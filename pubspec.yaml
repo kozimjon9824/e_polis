@@ -1,0 +1,85 @@
+name: e_polis
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  flutter_svg: ^1.1.3
+  # An SVG rendering and widget library for Flutter, which allows painting and displaying Scalable Vector Graphics 1.1 files.
+  cached_network_image: ^3.2.1
+  # Flutter library to load and cache network images. Can also be used with placeholder and error widgets.
+  keyboard_dismisser: ^3.0.0
+  # A simple Flutter package to hide the keyboard when performing a gesture outside of it.
+  dio: ^4.0.0
+  # A powerful Http client for Dart, which supports Interceptors, FormData, Request Cancellation, File Downloading, Timeout etc.
+  flutter_bloc: ^7.2.0
+  # Flutter Widgets that make it easy to implement the BLoC (Business Logic Component) design pattern. Built to be used with the bloc state management package.
+  dartz: ^0.10.1
+  # for network request , api call
+  retrofit: ^3.0.1
+  # for di getIt
+  get_it: ^7.2.0
+  # for compare objects
+  equatable: ^2.0.3
+  # for pick image from memory or camera
+  image_picker: ^0.8.4+6
+  # image slides on banners
+  carousel_slider: ^4.1.1
+  # sms code input
+  pinput: ^2.2.12
+  # local mini storage store token , lang
+  shared_preferences: ^2.0.15
+  # for error or success messages , snackbar
+  another_flushbar: ^1.10.29
+  # to detect internet connection
+  connectivity_plus: ^2.3.6+1
+  # animation dots for page index
+  smooth_page_indicator: ^1.0.0+2
+  # language and data formatter
+  intl: ^0.17.0
+  alice: ^0.2.5
+  # input formatter for phone number
+  mask_text_input_formatter: ^2.4.0
+  # drop down button
+  dropdown_button2: ^1.9.2
+  # expandable text
+  readmore: ^2.2.0
+  # detect keyboard status
+  flutter_keyboard_visibility: ^5.2.0
+  # code generator with cubit
+  freezed_annotation: ^2.2.0
+  flutter_html: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  retrofit_generator: ^4.0.1
+  build_runner: ^2.1.7
+  freezed: ^2.3.2
+  json_serializable: ^6.5.4
+
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/fonts/
+    - assets/images/
+    - assets/icons/
+
+  fonts:
+    - family: SFPro
+      fonts:
+        - asset: assets/fonts/SFPro.ttf
