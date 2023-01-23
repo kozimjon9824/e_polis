@@ -12,6 +12,7 @@ import '../../../core/themes/app_colors.dart';
 import '../../components/error_view.dart';
 import '../../components/snackbars.dart';
 import 'package:flutter_html/flutter_html.dart';
+import '../../cubits/auth/auth_cubit.dart';
 import 'widgets.dart';
 
 class LicenseAgreementPage extends StatefulWidget {
@@ -84,6 +85,7 @@ class _LicenseAgreementPageState extends State<LicenseAgreementPage> {
                       onTap: () {
                         if (check) {
                           context.read<MainScreenDataCubit>().loadData();
+                          context.read<AuthCubit>().checkUserToAuth();
                           Navigator.pushNamedAndRemoveUntil(
                               context, AppRoutes.main, (route) => false);
                         }

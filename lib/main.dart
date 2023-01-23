@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => inject<AuthCubit>(), lazy: false),
+        BlocProvider(create: (context) => inject<AuthCubit>()),
         BlocProvider(
             create: (context) => inject<CurrentProductsCubit>()..loadData()),
         BlocProvider(
@@ -36,8 +36,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => inject<ArchivedProductsCubit>()..loadData()),
         BlocProvider(
-            create: (context) => inject<MainScreenDataCubit>()..loadData(),
-            lazy: false),
+            create: (context) => inject<MainScreenDataCubit>()..loadData()),
         BlocProvider(
             create: (context) => inject<LanguageCubit>()..loadAppLang()),
       ],

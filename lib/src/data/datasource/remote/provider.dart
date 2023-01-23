@@ -1,12 +1,19 @@
 import 'package:dio/dio.dart';
+import 'package:e_polis/src/data/models/add_product/add_product.dart';
 import 'package:e_polis/src/data/models/help_data/help_data.dart';
+import 'package:e_polis/src/data/models/input_driver/request/driver_passport_input.dart';
+import 'package:e_polis/src/data/models/input_driver/response/driver_passport_response.dart';
 import 'package:e_polis/src/data/models/login/login.dart';
 import 'package:e_polis/src/data/models/product/product_details.dart';
 import 'package:e_polis/src/data/models/profile_update/profile_update.dart';
+import 'package:e_polis/src/data/models/user_profile/user_profile.dart';
+import 'package:e_polis/src/data/models/vehicle_information/request/vehicle_info_request.dart';
+import 'package:e_polis/src/data/models/vehicle_information/response/vehicle_info_response.dart';
 import 'package:e_polis/src/data/models/verify/request/verify.dart';
 import 'package:e_polis/src/data/models/verify/response/verify_response.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../../core/constants/constants.dart';
+import '../../models/driver_passport_validation/driver_passport_validation.dart';
 import '../../models/main/main.dart';
 import '../../models/my_products/product_data.dart';
 
@@ -50,4 +57,23 @@ abstract class ApiClient {
 
   @GET('faq')
   Future<HelpData> getFaq();
+
+  @GET('users/{id}')
+  Future<UserProfileResponse> getUserProfile(@Path('id') String id);
+
+  @POST('users/{userId}/products')
+  Future<dynamic> addProduct(
+      @Path('userId') String userId, @Body() AddProductRequest request);
+
+  @POST('insurance/vehicle-information')
+  Future<VehicleInfoResponse> checkVehicleInfo(
+      @Body() VehicleInfoRequest request);
+
+  @POST('insurance/driver-passport-validation')
+  Future<dynamic> validateDriverPassport(
+      @Body() DriverPassportValidation request);
+
+  @POST('insurance/passport-information')
+  Future<DriverPassportInputResponse> addDriver(
+      @Body() DriverPassportInputRequest request);
 }

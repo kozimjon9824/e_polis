@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'profile_update.dart';
+part of 'user_profile.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,36 +14,35 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ProfileUpdateRequest _$ProfileUpdateRequestFromJson(Map<String, dynamic> json) {
-  return _ProfileUpdateRequest.fromJson(json);
+UserProfileResponse _$UserProfileResponseFromJson(Map<String, dynamic> json) {
+  return _UserProfileResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ProfileUpdateRequest {
-  String? get firstName => throw _privateConstructorUsedError;
+mixin _$UserProfileResponse {
   String? get lastName => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ProfileUpdateRequestCopyWith<ProfileUpdateRequest> get copyWith =>
+  $UserProfileResponseCopyWith<UserProfileResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ProfileUpdateRequestCopyWith<$Res> {
-  factory $ProfileUpdateRequestCopyWith(ProfileUpdateRequest value,
-          $Res Function(ProfileUpdateRequest) then) =
-      _$ProfileUpdateRequestCopyWithImpl<$Res, ProfileUpdateRequest>;
+abstract class $UserProfileResponseCopyWith<$Res> {
+  factory $UserProfileResponseCopyWith(
+          UserProfileResponse value, $Res Function(UserProfileResponse) then) =
+      _$UserProfileResponseCopyWithImpl<$Res, UserProfileResponse>;
   @useResult
-  $Res call({String? firstName, String? lastName, String? photo});
+  $Res call({String? lastName, String? firstName, String? photo});
 }
 
 /// @nodoc
-class _$ProfileUpdateRequestCopyWithImpl<$Res,
-        $Val extends ProfileUpdateRequest>
-    implements $ProfileUpdateRequestCopyWith<$Res> {
-  _$ProfileUpdateRequestCopyWithImpl(this._value, this._then);
+class _$UserProfileResponseCopyWithImpl<$Res, $Val extends UserProfileResponse>
+    implements $UserProfileResponseCopyWith<$Res> {
+  _$UserProfileResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -53,18 +52,18 @@ class _$ProfileUpdateRequestCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? firstName = freezed,
     Object? photo = freezed,
   }) {
     return _then(_value.copyWith(
-      firstName: freezed == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String?,
       lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
               as String?,
       photo: freezed == photo
           ? _value.photo
@@ -75,39 +74,39 @@ class _$ProfileUpdateRequestCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ProfileUpdateRequestCopyWith<$Res>
-    implements $ProfileUpdateRequestCopyWith<$Res> {
-  factory _$$_ProfileUpdateRequestCopyWith(_$_ProfileUpdateRequest value,
-          $Res Function(_$_ProfileUpdateRequest) then) =
-      __$$_ProfileUpdateRequestCopyWithImpl<$Res>;
+abstract class _$$_UserProfileResponseCopyWith<$Res>
+    implements $UserProfileResponseCopyWith<$Res> {
+  factory _$$_UserProfileResponseCopyWith(_$_UserProfileResponse value,
+          $Res Function(_$_UserProfileResponse) then) =
+      __$$_UserProfileResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? firstName, String? lastName, String? photo});
+  $Res call({String? lastName, String? firstName, String? photo});
 }
 
 /// @nodoc
-class __$$_ProfileUpdateRequestCopyWithImpl<$Res>
-    extends _$ProfileUpdateRequestCopyWithImpl<$Res, _$_ProfileUpdateRequest>
-    implements _$$_ProfileUpdateRequestCopyWith<$Res> {
-  __$$_ProfileUpdateRequestCopyWithImpl(_$_ProfileUpdateRequest _value,
-      $Res Function(_$_ProfileUpdateRequest) _then)
+class __$$_UserProfileResponseCopyWithImpl<$Res>
+    extends _$UserProfileResponseCopyWithImpl<$Res, _$_UserProfileResponse>
+    implements _$$_UserProfileResponseCopyWith<$Res> {
+  __$$_UserProfileResponseCopyWithImpl(_$_UserProfileResponse _value,
+      $Res Function(_$_UserProfileResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? firstName = freezed,
     Object? photo = freezed,
   }) {
-    return _then(_$_ProfileUpdateRequest(
-      firstName: freezed == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String?,
+    return _then(_$_UserProfileResponse(
       lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
               as String?,
       photo: freezed == photo
           ? _value.photo
@@ -119,72 +118,72 @@ class __$$_ProfileUpdateRequestCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProfileUpdateRequest implements _ProfileUpdateRequest {
-  const _$_ProfileUpdateRequest({this.firstName, this.lastName, this.photo});
+class _$_UserProfileResponse implements _UserProfileResponse {
+  const _$_UserProfileResponse({this.lastName, this.firstName, this.photo});
 
-  factory _$_ProfileUpdateRequest.fromJson(Map<String, dynamic> json) =>
-      _$$_ProfileUpdateRequestFromJson(json);
+  factory _$_UserProfileResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_UserProfileResponseFromJson(json);
 
-  @override
-  final String? firstName;
   @override
   final String? lastName;
+  @override
+  final String? firstName;
   @override
   final String? photo;
 
   @override
   String toString() {
-    return 'ProfileUpdateRequest(firstName: $firstName, lastName: $lastName, photo: $photo)';
+    return 'UserProfileResponse(lastName: $lastName, firstName: $firstName, photo: $photo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProfileUpdateRequest &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
+            other is _$_UserProfileResponse &&
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
             (identical(other.photo, photo) || other.photo == photo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, firstName, lastName, photo);
+  int get hashCode => Object.hash(runtimeType, lastName, firstName, photo);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProfileUpdateRequestCopyWith<_$_ProfileUpdateRequest> get copyWith =>
-      __$$_ProfileUpdateRequestCopyWithImpl<_$_ProfileUpdateRequest>(
+  _$$_UserProfileResponseCopyWith<_$_UserProfileResponse> get copyWith =>
+      __$$_UserProfileResponseCopyWithImpl<_$_UserProfileResponse>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProfileUpdateRequestToJson(
+    return _$$_UserProfileResponseToJson(
       this,
     );
   }
 }
 
-abstract class _ProfileUpdateRequest implements ProfileUpdateRequest {
-  const factory _ProfileUpdateRequest(
-      {final String? firstName,
-      final String? lastName,
-      final String? photo}) = _$_ProfileUpdateRequest;
+abstract class _UserProfileResponse implements UserProfileResponse {
+  const factory _UserProfileResponse(
+      {final String? lastName,
+      final String? firstName,
+      final String? photo}) = _$_UserProfileResponse;
 
-  factory _ProfileUpdateRequest.fromJson(Map<String, dynamic> json) =
-      _$_ProfileUpdateRequest.fromJson;
+  factory _UserProfileResponse.fromJson(Map<String, dynamic> json) =
+      _$_UserProfileResponse.fromJson;
 
-  @override
-  String? get firstName;
   @override
   String? get lastName;
+  @override
+  String? get firstName;
   @override
   String? get photo;
   @override
   @JsonKey(ignore: true)
-  _$$_ProfileUpdateRequestCopyWith<_$_ProfileUpdateRequest> get copyWith =>
+  _$$_UserProfileResponseCopyWith<_$_UserProfileResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }

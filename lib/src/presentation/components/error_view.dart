@@ -11,9 +11,14 @@ class ErrorView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(Icons.error_outline),
-          const SizedBox(height: 24),
-          TextButton(onPressed: onTap, child: const Text('Retry'))
+          const Icon(Icons.error_outline, size: 64),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(onPressed: onTap, child: const Text('Retry')),
+            ],
+          )
         ],
       ),
     );

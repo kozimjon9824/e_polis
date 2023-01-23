@@ -4,6 +4,7 @@ import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_dat
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../components/error_view.dart';
 import '../../../components/loading.dart';
 import '../../../cubits/filter_tab/filter_tab_manager_cubit.dart';
 import 'widgets/body.dart';
@@ -23,11 +24,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => inject<FilterTabManagerCubit>()..changeTab('Все'),
-      child: BlocConsumer<MainScreenDataCubit, MainScreenDataState>(
-        listener: (context, state) {},
+      child: BlocBuilder<MainScreenDataCubit, MainScreenDataState>(
         builder: (context, state) {
           return state.maybeWhen(
-            orElse: () => const LoadingWidget(),
+            orElse: () => ErrorView(onTap: () {
+              context.read<MainScreenDataCubit>().loadData();
+            }),
+            error: (failure) => ErrorView(onTap: () {
+              context.read<MainScreenDataCubit>().loadData();
+            }),
             loading: () => const LoadingWidget(),
             initial: () => const LoadingWidget(),
             loaded: (data) => Scaffold(

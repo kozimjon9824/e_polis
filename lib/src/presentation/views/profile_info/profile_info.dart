@@ -27,47 +27,60 @@ class _ProfileInfoState extends State<ProfileInfo> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => inject<UpdateProfileCubit>(),
+      create: (context) => inject<UpdateProfileCubit>()..loadUserData(),
       child: Scaffold(
         appBar: AppBar(title: const Text('Информация профиля')),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(26),
-              child: CachedNetworkImage(
-                imageUrl: '',
-                fit: BoxFit.cover,
-                height: 116,
-                width: 116,
-                placeholder: (context, url) =>
-                    const CircularProgressIndicator(),
-                errorWidget: (context, url, error) =>
-                    SvgPicture.asset(AppIcons.bigAvatar),
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Text('Добавить изображение',
-                textAlign: TextAlign.center,
-                style: AppTextStyles.styleW600S16Grey9),
-            const SizedBox(height: 40),
-            CustomTextField(
-              label: 'Имя',
-              textEditingController: nameController,
-              textInputAction: TextInputAction.next,
-            ),
-            const SizedBox(height: 24),
-            CustomTextField(
-              label: 'Фамилия',
-              textEditingController: lastNameController,
-              textInputAction: TextInputAction.next,
-            ),
-            const SizedBox(height: 24),
-            phoneCustomPrefixTextField(),
-          ],
+        body: BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+                orElse: () => profileBodyWidget(),
+                loaded: (data) {
+                  lastNameController.text = data?.lastName ?? '';
+                  nameController.text = data?.firstName ?? '';
+                  return profileBodyWidget(image: data?.photo);
+                });
+          },
         ),
         bottomNavigationBar: button(),
       ),
+    );
+  }
+
+  Widget profileBodyWidget({String? image}) {
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(26),
+          child: CachedNetworkImage(
+            imageUrl: image ?? '',
+            fit: BoxFit.cover,
+            height: 116,
+            width: 116,
+            placeholder: (context, url) => const CircularProgressIndicator(),
+            errorWidget: (context, url, error) =>
+                SvgPicture.asset(AppIcons.bigAvatar),
+          ),
+        ),
+        const SizedBox(height: 16),
+        const Text('Добавить изображение',
+            textAlign: TextAlign.center,
+            style: AppTextStyles.styleW600S16Grey9),
+        const SizedBox(height: 40),
+        CustomTextField(
+          label: 'Имя',
+          textEditingController: nameController,
+          textInputAction: TextInputAction.next,
+        ),
+        const SizedBox(height: 24),
+        CustomTextField(
+          label: 'Фамилия',
+          textEditingController: lastNameController,
+          textInputAction: TextInputAction.next,
+        ),
+        const SizedBox(height: 24),
+        phoneCustomPrefixTextField(),
+      ],
     );
   }
 
@@ -75,7 +88,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
     return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
       listener: (context, state) {
         state.whenOrNull(
-            loaded: () {
+            success: () {
               context.read<MainScreenDataCubit>().loadData();
               showSuccessMessage(context, 'Successfully updated');
             },

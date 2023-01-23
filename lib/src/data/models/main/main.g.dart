@@ -75,9 +75,11 @@ Map<String, dynamic> _$$_ProductDataToJson(_$_ProductData instance) =>
 
 _$_Category _$$_CategoryFromJson(Map<String, dynamic> json) => _$_Category(
       name: json['name'] as String?,
+      type: json['type'] as String?,
     );
 
 Map<String, dynamic> _$$_CategoryToJson(_$_Category instance) =>
     <String, dynamic>{
       'name': instance.name,
+      'type': instance.type,
     };

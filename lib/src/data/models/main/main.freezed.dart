@@ -866,6 +866,7 @@ Category _$CategoryFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Category {
   String? get name => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -878,7 +879,7 @@ abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res, Category>;
   @useResult
-  $Res call({String? name});
+  $Res call({String? name, String? type});
 }
 
 /// @nodoc
@@ -895,11 +896,16 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
   @override
   $Res call({
     Object? name = freezed,
+    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -912,7 +918,7 @@ abstract class _$$_CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
       __$$_CategoryCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name});
+  $Res call({String? name, String? type});
 }
 
 /// @nodoc
@@ -927,11 +933,16 @@ class __$$_CategoryCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
+    Object? type = freezed,
   }) {
     return _then(_$_Category(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -940,17 +951,19 @@ class __$$_CategoryCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Category with DiagnosticableTreeMixin implements _Category {
-  const _$_Category({this.name});
+  const _$_Category({this.name, this.type});
 
   factory _$_Category.fromJson(Map<String, dynamic> json) =>
       _$$_CategoryFromJson(json);
 
   @override
   final String? name;
+  @override
+  final String? type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Category(name: $name)';
+    return 'Category(name: $name, type: $type)';
   }
 
   @override
@@ -958,7 +971,8 @@ class _$_Category with DiagnosticableTreeMixin implements _Category {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Category'))
-      ..add(DiagnosticsProperty('name', name));
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('type', type));
   }
 
   @override
@@ -966,12 +980,13 @@ class _$_Category with DiagnosticableTreeMixin implements _Category {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Category &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name);
+  int get hashCode => Object.hash(runtimeType, name, type);
 
   @JsonKey(ignore: true)
   @override
@@ -988,12 +1003,15 @@ class _$_Category with DiagnosticableTreeMixin implements _Category {
 }
 
 abstract class _Category implements Category {
-  const factory _Category({final String? name}) = _$_Category;
+  const factory _Category({final String? name, final String? type}) =
+      _$_Category;
 
   factory _Category.fromJson(Map<String, dynamic> json) = _$_Category.fromJson;
 
   @override
   String? get name;
+  @override
+  String? get type;
   @override
   @JsonKey(ignore: true)
   _$$_CategoryCopyWith<_$_Category> get copyWith =>

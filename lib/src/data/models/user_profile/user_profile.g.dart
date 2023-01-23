@@ -1,23 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'profile_update.dart';
+part of 'user_profile.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ProfileUpdateRequest _$$_ProfileUpdateRequestFromJson(
+_$_UserProfileResponse _$$_UserProfileResponseFromJson(
         Map<String, dynamic> json) =>
-    _$_ProfileUpdateRequest(
-      firstName: json['firstName'] as String?,
+    _$_UserProfileResponse(
       lastName: json['lastName'] as String?,
+      firstName: json['firstName'] as String?,
       photo: json['photo'] as String?,
     );
 
-Map<String, dynamic> _$$_ProfileUpdateRequestToJson(
-        _$_ProfileUpdateRequest instance) =>
+Map<String, dynamic> _$$_UserProfileResponseToJson(
+        _$_UserProfileResponse instance) =>
     <String, dynamic>{
-      'firstName': instance.firstName,
       'lastName': instance.lastName,
+      'firstName': instance.firstName,
       'photo': instance.photo,
     };

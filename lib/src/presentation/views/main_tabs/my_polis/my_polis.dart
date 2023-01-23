@@ -45,7 +45,7 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
                 },
               ),
             ),
-            body: (context.watch<AuthCubit>().state is UnAuthenticatedState)
+            body: (context.read<AuthCubit>().state is UnAuthenticatedState)
                 ? const UnAuthPolis()
                 : TabBarView(
                     controller: _tabController,
@@ -57,7 +57,7 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
                     ],
                   ),
             bottomNavigationBar:
-                (context.watch<AuthCubit>().state is UnAuthenticatedState)
+                (context.read<AuthCubit>().state is UnAuthenticatedState)
                     ? null
                     : bottomButtons(),
           );

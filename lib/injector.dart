@@ -12,11 +12,14 @@ import 'package:e_polis/src/domain/usecases/auth/logout.dart';
 import 'package:e_polis/src/domain/usecases/auth/verify.dart';
 import 'package:e_polis/src/domain/usecases/main/main_screen_data.dart';
 import 'package:e_polis/src/domain/usecases/main/product_details.dart';
+import 'package:e_polis/src/domain/usecases/product/add_product.dart';
 import 'package:e_polis/src/domain/usecases/product/archived_product.dart';
 import 'package:e_polis/src/domain/usecases/product/current_product.dart';
 import 'package:e_polis/src/domain/usecases/product/progress_product.dart';
 import 'package:e_polis/src/domain/usecases/profile/profile_update.dart';
+import 'package:e_polis/src/domain/usecases/profile/user_profile.dart';
 import 'package:e_polis/src/domain/usecases/setting/get_app_lang.dart';
+import 'package:e_polis/src/presentation/cubits/add_product/add_product_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/faq/faq_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/license_agreement/license_agreement_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/login/login_cubit.dart';
@@ -58,10 +61,11 @@ Future<void> initDi() async {
   inject.registerFactory(() => FaqCubit(inject()));
 
   // product
-  inject.registerLazySingleton(() => ProductTabManagerCubit());
+  inject.registerFactory(() => ProductTabManagerCubit());
   inject.registerFactory(() => CurrentProductsCubit(inject()));
   inject.registerFactory(() => ProgressProductsCubit(inject()));
   inject.registerFactory(() => ArchivedProductsCubit(inject()));
+  inject.registerFactory(() => AddProductCubit(inject()));
 
   // main cubits
   inject.registerFactory(() => MainScreenDataCubit(inject()));
@@ -71,7 +75,7 @@ Future<void> initDi() async {
   inject.registerFactory(() => LicenseAgreementCubit(inject()));
 
   // profile cubit
-  inject.registerFactory(() => UpdateProfileCubit(inject()));
+  inject.registerFactory(() => UpdateProfileCubit(inject(), inject()));
 
   // useCase need to register /----/ auth , register
 
@@ -87,11 +91,13 @@ Future<void> initDi() async {
 
   // profile use-cases
   inject.registerLazySingleton(() => UpdateProfileUseCase(inject()));
+  inject.registerLazySingleton(() => GetUserProfileUseCase(inject()));
 
   //product
   inject.registerLazySingleton(() => MyCurrentProductsUseCase(inject()));
   inject.registerLazySingleton(() => MyInProgressProductsUseCase(inject()));
   inject.registerLazySingleton(() => MyArchivedProductsUseCase(inject()));
+  inject.registerLazySingleton(() => AddProductUseCase(inject()));
 
   // auth
   inject.registerLazySingleton(() => CheckUserAuthUseCase(inject()));
@@ -115,7 +121,7 @@ Future<void> initDi() async {
   inject.registerLazySingleton(() => pref);
 
   // api client init for network requests dio
-  inject.registerLazySingleton(() => NetworkClient());
+  inject.registerFactory(() => NetworkClient());
   var dio = await inject<NetworkClient>().init(inject());
-  inject.registerLazySingleton(() => ApiClient(dio, BASE_URL));
+  inject.registerFactory(() => ApiClient(dio, BASE_URL));
 }

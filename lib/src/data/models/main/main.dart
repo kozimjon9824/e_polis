@@ -50,7 +50,7 @@ class ProductData with _$ProductData {
 
 @freezed
 class Category with _$Category {
-  const factory Category({String? name}) = _Category;
+  const factory Category({String? name, String? type}) = _Category;
 
   factory Category.fromJson(Map<String, dynamic> json) =>
       _$CategoryFromJson(json);
