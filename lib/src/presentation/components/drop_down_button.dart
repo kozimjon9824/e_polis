@@ -5,21 +5,23 @@ import '../../core/themes/app_colors.dart';
 import '../../core/themes/app_text_styles.dart';
 
 class DropDownButton<T> extends StatelessWidget {
-  const DropDownButton({
-    Key? key,
-    required this.label,
-    this.hint,
-    this.onChanged,
-    this.onSaved,
-    this.errorText,
-    required this.items,
-  }) : super(key: key);
+  const DropDownButton(
+      {Key? key,
+      required this.label,
+      this.hint,
+      this.onChanged,
+      this.onSaved,
+      this.errorText,
+      required this.items,
+      this.value})
+      : super(key: key);
   final String label;
   final String? hint;
   final String? errorText;
   final Function(T?)? onChanged;
   final Function(T?)? onSaved;
   final List<DropdownMenuItem<T>> items;
+  final T? value;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class DropDownButton<T> extends StatelessWidget {
         DropdownButtonFormField2(
             decoration: dropDownDecoration(),
             isExpanded: true,
+            value: value,
             hint: Text(hint ?? '',
                 style: AppTextStyles.styleW400S14Grey6
                     .copyWith(color: AppColors.grey400)),

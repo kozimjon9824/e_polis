@@ -6,7 +6,9 @@ import '../../../components/custom_button.dart';
 class DialogBody extends StatelessWidget {
   const DialogBody({
     Key? key,
+    required this.onSubmit,
   }) : super(key: key);
+  final Function() onSubmit;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class DialogBody extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: CustomButton(
-                      text: 'Регистрация', padding: 12, onTap: () {}),
+                      text: 'Регистрация', padding: 12, onTap: onSubmit),
                 ),
               ],
             )

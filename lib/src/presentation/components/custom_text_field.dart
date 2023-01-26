@@ -21,7 +21,8 @@ class CustomTextField extends StatelessWidget {
       this.initialValue,
       this.label,
       this.inputFormatters,
-      this.keyboardType})
+      this.keyboardType,
+      this.textCapitalization})
       : super(key: key);
 
   final TextEditingController? textEditingController;
@@ -40,6 +41,7 @@ class CustomTextField extends StatelessWidget {
   final String? label;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
+  final TextCapitalization? textCapitalization;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +59,7 @@ class CustomTextField extends StatelessWidget {
           autofocus: autoFocus ?? false,
           focusNode: focusNode,
           initialValue: initialValue,
+          textCapitalization: textCapitalization ?? TextCapitalization.none,
           inputFormatters: inputFormatters,
           controller: textEditingController,
           textInputAction: textInputAction,
@@ -112,7 +115,8 @@ class CustomPrefixTextField extends StatelessWidget {
       this.textInputType,
       required this.label,
       this.autoFocus,
-      this.inputFormatters})
+      this.inputFormatters,
+      this.focusNode})
       : super(key: key);
 
   final TextEditingController? textEditingController;
@@ -127,6 +131,7 @@ class CustomPrefixTextField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final String label;
   final List<TextInputFormatter>? inputFormatters;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -141,6 +146,7 @@ class CustomPrefixTextField extends StatelessWidget {
           onChanged: onChange,
           obscureText: obscure ?? false,
           autofocus: autoFocus ?? false,
+          focusNode: focusNode,
           textInputAction: textInputAction,
           controller: textEditingController,
           inputFormatters: inputFormatters,

@@ -1,10 +1,9 @@
-import 'package:e_polis/src/core/routes/app_routes.dart';
-import 'package:e_polis/src/core/themes/app_text_styles.dart';
+import 'package:e_polis/src/presentation/cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-
 import '../../components/search_bar.dart';
-import 'widgets/insurance_details.dart';
+import 'widgets/body_widget.dart';
 import 'widgets/nothing_found.dart';
 
 class BasicFilterResultPage extends StatefulWidget {
@@ -18,6 +17,12 @@ class _BasicFilterResultPageState extends State<BasicFilterResultPage> {
   final _focusNode = FocusNode();
   final controller = TextEditingController();
   final keyboardController = KeyboardVisibilityController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<InsuranceBasicFilterCubit>().loadData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,32 +46,7 @@ class _BasicFilterResultPageState extends State<BasicFilterResultPage> {
               },
               controller: controller),
         ),
-        body: false
-            ? const NothingFound()
-            : ListView(
-                shrinkWrap: true,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                children: [
-                  const Text(
-                    'Мы нашли несколько предложений от страховых компаний',
-                    style: AppTextStyles.styleW400S14Grey6,
-                  ),
-                  const SizedBox(height: 24),
-                  ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (_, index) => InsuranceDetail(
-                            onDetailTap: () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.insuranceDetails,
-                                  arguments: '123');
-                            },
-                          ),
-                      separatorBuilder: (_, __) => const SizedBox(height: 16),
-                      itemCount: 5)
-                ],
-              ),
+        body: false ? const NothingFound() : const InsurancesResults(),
       ),
     );
   }

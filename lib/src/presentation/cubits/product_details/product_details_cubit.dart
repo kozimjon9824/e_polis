@@ -8,6 +8,7 @@ part 'product_details_state.dart';
 
 part 'product_details_cubit.freezed.dart';
 
+/// no use
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   final ProductDetailsUseCase _detailsUseCase;
 

@@ -370,8 +370,7 @@ class __$$_BannerResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_BannerResponse
     with DiagnosticableTreeMixin
     implements _BannerResponse {

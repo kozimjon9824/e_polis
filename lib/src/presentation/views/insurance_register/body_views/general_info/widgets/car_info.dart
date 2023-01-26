@@ -2,13 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../../../../core/themes/app_colors.dart';
+import '../../../../../../data/models/vehicle_information/response/vehicle_info_response.dart';
 import '../../../../../components/custom_mask.dart';
 import '../../../../../components/custom_text_field.dart';
 import '../../../widgets/animated_container.dart';
 import '../../../widgets/widgets.dart';
 
 class CarInformationWidget extends StatelessWidget {
-  const CarInformationWidget({Key? key}) : super(key: key);
+  const CarInformationWidget({
+    Key? key,
+    this.vehicleInfo,
+    required this.vehicleController,
+    required this.seriesController,
+    required this.numberController,
+    required this.onClear,
+    this.focusNodeTechSeries,
+    this.focusNodeTechNumber,
+    this.focusNodeVehicleNumber,
+  }) : super(key: key);
+
+  final VehicleInfoResponse? vehicleInfo;
+  final TextEditingController vehicleController;
+  final TextEditingController seriesController;
+  final TextEditingController numberController;
+  final Function() onClear;
+  final FocusNode? focusNodeTechSeries;
+  final FocusNode? focusNodeTechNumber;
+  final FocusNode? focusNodeVehicleNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +36,22 @@ class CarInformationWidget extends StatelessWidget {
       title: 'Информация об автомобиле',
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
       padding2: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-      clearText: 'Очистить информацию',
-      showChildren2: true,
-      children2: const [
-        Divider(height: 0, color: AppColors.divider, thickness: 1),
-        SizedBox(height: 8),
-        TitleSubtitle(title: 'Марка и модель', subtitle: 'CHEVROLET , COBALT'),
-        TitleSubtitle(title: 'Год выпуска автомобиля', subtitle: '2014'),
-        TitleSubtitle(title: 'Тип автомобиля', subtitle: 'Легковые'),
-        TitleSubtitle(
-            title: 'Регион регистрации автомобиля', subtitle: 'Город Ташкент'),
-        SizedBox(height: 8),
+      clearText: vehicleInfo != null ? 'Очистить информацию' : null,
+      showChildren2: vehicleInfo != null,
+      onClear: onClear,
+      children2: [
+        VehicleInfoWidget(data: vehicleInfo?.vehicle),
       ],
       children: [
         CustomTextField(
           label: 'Номер авто',
           hintText: '01 М 001 ХА',
+          textEditingController: vehicleController,
+          keyboardType: TextInputType.text,
           inputFormatters: [SpecialMaskTextInputFormatter()],
+          textCapitalization: TextCapitalization.characters,
           textInputAction: TextInputAction.next,
+          focusNode: focusNodeVehicleNumber,
         ),
         const SizedBox(height: 16),
         Row(
@@ -44,8 +62,11 @@ class CarInformationWidget extends StatelessWidget {
                 child: CustomTextField(
                   label: 'Техпаспорт',
                   hintText: 'Серия',
+                  textEditingController: seriesController,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
+                  textCapitalization: TextCapitalization.characters,
+                  focusNode: focusNodeTechSeries,
                   inputFormatters: [
                     MaskTextInputFormatter(
                         mask: '###', filter: {"#": RegExp(r'[A-Z]')})
@@ -56,8 +77,10 @@ class CarInformationWidget extends StatelessWidget {
               flex: 2,
               child: CustomTextField(
                 hintText: 'Номер',
-                keyboardType: TextInputType.text,
+                focusNode: focusNodeTechNumber,
+                keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.done,
+                textEditingController: numberController,
                 inputFormatters: [
                   MaskTextInputFormatter(
                       mask: '######', filter: {"#": RegExp(r'[0-9]')})
@@ -66,6 +89,32 @@ class CarInformationWidget extends StatelessWidget {
             ),
           ],
         ),
+      ],
+    );
+  }
+}
+
+class VehicleInfoWidget extends StatelessWidget {
+  const VehicleInfoWidget({Key? key, this.data}) : super(key: key);
+
+  final VehicleData? data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Divider(height: 0, color: AppColors.divider, thickness: 1),
+        const SizedBox(height: 8),
+        TitleSubtitle(title: 'Марка и модель', subtitle: data?.model ?? ''),
+        TitleSubtitle(
+            title: 'Год выпуска автомобиля',
+            subtitle: data?.issueYear.toString() ?? ''),
+        TitleSubtitle(
+            title: 'Тип автомобиля', subtitle: data?.type.toString() ?? ''),
+        TitleSubtitle(
+            title: 'Регион регистрации автомобиля',
+            subtitle: data?.address ?? ''),
+        const SizedBox(height: 8),
       ],
     );
   }

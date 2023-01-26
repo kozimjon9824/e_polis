@@ -1,3 +1,5 @@
+import 'package:alice/alice.dart';
+import 'package:e_polis/src/presentation/cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/my_archived_product/archived_products_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/my_progress_products/progress_products_cubit.dart';
@@ -39,6 +41,7 @@ class MyApp extends StatelessWidget {
             create: (context) => inject<MainScreenDataCubit>()..loadData()),
         BlocProvider(
             create: (context) => inject<LanguageCubit>()..loadAppLang()),
+        BlocProvider(create: (context) => inject<InsuranceBasicFilterCubit>()),
       ],
       child: BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, state) {
@@ -47,8 +50,8 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: appThemeData,
             onGenerateRoute: RouteGenerateKit().generateKit,
-            navigatorKey: navigatorKey,
-            // navigatorKey: alice.getNavigatorKey(),
+            // navigatorKey: navigatorKey,
+            navigatorKey: alice.getNavigatorKey(),
             supportedLocales: const [Locale(EN)],
             locale: const Locale(RU),
             // locale: Locale(state.language),
@@ -62,6 +65,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+final alice = Alice(showNotification: true, navigatorKey: navigatorKey);
 
 // class MyBehavior extends ScrollBehavior {
 //   @override

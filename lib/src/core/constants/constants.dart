@@ -13,3 +13,7 @@ const EN = 'en';
 const RU = 'ru';
 
 const ALL = 'Все';
+
+const PERIOD_YEAR = '1 year';
+const PERIOD_MONTHS = '6 months';
+const PERIOD_DAYS = '20 days';

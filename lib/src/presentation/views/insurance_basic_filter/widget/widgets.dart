@@ -20,7 +20,7 @@ class Description extends StatelessWidget {
       colorClickableText: AppColors.primaryColor,
       trimMode: TrimMode.Line,
       trimCollapsedText: '\nПодробно',
-      trimExpandedText: 'Скрывать',
+      trimExpandedText: '\nСкрывать',
       style: AppTextStyles.styleW400S14Grey6
           .copyWith(color: AppColors.grey900, height: 1.5),
       moreStyle: AppTextStyles.styleW600S14Primary,

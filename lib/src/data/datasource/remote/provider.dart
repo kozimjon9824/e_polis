@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:e_polis/src/data/models/add_product/add_product.dart';
+import 'package:e_polis/src/data/models/basic_filter/request/basic_filter_request.dart';
 import 'package:e_polis/src/data/models/help_data/help_data.dart';
 import 'package:e_polis/src/data/models/input_driver/request/driver_passport_input.dart';
 import 'package:e_polis/src/data/models/input_driver/response/driver_passport_response.dart';
+import 'package:e_polis/src/data/models/insurance_details/insurance_details.dart';
 import 'package:e_polis/src/data/models/login/login.dart';
 import 'package:e_polis/src/data/models/product/product_details.dart';
 import 'package:e_polis/src/data/models/profile_update/profile_update.dart';
@@ -13,6 +15,7 @@ import 'package:e_polis/src/data/models/verify/request/verify.dart';
 import 'package:e_polis/src/data/models/verify/response/verify_response.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../../core/constants/constants.dart';
+import '../../models/basic_filter/response/basic_filter_response.dart';
 import '../../models/driver_passport_validation/driver_passport_validation.dart';
 import '../../models/main/main.dart';
 import '../../models/my_products/product_data.dart';
@@ -76,4 +79,11 @@ abstract class ApiClient {
   @POST('insurance/passport-information')
   Future<DriverPassportInputResponse> addDriver(
       @Body() DriverPassportInputRequest request);
+
+  @POST('products/osago/calculation')
+  Future<BasicFilterResponse> getInsurances(@Body() BasicFilterRequest request);
+
+  @POST('products/osago/calculation/{productId}')
+  Future<InsuranceDetails> getInsuranceDetails(
+      @Path('productId') String id, @Body() BasicFilterRequest request);
 }

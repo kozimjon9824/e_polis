@@ -38,8 +38,9 @@ class _AddPolisPageState extends State<AddPolisPage> {
               const SizedBox(height: 22),
               DropDownButton<String>(
                 label: 'Тип полиса',
-                hint: 'Выберите тип полиса',
-                items: ['one', 'two']
+                // hint: 'Выберите тип полиса',
+                value: 'ОСАГО',
+                items: ['ОСАГО']
                     .map((item) => DropdownMenuItem<String>(
                         value: item,
                         child: Text(
@@ -56,6 +57,7 @@ class _AddPolisPageState extends State<AddPolisPage> {
                 hintText: 'ААА 1234ABCD',
                 textInputAction: TextInputAction.next,
                 textEditingController: insuranceController,
+                textCapitalization: TextCapitalization.characters,
                 validator: (value) =>
                     value!.isEmpty ? 'Must not be empty' : null,
               ),
@@ -64,6 +66,7 @@ class _AddPolisPageState extends State<AddPolisPage> {
                 label: 'Номер транспорта',
                 hintText: '01 A 000 AA or 01 777 AAA',
                 textInputAction: TextInputAction.done,
+                textCapitalization: TextCapitalization.characters,
                 textEditingController: carController,
                 validator: (value) =>
                     value!.isEmpty ? 'Must not be empty' : null,
@@ -77,8 +80,10 @@ class _AddPolisPageState extends State<AddPolisPage> {
             state.whenOrNull(
                 error: (failure) => showErrorMessage(
                     context, failure.getLocalizedMessage(context)),
-                loaded: () =>
-                    showSuccessMessage(context, 'Successfully added'));
+                loaded: () {
+                  Navigator.pop(context);
+                  showSuccessMessage(context, 'Successfully added');
+                });
           },
           builder: (context, state) {
             return SafeArea(

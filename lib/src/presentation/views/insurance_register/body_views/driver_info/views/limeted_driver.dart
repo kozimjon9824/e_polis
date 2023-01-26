@@ -1,67 +1,68 @@
+import 'package:e_polis/injector.dart';
+import 'package:e_polis/src/presentation/cubits/limited_driver_tabbar/limited_driver_tab_bar_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/themes/app_colors.dart';
-import '../../../../../components/custom_button.dart';
 import '../widgets/widgets.dart';
 import 'tab_body/limeted_driver_tab_body.dart';
 
-class LimitedDriverView extends StatefulWidget {
+class LimitedDriverView extends StatelessWidget {
   const LimitedDriverView({Key? key}) : super(key: key);
 
   @override
-  State<LimitedDriverView> createState() => _LimitedDriverViewState();
-}
-
-class _LimitedDriverViewState extends State<LimitedDriverView> {
-  List tabList = [1];
-  int currentIndex = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            SliverPadding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-              sliver: SliverList(
-                delegate: SliverChildListDelegate([
-                  Row(children: [
-                    for (int i = 1; i <= tabList.length; i++)
-                      TextBtn(
-                          title: i.toString(),
-                          onTap: () {
-                            currentIndex = i - 1;
-                            setState(() {});
-                          },
-                          bgColor: AppColors.green300,
-                          borderRadius: (i == 1)
-                              ? const BorderRadius.horizontal(
-                                  left: Radius.circular(8))
-                              : (i == 5)
-                                  ? const BorderRadius.horizontal(
-                                      right: Radius.circular(8))
-                                  : null),
-                    Visibility(
-                      visible: tabList.length != 5,
-                      child: IconBtn(onTap: () {
-                        tabList.add(tabList.length + 1);
-                        setState(() {});
-                      }),
-                    )
-                  ]),
-                ]),
+    return BlocProvider(
+      create: (context) => inject<LimitedDriverTabBarCubit>(),
+      child: BlocBuilder<LimitedDriverTabBarCubit, LimitedDriverTabBarState>(
+        builder: (context, state) {
+          var cubit = context.read<LimitedDriverTabBarCubit>();
+          return Scaffold(
+            body: NestedScrollView(
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                return [
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 16),
+                    sliver: SliverList(
+                      delegate: SliverChildListDelegate([
+                        Row(children: [
+                          for (int i = 1; i <= state.tabCountMap.length; i++)
+                            TextBtn(
+                                title: i.toString(),
+                                onTap: () {
+                                  cubit.changeTab(i - 1);
+                                },
+                                bgColor: AppColors.green300,
+                                borderRadius: (i == 1)
+                                    ? const BorderRadius.horizontal(
+                                        left: Radius.circular(8))
+                                    : (i == 5)
+                                        ? const BorderRadius.horizontal(
+                                            right: Radius.circular(8))
+                                        : null),
+                          Visibility(
+                            visible: state.tabCountMap.length != 5,
+                            child: IconBtn(onTap: () {
+                              cubit.addTab();
+                            }),
+                          )
+                        ]),
+                      ]),
+                    ),
+                  ),
+                ];
+              },
+              body: IndexedStack(
+                index: state.currentIndex,
+                children: [
+                  for (int i = 1; i <= state.tabCountMap.length; i++)
+                    DriverInputDetailsBody(index: i)
+                ],
               ),
             ),
-          ];
+          );
         },
-        body: IndexedStack(
-          index: currentIndex,
-          children: [
-            for (int i = 1; i <= tabList.length; i++)
-              DriverInputDetailsBody(index: i)
-          ],
-        ),
       ),
     );
   }

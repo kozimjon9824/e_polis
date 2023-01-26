@@ -4,6 +4,7 @@ import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_dat
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../core/constants/constants.dart';
 import '../../../components/error_view.dart';
 import '../../../components/loading.dart';
 import '../../../cubits/filter_tab/filter_tab_manager_cubit.dart';
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => inject<FilterTabManagerCubit>()..changeTab('Все'),
+      create: (context) => inject<FilterTabManagerCubit>()..changeTab(ALL),
       child: BlocBuilder<MainScreenDataCubit, MainScreenDataState>(
         builder: (context, state) {
           return state.maybeWhen(
@@ -54,6 +55,7 @@ class _HomePageState extends State<HomePage> {
               ),
               body: BlocBuilder<FilterTabManagerCubit, FilterTabManagerState>(
                 builder: (context, state) {
+                  var tabCubit = context.read<FilterTabManagerCubit>();
                   return ListView(
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     children: [
@@ -69,14 +71,13 @@ class _HomePageState extends State<HomePage> {
                         ],
                         selectedTab: state.tab,
                         onTap: (String value) {
-                          context
-                              .read<FilterTabManagerCubit>()
-                              .changeTab(value);
+                          print('IND:$value');
+                          tabCubit.changeTab(value);
                         },
                       ),
                       const SizedBox(height: 16),
                       InsuranceTypesBody(
-                          products: (state.tab == 'Все')
+                          products: (state.tab == ALL)
                               ? (data?.products ?? [])
                               : data?.products
                                       ?.where((element) =>

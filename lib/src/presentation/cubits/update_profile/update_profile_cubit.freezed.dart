@@ -16,61 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UpdateProfileState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserProfileResponse? user) loaded,
-    required TResult Function() success,
-    required TResult Function(Failure failure) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(UserProfileResponse? user)? loaded,
-    TResult? Function()? success,
-    TResult? Function(Failure failure)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserProfileResponse? user)? loaded,
-    TResult Function()? success,
-    TResult Function(Failure failure)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) =>
+  StateStatus get status => throw _privateConstructorUsedError;
+  UserProfileResponse? get user => throw _privateConstructorUsedError;
+  File? get selectedFile => throw _privateConstructorUsedError;
+  Failure get failure => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $UpdateProfileStateCopyWith<UpdateProfileState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -79,6 +31,14 @@ abstract class $UpdateProfileStateCopyWith<$Res> {
   factory $UpdateProfileStateCopyWith(
           UpdateProfileState value, $Res Function(UpdateProfileState) then) =
       _$UpdateProfileStateCopyWithImpl<$Res, UpdateProfileState>;
+  @useResult
+  $Res call(
+      {StateStatus status,
+      UserProfileResponse? user,
+      File? selectedFile,
+      Failure failure});
+
+  $UserProfileResponseCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -90,274 +50,33 @@ class _$UpdateProfileStateCopyWithImpl<$Res, $Val extends UpdateProfileState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$UpdateProfileStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Initial implements _Initial {
-  const _$_Initial();
-
-  @override
-  String toString() {
-    return 'UpdateProfileState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserProfileResponse? user) loaded,
-    required TResult Function() success,
-    required TResult Function(Failure failure) error,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(UserProfileResponse? user)? loaded,
-    TResult? Function()? success,
-    TResult? Function(Failure failure)? error,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserProfileResponse? user)? loaded,
-    TResult Function()? success,
-    TResult Function(Failure failure)? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements UpdateProfileState {
-  const factory _Initial() = _$_Initial;
-}
-
-/// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
-    extends _$UpdateProfileStateCopyWithImpl<$Res, _$_Loading>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Loading implements _Loading {
-  const _$_Loading();
-
-  @override
-  String toString() {
-    return 'UpdateProfileState.loading()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserProfileResponse? user) loaded,
-    required TResult Function() success,
-    required TResult Function(Failure failure) error,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(UserProfileResponse? user)? loaded,
-    TResult? Function()? success,
-    TResult? Function(Failure failure)? error,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserProfileResponse? user)? loaded,
-    TResult Function()? success,
-    TResult Function(Failure failure)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements UpdateProfileState {
-  const factory _Loading() = _$_Loading;
-}
-
-/// @nodoc
-abstract class _$$_LoadedCopyWith<$Res> {
-  factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
-      __$$_LoadedCopyWithImpl<$Res>;
-  @useResult
-  $Res call({UserProfileResponse? user});
-
-  $UserProfileResponseCopyWith<$Res>? get user;
-}
-
-/// @nodoc
-class __$$_LoadedCopyWithImpl<$Res>
-    extends _$UpdateProfileStateCopyWithImpl<$Res, _$_Loaded>
-    implements _$$_LoadedCopyWith<$Res> {
-  __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
-      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? status = null,
     Object? user = freezed,
+    Object? selectedFile = freezed,
+    Object? failure = null,
   }) {
-    return _then(_$_Loaded(
+    return _then(_value.copyWith(
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as StateStatus,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserProfileResponse?,
-    ));
+      selectedFile: freezed == selectedFile
+          ? _value.selectedFile
+          : selectedFile // ignore: cast_nullable_to_non_nullable
+              as File?,
+      failure: null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure,
+    ) as $Val);
   }
 
   @override
@@ -368,272 +87,59 @@ class __$$_LoadedCopyWithImpl<$Res>
     }
 
     return $UserProfileResponseCopyWith<$Res>(_value.user!, (value) {
-      return _then(_value.copyWith(user: value));
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-
-class _$_Loaded implements _Loaded {
-  const _$_Loaded({this.user});
-
+abstract class _$$_UpdateProfileStateCopyWith<$Res>
+    implements $UpdateProfileStateCopyWith<$Res> {
+  factory _$$_UpdateProfileStateCopyWith(_$_UpdateProfileState value,
+          $Res Function(_$_UpdateProfileState) then) =
+      __$$_UpdateProfileStateCopyWithImpl<$Res>;
   @override
-  final UserProfileResponse? user;
-
-  @override
-  String toString() {
-    return 'UpdateProfileState.loaded(user: $user)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Loaded &&
-            (identical(other.user, user) || other.user == user));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
-      __$$_LoadedCopyWithImpl<_$_Loaded>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserProfileResponse? user) loaded,
-    required TResult Function() success,
-    required TResult Function(Failure failure) error,
-  }) {
-    return loaded(user);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(UserProfileResponse? user)? loaded,
-    TResult? Function()? success,
-    TResult? Function(Failure failure)? error,
-  }) {
-    return loaded?.call(user);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserProfileResponse? user)? loaded,
-    TResult Function()? success,
-    TResult Function(Failure failure)? error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(user);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
-  }) {
-    return loaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loaded implements UpdateProfileState {
-  const factory _Loaded({final UserProfileResponse? user}) = _$_Loaded;
-
-  UserProfileResponse? get user;
-  @JsonKey(ignore: true)
-  _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_SuccessCopyWith<$Res> {
-  factory _$$_SuccessCopyWith(
-          _$_Success value, $Res Function(_$_Success) then) =
-      __$$_SuccessCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_SuccessCopyWithImpl<$Res>
-    extends _$UpdateProfileStateCopyWithImpl<$Res, _$_Success>
-    implements _$$_SuccessCopyWith<$Res> {
-  __$$_SuccessCopyWithImpl(_$_Success _value, $Res Function(_$_Success) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Success implements _Success {
-  const _$_Success();
-
-  @override
-  String toString() {
-    return 'UpdateProfileState.success()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Success);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserProfileResponse? user) loaded,
-    required TResult Function() success,
-    required TResult Function(Failure failure) error,
-  }) {
-    return success();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(UserProfileResponse? user)? loaded,
-    TResult? Function()? success,
-    TResult? Function(Failure failure)? error,
-  }) {
-    return success?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserProfileResponse? user)? loaded,
-    TResult Function()? success,
-    TResult Function(Failure failure)? error,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Success implements UpdateProfileState {
-  const factory _Success() = _$_Success;
-}
-
-/// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
   @useResult
-  $Res call({Failure failure});
+  $Res call(
+      {StateStatus status,
+      UserProfileResponse? user,
+      File? selectedFile,
+      Failure failure});
+
+  @override
+  $UserProfileResponseCopyWith<$Res>? get user;
 }
 
 /// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
-    extends _$UpdateProfileStateCopyWithImpl<$Res, _$_Error>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
+class __$$_UpdateProfileStateCopyWithImpl<$Res>
+    extends _$UpdateProfileStateCopyWithImpl<$Res, _$_UpdateProfileState>
+    implements _$$_UpdateProfileStateCopyWith<$Res> {
+  __$$_UpdateProfileStateCopyWithImpl(
+      _$_UpdateProfileState _value, $Res Function(_$_UpdateProfileState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? status = null,
+    Object? user = freezed,
+    Object? selectedFile = freezed,
     Object? failure = null,
   }) {
-    return _then(_$_Error(
-      null == failure
+    return _then(_$_UpdateProfileState(
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as StateStatus,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserProfileResponse?,
+      selectedFile: freezed == selectedFile
+          ? _value.selectedFile
+          : selectedFile // ignore: cast_nullable_to_non_nullable
+              as File?,
+      failure: null == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as Failure,
@@ -643,120 +149,70 @@ class __$$_ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error implements _Error {
-  const _$_Error(this.failure);
+class _$_UpdateProfileState implements _UpdateProfileState {
+  const _$_UpdateProfileState(
+      {this.status = StateStatus.unknown,
+      this.user,
+      this.selectedFile,
+      this.failure = const UnknownFailure()});
 
   @override
+  @JsonKey()
+  final StateStatus status;
+  @override
+  final UserProfileResponse? user;
+  @override
+  final File? selectedFile;
+  @override
+  @JsonKey()
   final Failure failure;
 
   @override
   String toString() {
-    return 'UpdateProfileState.error(failure: $failure)';
+    return 'UpdateProfileState(status: $status, user: $user, selectedFile: $selectedFile, failure: $failure)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Error &&
+            other is _$_UpdateProfileState &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.selectedFile, selectedFile) ||
+                other.selectedFile == selectedFile) &&
             (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, failure);
+  int get hashCode =>
+      Object.hash(runtimeType, status, user, selectedFile, failure);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserProfileResponse? user) loaded,
-    required TResult Function() success,
-    required TResult Function(Failure failure) error,
-  }) {
-    return error(failure);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(UserProfileResponse? user)? loaded,
-    TResult? Function()? success,
-    TResult? Function(Failure failure)? error,
-  }) {
-    return error?.call(failure);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserProfileResponse? user)? loaded,
-    TResult Function()? success,
-    TResult Function(Failure failure)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(failure);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
+  _$$_UpdateProfileStateCopyWith<_$_UpdateProfileState> get copyWith =>
+      __$$_UpdateProfileStateCopyWithImpl<_$_UpdateProfileState>(
+          this, _$identity);
 }
 
-abstract class _Error implements UpdateProfileState {
-  const factory _Error(final Failure failure) = _$_Error;
+abstract class _UpdateProfileState implements UpdateProfileState {
+  const factory _UpdateProfileState(
+      {final StateStatus status,
+      final UserProfileResponse? user,
+      final File? selectedFile,
+      final Failure failure}) = _$_UpdateProfileState;
 
+  @override
+  StateStatus get status;
+  @override
+  UserProfileResponse? get user;
+  @override
+  File? get selectedFile;
+  @override
   Failure get failure;
+  @override
   @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+  _$$_UpdateProfileStateCopyWith<_$_UpdateProfileState> get copyWith =>
       throw _privateConstructorUsedError;
 }

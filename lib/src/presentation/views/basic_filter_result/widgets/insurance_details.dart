@@ -6,9 +6,19 @@ import 'package:flutter/material.dart';
 import '../../../components/custom_button.dart';
 
 class InsuranceDetail extends StatelessWidget {
-  const InsuranceDetail({Key? key, required this.onDetailTap})
+  const InsuranceDetail(
+      {Key? key,
+      required this.onDetailTap,
+      this.image,
+      this.polisPrice,
+      this.insurancePrice,
+      this.onBuy})
       : super(key: key);
   final Function() onDetailTap;
+  final String? image;
+  final String? polisPrice;
+  final String? insurancePrice;
+  final Function()? onBuy;
 
   @override
   Widget build(BuildContext context) {
@@ -22,25 +32,31 @@ class InsuranceDetail extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                  child: CachedNetworkImage(imageUrl: 'imageUrl', height: 28)),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: CachedNetworkImage(
+                          imageUrl: image ?? '', height: 28))),
               const SizedBox(width: 24),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
-                children: const [
-                  Text('Цена полиса', style: AppTextStyles.styleW400S14Grey6),
-                  SizedBox(height: 4),
-                  Text('168 000 сум', style: AppTextStyles.styleW700S18Green)
+                children: [
+                  const Text('Цена полиса',
+                      style: AppTextStyles.styleW400S14Grey6),
+                  const SizedBox(height: 4),
+                  Text('$polisPrice сум',
+                      style: AppTextStyles.styleW700S18Green)
                 ],
               )
             ],
           ),
           const Divider(height: 28, color: AppColors.grey300),
           Row(
-            children: const [
-              Expanded(
+            children: [
+              const Expanded(
                   child: Text('Страховая сумма',
                       style: AppTextStyles.styleW400S14Grey6)),
-              Text('40 000 000 сум', style: AppTextStyles.styleW600S14Grey9),
+              Text('$insurancePrice сум',
+                  style: AppTextStyles.styleW600S14Grey9),
             ],
           ),
           const SizedBox(height: 14),
@@ -54,7 +70,7 @@ class InsuranceDetail extends StatelessWidget {
                 child: CustomButton(
                   text: 'КУПИТЬ',
                   padding: 12,
-                  onTap: () {},
+                  onTap: onBuy,
                 ),
               ),
             ],

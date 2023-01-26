@@ -44,6 +44,7 @@ class AnimatedRoundContainer extends StatelessWidget {
             collapsedBackgroundColor: AppColors.primaryColor,
             backgroundColor: AppColors.primaryColor,
             iconColor: AppColors.white,
+            initiallyExpanded: true,
             collapsedIconColor: AppColors.white,
             children: <Widget>[
               Container(

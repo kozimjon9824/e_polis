@@ -19,7 +19,6 @@ class MainScreenData with _$MainScreenData {
 
 @freezed
 class BannerResponse with _$BannerResponse {
-  @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory BannerResponse({String? photo, String? action, String? value}) =
       _BannerResponse;
 

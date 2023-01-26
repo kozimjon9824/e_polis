@@ -5,13 +5,34 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../../../../core/themes/app_colors.dart';
 import '../../../../../../core/themes/app_icons.dart';
 import '../../../../../../core/themes/app_text_styles.dart';
+import '../../../../../../data/models/vehicle_information/response/vehicle_info_response.dart';
 import '../../../../../components/custom_mask.dart';
 import '../../../../../components/custom_text_field.dart';
 import '../../../widgets/animated_container.dart';
 import '../../../widgets/widgets.dart';
 
 class DriverInformationWidget extends StatelessWidget {
-  const DriverInformationWidget({Key? key}) : super(key: key);
+  const DriverInformationWidget(
+      {Key? key,
+      this.ownerData,
+      required this.seriesID,
+      required this.numberID,
+      required this.phoneController,
+      required this.onClear,
+      this.isValidated,
+      this.focusNodeSeriesID,
+      this.focusNodeNumberID,
+      this.focusNodePhone})
+      : super(key: key);
+  final OwnerData? ownerData;
+  final TextEditingController seriesID;
+  final TextEditingController numberID;
+  final TextEditingController phoneController;
+  final Function() onClear;
+  final bool? isValidated;
+  final FocusNode? focusNodeSeriesID;
+  final FocusNode? focusNodeNumberID;
+  final FocusNode? focusNodePhone;
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +40,16 @@ class DriverInformationWidget extends StatelessWidget {
       title: 'Информация о владельце',
       padding: const EdgeInsets.fromLTRB(10, 8, 10, 16),
       padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
-      clearText: 'Очистить информацию',
-      showChildren2: true,
+      clearText: isValidated == true ? 'Очистить информацию' : null,
+      showChildren2: isValidated == true,
+      onClear: onClear,
       children2: [
         phoneCustomTextField(),
         // const SizedBox(height: 16),
       ],
       children: [
-        const TitleSubtitle(title: 'Ф.И.О', subtitle: 'Kozimjon kh'),
-        const TitleSubtitle(title: 'ЖШШИР', subtitle: '1234567890123'),
+        TitleSubtitle(title: 'Ф.И.О', subtitle: ownerData?.fullName ?? ''),
+        TitleSubtitle(title: 'ЖШШИР', subtitle: ownerData?.pinfl ?? ''),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
         const SizedBox(height: 8),
         const Text('Паспорта/ID карта', style: AppTextStyles.styleW600S14Grey9),
@@ -41,6 +63,9 @@ class DriverInformationWidget extends StatelessWidget {
                   hintText: 'AA',
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
+                  textEditingController: seriesID,
+                  textCapitalization: TextCapitalization.characters,
+                  focusNode: focusNodeSeriesID,
                   inputFormatters: [
                     MaskTextInputFormatter(
                         mask: '##', filter: {"#": RegExp(r'[A-Z]')})
@@ -51,8 +76,10 @@ class DriverInformationWidget extends StatelessWidget {
               flex: 2,
               child: CustomTextField(
                 hintText: '1234567',
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.done,
+                textEditingController: numberID,
+                focusNode: focusNodeNumberID,
                 inputFormatters: [
                   MaskTextInputFormatter(
                       mask: '#######', filter: {"#": RegExp(r'[0-9]')})
@@ -69,9 +96,10 @@ class DriverInformationWidget extends StatelessWidget {
     return CustomPrefixTextField(
       label: 'Номер телефона',
       hintText: '(--) --- -- --',
-      autoFocus: true,
       textInputAction: TextInputAction.done,
+      textEditingController: phoneController,
       textInputType: TextInputType.phone,
+      focusNode: focusNodePhone,
       inputFormatters: [
         MaskTextInputFormatter(
             mask: '(##) ### ## ##', filter: {"#": RegExp(r'[0-9]')})

@@ -40,6 +40,20 @@ class UnknownFailure extends Failure {
   String getLocalizedMessage(BuildContext context) => 'Unknown failure';
 }
 
+class PassportValidationFailure extends Failure {
+  const PassportValidationFailure() : super();
+
+  @override
+  String getLocalizedMessage(BuildContext context) => 'Invalid driver passport';
+}
+
+class InputDataWrongFailure extends Failure {
+  const InputDataWrongFailure() : super();
+
+  @override
+  String getLocalizedMessage(BuildContext context) => 'You entered wrong data!';
+}
+
 class UserExistFailure extends Failure {
   const UserExistFailure() : super();
 

@@ -46,7 +46,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   # language and data formatter
   intl: ^0.17.0
-  alice: ^0.2.5
+  alice: ^0.3.2
   # input formatter for phone number
   mask_text_input_formatter: ^2.4.0
   # drop down button
@@ -58,6 +58,7 @@ dependencies:
   # code generator with cubit
   freezed_annotation: ^2.2.0
   flutter_html: any
+  http_parser: ^4.0.2
 
 dev_dependencies:
   flutter_test:

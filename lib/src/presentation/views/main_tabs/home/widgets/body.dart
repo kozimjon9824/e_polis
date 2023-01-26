@@ -30,7 +30,7 @@ class InsuranceTypesBody extends StatelessWidget {
           image: data.photo ?? '',
           onTap: () {
             Navigator.pushNamed(context, AppRoutes.insuranceBasicFilter,
-                arguments: data.id ?? '');
+                arguments: data);
           },
         );
       },

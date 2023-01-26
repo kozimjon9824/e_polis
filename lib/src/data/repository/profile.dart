@@ -3,9 +3,11 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:e_polis/src/core/error/error.dart';
 import 'package:e_polis/src/data/datasource/remote/provider.dart';
+import 'package:e_polis/src/data/models/photo/photo_response.dart';
 import 'package:e_polis/src/data/models/user_profile/user_profile.dart';
 import 'package:e_polis/src/domain/repository/profile.dart';
 import 'package:flutter/foundation.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/constants.dart';
@@ -59,6 +61,54 @@ class ProfileRepository extends IProfileRepository {
     try {
       final response = await _apiClient.getUserProfile(_getUserId());
       return Right(response);
+    } on DioError catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      if (e.error is SocketException) {
+        return const Left(ConnectionFailure());
+      }
+      // if (e.response?.statusCode == 422) {
+      //   return const Left(EmptyFieldFailure());
+      // }
+      return Left(
+        (e.response?.statusCode == 401)
+            ? const UnAuthorizationFailure()
+            : const UnknownFailure(),
+      );
+    } on Object catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Either<Failure, PhotoResponse>> uploadPhoto(String path) async {
+    Dio dio = Dio();
+    dio.interceptors.add(LogInterceptor(
+        requestBody: true,
+        responseBody: true,
+        request: true,
+        requestHeader: true));
+    try {
+      var header = {
+        "Authorization": "Bearer ${_preferences.getString(ACCESS_TOKEN)}"
+      };
+      var image = await MultipartFile.fromFile(
+        path, filename: path.split('/').last,
+        contentType: MediaType("image", "jpeg"), //important
+      );
+      FormData formData = FormData.fromMap({'image': image});
+
+      final response = await dio.post('${BASE_URL}files/user-photos',
+          data: formData,
+          options:
+              Options(headers: header, contentType: 'multipart/form-data'));
+
+      PhotoResponse res = PhotoResponse.fromJson(response.data);
+      return Right(res);
     } on DioError catch (e) {
       if (kDebugMode) {
         print(e);

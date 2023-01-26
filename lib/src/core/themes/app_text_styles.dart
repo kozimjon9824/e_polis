@@ -59,6 +59,9 @@ class AppTextStyles {
   static const styleW700S18Grey9 = TextStyle(
       fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.grey900);
 
+  static const styleW700S18Green = TextStyle(
+      fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.green);
+
   static const styleW500S16Grey4 = TextStyle(
       fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.grey400);
 
@@ -85,7 +88,4 @@ class AppTextStyles {
 
   static const styleW500S14White = TextStyle(
       fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.white);
-
-  static const styleW700S18Green = TextStyle(
-      fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.green);
 }

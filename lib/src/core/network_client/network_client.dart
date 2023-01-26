@@ -6,8 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../main.dart';
 import '../constants/constants.dart';
-import '../routes/app_routes.dart';
-import '../utils/utils.dart';
 import 'retry.dart';
 
 class NetworkClient {
@@ -16,6 +14,7 @@ class NetworkClient {
 
   Future<Dio> init(SharedPreferences preferences) async {
     api = Dio();
+    api.interceptors.add(alice.getDioInterceptor());
     api.interceptors.add(InterceptorsWrapper(
       /// onRequest
       onRequest: (options, handler) async {
@@ -54,7 +53,6 @@ class NetworkClient {
             method: requestOptions.method,
             headers: {'Authorization': 'Bearer $_token'},
           );
-          // options.headers['Authorization'] = 'Bearer $_token';
           late Response cloneReq;
           try {
             String url = requestOptions.path.contains(BASE_URL)
@@ -73,7 +71,6 @@ class NetworkClient {
         return handler.next(error);
       },
     ));
-    // api.interceptors.add(alice.getDioInterceptor());
     api.interceptors.add(LogInterceptor(
         requestBody: true,
         responseBody: true,
@@ -89,9 +86,9 @@ class NetworkClient {
     }
     try {
       debugPrint('AA: $refreshToken');
-      // final options = Options(
-      //   headers: {"Content-Type": "application/json"},
-      // );
+      final options = Options(
+        headers: {"Content-Type": "application/json"},
+      );
       final response = await Dio(BaseOptions(baseUrl: BASE_URL))
           .post('auth/refresh-token', data: {'refresh_token': refreshToken});
       if (response.statusCode == 201 || response.statusCode == 200) {
