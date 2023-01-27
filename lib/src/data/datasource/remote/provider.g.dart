@@ -415,12 +415,39 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              'products/osago/calculation/${id}',
+              'products/osago/${id}/calculation',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = InsuranceDetails.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BookModel> bookInsurance(
+    id,
+    request,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<BookModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'products/osago/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BookModel.fromJson(_result.data!);
     return value;
   }
 

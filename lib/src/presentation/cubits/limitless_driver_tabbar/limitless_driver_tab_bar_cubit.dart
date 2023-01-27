@@ -1,14 +1,14 @@
-import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../../core/utils/helper_models.dart';
+import '../../../core/utils/utils.dart';
 
-part 'limited_driver_tab_bar_state.dart';
+part 'limitless_driver_tab_bar_state.dart';
+part 'limitless_driver_tab_bar_cubit.freezed.dart';
 
-part 'limited_driver_tab_bar_cubit.freezed.dart';
-
-class LimitedDriverTabBarCubit extends Cubit<LimitedDriverTabBarState> {
-  LimitedDriverTabBarCubit() : super(const LimitedDriverTabBarState());
+class LimitlessDriverTabBarCubit extends Cubit<LimitlessDriverTabBarState> {
+  LimitlessDriverTabBarCubit() : super(const LimitlessDriverTabBarState());
 
   void changeTab(int index) {
     emit(state.copyWith(status: StateStatus.unknown, currentIndex: index));
@@ -16,10 +16,6 @@ class LimitedDriverTabBarCubit extends Cubit<LimitedDriverTabBarState> {
 
   void addTab() {
     var tabs = List.of(state.drivers);
-    int count = tabs.length;
-    if (count == 5) {
-      return;
-    }
     tabs.add(const IndexedDriverModel());
     emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
   }

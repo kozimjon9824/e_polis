@@ -21,7 +21,7 @@ class ProfileDetailsWidget extends StatelessWidget {
             loaded: (data) => Profile(
                   hasUser: data?.user != null,
                   fullName: data?.user?.fullName,
-                  image: data?.user?.phone,
+                  image: data?.user?.photo,
                   phone: data?.user?.phone,
                 ));
       },

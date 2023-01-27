@@ -1,5 +1,7 @@
 import 'package:e_polis/src/core/themes/app_icons.dart';
 
+import '../../data/models/book/book_model.dart';
+
 //payment
 enum PaymentType { payMe, click, apelsin, byCard }
 
@@ -17,3 +19,10 @@ final paymentTypeList = [
   PaymentModel(paymentType: PaymentType.apelsin, icon: AppIcons.apelsin),
   PaymentModel(paymentType: PaymentType.byCard, icon: AppIcons.card),
 ];
+
+class IndexedDriverModel {
+  final DriverModel? driverModel;
+  final bool? isSuccess;
+
+  const IndexedDriverModel({this.driverModel, this.isSuccess});
+}

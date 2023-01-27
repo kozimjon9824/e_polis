@@ -458,6 +458,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) {
 mixin _$UserData {
   String? get fullName => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
+  String? get photo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -470,7 +471,7 @@ abstract class $UserDataCopyWith<$Res> {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) =
       _$UserDataCopyWithImpl<$Res, UserData>;
   @useResult
-  $Res call({String? fullName, String? phone});
+  $Res call({String? fullName, String? phone, String? photo});
 }
 
 /// @nodoc
@@ -488,6 +489,7 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
   $Res call({
     Object? fullName = freezed,
     Object? phone = freezed,
+    Object? photo = freezed,
   }) {
     return _then(_value.copyWith(
       fullName: freezed == fullName
@@ -497,6 +499,10 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photo: freezed == photo
+          ? _value.photo
+          : photo // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -509,7 +515,7 @@ abstract class _$$_UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
       __$$_UserDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? fullName, String? phone});
+  $Res call({String? fullName, String? phone, String? photo});
 }
 
 /// @nodoc
@@ -525,6 +531,7 @@ class __$$_UserDataCopyWithImpl<$Res>
   $Res call({
     Object? fullName = freezed,
     Object? phone = freezed,
+    Object? photo = freezed,
   }) {
     return _then(_$_UserData(
       fullName: freezed == fullName
@@ -535,6 +542,10 @@ class __$$_UserDataCopyWithImpl<$Res>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      photo: freezed == photo
+          ? _value.photo
+          : photo // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -542,7 +553,7 @@ class __$$_UserDataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserData with DiagnosticableTreeMixin implements _UserData {
-  const _$_UserData({this.fullName, this.phone});
+  const _$_UserData({this.fullName, this.phone, this.photo});
 
   factory _$_UserData.fromJson(Map<String, dynamic> json) =>
       _$$_UserDataFromJson(json);
@@ -551,10 +562,12 @@ class _$_UserData with DiagnosticableTreeMixin implements _UserData {
   final String? fullName;
   @override
   final String? phone;
+  @override
+  final String? photo;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserData(fullName: $fullName, phone: $phone)';
+    return 'UserData(fullName: $fullName, phone: $phone, photo: $photo)';
   }
 
   @override
@@ -563,7 +576,8 @@ class _$_UserData with DiagnosticableTreeMixin implements _UserData {
     properties
       ..add(DiagnosticsProperty('type', 'UserData'))
       ..add(DiagnosticsProperty('fullName', fullName))
-      ..add(DiagnosticsProperty('phone', phone));
+      ..add(DiagnosticsProperty('phone', phone))
+      ..add(DiagnosticsProperty('photo', photo));
   }
 
   @override
@@ -573,12 +587,13 @@ class _$_UserData with DiagnosticableTreeMixin implements _UserData {
             other is _$_UserData &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
-            (identical(other.phone, phone) || other.phone == phone));
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.photo, photo) || other.photo == photo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, fullName, phone);
+  int get hashCode => Object.hash(runtimeType, fullName, phone, photo);
 
   @JsonKey(ignore: true)
   @override
@@ -595,8 +610,10 @@ class _$_UserData with DiagnosticableTreeMixin implements _UserData {
 }
 
 abstract class _UserData implements UserData {
-  const factory _UserData({final String? fullName, final String? phone}) =
-      _$_UserData;
+  const factory _UserData(
+      {final String? fullName,
+      final String? phone,
+      final String? photo}) = _$_UserData;
 
   factory _UserData.fromJson(Map<String, dynamic> json) = _$_UserData.fromJson;
 
@@ -604,6 +621,8 @@ abstract class _UserData implements UserData {
   String? get fullName;
   @override
   String? get phone;
+  @override
+  String? get photo;
   @override
   @JsonKey(ignore: true)
   _$$_UserDataCopyWith<_$_UserData> get copyWith =>

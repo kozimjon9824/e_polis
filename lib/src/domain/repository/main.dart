@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_polis/src/core/error/error.dart';
 import 'package:e_polis/src/data/models/basic_filter/request/basic_filter_request.dart';
+import 'package:e_polis/src/data/models/book/book_model.dart';
 import 'package:e_polis/src/data/models/main/main.dart';
 import 'package:e_polis/src/data/models/product/product_details.dart';
 
@@ -33,4 +34,7 @@ abstract class IMainRepository {
 
   Future<Either<Failure, InsuranceDetails>> getInsuranceDetails(
       String id, BasicFilterRequest request);
+
+  Future<Either<Failure, BookModel>> bookInsurance(
+      String id, BookModel request);
 }

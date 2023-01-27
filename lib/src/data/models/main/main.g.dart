@@ -45,12 +45,14 @@ Map<String, dynamic> _$$_BannerResponseToJson(_$_BannerResponse instance) =>
 _$_UserData _$$_UserDataFromJson(Map<String, dynamic> json) => _$_UserData(
       fullName: json['fullName'] as String?,
       phone: json['phone'] as String?,
+      photo: json['photo'] as String?,
     );
 
 Map<String, dynamic> _$$_UserDataToJson(_$_UserData instance) =>
     <String, dynamic>{
       'fullName': instance.fullName,
       'phone': instance.phone,
+      'photo': instance.photo,
     };
 
 _$_ProductData _$$_ProductDataFromJson(Map<String, dynamic> json) =>

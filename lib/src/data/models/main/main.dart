@@ -28,7 +28,8 @@ class BannerResponse with _$BannerResponse {
 
 @freezed
 class UserData with _$UserData {
-  const factory UserData({String? fullName, String? phone}) = _UserData;
+  const factory UserData({String? fullName, String? phone, String? photo}) =
+      _UserData;
 
   factory UserData.fromJson(Map<String, dynamic> json) =>
       _$UserDataFromJson(json);

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:e_polis/src/data/models/add_product/add_product.dart';
 import 'package:e_polis/src/data/models/basic_filter/request/basic_filter_request.dart';
+import 'package:e_polis/src/data/models/book/book_model.dart';
 import 'package:e_polis/src/data/models/help_data/help_data.dart';
 import 'package:e_polis/src/data/models/input_driver/request/driver_passport_input.dart';
 import 'package:e_polis/src/data/models/input_driver/response/driver_passport_response.dart';
@@ -83,7 +84,11 @@ abstract class ApiClient {
   @POST('products/osago/calculation')
   Future<BasicFilterResponse> getInsurances(@Body() BasicFilterRequest request);
 
-  @POST('products/osago/calculation/{productId}')
+  @POST('products/osago/{productId}/calculation')
   Future<InsuranceDetails> getInsuranceDetails(
       @Path('productId') String id, @Body() BasicFilterRequest request);
+
+  @POST('products/osago/{id}')
+  Future<BookModel> bookInsurance(
+      @Path('id') String id, @Body() BookModel request);
 }

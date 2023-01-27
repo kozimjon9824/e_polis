@@ -11,6 +11,7 @@ import 'package:e_polis/src/domain/usecases/auth/login.dart';
 import 'package:e_polis/src/domain/usecases/auth/logout.dart';
 import 'package:e_polis/src/domain/usecases/auth/verify.dart';
 import 'package:e_polis/src/domain/usecases/main/add_driver.dart';
+import 'package:e_polis/src/domain/usecases/main/book.dart';
 import 'package:e_polis/src/domain/usecases/main/check_vehicle_info.dart';
 import 'package:e_polis/src/domain/usecases/main/get_insurances.dart';
 import 'package:e_polis/src/domain/usecases/main/insurance_details.dart';
@@ -26,6 +27,7 @@ import 'package:e_polis/src/domain/usecases/profile/user_profile.dart';
 import 'package:e_polis/src/domain/usecases/setting/get_app_lang.dart';
 import 'package:e_polis/src/presentation/cubits/add_driver/add_driver_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/add_product/add_product_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/check_vehicle_info/check_vehicle_info_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/faq/faq_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
@@ -56,6 +58,7 @@ import 'src/presentation/cubits/filter_tab/filter_tab_manager_cubit.dart';
 import 'src/presentation/cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
 import 'src/presentation/cubits/language/language_cubit.dart';
 import 'src/presentation/cubits/language_setting/language_setting_cubit.dart';
+import 'src/presentation/cubits/limitless_driver_tabbar/limitless_driver_tab_bar_cubit.dart';
 import 'src/presentation/cubits/my_product_tab_controller/product_tab_manager_cubit.dart';
 
 final inject = GetIt.instance;
@@ -88,7 +91,9 @@ Future<void> initDi() async {
   inject.registerFactory(() => InsuranceDetailsCubit(inject()));
   inject.registerFactory(() => CheckVehicleInfoCubit(inject(), inject()));
   inject.registerFactory(() => AddDriverCubit(inject()));
+  inject.registerFactory(() => BookCubit(inject()));
   inject.registerFactory(() => LimitedDriverTabBarCubit());
+  inject.registerFactory(() => LimitlessDriverTabBarCubit());
 
   // profile cubit
   inject
@@ -110,6 +115,7 @@ Future<void> initDi() async {
   inject.registerLazySingleton(() => CheckVehicleInfoUseCase(inject()));
   inject.registerLazySingleton(() => ValidatePassportUseCase(inject()));
   inject.registerLazySingleton(() => AddDriverUseCase(inject()));
+  inject.registerLazySingleton(() => BookInsuranceUseCase(inject()));
 
   // profile use-cases
   inject.registerLazySingleton(() => UpdateProfileUseCase(inject()));

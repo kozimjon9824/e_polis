@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                 automaticallyImplyLeading: false,
                 titleSpacing: 0.0,
                 title: ProfileWidget(
-                  image: data?.user?.phone,
+                  image: data?.user?.photo,
                   fullName: data?.user?.fullName,
                   phone: data?.user?.phone,
                   hasUser: data?.user != null,

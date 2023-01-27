@@ -27,13 +27,18 @@ class LimitedDriverView extends StatelessWidget {
                     sliver: SliverList(
                       delegate: SliverChildListDelegate([
                         Row(children: [
-                          for (int i = 1; i <= state.tabCountMap.length; i++)
+                          for (int i = 1; i <= state.drivers.length; i++)
                             TextBtn(
                                 title: i.toString(),
                                 onTap: () {
                                   cubit.changeTab(i - 1);
                                 },
-                                bgColor: AppColors.green300,
+                                bgColor: (state.drivers[i - 1].isSuccess ==
+                                        null)
+                                    ? null
+                                    : (state.drivers[i - 1].isSuccess == true)
+                                        ? AppColors.green
+                                        : AppColors.green300,
                                 borderRadius: (i == 1)
                                     ? const BorderRadius.horizontal(
                                         left: Radius.circular(8))
@@ -42,7 +47,7 @@ class LimitedDriverView extends StatelessWidget {
                                             right: Radius.circular(8))
                                         : null),
                           Visibility(
-                            visible: state.tabCountMap.length != 5,
+                            visible: state.drivers.length != 5,
                             child: IconBtn(onTap: () {
                               cubit.addTab();
                             }),
@@ -56,7 +61,7 @@ class LimitedDriverView extends StatelessWidget {
               body: IndexedStack(
                 index: state.currentIndex,
                 children: [
-                  for (int i = 1; i <= state.tabCountMap.length; i++)
+                  for (int i = 1; i <= state.drivers.length; i++)
                     DriverInputDetailsBody(index: i)
                 ],
               ),

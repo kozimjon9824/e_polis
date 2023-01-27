@@ -22,8 +22,8 @@ class ContractDetails extends StatelessWidget {
         CustomTextField(
           label: 'Дата начало контракта',
           hintText: '',
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.next,
+          keyboardType: TextInputType.datetime,
+          textInputAction: TextInputAction.done,
           inputFormatters: [
             MaskTextInputFormatter(
                 mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')})

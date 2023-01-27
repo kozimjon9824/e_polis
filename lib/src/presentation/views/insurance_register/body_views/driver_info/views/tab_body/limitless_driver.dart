@@ -1,26 +1,27 @@
-import 'package:e_polis/injector.dart';
-import 'package:e_polis/src/data/models/book/book_model.dart';
-import 'package:e_polis/src/presentation/components/snackbars.dart';
-import 'package:e_polis/src/presentation/cubits/add_driver/add_driver_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/limitless_driver_tabbar/limitless_driver_tab_bar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../../../../injector.dart';
 import '../../../../../../../core/utils/helper_models.dart';
 import '../../../../../../../core/utils/utils.dart';
+import '../../../../../../../data/models/book/book_model.dart';
 import '../../../../../../components/custom_button.dart';
-import '../../../../../../cubits/limited_driver_tabbar/limited_driver_tab_bar_cubit.dart';
+import '../../../../../../components/snackbars.dart';
+import '../../../../../../cubits/add_driver/add_driver_cubit.dart';
 import '../../../../widgets/animated_container.dart';
-import 'children/children.dart';
+import 'children/children_limitless_driver.dart';
 
-class DriverInputDetailsBody extends StatefulWidget {
-  const DriverInputDetailsBody({Key? key, required this.index})
+class LimitlessDriverInputs extends StatefulWidget {
+  const LimitlessDriverInputs({Key? key, required this.index})
       : super(key: key);
   final int index;
 
   @override
-  State<DriverInputDetailsBody> createState() => _DriverInputDetailsBodyState();
+  State<LimitlessDriverInputs> createState() => _LimitlessDriverInputsState();
 }
 
-class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
+class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
   final seriesController = TextEditingController();
   final numberController = TextEditingController();
   final dateController = TextEditingController();
@@ -38,14 +39,14 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
       child: BlocConsumer<AddDriverCubit, AddDriverState>(
         listener: (context, state) {
           if (state.status == StateStatus.error) {
-            context.read<LimitedDriverTabBarCubit>().addDriverData(
+            context.read<LimitlessDriverTabBarCubit>().addDriverData(
                 index: widget.index - 1,
                 model: const IndexedDriverModel(isSuccess: false));
             showErrorMessage(
                 context, state.failure.getLocalizedMessage(context));
           }
           if (state.status == StateStatus.success) {
-            context.read<LimitedDriverTabBarCubit>().addDriverData(
+            context.read<LimitlessDriverTabBarCubit>().addDriverData(
                 index: widget.index - 1,
                 model: IndexedDriverModel(
                     isSuccess: true,
@@ -74,21 +75,23 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
                   padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
                   showChildren2: state.driverData != null,
-                  clearText: state.driverData != null ? 'Удалить' : null,
+                  clearText: state.driverData == null
+                      ? 'Удалить'
+                      : 'Очистить информацию',
                   onClear: () {
                     context
-                        .read<LimitedDriverTabBarCubit>()
+                        .read<LimitlessDriverTabBarCubit>()
                         .removeTab(widget.index - 1);
                   },
                   children2: [
-                    Child2Body(
+                    LimitlessDriverChild2Body(
                         data: state.driverData,
                         licenseSeries: licenseSeries,
                         licenseNumber: licenseNumber,
                         licenseDate: licenseDate)
                   ],
                   children: [
-                    Child1Body(
+                    LimitlessDriverChild1Body(
                         seriesController: seriesController,
                         numberController: numberController,
                         dateController: dateController,
@@ -98,13 +101,12 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                if (widget.index != 5)
-                  CustomOutlineButton(
-                      text: 'Добавить водителя',
-                      onTap: () {
-                        context.read<LimitedDriverTabBarCubit>().addTab();
-                      }),
-                if (widget.index != 5) const SizedBox(height: 24),
+                CustomOutlineButton(
+                    text: 'Добавить водителя',
+                    onTap: () {
+                      context.read<LimitlessDriverTabBarCubit>().addTab();
+                    }),
+                const SizedBox(height: 24),
               ],
             ),
             bottomNavigationBar: SafeArea(

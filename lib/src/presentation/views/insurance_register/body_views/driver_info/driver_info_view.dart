@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import '../../../insurance_basic_filter/widget/container_switch.dart';
 import 'views/limeted_driver.dart';
+import 'views/limetless_drivers.dart';
 
 class DriverInfoView extends StatelessWidget {
   const DriverInfoView({Key? key}) : super(key: key);
@@ -20,7 +21,10 @@ class DriverInfoView extends StatelessWidget {
           bool status = state.basicFilterRequest.isVip ?? false;
           return IndexedStack(
             index: status ? 1 : 0,
-            children: const [LimitedDriverView(), Center(child: Text('data'))],
+            children: const [
+              LimitedDriverView(),
+              LimitlessDriverView(),
+            ],
           );
         },
       ),
