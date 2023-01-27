@@ -4,7 +4,6 @@ import 'package:e_polis/src/presentation/components/snackbars.dart';
 import 'package:e_polis/src/presentation/cubits/check_vehicle_info/check_vehicle_info_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '../../../../components/custom_button.dart';
 import '../../../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
 import 'widgets/car_info.dart';
@@ -30,6 +29,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
   final focusNodeTechSeries = FocusNode();
   final focusNodeTechNumber = FocusNode();
   final focusNodeVehicleNumber = FocusNode();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +44,10 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
         },
         builder: (context, state) {
           var cubit = context.read<CheckVehicleInfoCubit>();
-          return KeyboardDismisser(
-            child: Scaffold(
-              body: ListView(
+          return Scaffold(
+            body: Form(
+              key: formKey,
+              child: ListView(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 children: [
@@ -71,37 +72,39 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                       focusNodeNumberID: focusNodeNumberID,
                       focusNodeSeriesID: focusNodeSeriesID,
                       focusNodePhone: focusNodePhone,
-                      onClear: () {},
                     ),
                 ],
               ),
-              bottomNavigationBar: SafeArea(
-                minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-                child: CustomButton(
-                  isLoading: state.status == StateStatus.loading,
-                  text: 'Продолжить',
-                  onTap: () {
-                    focusNodeSeriesID.unfocus();
-                    focusNodeNumberID.unfocus();
-                    focusNodePhone.unfocus();
-                    focusNodeVehicleNumber.unfocus();
-                    focusNodeTechSeries.unfocus();
-                    focusNodeTechNumber.unfocus();
-                    if (state.vehicleInfo == null) {
-                      cubit.checkVehicleData(
-                          vehicleNum: vehicleController.text,
-                          techPasSer: series.text,
-                          techPasNum: number.text);
-                    } else if (!state.isPassportValidated) {
-                      cubit.validatePassport(
-                          series: seriesID.text, number: numberID.text);
-                    } else {
-                      context
-                          .read<ManageInsuranceStackViewsCubit>()
-                          .changeIndex(1);
-                    }
-                  },
-                ),
+            ),
+            bottomNavigationBar: SafeArea(
+              minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+              child: CustomButton(
+                isLoading: state.status == StateStatus.loading,
+                text: 'Продолжить',
+                onTap: () {
+                  if (!formKey.currentState!.validate()) {
+                    return;
+                  }
+                  focusNodeSeriesID.unfocus();
+                  focusNodeNumberID.unfocus();
+                  focusNodePhone.unfocus();
+                  focusNodeVehicleNumber.unfocus();
+                  focusNodeTechSeries.unfocus();
+                  focusNodeTechNumber.unfocus();
+                  if (state.vehicleInfo == null) {
+                    cubit.checkVehicleData(
+                        vehicleNum: vehicleController.text,
+                        techPasSer: series.text,
+                        techPasNum: number.text);
+                  } else if (!state.isPassportValidated) {
+                    cubit.validatePassport(
+                        series: seriesID.text, number: numberID.text);
+                  } else {
+                    context
+                        .read<ManageInsuranceStackViewsCubit>()
+                        .changeIndex(1);
+                  }
+                },
               ),
             ),
           );

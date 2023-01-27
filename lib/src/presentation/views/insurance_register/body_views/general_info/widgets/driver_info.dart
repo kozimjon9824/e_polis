@@ -18,7 +18,7 @@ class DriverInformationWidget extends StatelessWidget {
       required this.seriesID,
       required this.numberID,
       required this.phoneController,
-      required this.onClear,
+      this.onClear,
       this.isValidated,
       this.focusNodeSeriesID,
       this.focusNodeNumberID,
@@ -28,7 +28,7 @@ class DriverInformationWidget extends StatelessWidget {
   final TextEditingController seriesID;
   final TextEditingController numberID;
   final TextEditingController phoneController;
-  final Function() onClear;
+  final Function()? onClear;
   final bool? isValidated;
   final FocusNode? focusNodeSeriesID;
   final FocusNode? focusNodeNumberID;
@@ -45,7 +45,6 @@ class DriverInformationWidget extends StatelessWidget {
       onClear: onClear,
       children2: [
         phoneCustomTextField(),
-        // const SizedBox(height: 16),
       ],
       children: [
         TitleSubtitle(title: 'Ф.И.О', subtitle: ownerData?.fullName ?? ''),
@@ -56,6 +55,7 @@ class DriverInformationWidget extends StatelessWidget {
         const SizedBox(height: 6),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
+          textBaseline: TextBaseline.ideographic,
           children: [
             Expanded(
                 flex: 1,

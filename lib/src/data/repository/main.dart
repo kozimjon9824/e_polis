@@ -12,6 +12,7 @@ import 'package:e_polis/src/data/models/input_driver/response/driver_passport_re
 import 'package:e_polis/src/data/models/insurance_details/insurance_details.dart';
 import 'package:e_polis/src/data/models/main/main.dart';
 import 'package:e_polis/src/data/models/product/product_details.dart';
+import 'package:e_polis/src/data/models/select_values/select_values.dart';
 import 'package:e_polis/src/data/models/vehicle_information/request/vehicle_info_request.dart';
 import 'package:e_polis/src/data/models/vehicle_information/response/vehicle_info_response.dart';
 import 'package:e_polis/src/domain/repository/main.dart';
@@ -242,6 +243,31 @@ class MainRepository implements IMainRepository {
       String id, BookModel request) async {
     try {
       final response = await _apiClient.bookInsurance(id, request);
+      return Right(response);
+    } on DioError catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      if (e.error is SocketException) {
+        return const Left(ConnectionFailure());
+      }
+      return Left(
+        (e.response?.statusCode == 401)
+            ? const UnAuthorizationFailure()
+            : const UnknownFailure(),
+      );
+    } on Object catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Either<Failure, SelectValues>> getDropDownValue() async {
+    try {
+      final response = await _apiClient.getDropDownValues();
       return Right(response);
     } on DioError catch (e) {
       if (kDebugMode) {

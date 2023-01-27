@@ -9,6 +9,7 @@ import 'package:e_polis/src/data/models/insurance_details/insurance_details.dart
 import 'package:e_polis/src/data/models/login/login.dart';
 import 'package:e_polis/src/data/models/product/product_details.dart';
 import 'package:e_polis/src/data/models/profile_update/profile_update.dart';
+import 'package:e_polis/src/data/models/select_values/select_values.dart';
 import 'package:e_polis/src/data/models/user_profile/user_profile.dart';
 import 'package:e_polis/src/data/models/vehicle_information/request/vehicle_info_request.dart';
 import 'package:e_polis/src/data/models/vehicle_information/response/vehicle_info_response.dart';
@@ -20,6 +21,7 @@ import '../../models/basic_filter/response/basic_filter_response.dart';
 import '../../models/driver_passport_validation/driver_passport_validation.dart';
 import '../../models/main/main.dart';
 import '../../models/my_products/product_data.dart';
+import '../../models/notification/notification_model.dart';
 
 part 'provider.g.dart';
 
@@ -91,4 +93,11 @@ abstract class ApiClient {
   @POST('products/osago/{id}')
   Future<BookModel> bookInsurance(
       @Path('id') String id, @Body() BookModel request);
+
+  @GET('products/osago/dictionary')
+  Future<SelectValues> getDropDownValues();
+
+  @GET('users/{userId}/notifications')
+  Future<List<NotificationModel>> getNotifications(
+      @Path('userId') String userId);
 }

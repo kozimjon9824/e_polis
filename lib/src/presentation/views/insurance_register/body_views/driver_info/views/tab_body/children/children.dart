@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-
 import '../../../../../../../../core/themes/app_colors.dart';
 import '../../../../../../../../core/themes/app_text_styles.dart';
 import '../../../../../../../../data/models/input_driver/response/driver_passport_response.dart';
@@ -44,6 +43,9 @@ class Child1Body extends StatelessWidget {
                   textCapitalization: TextCapitalization.characters,
                   textEditingController: seriesController,
                   focusNode: seriesFocus,
+                  onFieldSubmitted: (_) => numberFocus?.requestFocus(),
+                  validator: (value) =>
+                      value!.isEmpty ? 'Must not be empty' : null,
                   inputFormatters: [
                     MaskTextInputFormatter(
                         mask: '##', filter: {"#": RegExp(r'[A-Z]')})
@@ -58,6 +60,9 @@ class Child1Body extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 textEditingController: numberController,
                 focusNode: numberFocus,
+                onFieldSubmitted: (_) => dateFocus?.requestFocus(),
+                validator: (value) =>
+                    value!.isEmpty ? 'Must not be empty' : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
                       mask: '#######', filter: {"#": RegExp(r'[0-9]')})
@@ -74,6 +79,8 @@ class Child1Body extends StatelessWidget {
           textEditingController: dateController,
           textInputAction: TextInputAction.done,
           focusNode: dateFocus,
+          onFieldSubmitted: (_) => dateFocus?.unfocus(),
+          validator: (value) => value!.isEmpty ? 'Must not be empty' : null,
           inputFormatters: [
             MaskTextInputFormatter(
                 mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')})
@@ -90,13 +97,17 @@ class Child2Body extends StatelessWidget {
       this.data,
       required this.licenseSeries,
       required this.licenseNumber,
-      required this.licenseDate})
+      required this.licenseDate,
+      this.dropDownValues = const [],
+      this.onChange})
       : super(key: key);
 
   final DriverPassportInputResponse? data;
   final TextEditingController licenseSeries;
   final TextEditingController licenseNumber;
   final TextEditingController licenseDate;
+  final List<String> dropDownValues;
+  final Function(String? value)? onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -108,15 +119,12 @@ class Child2Body extends StatelessWidget {
         const SizedBox(height: 8),
         DropDownButton<String>(
             label: 'Родство',
-            items: ['Брат']
+            items: dropDownValues
                 .map((item) => DropdownMenuItem<String>(
                     value: item,
-                    child: Text(
-                      item,
-                      style: AppTextStyles.styleW400S14Grey6,
-                    )))
+                    child: Text(item, style: AppTextStyles.styleW400S14Grey6)))
                 .toList(),
-            onChanged: (value) {}),
+            onChanged: onChange),
         const SizedBox(height: 16),
         const Text('Водительские права',
             style: AppTextStyles.styleW600S14Grey9),

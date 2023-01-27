@@ -7,8 +7,8 @@ part 'basic_filter_request.g.dart';
 @freezed
 class BasicFilterRequest with _$BasicFilterRequest {
   const factory BasicFilterRequest(
-      {String? region,
-      String? vehicleType,
+      {int? region,
+      int? vehicleType,
       bool? isVip,
       String? period}) = _BasicFilterRequest;
 

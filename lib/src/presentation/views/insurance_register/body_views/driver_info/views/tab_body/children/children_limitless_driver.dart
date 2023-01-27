@@ -44,6 +44,9 @@ class LimitlessDriverChild1Body extends StatelessWidget {
                   textCapitalization: TextCapitalization.characters,
                   textEditingController: seriesController,
                   focusNode: seriesFocus,
+                  onFieldSubmitted: (_) => numberFocus!.requestFocus(),
+                  validator: (value) =>
+                      value!.isEmpty ? 'Must not be empty' : null,
                   inputFormatters: [
                     MaskTextInputFormatter(
                         mask: '##', filter: {"#": RegExp(r'[A-Z]')})
@@ -58,6 +61,9 @@ class LimitlessDriverChild1Body extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 textEditingController: numberController,
                 focusNode: numberFocus,
+                onFieldSubmitted: (_) => dateFocus!.requestFocus(),
+                validator: (value) =>
+                    value!.isEmpty ? 'Must not be empty' : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
                       mask: '#######', filter: {"#": RegExp(r'[0-9]')})
@@ -74,6 +80,7 @@ class LimitlessDriverChild1Body extends StatelessWidget {
           textEditingController: dateController,
           textInputAction: TextInputAction.done,
           focusNode: dateFocus,
+          validator: (value) => value!.isEmpty ? 'Must not be empty' : null,
           inputFormatters: [
             MaskTextInputFormatter(
                 mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')})
@@ -90,13 +97,17 @@ class LimitlessDriverChild2Body extends StatelessWidget {
       this.data,
       required this.licenseSeries,
       required this.licenseNumber,
-      required this.licenseDate})
+      required this.licenseDate,
+      this.dropDownValues = const [],
+      this.onChange})
       : super(key: key);
 
   final DriverPassportInputResponse? data;
   final TextEditingController licenseSeries;
   final TextEditingController licenseNumber;
   final TextEditingController licenseDate;
+  final List<String> dropDownValues;
+  final Function(String? value)? onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -104,19 +115,15 @@ class LimitlessDriverChild2Body extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
-        TitleSubtitle(title: 'Ф.И.О', subtitle: data?.fullName ?? ''),
         const SizedBox(height: 8),
         DropDownButton<String>(
             label: 'Родство',
-            items: ['Брат']
+            items: dropDownValues
                 .map((item) => DropdownMenuItem<String>(
                     value: item,
-                    child: Text(
-                      item,
-                      style: AppTextStyles.styleW400S14Grey6,
-                    )))
+                    child: Text(item, style: AppTextStyles.styleW400S14Grey6)))
                 .toList(),
-            onChanged: (value) {}),
+            onChanged: onChange),
         const SizedBox(height: 16),
         const Text('Водительские права',
             style: AppTextStyles.styleW600S14Grey9),
@@ -165,6 +172,8 @@ class LimitlessDriverChild2Body extends StatelessWidget {
           ],
           textInputAction: TextInputAction.done,
         ),
+        const SizedBox(height: 8),
+        TitleSubtitle(title: 'Ф.И.О', subtitle: data?.fullName ?? ''),
       ],
     );
   }

@@ -9,8 +9,8 @@ part of 'basic_filter_request.dart';
 _$_BasicFilterRequest _$$_BasicFilterRequestFromJson(
         Map<String, dynamic> json) =>
     _$_BasicFilterRequest(
-      region: json['region'] as String?,
-      vehicleType: json['vehicleType'] as String?,
+      region: json['region'] as int?,
+      vehicleType: json['vehicleType'] as int?,
       isVip: json['isVip'] as bool?,
       period: json['period'] as String?,
     );

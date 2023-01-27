@@ -46,14 +46,14 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
         status: StateStatus.unknown, basicFilterRequest: newData));
   }
 
-  void selectRegion(String region) {
+  void selectRegion(int region) {
     BasicFilterRequest data = state.basicFilterRequest;
     var newData = data.copyWith(region: region);
     emit(state.copyWith(
         status: StateStatus.unknown, basicFilterRequest: newData));
   }
 
-  void selectVehicleType(String type) {
+  void selectVehicleType(int type) {
     BasicFilterRequest data = state.basicFilterRequest;
     var newData = data.copyWith(vehicleType: type);
     emit(state.copyWith(

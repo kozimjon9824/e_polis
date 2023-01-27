@@ -4,6 +4,7 @@ import 'package:e_polis/src/data/models/basic_filter/request/basic_filter_reques
 import 'package:e_polis/src/data/models/book/book_model.dart';
 import 'package:e_polis/src/data/models/main/main.dart';
 import 'package:e_polis/src/data/models/product/product_details.dart';
+import 'package:e_polis/src/data/models/select_values/select_values.dart';
 
 import '../../data/models/basic_filter/response/basic_filter_response.dart';
 import '../../data/models/driver_passport_validation/driver_passport_validation.dart';
@@ -37,4 +38,6 @@ abstract class IMainRepository {
 
   Future<Either<Failure, BookModel>> bookInsurance(
       String id, BookModel request);
+
+  Future<Either<Failure, SelectValues>> getDropDownValue();
 }

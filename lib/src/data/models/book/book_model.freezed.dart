@@ -798,7 +798,7 @@ DriverModel _$DriverModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DriverModel {
   String? get birthDate => throw _privateConstructorUsedError;
-  String? get relative => throw _privateConstructorUsedError;
+  int? get relative => throw _privateConstructorUsedError;
   DriverPassport? get passport => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -813,7 +813,7 @@ abstract class $DriverModelCopyWith<$Res> {
           DriverModel value, $Res Function(DriverModel) then) =
       _$DriverModelCopyWithImpl<$Res, DriverModel>;
   @useResult
-  $Res call({String? birthDate, String? relative, DriverPassport? passport});
+  $Res call({String? birthDate, int? relative, DriverPassport? passport});
 
   $DriverPassportCopyWith<$Res>? get passport;
 }
@@ -843,7 +843,7 @@ class _$DriverModelCopyWithImpl<$Res, $Val extends DriverModel>
       relative: freezed == relative
           ? _value.relative
           : relative // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       passport: freezed == passport
           ? _value.passport
           : passport // ignore: cast_nullable_to_non_nullable
@@ -872,7 +872,7 @@ abstract class _$$_DriverModelCopyWith<$Res>
       __$$_DriverModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? birthDate, String? relative, DriverPassport? passport});
+  $Res call({String? birthDate, int? relative, DriverPassport? passport});
 
   @override
   $DriverPassportCopyWith<$Res>? get passport;
@@ -901,7 +901,7 @@ class __$$_DriverModelCopyWithImpl<$Res>
       relative: freezed == relative
           ? _value.relative
           : relative // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       passport: freezed == passport
           ? _value.passport
           : passport // ignore: cast_nullable_to_non_nullable
@@ -921,7 +921,7 @@ class _$_DriverModel implements _DriverModel {
   @override
   final String? birthDate;
   @override
-  final String? relative;
+  final int? relative;
   @override
   final DriverPassport? passport;
 
@@ -964,7 +964,7 @@ class _$_DriverModel implements _DriverModel {
 abstract class _DriverModel implements DriverModel {
   const factory _DriverModel(
       {final String? birthDate,
-      final String? relative,
+      final int? relative,
       final DriverPassport? passport}) = _$_DriverModel;
 
   factory _DriverModel.fromJson(Map<String, dynamic> json) =
@@ -973,7 +973,7 @@ abstract class _DriverModel implements DriverModel {
   @override
   String? get birthDate;
   @override
-  String? get relative;
+  int? get relative;
   @override
   DriverPassport? get passport;
   @override

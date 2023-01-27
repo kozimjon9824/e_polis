@@ -20,8 +20,8 @@ BasicFilterRequest _$BasicFilterRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BasicFilterRequest {
-  String? get region => throw _privateConstructorUsedError;
-  String? get vehicleType => throw _privateConstructorUsedError;
+  int? get region => throw _privateConstructorUsedError;
+  int? get vehicleType => throw _privateConstructorUsedError;
   bool? get isVip => throw _privateConstructorUsedError;
   String? get period => throw _privateConstructorUsedError;
 
@@ -37,7 +37,7 @@ abstract class $BasicFilterRequestCopyWith<$Res> {
           BasicFilterRequest value, $Res Function(BasicFilterRequest) then) =
       _$BasicFilterRequestCopyWithImpl<$Res, BasicFilterRequest>;
   @useResult
-  $Res call({String? region, String? vehicleType, bool? isVip, String? period});
+  $Res call({int? region, int? vehicleType, bool? isVip, String? period});
 }
 
 /// @nodoc
@@ -62,11 +62,11 @@ class _$BasicFilterRequestCopyWithImpl<$Res, $Val extends BasicFilterRequest>
       region: freezed == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       vehicleType: freezed == vehicleType
           ? _value.vehicleType
           : vehicleType // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       isVip: freezed == isVip
           ? _value.isVip
           : isVip // ignore: cast_nullable_to_non_nullable
@@ -87,7 +87,7 @@ abstract class _$$_BasicFilterRequestCopyWith<$Res>
       __$$_BasicFilterRequestCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? region, String? vehicleType, bool? isVip, String? period});
+  $Res call({int? region, int? vehicleType, bool? isVip, String? period});
 }
 
 /// @nodoc
@@ -110,11 +110,11 @@ class __$$_BasicFilterRequestCopyWithImpl<$Res>
       region: freezed == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       vehicleType: freezed == vehicleType
           ? _value.vehicleType
           : vehicleType // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       isVip: freezed == isVip
           ? _value.isVip
           : isVip // ignore: cast_nullable_to_non_nullable
@@ -137,9 +137,9 @@ class _$_BasicFilterRequest implements _BasicFilterRequest {
       _$$_BasicFilterRequestFromJson(json);
 
   @override
-  final String? region;
+  final int? region;
   @override
-  final String? vehicleType;
+  final int? vehicleType;
   @override
   final bool? isVip;
   @override
@@ -184,8 +184,8 @@ class _$_BasicFilterRequest implements _BasicFilterRequest {
 
 abstract class _BasicFilterRequest implements BasicFilterRequest {
   const factory _BasicFilterRequest(
-      {final String? region,
-      final String? vehicleType,
+      {final int? region,
+      final int? vehicleType,
       final bool? isVip,
       final String? period}) = _$_BasicFilterRequest;
 
@@ -193,9 +193,9 @@ abstract class _BasicFilterRequest implements BasicFilterRequest {
       _$_BasicFilterRequest.fromJson;
 
   @override
-  String? get region;
+  int? get region;
   @override
-  String? get vehicleType;
+  int? get vehicleType;
   @override
   bool? get isVip;
   @override

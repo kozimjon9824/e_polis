@@ -52,6 +52,8 @@ class CarInformationWidget extends StatelessWidget {
           textCapitalization: TextCapitalization.characters,
           textInputAction: TextInputAction.next,
           focusNode: focusNodeVehicleNumber,
+          onFieldSubmitted: (_) => focusNodeTechSeries!.requestFocus(),
+          validator: (value) => value!.isEmpty ? 'Must not be empty' : null,
         ),
         const SizedBox(height: 16),
         Row(
@@ -60,18 +62,21 @@ class CarInformationWidget extends StatelessWidget {
             Expanded(
                 flex: 1,
                 child: CustomTextField(
-                  label: 'Техпаспорт',
-                  hintText: 'Серия',
-                  textEditingController: seriesController,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  textCapitalization: TextCapitalization.characters,
-                  focusNode: focusNodeTechSeries,
-                  inputFormatters: [
-                    MaskTextInputFormatter(
-                        mask: '###', filter: {"#": RegExp(r'[A-Z]')})
-                  ],
-                )),
+                    label: 'Техпаспорт',
+                    hintText: 'Серия',
+                    textEditingController: seriesController,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                    textCapitalization: TextCapitalization.characters,
+                    focusNode: focusNodeTechSeries,
+                    onFieldSubmitted: (_) =>
+                        focusNodeTechNumber!.requestFocus(),
+                    inputFormatters: [
+                      MaskTextInputFormatter(
+                          mask: '###', filter: {"#": RegExp(r'[A-Z]')})
+                    ],
+                    validator: (value) =>
+                        value!.isEmpty ? 'Must not be empty' : null)),
             const SizedBox(width: 10),
             Expanded(
               flex: 2,
@@ -81,6 +86,9 @@ class CarInformationWidget extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.done,
                 textEditingController: numberController,
+                onFieldSubmitted: (_) => focusNodeTechNumber!.unfocus(),
+                validator: (value) =>
+                    value!.isEmpty ? 'Must not be empty' : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
                       mask: '######', filter: {"#": RegExp(r'[0-9]')})

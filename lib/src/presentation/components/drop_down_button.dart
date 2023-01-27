@@ -43,6 +43,7 @@ class DropDownButton<T> extends StatelessWidget {
                 const Icon(CupertinoIcons.chevron_up, color: AppColors.grey400),
             iconSize: 16,
             buttonHeight: 56,
+            dropdownMaxHeight: MediaQuery.of(context).size.height / 2,
             style: AppTextStyles.styleW500S14Grey9,
             buttonPadding: const EdgeInsets.only(right: 12),
             dropdownDecoration: BoxDecoration(

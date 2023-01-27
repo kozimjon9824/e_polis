@@ -5,6 +5,7 @@ import '../../../core/utils/helper_models.dart';
 import '../../../core/utils/utils.dart';
 
 part 'limitless_driver_tab_bar_state.dart';
+
 part 'limitless_driver_tab_bar_cubit.freezed.dart';
 
 class LimitlessDriverTabBarCubit extends Cubit<LimitlessDriverTabBarState> {
@@ -24,8 +25,11 @@ class LimitlessDriverTabBarCubit extends Cubit<LimitlessDriverTabBarState> {
     var tabs = List.of(state.drivers);
     int count = tabs.length;
     if (count == 1) {
+      emit(state.copyWith(
+          status: StateStatus.unknown, drivers: [], currentIndex: 0));
       return;
     }
+
     int current = index == 0 ? 0 : (index - 1);
     tabs.removeAt(index);
     emit(state.copyWith(
@@ -36,5 +40,20 @@ class LimitlessDriverTabBarCubit extends Cubit<LimitlessDriverTabBarState> {
     var tabs = List.of(state.drivers);
     tabs[index] = model;
     emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
+  }
+
+  void selectDriverRelationShip(
+      {required int index, required int relativeKey}) {
+    List<IndexedDriverModel> tabs = List.of(state.drivers);
+    IndexedDriverModel newModel = tabs[index];
+    newModel.driverModel?.copyWith(relative: relativeKey);
+    tabs[index] = newModel;
+    emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
+  }
+
+  bool isAllCompleted() {
+    var tabs = List.of(state.drivers);
+    return !tabs.any(
+        (element) => (element.isSuccess == null || element.isSuccess == false));
   }
 }

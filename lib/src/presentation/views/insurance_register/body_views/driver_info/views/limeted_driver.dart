@@ -18,8 +18,7 @@ class LimitedDriverView extends StatelessWidget {
           var cubit = context.read<LimitedDriverTabBarCubit>();
           return Scaffold(
             body: NestedScrollView(
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
+              headerSliverBuilder: (BuildContext context, bool _) {
                 return [
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(

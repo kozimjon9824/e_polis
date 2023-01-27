@@ -2,11 +2,13 @@ import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/data/models/book/book_model.dart';
 import 'package:e_polis/src/presentation/components/snackbars.dart';
 import 'package:e_polis/src/presentation/cubits/add_driver/add_driver_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/drop_down_values/drop_down_values_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../../core/utils/helper_models.dart';
 import '../../../../../../../core/utils/utils.dart';
 import '../../../../../../components/custom_button.dart';
+import '../../../../../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
 import '../../../../../../cubits/limited_driver_tabbar/limited_driver_tab_bar_cubit.dart';
 import '../../../../widgets/animated_container.dart';
 import 'children/children.dart';
@@ -30,6 +32,7 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
   final seriesFocus = FocusNode();
   final numberFocus = FocusNode();
   final dateFocus = FocusNode();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,6 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                     isSuccess: true,
                     driverModel: DriverModel(
                         birthDate: dateController.text,
-                        relative: 'Брат',
                         passport: DriverPassport(
                             series: seriesController.text,
                             number: numberController.text))));
@@ -65,47 +67,66 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
             licenseSeries.text = state.driverData?.driverLicense?.series ?? '';
           }
           return Scaffold(
-            body: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              children: [
-                AnimatedRoundContainer(
-                  title: '${widget.index}-Водитель',
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-                  padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
-                  showChildren2: state.driverData != null,
-                  clearText: state.driverData != null ? 'Удалить' : null,
-                  onClear: () {
-                    context
-                        .read<LimitedDriverTabBarCubit>()
-                        .removeTab(widget.index - 1);
-                  },
-                  children2: [
-                    Child2Body(
-                        data: state.driverData,
-                        licenseSeries: licenseSeries,
-                        licenseNumber: licenseNumber,
-                        licenseDate: licenseDate)
-                  ],
-                  children: [
-                    Child1Body(
-                        seriesController: seriesController,
-                        numberController: numberController,
-                        dateController: dateController,
-                        dateFocus: dateFocus,
-                        seriesFocus: seriesFocus,
-                        numberFocus: numberFocus)
-                  ],
-                ),
-                const SizedBox(height: 20),
-                if (widget.index != 5)
-                  CustomOutlineButton(
-                      text: 'Добавить водителя',
-                      onTap: () {
-                        context.read<LimitedDriverTabBarCubit>().addTab();
-                      }),
-                if (widget.index != 5) const SizedBox(height: 24),
-              ],
+            body: Form(
+              key: formKey,
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
+                children: [
+                  AnimatedRoundContainer(
+                    title: '${widget.index}-Водитель',
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 10),
+                    padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
+                    showChildren2: state.driverData != null,
+                    clearText: state.driverData != null ? 'Удалить' : null,
+                    onClear: () {
+                      cubit.clearDriverData();
+                      context
+                          .read<LimitedDriverTabBarCubit>()
+                          .removeTab(widget.index - 1);
+                    },
+                    children2: [
+                      BlocBuilder<DropDownValuesCubit, DropDownValuesState>(
+                        builder: (context, dropDownState) {
+                          return Child2Body(
+                              onChange: (value) {
+                                int key = context
+                                    .read<DropDownValuesCubit>()
+                                    .getRelativeKey(value ?? '');
+                                context
+                                    .read<LimitedDriverTabBarCubit>()
+                                    .selectDriverRelationShip(
+                                        index: widget.index - 1,
+                                        relativeKey: key);
+                              },
+                              dropDownValues: dropDownState.relativeList,
+                              data: state.driverData,
+                              licenseSeries: licenseSeries,
+                              licenseNumber: licenseNumber,
+                              licenseDate: licenseDate);
+                        },
+                      )
+                    ],
+                    children: [
+                      Child1Body(
+                          seriesController: seriesController,
+                          numberController: numberController,
+                          dateController: dateController,
+                          dateFocus: dateFocus,
+                          seriesFocus: seriesFocus,
+                          numberFocus: numberFocus)
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  if (widget.index != 5)
+                    CustomOutlineButton(
+                        text: 'Добавить водителя',
+                        onTap: () {
+                          context.read<LimitedDriverTabBarCubit>().addTab();
+                        }),
+                  if (widget.index != 5) const SizedBox(height: 24),
+                ],
+              ),
             ),
             bottomNavigationBar: SafeArea(
               minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
@@ -113,6 +134,9 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                 text: 'Продолжить',
                 isLoading: state.status == StateStatus.loading,
                 onTap: () {
+                  if (!formKey.currentState!.validate()) {
+                    return;
+                  }
                   dateFocus.unfocus();
                   seriesFocus.unfocus();
                   numberFocus.unfocus();
@@ -121,6 +145,12 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                         birth: dateController.text,
                         series: seriesController.text,
                         number: numberController.text);
+                  } else if (context
+                      .read<LimitedDriverTabBarCubit>()
+                      .isAllCompleted()) {
+                    context
+                        .read<ManageInsuranceStackViewsCubit>()
+                        .changeIndex(2);
                   }
                 },
               ),

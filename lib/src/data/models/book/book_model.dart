@@ -54,7 +54,7 @@ class CalculationModel with _$CalculationModel {
 class DriverModel with _$DriverModel {
   const factory DriverModel(
       {String? birthDate,
-      String? relative,
+      int? relative,
       DriverPassport? passport}) = _DriverModel;
 
   factory DriverModel.fromJson(Map<String, dynamic> json) =>

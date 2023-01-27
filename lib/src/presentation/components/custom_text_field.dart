@@ -22,7 +22,8 @@ class CustomTextField extends StatelessWidget {
       this.label,
       this.inputFormatters,
       this.keyboardType,
-      this.textCapitalization})
+      this.textCapitalization,
+      this.onFieldSubmitted})
       : super(key: key);
 
   final TextEditingController? textEditingController;
@@ -42,6 +43,7 @@ class CustomTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
   final TextCapitalization? textCapitalization;
+  final ValueChanged<String>? onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +67,7 @@ class CustomTextField extends StatelessWidget {
           textInputAction: textInputAction,
           keyboardType: keyboardType,
           cursorColor: AppColors.primaryColor,
+          onFieldSubmitted: onFieldSubmitted,
           decoration: InputDecoration(
             // prefixIcon: Icon(prefixIcon, size: 22, color: preIconColor),
             suffixIcon: suffixIcon,

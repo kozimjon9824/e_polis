@@ -41,4 +41,19 @@ class LimitedDriverTabBarCubit extends Cubit<LimitedDriverTabBarState> {
     tabs[index] = model;
     emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
   }
+
+  void selectDriverRelationShip(
+      {required int index, required int relativeKey}) {
+    List<IndexedDriverModel> tabs = List.of(state.drivers);
+    IndexedDriverModel newModel = tabs[index];
+    newModel.driverModel?.copyWith(relative: relativeKey);
+    tabs[index] = newModel;
+    emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
+  }
+
+  bool isAllCompleted() {
+    var tabs = List.of(state.drivers);
+    return !tabs.any(
+        (element) => (element.isSuccess == null || element.isSuccess == false));
+  }
 }

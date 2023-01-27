@@ -77,7 +77,7 @@ Map<String, dynamic> _$$_CalculationModelToJson(_$_CalculationModel instance) =>
 _$_DriverModel _$$_DriverModelFromJson(Map<String, dynamic> json) =>
     _$_DriverModel(
       birthDate: json['birthDate'] as String?,
-      relative: json['relative'] as String?,
+      relative: json['relative'] as int?,
       passport: json['passport'] == null
           ? null
           : DriverPassport.fromJson(json['passport'] as Map<String, dynamic>),

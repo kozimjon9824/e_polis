@@ -1,4 +1,5 @@
 import 'package:alice/alice.dart';
+import 'package:e_polis/src/presentation/cubits/drop_down_values/drop_down_values_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/my_archived_product/archived_products_cubit.dart';
@@ -42,6 +43,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => inject<LanguageCubit>()..loadAppLang()),
         BlocProvider(create: (context) => inject<InsuranceBasicFilterCubit>()),
+        BlocProvider(
+            create: (context) => inject<DropDownValuesCubit>()..loadValues()),
       ],
       child: BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, state) {
