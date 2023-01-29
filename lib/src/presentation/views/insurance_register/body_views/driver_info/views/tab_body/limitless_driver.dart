@@ -8,6 +8,7 @@ import '../../../../../../../data/models/book/book_model.dart';
 import '../../../../../../components/custom_button.dart';
 import '../../../../../../components/snackbars.dart';
 import '../../../../../../cubits/add_driver/add_driver_cubit.dart';
+import '../../../../../../cubits/book/book_cubit.dart';
 import '../../../../../../cubits/drop_down_values/drop_down_values_cubit.dart';
 import '../../../../../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
 import '../../../../widgets/animated_container.dart';
@@ -43,7 +44,7 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
           if (state.status == StateStatus.error) {
             context.read<LimitlessDriverTabBarCubit>().addDriverData(
                 index: widget.index - 1,
-                model: const IndexedDriverModel(isSuccess: false));
+                model: IndexedDriverModel(isSuccess: false));
             showErrorMessage(
                 context, state.failure.getLocalizedMessage(context));
           }
@@ -53,7 +54,10 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                 model: IndexedDriverModel(
                     isSuccess: true,
                     driverModel: DriverModel(
-                        birthDate: dateController.text,
+                        birthDate: dateConverter(
+                            date: dateController.text,
+                            inFormat: 'dd/MM/yyyy',
+                            outFormat: 'yyyy-MM-dd'),
                         passport: DriverPassport(
                             series: seriesController.text,
                             number: numberController.text))));
@@ -125,9 +129,8 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                   const SizedBox(height: 20),
                   CustomOutlineButton(
                       text: 'Добавить водителя',
-                      onTap: () {
-                        context.read<LimitlessDriverTabBarCubit>().addTab();
-                      }),
+                      onTap: () =>
+                          context.read<LimitlessDriverTabBarCubit>().addTab()),
                   const SizedBox(height: 24),
                 ],
               ),
@@ -145,13 +148,23 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                   seriesFocus.unfocus();
                   numberFocus.unfocus();
                   if (state.driverData == null) {
+                    String date = dateConverter(
+                        date: dateController.text,
+                        inFormat: 'dd/MM/yyyy',
+                        outFormat: 'yyyy-MM-dd');
                     cubit.addDriver(
-                        birth: dateController.text,
+                        birth: date,
                         series: seriesController.text,
                         number: numberController.text);
                   } else if (context
                       .read<LimitlessDriverTabBarCubit>()
                       .isAllCompleted()) {
+                    List<IndexedDriverModel> driverList = context
+                        .read<LimitlessDriverTabBarCubit>()
+                        .state
+                        .drivers;
+                    context.read<BookCubit>().onDriverListData(
+                        driverList.map((e) => e.driverModel!).toList());
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(2);

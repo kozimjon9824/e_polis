@@ -5,6 +5,6 @@ class LimitedDriverTabBarState with _$LimitedDriverTabBarState {
   const factory LimitedDriverTabBarState(
           {@Default(StateStatus.unknown) StateStatus status,
           @Default(0) int currentIndex,
-          @Default([IndexedDriverModel()]) List<IndexedDriverModel> drivers}) =
+          @Default([]) List<IndexedDriverModel> drivers}) =
       _LimitedDriverTabBarState;
 }

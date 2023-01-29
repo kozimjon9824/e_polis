@@ -21,8 +21,8 @@ final paymentTypeList = [
 ];
 
 class IndexedDriverModel {
-  final DriverModel? driverModel;
+  DriverModel? driverModel;
   final bool? isSuccess;
 
-  const IndexedDriverModel({this.driverModel, this.isSuccess});
+  IndexedDriverModel({this.driverModel, this.isSuccess});
 }

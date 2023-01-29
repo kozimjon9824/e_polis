@@ -19,4 +19,5 @@ class AppRoutes {
   static const insuranceRegistration = '/insuranceRegistration';
   static const cardInput = '/cardInput';
   static const helperCenter = '/helperCenter';
+  static const notification = '/notification';
 }

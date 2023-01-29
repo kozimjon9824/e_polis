@@ -10,6 +10,7 @@ class BookModel with _$BookModel {
       {ApplicantModel? applicant,
       CalculationModel? calculation,
       String? startDate,
+      VehicleNumber? vehicle,
       List<DriverModel>? drivers}) = _BookModel;
 
   factory BookModel.fromJson(Map<String, dynamic> json) =>
@@ -40,8 +41,8 @@ class ApplicantModel with _$ApplicantModel {
 @freezed
 class CalculationModel with _$CalculationModel {
   const factory CalculationModel({
-    String? region,
-    String? vehicleType,
+    int? region,
+    int? vehicleType,
     bool? isVip,
     String? period,
   }) = _CalculationModel;
@@ -68,4 +69,12 @@ class DriverPassport with _$DriverPassport {
 
   factory DriverPassport.fromJson(Map<String, dynamic> json) =>
       _$DriverPassportFromJson(json);
+}
+
+@freezed
+class VehicleNumber with _$VehicleNumber {
+  const factory VehicleNumber({String? plateNumber}) = _VehicleNumber;
+
+  factory VehicleNumber.fromJson(Map<String, dynamic> json) =>
+      _$VehicleNumberFromJson(json);
 }

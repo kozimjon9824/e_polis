@@ -24,7 +24,7 @@ mixin _$NotificationModel {
   String? get day => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
   ActionType? get actionButton => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $NotificationModelCopyWith<$Res> {
       String? day,
       String? photo,
       String? title,
-      String? description,
+      String? text,
       ActionType? actionButton});
 
   $ActionTypeCopyWith<$Res>? get actionButton;
@@ -67,7 +67,7 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
     Object? day = freezed,
     Object? photo = freezed,
     Object? title = freezed,
-    Object? description = freezed,
+    Object? text = freezed,
     Object? actionButton = freezed,
   }) {
     return _then(_value.copyWith(
@@ -87,9 +87,9 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
               as String?,
       actionButton: freezed == actionButton
           ? _value.actionButton
@@ -124,7 +124,7 @@ abstract class _$$_NotificationModelCopyWith<$Res>
       String? day,
       String? photo,
       String? title,
-      String? description,
+      String? text,
       ActionType? actionButton});
 
   @override
@@ -146,7 +146,7 @@ class __$$_NotificationModelCopyWithImpl<$Res>
     Object? day = freezed,
     Object? photo = freezed,
     Object? title = freezed,
-    Object? description = freezed,
+    Object? text = freezed,
     Object? actionButton = freezed,
   }) {
     return _then(_$_NotificationModel(
@@ -166,9 +166,9 @@ class __$$_NotificationModelCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
               as String?,
       actionButton: freezed == actionButton
           ? _value.actionButton
@@ -186,7 +186,7 @@ class _$_NotificationModel implements _NotificationModel {
       this.day,
       this.photo,
       this.title,
-      this.description,
+      this.text,
       this.actionButton});
 
   factory _$_NotificationModel.fromJson(Map<String, dynamic> json) =>
@@ -201,13 +201,13 @@ class _$_NotificationModel implements _NotificationModel {
   @override
   final String? title;
   @override
-  final String? description;
+  final String? text;
   @override
   final ActionType? actionButton;
 
   @override
   String toString() {
-    return 'NotificationModel(date: $date, day: $day, photo: $photo, title: $title, description: $description, actionButton: $actionButton)';
+    return 'NotificationModel(date: $date, day: $day, photo: $photo, title: $title, text: $text, actionButton: $actionButton)';
   }
 
   @override
@@ -219,16 +219,15 @@ class _$_NotificationModel implements _NotificationModel {
             (identical(other.day, day) || other.day == day) &&
             (identical(other.photo, photo) || other.photo == photo) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
+            (identical(other.text, text) || other.text == text) &&
             (identical(other.actionButton, actionButton) ||
                 other.actionButton == actionButton));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, date, day, photo, title, description, actionButton);
+  int get hashCode =>
+      Object.hash(runtimeType, date, day, photo, title, text, actionButton);
 
   @JsonKey(ignore: true)
   @override
@@ -251,7 +250,7 @@ abstract class _NotificationModel implements NotificationModel {
       final String? day,
       final String? photo,
       final String? title,
-      final String? description,
+      final String? text,
       final ActionType? actionButton}) = _$_NotificationModel;
 
   factory _NotificationModel.fromJson(Map<String, dynamic> json) =
@@ -266,7 +265,7 @@ abstract class _NotificationModel implements NotificationModel {
   @override
   String? get title;
   @override
-  String? get description;
+  String? get text;
   @override
   ActionType? get actionButton;
   @override
@@ -281,8 +280,10 @@ ActionType _$ActionTypeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ActionType {
-  String? get action => throw _privateConstructorUsedError;
-  String? get value => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
+  String? get destination => throw _privateConstructorUsedError;
+  String? get internalId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -296,7 +297,8 @@ abstract class $ActionTypeCopyWith<$Res> {
           ActionType value, $Res Function(ActionType) then) =
       _$ActionTypeCopyWithImpl<$Res, ActionType>;
   @useResult
-  $Res call({String? action, String? value});
+  $Res call(
+      {String? title, String? type, String? destination, String? internalId});
 }
 
 /// @nodoc
@@ -312,17 +314,27 @@ class _$ActionTypeCopyWithImpl<$Res, $Val extends ActionType>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? action = freezed,
-    Object? value = freezed,
+    Object? title = freezed,
+    Object? type = freezed,
+    Object? destination = freezed,
+    Object? internalId = freezed,
   }) {
     return _then(_value.copyWith(
-      action: freezed == action
-          ? _value.action
-          : action // ignore: cast_nullable_to_non_nullable
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      value: freezed == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      destination: freezed == destination
+          ? _value.destination
+          : destination // ignore: cast_nullable_to_non_nullable
+              as String?,
+      internalId: freezed == internalId
+          ? _value.internalId
+          : internalId // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -336,7 +348,8 @@ abstract class _$$_ActionTypeCopyWith<$Res>
       __$$_ActionTypeCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? action, String? value});
+  $Res call(
+      {String? title, String? type, String? destination, String? internalId});
 }
 
 /// @nodoc
@@ -350,17 +363,27 @@ class __$$_ActionTypeCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? action = freezed,
-    Object? value = freezed,
+    Object? title = freezed,
+    Object? type = freezed,
+    Object? destination = freezed,
+    Object? internalId = freezed,
   }) {
     return _then(_$_ActionType(
-      action: freezed == action
-          ? _value.action
-          : action // ignore: cast_nullable_to_non_nullable
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      value: freezed == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      destination: freezed == destination
+          ? _value.destination
+          : destination // ignore: cast_nullable_to_non_nullable
+              as String?,
+      internalId: freezed == internalId
+          ? _value.internalId
+          : internalId // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -369,19 +392,24 @@ class __$$_ActionTypeCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ActionType implements _ActionType {
-  const _$_ActionType({this.action, this.value});
+  const _$_ActionType(
+      {this.title, this.type, this.destination, this.internalId});
 
   factory _$_ActionType.fromJson(Map<String, dynamic> json) =>
       _$$_ActionTypeFromJson(json);
 
   @override
-  final String? action;
+  final String? title;
   @override
-  final String? value;
+  final String? type;
+  @override
+  final String? destination;
+  @override
+  final String? internalId;
 
   @override
   String toString() {
-    return 'ActionType(action: $action, value: $value)';
+    return 'ActionType(title: $title, type: $type, destination: $destination, internalId: $internalId)';
   }
 
   @override
@@ -389,13 +417,18 @@ class _$_ActionType implements _ActionType {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ActionType &&
-            (identical(other.action, action) || other.action == action) &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.destination, destination) ||
+                other.destination == destination) &&
+            (identical(other.internalId, internalId) ||
+                other.internalId == internalId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, action, value);
+  int get hashCode =>
+      Object.hash(runtimeType, title, type, destination, internalId);
 
   @JsonKey(ignore: true)
   @override
@@ -412,18 +445,193 @@ class _$_ActionType implements _ActionType {
 }
 
 abstract class _ActionType implements ActionType {
-  const factory _ActionType({final String? action, final String? value}) =
-      _$_ActionType;
+  const factory _ActionType(
+      {final String? title,
+      final String? type,
+      final String? destination,
+      final String? internalId}) = _$_ActionType;
 
   factory _ActionType.fromJson(Map<String, dynamic> json) =
       _$_ActionType.fromJson;
 
   @override
-  String? get action;
+  String? get title;
   @override
-  String? get value;
+  String? get type;
+  @override
+  String? get destination;
+  @override
+  String? get internalId;
   @override
   @JsonKey(ignore: true)
   _$$_ActionTypeCopyWith<_$_ActionType> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+NotificationResponse _$NotificationResponseFromJson(Map<String, dynamic> json) {
+  return _NotificationResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$NotificationResponse {
+  List<NotificationModel>? get data => throw _privateConstructorUsedError;
+  int? get totalCount => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $NotificationResponseCopyWith<NotificationResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NotificationResponseCopyWith<$Res> {
+  factory $NotificationResponseCopyWith(NotificationResponse value,
+          $Res Function(NotificationResponse) then) =
+      _$NotificationResponseCopyWithImpl<$Res, NotificationResponse>;
+  @useResult
+  $Res call({List<NotificationModel>? data, int? totalCount});
+}
+
+/// @nodoc
+class _$NotificationResponseCopyWithImpl<$Res,
+        $Val extends NotificationResponse>
+    implements $NotificationResponseCopyWith<$Res> {
+  _$NotificationResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+    Object? totalCount = freezed,
+  }) {
+    return _then(_value.copyWith(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<NotificationModel>?,
+      totalCount: freezed == totalCount
+          ? _value.totalCount
+          : totalCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_NotificationResponseCopyWith<$Res>
+    implements $NotificationResponseCopyWith<$Res> {
+  factory _$$_NotificationResponseCopyWith(_$_NotificationResponse value,
+          $Res Function(_$_NotificationResponse) then) =
+      __$$_NotificationResponseCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<NotificationModel>? data, int? totalCount});
+}
+
+/// @nodoc
+class __$$_NotificationResponseCopyWithImpl<$Res>
+    extends _$NotificationResponseCopyWithImpl<$Res, _$_NotificationResponse>
+    implements _$$_NotificationResponseCopyWith<$Res> {
+  __$$_NotificationResponseCopyWithImpl(_$_NotificationResponse _value,
+      $Res Function(_$_NotificationResponse) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+    Object? totalCount = freezed,
+  }) {
+    return _then(_$_NotificationResponse(
+      data: freezed == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<NotificationModel>?,
+      totalCount: freezed == totalCount
+          ? _value.totalCount
+          : totalCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_NotificationResponse implements _NotificationResponse {
+  const _$_NotificationResponse(
+      {final List<NotificationModel>? data, this.totalCount})
+      : _data = data;
+
+  factory _$_NotificationResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_NotificationResponseFromJson(json);
+
+  final List<NotificationModel>? _data;
+  @override
+  List<NotificationModel>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final int? totalCount;
+
+  @override
+  String toString() {
+    return 'NotificationResponse(data: $data, totalCount: $totalCount)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_NotificationResponse &&
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.totalCount, totalCount) ||
+                other.totalCount == totalCount));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_data), totalCount);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_NotificationResponseCopyWith<_$_NotificationResponse> get copyWith =>
+      __$$_NotificationResponseCopyWithImpl<_$_NotificationResponse>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_NotificationResponseToJson(
+      this,
+    );
+  }
+}
+
+abstract class _NotificationResponse implements NotificationResponse {
+  const factory _NotificationResponse(
+      {final List<NotificationModel>? data,
+      final int? totalCount}) = _$_NotificationResponse;
+
+  factory _NotificationResponse.fromJson(Map<String, dynamic> json) =
+      _$_NotificationResponse.fromJson;
+
+  @override
+  List<NotificationModel>? get data;
+  @override
+  int? get totalCount;
+  @override
+  @JsonKey(ignore: true)
+  _$$_NotificationResponseCopyWith<_$_NotificationResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -2,6 +2,7 @@ import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/data/models/book/book_model.dart';
 import 'package:e_polis/src/presentation/components/snackbars.dart';
 import 'package:e_polis/src/presentation/cubits/add_driver/add_driver_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/drop_down_values/drop_down_values_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +44,7 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
           if (state.status == StateStatus.error) {
             context.read<LimitedDriverTabBarCubit>().addDriverData(
                 index: widget.index - 1,
-                model: const IndexedDriverModel(isSuccess: false));
+                model: IndexedDriverModel(isSuccess: false));
             showErrorMessage(
                 context, state.failure.getLocalizedMessage(context));
           }
@@ -53,7 +54,10 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                 model: IndexedDriverModel(
                     isSuccess: true,
                     driverModel: DriverModel(
-                        birthDate: dateController.text,
+                        birthDate: dateConverter(
+                            date: dateController.text,
+                            inFormat: 'dd/MM/yyyy',
+                            outFormat: 'yyyy-MM-dd'),
                         passport: DriverPassport(
                             series: seriesController.text,
                             number: numberController.text))));
@@ -141,13 +145,21 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                   seriesFocus.unfocus();
                   numberFocus.unfocus();
                   if (state.driverData == null) {
+                    String date = dateConverter(
+                        date: dateController.text,
+                        inFormat: 'dd/MM/yyyy',
+                        outFormat: 'yyyy-MM-dd');
                     cubit.addDriver(
-                        birth: dateController.text,
+                        birth: date,
                         series: seriesController.text,
                         number: numberController.text);
                   } else if (context
                       .read<LimitedDriverTabBarCubit>()
                       .isAllCompleted()) {
+                    List<IndexedDriverModel> driverList =
+                        context.read<LimitedDriverTabBarCubit>().state.drivers;
+                    context.read<BookCubit>().onDriverListData(
+                        driverList.map((e) => e.driverModel!).toList());
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(2);

@@ -12,7 +12,7 @@ class ContainerSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<InsuranceBasicFilterCubit, InsuranceBasicFilterState>(
       builder: (context, state) {
-        var cubit = context.read<InsuranceBasicFilterCubit>();
+        final cubit = context.read<InsuranceBasicFilterCubit>();
         var status = state.basicFilterRequest.isVip;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

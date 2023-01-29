@@ -2,28 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../../../../core/themes/app_colors.dart';
+import '../../../../../../data/models/contract_information/response/contract_info_response.dart';
 import '../../../../../components/custom_mask.dart';
 import '../../../../../components/custom_text_field.dart';
 import '../../../widgets/animated_container.dart';
 import '../../../widgets/widgets.dart';
 
 class ContractDetails extends StatelessWidget {
-  const ContractDetails({Key? key}) : super(key: key);
+  const ContractDetails(
+      {Key? key,
+      this.contract,
+      required this.dateController,
+      this.onClear,
+      required this.focusNode})
+      : super(key: key);
+  final ContractInfoResponse? contract;
+  final TextEditingController dateController;
+  final Function()? onClear;
+  final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedRoundContainer(
       title: 'Информация о контракте',
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-      clearText: 'Очистить информацию',
+      clearText: contract != null ? 'Очистить информацию' : null,
       showChildren2: true,
+      onClear: onClear,
       children: [
         const SizedBox(height: 8),
         CustomTextField(
           label: 'Дата начало контракта',
-          hintText: '',
+          hintText: '02.12.2022',
           keyboardType: TextInputType.datetime,
+          textEditingController: dateController,
           textInputAction: TextInputAction.done,
+          focusNode: focusNode,
+          validator: (value) => (value?.isEmpty ?? false) ? 'Enter date' : null,
           inputFormatters: [
             MaskTextInputFormatter(
                 mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')})
@@ -31,15 +46,18 @@ class ContractDetails extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
-        const TitleSubtitle(
+        TitleSubtitle(
             title: 'Дата окончания срока действия контракта',
-            subtitle: '02.12.2023'),
+            subtitle: contract?.endDate ?? ''),
         const TitleSubtitle(
             title: 'Иметь привилегию', subtitle: 'Не привилегированный'),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
-        const TitleSubtitle(title: 'Цена полиса', subtitle: '168 000 сум'),
-        const TitleSubtitle(
-            title: 'Страховая сумма', subtitle: '40 000 000 сум'),
+        TitleSubtitle(
+            title: 'Цена полиса',
+            subtitle: '${contract?.policyAmount?.toInt() ?? 0} сум'),
+        TitleSubtitle(
+            title: 'Страховая сумма',
+            subtitle: '${contract?.insuranceAmount?.toInt() ?? 0} сум'),
       ],
     );
   }

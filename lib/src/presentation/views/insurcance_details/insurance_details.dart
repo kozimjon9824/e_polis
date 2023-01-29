@@ -31,7 +31,7 @@ class InsuranceDetailsPage extends StatelessWidget {
               loading: () => const LoadingWidget(),
               error: (failure) => ErrorView(onTap: () {}),
               loaded: (data) {
-                return SuccessBody(insuranceDetails: data);
+                return SuccessBody(insuranceDetails: data, argument: arguments);
               });
         },
       ),
@@ -47,11 +47,10 @@ class InsurancePageArguments {
 }
 
 class SuccessBody extends StatelessWidget {
-  const SuccessBody({
-    Key? key,
-    this.insuranceDetails,
-  }) : super(key: key);
+  const SuccessBody({Key? key, this.insuranceDetails, required this.argument})
+      : super(key: key);
   final InsuranceDetails? insuranceDetails;
+  final InsurancePageArguments argument;
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +119,8 @@ class SuccessBody extends StatelessWidget {
                         Navigator.pushNamed(context, AppRoutes.login);
                       }));
             } else {
-              Navigator.pushNamed(context, AppRoutes.insuranceRegistration);
+              Navigator.pushNamed(context, AppRoutes.insuranceRegistration,
+                  arguments: argument);
             }
           },
         ),

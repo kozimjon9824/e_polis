@@ -13,13 +13,45 @@ class BookCubit extends Cubit<BookState> {
   BookCubit(this._bookInsuranceUseCase) : super(const BookState());
   final BookInsuranceUseCase _bookInsuranceUseCase;
 
-  void bookInsurance(String id) async {
+  void bookInsurance({required String id}) async {
     emit(state.copyWith(status: StateStatus.loading));
-    var result = await _bookInsuranceUseCase.call(BookParams(id, BookModel()));
+    var result =
+        await _bookInsuranceUseCase.call(BookParams(id, state.requestModel));
     result.fold(
         (failure) =>
             emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) => emit(
-            state.copyWith(status: StateStatus.success, bookModel: response)));
+        (response) => emit(state.copyWith(
+            status: StateStatus.success, responseModel: response)));
+  }
+
+  void onApplicantData(ApplicantModel model) {
+    BookModel bookModel = state.requestModel;
+    var newModel = bookModel.copyWith(applicant: model);
+    emit(state.copyWith(status: StateStatus.unknown, requestModel: newModel));
+  }
+
+  void onVehicleNumberData(String vehicleNumber) {
+    BookModel bookModel = state.requestModel;
+    var newModel =
+        bookModel.copyWith(vehicle: VehicleNumber(plateNumber: vehicleNumber));
+    emit(state.copyWith(status: StateStatus.unknown, requestModel: newModel));
+  }
+
+  void onDriverListData(List<DriverModel>? drivers) {
+    BookModel bookModel = state.requestModel;
+    var newModel = bookModel.copyWith(drivers: drivers);
+    emit(state.copyWith(status: StateStatus.unknown, requestModel: newModel));
+  }
+
+  void onCalculationData(CalculationModel calculation) {
+    BookModel bookModel = state.requestModel;
+    var newModel = bookModel.copyWith(calculation: calculation);
+    emit(state.copyWith(status: StateStatus.unknown, requestModel: newModel));
+  }
+
+  void onStartDate(String date) {
+    BookModel bookModel = state.requestModel;
+    var newDate = bookModel.copyWith(startDate: date);
+    emit(state.copyWith(status: StateStatus.unknown, requestModel: newDate));
   }
 }

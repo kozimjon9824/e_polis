@@ -12,6 +12,7 @@ import 'package:e_polis/src/presentation/views/login/login.dart';
 import 'package:e_polis/src/presentation/views/login/verify.dart';
 import 'package:e_polis/src/presentation/views/main_tabs/main_tab.dart';
 import 'package:e_polis/src/presentation/views/notification_setting/notification_setting.dart';
+import 'package:e_polis/src/presentation/views/notifications/notifications.dart';
 import 'package:e_polis/src/presentation/views/onboarding/onboarding_page.dart';
 import 'package:e_polis/src/presentation/views/profile_info/profile_info.dart';
 import 'package:e_polis/src/presentation/views/splash/splash_page.dart';
@@ -82,6 +83,8 @@ class RouteGenerateKit {
         return MaterialPageRoute(
             builder: (context) => const HelperCenterPage(),
             settings: RouteSettings(arguments: args));
+      case AppRoutes.notification:
+        return simpleRoute(const NotificationPage());
     }
     return null;
   }

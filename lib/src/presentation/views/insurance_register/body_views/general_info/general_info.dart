@@ -1,9 +1,12 @@
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
+import 'package:e_polis/src/data/models/book/book_model.dart';
 import 'package:e_polis/src/presentation/components/snackbars.dart';
+import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/check_vehicle_info/check_vehicle_info_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../../components/custom_button.dart';
 import '../../../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
 import 'widgets/car_info.dart';
@@ -100,6 +103,21 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     cubit.validatePassport(
                         series: seriesID.text, number: numberID.text);
                   } else {
+                    var owner = state.vehicleInfo?.owner;
+                    var phone = MaskTextInputFormatter(
+                            mask: '(##) ### ## ##',
+                            filter: {"#": RegExp(r'[0-9]')})
+                        .unmaskText(phoneController.text);
+                    ApplicantModel applicant = ApplicantModel(
+                        phone: phone,
+                        passport: ApplicantPassport(
+                            pinfl: owner?.pinfl,
+                            series: seriesID.text,
+                            number: numberID.text));
+                    context.read<BookCubit>().onApplicantData(applicant);
+                    context
+                        .read<BookCubit>()
+                        .onVehicleNumberData(vehicleController.text);
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(1);

@@ -2,7 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:e_polis/src/core/error/error.dart';
 import 'package:e_polis/src/data/models/basic_filter/request/basic_filter_request.dart';
 import 'package:e_polis/src/data/models/book/book_model.dart';
+import 'package:e_polis/src/data/models/contract_information/request/contract_info_request.dart';
+import 'package:e_polis/src/data/models/contract_information/response/contract_info_response.dart';
 import 'package:e_polis/src/data/models/main/main.dart';
+import 'package:e_polis/src/data/models/notification/notification_model.dart';
 import 'package:e_polis/src/data/models/product/product_details.dart';
 import 'package:e_polis/src/data/models/select_values/select_values.dart';
 
@@ -40,4 +43,10 @@ abstract class IMainRepository {
       String id, BookModel request);
 
   Future<Either<Failure, SelectValues>> getDropDownValue();
+
+  Future<Either<Failure, NotificationResponse>> getNotifications(
+      int page, int limit);
+
+  Future<Either<Failure, ContractInfoResponse>> getContractInfo(
+      String productId, ContractInfoRequest request);
 }

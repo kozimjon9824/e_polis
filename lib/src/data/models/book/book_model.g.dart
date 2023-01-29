@@ -15,6 +15,9 @@ _$_BookModel _$$_BookModelFromJson(Map<String, dynamic> json) => _$_BookModel(
           : CalculationModel.fromJson(
               json['calculation'] as Map<String, dynamic>),
       startDate: json['startDate'] as String?,
+      vehicle: json['vehicle'] == null
+          ? null
+          : VehicleNumber.fromJson(json['vehicle'] as Map<String, dynamic>),
       drivers: (json['drivers'] as List<dynamic>?)
           ?.map((e) => DriverModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -25,6 +28,7 @@ Map<String, dynamic> _$$_BookModelToJson(_$_BookModel instance) =>
       'applicant': instance.applicant,
       'calculation': instance.calculation,
       'startDate': instance.startDate,
+      'vehicle': instance.vehicle,
       'drivers': instance.drivers,
     };
 
@@ -60,8 +64,8 @@ Map<String, dynamic> _$$_ApplicantModelToJson(_$_ApplicantModel instance) =>
 
 _$_CalculationModel _$$_CalculationModelFromJson(Map<String, dynamic> json) =>
     _$_CalculationModel(
-      region: json['region'] as String?,
-      vehicleType: json['vehicleType'] as String?,
+      region: json['region'] as int?,
+      vehicleType: json['vehicleType'] as int?,
       isVip: json['isVip'] as bool?,
       period: json['period'] as String?,
     );
@@ -100,4 +104,14 @@ Map<String, dynamic> _$$_DriverPassportToJson(_$_DriverPassport instance) =>
     <String, dynamic>{
       'series': instance.series,
       'number': instance.number,
+    };
+
+_$_VehicleNumber _$$_VehicleNumberFromJson(Map<String, dynamic> json) =>
+    _$_VehicleNumber(
+      plateNumber: json['plateNumber'] as String?,
+    );
+
+Map<String, dynamic> _$$_VehicleNumberToJson(_$_VehicleNumber instance) =>
+    <String, dynamic>{
+      'plateNumber': instance.plateNumber,
     };

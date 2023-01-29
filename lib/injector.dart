@@ -13,6 +13,7 @@ import 'package:e_polis/src/domain/usecases/auth/verify.dart';
 import 'package:e_polis/src/domain/usecases/main/add_driver.dart';
 import 'package:e_polis/src/domain/usecases/main/book.dart';
 import 'package:e_polis/src/domain/usecases/main/check_vehicle_info.dart';
+import 'package:e_polis/src/domain/usecases/main/contract_information.dart';
 import 'package:e_polis/src/domain/usecases/main/get_drop_down_values.dart';
 import 'package:e_polis/src/domain/usecases/main/get_insurances.dart';
 import 'package:e_polis/src/domain/usecases/main/insurance_details.dart';
@@ -30,6 +31,7 @@ import 'package:e_polis/src/presentation/cubits/add_driver/add_driver_cubit.dart
 import 'package:e_polis/src/presentation/cubits/add_product/add_product_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/check_vehicle_info/check_vehicle_info_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/contract_information/contract_information_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/drop_down_values/drop_down_values_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/faq/faq_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
@@ -41,6 +43,7 @@ import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_dat
 import 'package:e_polis/src/presentation/cubits/my_archived_product/archived_products_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/my_current_products/current_products_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/my_progress_products/progress_products_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/notifications/notifications_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/product_details/product_details_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/update_profile/update_profile_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/verify/verify_cubit.dart';
@@ -52,6 +55,7 @@ import 'src/data/datasource/remote/provider.dart';
 import 'src/domain/repository/product.dart';
 import 'src/domain/repository/settings.dart';
 import 'src/domain/usecases/main/license_agreement.dart';
+import 'src/domain/usecases/main/notifications.dart';
 import 'src/domain/usecases/profile/upload_photo.dart';
 import 'src/domain/usecases/setting/faq.dart';
 import 'src/domain/usecases/setting/set_app_lang.dart';
@@ -97,6 +101,8 @@ Future<void> initDi() async {
   inject.registerFactory(() => LimitedDriverTabBarCubit());
   inject.registerFactory(() => LimitlessDriverTabBarCubit());
   inject.registerFactory(() => DropDownValuesCubit(inject()));
+  inject.registerFactory(() => NotificationsCubit(inject()));
+  inject.registerFactory(() => ContractInformationCubit(inject()));
 
   // profile cubit
   inject
@@ -120,6 +126,8 @@ Future<void> initDi() async {
   inject.registerLazySingleton(() => AddDriverUseCase(inject()));
   inject.registerLazySingleton(() => BookInsuranceUseCase(inject()));
   inject.registerLazySingleton(() => GetDropDownValuesUseCase(inject()));
+  inject.registerLazySingleton(() => NotificationUseCase(inject()));
+  inject.registerLazySingleton(() => ContractInfoUseCase(inject()));
 
   // profile use-cases
   inject.registerLazySingleton(() => UpdateProfileUseCase(inject()));
@@ -141,7 +149,8 @@ Future<void> initDi() async {
   /// repository init
   inject.registerLazySingleton<ISettingRepository>(
       () => SettingRepository(inject(), inject()));
-  inject.registerLazySingleton<IMainRepository>(() => MainRepository(inject()));
+  inject.registerLazySingleton<IMainRepository>(
+      () => MainRepository(inject(), inject()));
   inject.registerLazySingleton<IProductRepository>(
       () => ProductRepository(inject(), inject()));
   inject.registerLazySingleton<IProfileRepository>(

@@ -22,21 +22,17 @@ class LimitlessDriverView extends StatelessWidget {
             body: (state.drivers.isEmpty)
                 ? const SizedBox.shrink()
                 : NestedScrollView(
-                    headerSliverBuilder:
-                        (BuildContext context, bool innerBoxIsScrolled) {
+                    headerSliverBuilder: (BuildContext context, bool _) {
                       return [
                         SliverPadding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 16),
+                          padding: const EdgeInsets.all(16),
                           sliver: SliverList(
                             delegate: SliverChildListDelegate([
                               Row(children: [
                                 for (int i = 1; i <= state.drivers.length; i++)
                                   TextBtn(
                                       title: i.toString(),
-                                      onTap: () {
-                                        cubit.changeTab(i - 1);
-                                      },
+                                      onTap: () => cubit.changeTab(i - 1),
                                       bgColor: (state
                                                   .drivers[i - 1].isSuccess ==
                                               null)
@@ -49,9 +45,7 @@ class LimitlessDriverView extends StatelessWidget {
                                           ? const BorderRadius.horizontal(
                                               left: Radius.circular(8))
                                           : null),
-                                IconBtn(onTap: () {
-                                  cubit.addTab();
-                                })
+                                IconBtn(onTap: () => cubit.addTab())
                               ]),
                             ]),
                           ),

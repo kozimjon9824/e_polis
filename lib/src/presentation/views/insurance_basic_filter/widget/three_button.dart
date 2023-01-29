@@ -53,5 +53,3 @@ class ThreeButton extends StatelessWidget {
     );
   }
 }
-
-enum ButtonStatus { left, middle, right, initial }

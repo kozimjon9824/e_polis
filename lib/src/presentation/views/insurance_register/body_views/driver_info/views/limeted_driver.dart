@@ -47,9 +47,7 @@ class LimitedDriverView extends StatelessWidget {
                                         : null),
                           Visibility(
                             visible: state.drivers.length != 5,
-                            child: IconBtn(onTap: () {
-                              cubit.addTab();
-                            }),
+                            child: IconBtn(onTap: () => cubit.addTab()),
                           )
                         ]),
                       ]),

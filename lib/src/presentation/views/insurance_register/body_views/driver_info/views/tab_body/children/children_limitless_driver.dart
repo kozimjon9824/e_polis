@@ -162,16 +162,15 @@ class LimitlessDriverChild2Body extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         CustomTextField(
-          label: 'Дата',
-          hintText: 'ДД/ММ/ГГГГ',
-          keyboardType: TextInputType.datetime,
-          textEditingController: licenseDate,
-          inputFormatters: [
-            MaskTextInputFormatter(
-                mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')})
-          ],
-          textInputAction: TextInputAction.done,
-        ),
+            label: 'Дата',
+            hintText: 'ДД/ММ/ГГГГ',
+            keyboardType: TextInputType.datetime,
+            textEditingController: licenseDate,
+            inputFormatters: [
+              MaskTextInputFormatter(
+                  mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')})
+            ],
+            textInputAction: TextInputAction.done),
         const SizedBox(height: 8),
         TitleSubtitle(title: 'Ф.И.О', subtitle: data?.fullName ?? ''),
       ],

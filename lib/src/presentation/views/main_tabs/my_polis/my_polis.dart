@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../injector.dart';
 import '../../../components/custom_button.dart';
+import '../../../cubits/my_archived_product/archived_products_cubit.dart';
+import '../../../cubits/my_current_products/current_products_cubit.dart';
 import '../../../cubits/my_product_tab_controller/product_tab_manager_cubit.dart';
+import '../../../cubits/my_progress_products/progress_products_cubit.dart';
 import 'tab_views/current_insurance.dart';
 import 'widgets/tab_bar.dart';
 import 'widgets/unauth_polis.dart';
@@ -25,6 +28,11 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    if ((context.read<AuthCubit>().state is AuthenticatedState)) {
+      context.read<CurrentProductsCubit>().loadData();
+      context.read<ProgressProductsCubit>().loadData();
+      context.read<ArchivedProductsCubit>().loadData();
+    }
   }
 
   @override

@@ -8,7 +8,8 @@ part 'limited_driver_tab_bar_state.dart';
 part 'limited_driver_tab_bar_cubit.freezed.dart';
 
 class LimitedDriverTabBarCubit extends Cubit<LimitedDriverTabBarState> {
-  LimitedDriverTabBarCubit() : super(const LimitedDriverTabBarState());
+  LimitedDriverTabBarCubit()
+      : super(LimitedDriverTabBarState(drivers: [IndexedDriverModel()]));
 
   void changeTab(int index) {
     emit(state.copyWith(status: StateStatus.unknown, currentIndex: index));
@@ -20,7 +21,7 @@ class LimitedDriverTabBarCubit extends Cubit<LimitedDriverTabBarState> {
     if (count == 5) {
       return;
     }
-    tabs.add(const IndexedDriverModel());
+    tabs.add(IndexedDriverModel());
     emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
   }
 
@@ -46,7 +47,8 @@ class LimitedDriverTabBarCubit extends Cubit<LimitedDriverTabBarState> {
       {required int index, required int relativeKey}) {
     List<IndexedDriverModel> tabs = List.of(state.drivers);
     IndexedDriverModel newModel = tabs[index];
-    newModel.driverModel?.copyWith(relative: relativeKey);
+    var withRelative = newModel.driverModel?.copyWith(relative: relativeKey);
+    newModel.driverModel = withRelative;
     tabs[index] = newModel;
     emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
   }

@@ -32,19 +32,15 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => inject<AuthCubit>()),
-        BlocProvider(
-            create: (context) => inject<CurrentProductsCubit>()..loadData()),
-        BlocProvider(
-            create: (context) => inject<ProgressProductsCubit>()..loadData()),
-        BlocProvider(
-            create: (context) => inject<ArchivedProductsCubit>()..loadData()),
+        BlocProvider(create: (context) => inject<CurrentProductsCubit>()),
+        BlocProvider(create: (context) => inject<ProgressProductsCubit>()),
+        BlocProvider(create: (context) => inject<ArchivedProductsCubit>()),
         BlocProvider(
             create: (context) => inject<MainScreenDataCubit>()..loadData()),
         BlocProvider(
             create: (context) => inject<LanguageCubit>()..loadAppLang()),
         BlocProvider(create: (context) => inject<InsuranceBasicFilterCubit>()),
-        BlocProvider(
-            create: (context) => inject<DropDownValuesCubit>()..loadValues()),
+        BlocProvider(create: (context) => inject<DropDownValuesCubit>()),
       ],
       child: BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, state) {

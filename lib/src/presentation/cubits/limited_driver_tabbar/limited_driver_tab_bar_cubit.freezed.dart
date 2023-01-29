@@ -122,7 +122,7 @@ class _$_LimitedDriverTabBarState implements _LimitedDriverTabBarState {
   const _$_LimitedDriverTabBarState(
       {this.status = StateStatus.unknown,
       this.currentIndex = 0,
-      final List<IndexedDriverModel> drivers = const [IndexedDriverModel()]})
+      final List<IndexedDriverModel> drivers = const []})
       : _drivers = drivers;
 
   @override

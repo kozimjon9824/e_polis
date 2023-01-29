@@ -23,6 +23,7 @@ mixin _$BookModel {
   ApplicantModel? get applicant => throw _privateConstructorUsedError;
   CalculationModel? get calculation => throw _privateConstructorUsedError;
   String? get startDate => throw _privateConstructorUsedError;
+  VehicleNumber? get vehicle => throw _privateConstructorUsedError;
   List<DriverModel>? get drivers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,10 +41,12 @@ abstract class $BookModelCopyWith<$Res> {
       {ApplicantModel? applicant,
       CalculationModel? calculation,
       String? startDate,
+      VehicleNumber? vehicle,
       List<DriverModel>? drivers});
 
   $ApplicantModelCopyWith<$Res>? get applicant;
   $CalculationModelCopyWith<$Res>? get calculation;
+  $VehicleNumberCopyWith<$Res>? get vehicle;
 }
 
 /// @nodoc
@@ -62,6 +65,7 @@ class _$BookModelCopyWithImpl<$Res, $Val extends BookModel>
     Object? applicant = freezed,
     Object? calculation = freezed,
     Object? startDate = freezed,
+    Object? vehicle = freezed,
     Object? drivers = freezed,
   }) {
     return _then(_value.copyWith(
@@ -77,6 +81,10 @@ class _$BookModelCopyWithImpl<$Res, $Val extends BookModel>
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as String?,
+      vehicle: freezed == vehicle
+          ? _value.vehicle
+          : vehicle // ignore: cast_nullable_to_non_nullable
+              as VehicleNumber?,
       drivers: freezed == drivers
           ? _value.drivers
           : drivers // ignore: cast_nullable_to_non_nullable
@@ -107,6 +115,18 @@ class _$BookModelCopyWithImpl<$Res, $Val extends BookModel>
       return _then(_value.copyWith(calculation: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $VehicleNumberCopyWith<$Res>? get vehicle {
+    if (_value.vehicle == null) {
+      return null;
+    }
+
+    return $VehicleNumberCopyWith<$Res>(_value.vehicle!, (value) {
+      return _then(_value.copyWith(vehicle: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -120,12 +140,15 @@ abstract class _$$_BookModelCopyWith<$Res> implements $BookModelCopyWith<$Res> {
       {ApplicantModel? applicant,
       CalculationModel? calculation,
       String? startDate,
+      VehicleNumber? vehicle,
       List<DriverModel>? drivers});
 
   @override
   $ApplicantModelCopyWith<$Res>? get applicant;
   @override
   $CalculationModelCopyWith<$Res>? get calculation;
+  @override
+  $VehicleNumberCopyWith<$Res>? get vehicle;
 }
 
 /// @nodoc
@@ -142,6 +165,7 @@ class __$$_BookModelCopyWithImpl<$Res>
     Object? applicant = freezed,
     Object? calculation = freezed,
     Object? startDate = freezed,
+    Object? vehicle = freezed,
     Object? drivers = freezed,
   }) {
     return _then(_$_BookModel(
@@ -157,6 +181,10 @@ class __$$_BookModelCopyWithImpl<$Res>
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as String?,
+      vehicle: freezed == vehicle
+          ? _value.vehicle
+          : vehicle // ignore: cast_nullable_to_non_nullable
+              as VehicleNumber?,
       drivers: freezed == drivers
           ? _value._drivers
           : drivers // ignore: cast_nullable_to_non_nullable
@@ -172,6 +200,7 @@ class _$_BookModel implements _BookModel {
       {this.applicant,
       this.calculation,
       this.startDate,
+      this.vehicle,
       final List<DriverModel>? drivers})
       : _drivers = drivers;
 
@@ -184,6 +213,8 @@ class _$_BookModel implements _BookModel {
   final CalculationModel? calculation;
   @override
   final String? startDate;
+  @override
+  final VehicleNumber? vehicle;
   final List<DriverModel>? _drivers;
   @override
   List<DriverModel>? get drivers {
@@ -196,7 +227,7 @@ class _$_BookModel implements _BookModel {
 
   @override
   String toString() {
-    return 'BookModel(applicant: $applicant, calculation: $calculation, startDate: $startDate, drivers: $drivers)';
+    return 'BookModel(applicant: $applicant, calculation: $calculation, startDate: $startDate, vehicle: $vehicle, drivers: $drivers)';
   }
 
   @override
@@ -210,13 +241,14 @@ class _$_BookModel implements _BookModel {
                 other.calculation == calculation) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
+            (identical(other.vehicle, vehicle) || other.vehicle == vehicle) &&
             const DeepCollectionEquality().equals(other._drivers, _drivers));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, applicant, calculation,
-      startDate, const DeepCollectionEquality().hash(_drivers));
+      startDate, vehicle, const DeepCollectionEquality().hash(_drivers));
 
   @JsonKey(ignore: true)
   @override
@@ -237,6 +269,7 @@ abstract class _BookModel implements BookModel {
       {final ApplicantModel? applicant,
       final CalculationModel? calculation,
       final String? startDate,
+      final VehicleNumber? vehicle,
       final List<DriverModel>? drivers}) = _$_BookModel;
 
   factory _BookModel.fromJson(Map<String, dynamic> json) =
@@ -248,6 +281,8 @@ abstract class _BookModel implements BookModel {
   CalculationModel? get calculation;
   @override
   String? get startDate;
+  @override
+  VehicleNumber? get vehicle;
   @override
   List<DriverModel>? get drivers;
   @override
@@ -606,8 +641,8 @@ CalculationModel _$CalculationModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CalculationModel {
-  String? get region => throw _privateConstructorUsedError;
-  String? get vehicleType => throw _privateConstructorUsedError;
+  int? get region => throw _privateConstructorUsedError;
+  int? get vehicleType => throw _privateConstructorUsedError;
   bool? get isVip => throw _privateConstructorUsedError;
   String? get period => throw _privateConstructorUsedError;
 
@@ -623,7 +658,7 @@ abstract class $CalculationModelCopyWith<$Res> {
           CalculationModel value, $Res Function(CalculationModel) then) =
       _$CalculationModelCopyWithImpl<$Res, CalculationModel>;
   @useResult
-  $Res call({String? region, String? vehicleType, bool? isVip, String? period});
+  $Res call({int? region, int? vehicleType, bool? isVip, String? period});
 }
 
 /// @nodoc
@@ -648,11 +683,11 @@ class _$CalculationModelCopyWithImpl<$Res, $Val extends CalculationModel>
       region: freezed == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       vehicleType: freezed == vehicleType
           ? _value.vehicleType
           : vehicleType // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       isVip: freezed == isVip
           ? _value.isVip
           : isVip // ignore: cast_nullable_to_non_nullable
@@ -673,7 +708,7 @@ abstract class _$$_CalculationModelCopyWith<$Res>
       __$$_CalculationModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? region, String? vehicleType, bool? isVip, String? period});
+  $Res call({int? region, int? vehicleType, bool? isVip, String? period});
 }
 
 /// @nodoc
@@ -696,11 +731,11 @@ class __$$_CalculationModelCopyWithImpl<$Res>
       region: freezed == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       vehicleType: freezed == vehicleType
           ? _value.vehicleType
           : vehicleType // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       isVip: freezed == isVip
           ? _value.isVip
           : isVip // ignore: cast_nullable_to_non_nullable
@@ -723,9 +758,9 @@ class _$_CalculationModel implements _CalculationModel {
       _$$_CalculationModelFromJson(json);
 
   @override
-  final String? region;
+  final int? region;
   @override
-  final String? vehicleType;
+  final int? vehicleType;
   @override
   final bool? isVip;
   @override
@@ -769,8 +804,8 @@ class _$_CalculationModel implements _CalculationModel {
 
 abstract class _CalculationModel implements CalculationModel {
   const factory _CalculationModel(
-      {final String? region,
-      final String? vehicleType,
+      {final int? region,
+      final int? vehicleType,
       final bool? isVip,
       final String? period}) = _$_CalculationModel;
 
@@ -778,9 +813,9 @@ abstract class _CalculationModel implements CalculationModel {
       _$_CalculationModel.fromJson;
 
   @override
-  String? get region;
+  int? get region;
   @override
-  String? get vehicleType;
+  int? get vehicleType;
   @override
   bool? get isVip;
   @override
@@ -1132,5 +1167,142 @@ abstract class _DriverPassport implements DriverPassport {
   @override
   @JsonKey(ignore: true)
   _$$_DriverPassportCopyWith<_$_DriverPassport> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+VehicleNumber _$VehicleNumberFromJson(Map<String, dynamic> json) {
+  return _VehicleNumber.fromJson(json);
+}
+
+/// @nodoc
+mixin _$VehicleNumber {
+  String? get plateNumber => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $VehicleNumberCopyWith<VehicleNumber> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $VehicleNumberCopyWith<$Res> {
+  factory $VehicleNumberCopyWith(
+          VehicleNumber value, $Res Function(VehicleNumber) then) =
+      _$VehicleNumberCopyWithImpl<$Res, VehicleNumber>;
+  @useResult
+  $Res call({String? plateNumber});
+}
+
+/// @nodoc
+class _$VehicleNumberCopyWithImpl<$Res, $Val extends VehicleNumber>
+    implements $VehicleNumberCopyWith<$Res> {
+  _$VehicleNumberCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? plateNumber = freezed,
+  }) {
+    return _then(_value.copyWith(
+      plateNumber: freezed == plateNumber
+          ? _value.plateNumber
+          : plateNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_VehicleNumberCopyWith<$Res>
+    implements $VehicleNumberCopyWith<$Res> {
+  factory _$$_VehicleNumberCopyWith(
+          _$_VehicleNumber value, $Res Function(_$_VehicleNumber) then) =
+      __$$_VehicleNumberCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? plateNumber});
+}
+
+/// @nodoc
+class __$$_VehicleNumberCopyWithImpl<$Res>
+    extends _$VehicleNumberCopyWithImpl<$Res, _$_VehicleNumber>
+    implements _$$_VehicleNumberCopyWith<$Res> {
+  __$$_VehicleNumberCopyWithImpl(
+      _$_VehicleNumber _value, $Res Function(_$_VehicleNumber) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? plateNumber = freezed,
+  }) {
+    return _then(_$_VehicleNumber(
+      plateNumber: freezed == plateNumber
+          ? _value.plateNumber
+          : plateNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_VehicleNumber implements _VehicleNumber {
+  const _$_VehicleNumber({this.plateNumber});
+
+  factory _$_VehicleNumber.fromJson(Map<String, dynamic> json) =>
+      _$$_VehicleNumberFromJson(json);
+
+  @override
+  final String? plateNumber;
+
+  @override
+  String toString() {
+    return 'VehicleNumber(plateNumber: $plateNumber)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_VehicleNumber &&
+            (identical(other.plateNumber, plateNumber) ||
+                other.plateNumber == plateNumber));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, plateNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_VehicleNumberCopyWith<_$_VehicleNumber> get copyWith =>
+      __$$_VehicleNumberCopyWithImpl<_$_VehicleNumber>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_VehicleNumberToJson(
+      this,
+    );
+  }
+}
+
+abstract class _VehicleNumber implements VehicleNumber {
+  const factory _VehicleNumber({final String? plateNumber}) = _$_VehicleNumber;
+
+  factory _VehicleNumber.fromJson(Map<String, dynamic> json) =
+      _$_VehicleNumber.fromJson;
+
+  @override
+  String? get plateNumber;
+  @override
+  @JsonKey(ignore: true)
+  _$$_VehicleNumberCopyWith<_$_VehicleNumber> get copyWith =>
       throw _privateConstructorUsedError;
 }

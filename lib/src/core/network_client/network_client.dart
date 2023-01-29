@@ -4,8 +4,13 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../injector.dart';
 import '../../../main.dart';
+import '../../data/models/refresh_token/refresh_token.dart';
+import '../../presentation/cubits/auth/auth_cubit.dart';
 import '../constants/constants.dart';
+import '../routes/app_routes.dart';
+import '../utils/utils.dart';
 import 'retry.dart';
 
 class NetworkClient {
@@ -62,9 +67,9 @@ class NetworkClient {
                 data: requestOptions.data,
                 queryParameters: requestOptions.queryParameters,
                 options: options);
-            print('PATHHH : ${cloneReq.realUri.path} KKK$cloneReq');
+            debugPrint('PATHHH : ${cloneReq.realUri.path} KKK$cloneReq');
           } catch (e) {
-            print('EE:$e');
+            debugPrint('EE:$e');
           }
           return handler.resolve(cloneReq);
         }
@@ -86,20 +91,20 @@ class NetworkClient {
     }
     try {
       debugPrint('AA: $refreshToken');
-      final options = Options(
-        headers: {"Content-Type": "application/json"},
-      );
-      final response = await Dio(BaseOptions(baseUrl: BASE_URL))
-          .post('auth/refresh-token', data: {'refresh_token': refreshToken});
+      final options = Options(headers: {"Content-Type": "application/json"});
+      final response = await Dio(BaseOptions(baseUrl: BASE_URL)).post(
+          'auth/refresh-token',
+          data: {'refreshToken': refreshToken},
+          options: options);
       if (response.statusCode == 201 || response.statusCode == 200) {
-        // RefreshResponse token = RefreshResponse.fromJson(response.data);
-        // debugPrint('TTTTT: ${token.accessToken}');
-        // _token = token.accessToken ?? '';
-        // await Future.wait([
-        //   preferences.setString(ACCESS_TOKEN, token.accessToken ?? ''),
-        //   preferences.setString(
-        //       REFRESH_TOKEN, token.refreshToken ?? refreshToken)
-        // ]);
+        RefreshToken token = RefreshToken.fromJson(response.data);
+        debugPrint('TTTTT: ${token.accessToken}');
+        _token = token.accessToken ?? '';
+        await Future.wait([
+          preferences.setString(ACCESS_TOKEN, token.accessToken ?? ''),
+          preferences.setString(
+              REFRESH_TOKEN, token.refreshToken ?? refreshToken)
+        ]);
       }
       if (response.statusCode == 401) {
         _token = '';
@@ -107,7 +112,7 @@ class NetworkClient {
       }
     } catch (err) {
       _token = '';
-      print('EEE:$err');
+      debugPrint('EEE:$err');
       await preferences.setString(REFRESH_TOKEN, '');
       await _goToLoginScreen();
     }
@@ -120,10 +125,10 @@ class NetworkClient {
   }
 
   Future<void> _goToLoginScreen() async {
-    // await inject<AuthCubit>().logout();
+    await inject<AuthCubit>().logout();
 
     /// Navigate to Sign in Screen
-    // Navigator.pushNamedAndRemoveUntil(
-    //     navigatorKey.currentContext!, AppRoutes.signIn, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        navigatorKey.currentContext!, AppRoutes.splash, (route) => false);
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/constants/constants.dart';
+import '../../../../core/routes/app_routes.dart';
 import '../../../components/error_view.dart';
 import '../../../components/loading.dart';
 import '../../../cubits/filter_tab/filter_tab_manager_cubit.dart';
@@ -47,10 +48,14 @@ class _HomePageState extends State<HomePage> {
                   hasUser: data?.user != null,
                 ),
                 actions: [
-                  SvgPicture.asset((data?.hasNotification == true)
-                      ? AppIcons.activeBell
-                      : AppIcons.bell),
-                  const SizedBox(width: 20)
+                  IconButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.notification),
+                    icon: SvgPicture.asset((data?.hasNotification == true)
+                        ? AppIcons.activeBell
+                        : AppIcons.bell),
+                  ),
+                  const SizedBox(width: 8)
                 ],
               ),
               body: BlocBuilder<FilterTabManagerCubit, FilterTabManagerState>(

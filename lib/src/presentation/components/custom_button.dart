@@ -30,7 +30,7 @@ class CustomButton extends StatelessWidget {
       color: bgColor ?? AppColors.primaryColor,
       child: InkWell(
         borderRadius: BorderRadius.circular(radius ?? 12),
-        onTap: onTap,
+        onTap: isLoading ? null : onTap,
         child: Ink(
           padding:
               EdgeInsets.symmetric(vertical: isLoading ? 8 : (padding ?? 16)),

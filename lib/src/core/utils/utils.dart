@@ -53,3 +53,18 @@ String getDateTime(String? date) {
   }
   return DateFormat('MMMM d').format(d);
 }
+
+String dateConverter(
+    {required String date,
+    required String inFormat,
+    required String outFormat}) {
+  try {
+    final format = DateFormat(inFormat);
+    DateTime gettingDate = format.parse(date);
+    final DateFormat formatter = DateFormat(outFormat);
+    final String formatted = formatter.format(gettingDate);
+    return formatted;
+  } catch (e) {
+    return '';
+  }
+}

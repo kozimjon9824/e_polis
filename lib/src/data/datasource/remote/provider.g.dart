@@ -475,28 +475,58 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<List<NotificationModel>> getNotifications(userId) async {
+  Future<NotificationResponse> getNotifications(
+    page,
+    limit,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'limit': limit,
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<NotificationModel>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<NotificationResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'users/${userId}/notifications',
+              'notifications',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map((dynamic i) =>
-            NotificationModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = NotificationResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ContractInfoResponse> getContractInformation(
+    id,
+    request,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ContractInfoResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'products/osago/${id}/information',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ContractInfoResponse.fromJson(_result.data!);
     return value;
   }
 

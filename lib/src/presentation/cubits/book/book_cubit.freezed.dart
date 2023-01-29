@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BookState {
   StateStatus get status => throw _privateConstructorUsedError;
   Failure get failure => throw _privateConstructorUsedError;
-  BookModel? get bookModel => throw _privateConstructorUsedError;
+  BookModel? get responseModel => throw _privateConstructorUsedError;
+  BookModel get requestModel => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookStateCopyWith<BookState> get copyWith =>
@@ -30,9 +31,14 @@ abstract class $BookStateCopyWith<$Res> {
   factory $BookStateCopyWith(BookState value, $Res Function(BookState) then) =
       _$BookStateCopyWithImpl<$Res, BookState>;
   @useResult
-  $Res call({StateStatus status, Failure failure, BookModel? bookModel});
+  $Res call(
+      {StateStatus status,
+      Failure failure,
+      BookModel? responseModel,
+      BookModel requestModel});
 
-  $BookModelCopyWith<$Res>? get bookModel;
+  $BookModelCopyWith<$Res>? get responseModel;
+  $BookModelCopyWith<$Res> get requestModel;
 }
 
 /// @nodoc
@@ -50,7 +56,8 @@ class _$BookStateCopyWithImpl<$Res, $Val extends BookState>
   $Res call({
     Object? status = null,
     Object? failure = null,
-    Object? bookModel = freezed,
+    Object? responseModel = freezed,
+    Object? requestModel = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -61,22 +68,34 @@ class _$BookStateCopyWithImpl<$Res, $Val extends BookState>
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as Failure,
-      bookModel: freezed == bookModel
-          ? _value.bookModel
-          : bookModel // ignore: cast_nullable_to_non_nullable
+      responseModel: freezed == responseModel
+          ? _value.responseModel
+          : responseModel // ignore: cast_nullable_to_non_nullable
               as BookModel?,
+      requestModel: null == requestModel
+          ? _value.requestModel
+          : requestModel // ignore: cast_nullable_to_non_nullable
+              as BookModel,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $BookModelCopyWith<$Res>? get bookModel {
-    if (_value.bookModel == null) {
+  $BookModelCopyWith<$Res>? get responseModel {
+    if (_value.responseModel == null) {
       return null;
     }
 
-    return $BookModelCopyWith<$Res>(_value.bookModel!, (value) {
-      return _then(_value.copyWith(bookModel: value) as $Val);
+    return $BookModelCopyWith<$Res>(_value.responseModel!, (value) {
+      return _then(_value.copyWith(responseModel: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BookModelCopyWith<$Res> get requestModel {
+    return $BookModelCopyWith<$Res>(_value.requestModel, (value) {
+      return _then(_value.copyWith(requestModel: value) as $Val);
     });
   }
 }
@@ -88,10 +107,16 @@ abstract class _$$_BookStateCopyWith<$Res> implements $BookStateCopyWith<$Res> {
       __$$_BookStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({StateStatus status, Failure failure, BookModel? bookModel});
+  $Res call(
+      {StateStatus status,
+      Failure failure,
+      BookModel? responseModel,
+      BookModel requestModel});
 
   @override
-  $BookModelCopyWith<$Res>? get bookModel;
+  $BookModelCopyWith<$Res>? get responseModel;
+  @override
+  $BookModelCopyWith<$Res> get requestModel;
 }
 
 /// @nodoc
@@ -107,7 +132,8 @@ class __$$_BookStateCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? failure = null,
-    Object? bookModel = freezed,
+    Object? responseModel = freezed,
+    Object? requestModel = null,
   }) {
     return _then(_$_BookState(
       status: null == status
@@ -118,10 +144,14 @@ class __$$_BookStateCopyWithImpl<$Res>
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as Failure,
-      bookModel: freezed == bookModel
-          ? _value.bookModel
-          : bookModel // ignore: cast_nullable_to_non_nullable
+      responseModel: freezed == responseModel
+          ? _value.responseModel
+          : responseModel // ignore: cast_nullable_to_non_nullable
               as BookModel?,
+      requestModel: null == requestModel
+          ? _value.requestModel
+          : requestModel // ignore: cast_nullable_to_non_nullable
+              as BookModel,
     ));
   }
 }
@@ -132,7 +162,8 @@ class _$_BookState implements _BookState {
   const _$_BookState(
       {this.status = StateStatus.unknown,
       this.failure = const UnknownFailure(),
-      this.bookModel});
+      this.responseModel,
+      this.requestModel = const BookModel()});
 
   @override
   @JsonKey()
@@ -141,11 +172,14 @@ class _$_BookState implements _BookState {
   @JsonKey()
   final Failure failure;
   @override
-  final BookModel? bookModel;
+  final BookModel? responseModel;
+  @override
+  @JsonKey()
+  final BookModel requestModel;
 
   @override
   String toString() {
-    return 'BookState(status: $status, failure: $failure, bookModel: $bookModel)';
+    return 'BookState(status: $status, failure: $failure, responseModel: $responseModel, requestModel: $requestModel)';
   }
 
   @override
@@ -155,12 +189,15 @@ class _$_BookState implements _BookState {
             other is _$_BookState &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.failure, failure) || other.failure == failure) &&
-            (identical(other.bookModel, bookModel) ||
-                other.bookModel == bookModel));
+            (identical(other.responseModel, responseModel) ||
+                other.responseModel == responseModel) &&
+            (identical(other.requestModel, requestModel) ||
+                other.requestModel == requestModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, failure, bookModel);
+  int get hashCode =>
+      Object.hash(runtimeType, status, failure, responseModel, requestModel);
 
   @JsonKey(ignore: true)
   @override
@@ -173,14 +210,17 @@ abstract class _BookState implements BookState {
   const factory _BookState(
       {final StateStatus status,
       final Failure failure,
-      final BookModel? bookModel}) = _$_BookState;
+      final BookModel? responseModel,
+      final BookModel requestModel}) = _$_BookState;
 
   @override
   StateStatus get status;
   @override
   Failure get failure;
   @override
-  BookModel? get bookModel;
+  BookModel? get responseModel;
+  @override
+  BookModel get requestModel;
   @override
   @JsonKey(ignore: true)
   _$$_BookStateCopyWith<_$_BookState> get copyWith =>

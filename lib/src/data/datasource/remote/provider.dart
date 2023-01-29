@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:e_polis/src/data/models/add_product/add_product.dart';
 import 'package:e_polis/src/data/models/basic_filter/request/basic_filter_request.dart';
 import 'package:e_polis/src/data/models/book/book_model.dart';
+import 'package:e_polis/src/data/models/contract_information/request/contract_info_request.dart';
+import 'package:e_polis/src/data/models/contract_information/response/contract_info_response.dart';
 import 'package:e_polis/src/data/models/help_data/help_data.dart';
 import 'package:e_polis/src/data/models/input_driver/request/driver_passport_input.dart';
 import 'package:e_polis/src/data/models/input_driver/response/driver_passport_response.dart';
@@ -97,7 +99,11 @@ abstract class ApiClient {
   @GET('products/osago/dictionary')
   Future<SelectValues> getDropDownValues();
 
-  @GET('users/{userId}/notifications')
-  Future<List<NotificationModel>> getNotifications(
-      @Path('userId') String userId);
+  @GET('notifications')
+  Future<NotificationResponse> getNotifications(
+      @Query('page') int page, @Query('limit') int limit);
+
+  @POST('products/osago/{id}/information')
+  Future<ContractInfoResponse> getContractInformation(
+      @Path('id') String id, @Body() ContractInfoRequest request);
 }

@@ -27,6 +27,7 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
   void initState() {
     super.initState();
     context.read<InsuranceBasicFilterCubit>().clearData();
+    context.read<DropDownValuesCubit>().loadValues();
   }
 
   @override
@@ -68,22 +69,21 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
                     ),
                     const SizedBox(height: 22),
                     DropDownButton<String>(
-                        label: 'Тип автомобиля',
-                        hint: 'Выберите тип автомобиля',
-                        items: dropDownState.vehiclesList
-                            .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: AppTextStyles.styleW400S14Grey6,
-                                )))
-                            .toList(),
-                        onChanged: (value) {
-                          int key =
-                              dropDownCubit.getVehicleTypeKey(value ?? '');
-                          cubit.selectVehicleType(key);
-                        },
-                        onSaved: (value) {}),
+                      label: 'Тип автомобиля',
+                      hint: 'Выберите тип автомобиля',
+                      items: dropDownState.vehiclesList
+                          .map((item) => DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: AppTextStyles.styleW400S14Grey6,
+                              )))
+                          .toList(),
+                      onChanged: (value) {
+                        int key = dropDownCubit.getVehicleTypeKey(value ?? '');
+                        cubit.selectVehicleType(key);
+                      },
+                    ),
                     const SizedBox(height: 22),
                     const ContainerSwitch(),
                     const SizedBox(height: 22),
