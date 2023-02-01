@@ -34,8 +34,11 @@ class InsuranceDetail extends StatelessWidget {
               Expanded(
                   child: Align(
                       alignment: Alignment.centerLeft,
-                      child: CachedNetworkImage(
-                          imageUrl: image ?? '', height: 28))),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: CachedNetworkImage(
+                            imageUrl: image ?? '', height: 30),
+                      ))),
               const SizedBox(width: 24),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,

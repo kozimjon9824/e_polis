@@ -40,7 +40,7 @@ class SearchBar extends StatelessWidget implements PreferredSizeWidget {
   TextStyle cancelTextStyle() => const TextStyle(
       fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,
-      color: Color(0xFF31AFB4),
+      color: Color(0xFF297AFF),
       fontSize: 12);
 
   @override

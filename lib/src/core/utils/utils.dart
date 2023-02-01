@@ -68,3 +68,8 @@ String dateConverter(
     return '';
   }
 }
+
+String numberFormat(dynamic number) {
+  if (number == null) return '';
+  return NumberFormat.decimalPattern().format(number).replaceAll(',', ' ');
+}

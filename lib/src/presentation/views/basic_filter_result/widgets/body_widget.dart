@@ -58,9 +58,9 @@ class BodyWidget extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (_, index) => InsuranceDetail(
                   image: list[index].logo,
-                  polisPrice: list[index].policyAmount?.toInt().toString(),
+                  polisPrice: numberFormat(list[index].policyAmount?.toInt()),
                   insurancePrice:
-                      list[index].insuranceAmount?.toInt().toString(),
+                      numberFormat(list[index].insuranceAmount?.toInt()),
                   onBuy: () {},
                   onDetailTap: () {
                     Navigator.pushNamed(context, AppRoutes.insuranceDetails,

@@ -42,8 +42,8 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
             },
             title: Text(widget.title,
                 style: AppTextStyles.styleW700S14Grey9.copyWith(
-                    color:
-                        isOpen ? AppColors.primaryColor : AppColors.grey900)),
+                    color: isOpen ? AppColors.primaryColor : AppColors.grey900,
+                    height: 1.6)),
             backgroundColor: AppColors.grey50,
             iconColor: AppColors.primaryColor,
             collapsedIconColor: AppColors.grey900,
@@ -56,7 +56,8 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                   children: [
                     Expanded(
                       child: Text(widget.subText,
-                          style: AppTextStyles.styleW500S12Grey5),
+                          style: AppTextStyles.styleW500S12Grey5
+                              .copyWith(height: 1.4)),
                     ),
                   ],
                 ),

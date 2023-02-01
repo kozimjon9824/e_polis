@@ -26,7 +26,6 @@ class _BasicFilterResultPageState extends State<BasicFilterResultPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final arguments = ModalRoute.of(context)!.settings.arguments as String;
     return KeyboardVisibilityProvider(
       controller: keyboardController,
       child: Scaffold(

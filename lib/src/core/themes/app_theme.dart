@@ -20,7 +20,7 @@ final appThemeData = ThemeData(
       ),
       centerTitle: false,
       titleTextStyle: AppTextStyles.styleW700S18Grey9),
-  fontFamily: 'SFPro',
+  fontFamily: "Gilroy",
   backgroundColor: AppColors.backgroundColor,
   scaffoldBackgroundColor: AppColors.backgroundColor,
   cupertinoOverrideTheme: const CupertinoThemeData(brightness: Brightness.dark),

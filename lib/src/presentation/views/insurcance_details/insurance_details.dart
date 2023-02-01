@@ -3,6 +3,7 @@ import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/themes/app_text_styles.dart';
+import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:e_polis/src/data/models/basic_filter/request/basic_filter_request.dart';
 import 'package:e_polis/src/presentation/components/error_view.dart';
 import 'package:e_polis/src/presentation/cubits/insurance_details/insurance_details_cubit.dart';
@@ -61,8 +62,11 @@ class SuccessBody extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topLeft,
-              child: CachedNetworkImage(
-                  imageUrl: insuranceDetails?.logo ?? '', height: 44),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: CachedNetworkImage(
+                    imageUrl: insuranceDetails?.logo ?? '', height: 44),
+              ),
             ),
             const SizedBox(height: 24),
             Text(insuranceDetails?.description ?? '',
@@ -79,29 +83,25 @@ class SuccessBody extends StatelessWidget {
                   PriceTile(
                       title: 'Цена полиса',
                       price:
-                          insuranceDetails?.policyAmount?.toInt().toString() ??
-                              '',
+                          numberFormat(insuranceDetails?.policyAmount?.toInt()),
                       textStyle: AppTextStyles.styleW700S18Green),
                   const SizedBox(height: 12),
                   PriceTile(
                     title: 'Страховая сумма',
-                    price:
-                        insuranceDetails?.insuranceAmount?.toInt().toString() ??
-                            '',
+                    price: numberFormat(
+                        insuranceDetails?.insuranceAmount?.toInt()),
                   ),
                   const SizedBox(height: 12),
                   PriceTile(
                     title:
                         'Страхование вреда, причиненного жизни и здоровью пострадавшей стороны',
-                    price:
-                        insuranceDetails?.lifeDamage?.toInt().toString() ?? '',
+                    price: numberFormat(insuranceDetails?.lifeDamage?.toInt()),
                   ),
                   const SizedBox(height: 12),
                   PriceTile(
                     title: 'Возмещение ущерба имуществу потерпевшего',
                     price:
-                        insuranceDetails?.propertyDamage?.toInt().toString() ??
-                            '',
+                        numberFormat(insuranceDetails?.propertyDamage?.toInt()),
                   ),
                 ],
               ),

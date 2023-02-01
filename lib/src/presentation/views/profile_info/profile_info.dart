@@ -87,7 +87,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
       listener: (context, state) {
         if (state.status == StateStatus.success) {
           context.read<MainScreenDataCubit>().loadData();
-          showSuccessMessage(context, 'Successfully updated');
+          Navigator.pop(context);
+          showSuccessMessage(context, 'Successfully updated!');
         }
         if (state.status == StateStatus.error) {
           showErrorMessage(context, state.failure.getLocalizedMessage(context));
@@ -109,6 +110,14 @@ class _ProfileInfoState extends State<ProfileInfo> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    lastNameController.dispose();
+    phoneController.dispose();
   }
 
   Widget phoneCustomPrefixTextField() {

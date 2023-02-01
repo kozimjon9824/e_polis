@@ -1,3 +1,4 @@
+import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -54,10 +55,11 @@ class ContractDetails extends StatelessWidget {
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
         TitleSubtitle(
             title: 'Цена полиса',
-            subtitle: '${contract?.policyAmount?.toInt() ?? 0} сум'),
+            subtitle: '${numberFormat(contract?.policyAmount?.toInt())} сум'),
         TitleSubtitle(
             title: 'Страховая сумма',
-            subtitle: '${contract?.insuranceAmount?.toInt() ?? 0} сум'),
+            subtitle:
+                '${numberFormat(contract?.insuranceAmount?.toInt())} сум'),
       ],
     );
   }

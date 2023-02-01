@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   cupertino_icons: ^1.0.2
   flutter_svg: ^1.1.3
@@ -74,6 +76,7 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/fonts/
@@ -81,6 +84,9 @@ flutter:
     - assets/icons/
 
   fonts:
-    - family: SFPro
+    - family: Gilroy
       fonts:
-        - asset: assets/fonts/SFPro.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-Regular.ttf
+
+flutter_intl:
+  enabled: true

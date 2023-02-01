@@ -9,7 +9,6 @@ import 'package:e_polis/src/presentation/views/help_center/widgets/animated_cont
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../data/models/help_data/help_data.dart';
 
 class HelperCenterPage extends StatelessWidget {
