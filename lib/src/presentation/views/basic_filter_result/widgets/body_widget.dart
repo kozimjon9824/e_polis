@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:e_polis/src/data/models/basic_filter/request/basic_filter_request.dart';
 import 'package:e_polis/src/presentation/components/loading.dart';
@@ -29,7 +30,7 @@ class InsurancesResults extends StatelessWidget {
         return BodyWidget(
             list: state.data ?? [],
             request: state.basicFilterRequest,
-            text: 'Мы нашли несколько предложений от страховых компаний');
+            text: AppLocalizations.of(context).weFoundSeveralOffers);
       },
     );
   }

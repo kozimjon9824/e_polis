@@ -15,7 +15,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  flutter_svg: ^1.1.3
+  flutter_svg: ^1.1.6
   # An SVG rendering and widget library for Flutter, which allows painting and displaying Scalable Vector Graphics 1.1 files.
   cached_network_image: ^3.2.1
   # Flutter library to load and cache network images. Can also be used with placeholder and error widgets.
@@ -59,7 +59,7 @@ dependencies:
   flutter_keyboard_visibility: ^5.2.0
   # code generator with cubit
   freezed_annotation: ^2.2.0
-  flutter_html: any
+  flutter_html: ^3.0.0-alpha.6
   http_parser: ^4.0.2
 
 dev_dependencies:
@@ -76,7 +76,7 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
-  generate: true
+#  generate: true
 
   assets:
     - assets/fonts/
@@ -88,5 +88,6 @@ flutter:
       fonts:
         - asset: assets/fonts/Gilroy/Gilroy-Regular.ttf
 
-flutter_intl:
-  enabled: true
+#flutter_intl:
+#  enabled: true
+#  class_name: AppLocalizations

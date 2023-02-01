@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -33,10 +34,11 @@ class CarInformationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedRoundContainer(
-      title: 'Информация об автомобиле',
+      title: AppLocalizations.of(context).infoAboutCar,
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
       padding2: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-      clearText: vehicleInfo != null ? 'Очистить информацию' : null,
+      clearText:
+          vehicleInfo != null ? AppLocalizations.of(context).clearData : null,
       showChildren2: vehicleInfo != null,
       onClear: onClear,
       children2: [
@@ -44,7 +46,7 @@ class CarInformationWidget extends StatelessWidget {
       ],
       children: [
         CustomTextField(
-          label: 'Номер авто',
+          label: AppLocalizations.of(context).cardNumber,
           hintText: '01 М 001 ХА',
           textEditingController: vehicleController,
           keyboardType: TextInputType.text,
@@ -53,7 +55,8 @@ class CarInformationWidget extends StatelessWidget {
           textInputAction: TextInputAction.next,
           focusNode: focusNodeVehicleNumber,
           onFieldSubmitted: (_) => focusNodeTechSeries!.requestFocus(),
-          validator: (value) => value!.isEmpty ? 'Must not be empty' : null,
+          validator: (value) =>
+              value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
         ),
         const SizedBox(height: 16),
         Row(
@@ -62,8 +65,8 @@ class CarInformationWidget extends StatelessWidget {
             Expanded(
                 flex: 1,
                 child: CustomTextField(
-                    label: 'Техпаспорт',
-                    hintText: 'Серия',
+                    label: AppLocalizations.of(context).techPassport,
+                    hintText: AppLocalizations.of(context).series,
                     textEditingController: seriesController,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
@@ -75,20 +78,22 @@ class CarInformationWidget extends StatelessWidget {
                       MaskTextInputFormatter(
                           mask: '###', filter: {"#": RegExp(r'[A-Z]')})
                     ],
-                    validator: (value) =>
-                        value!.isEmpty ? 'Must not be empty' : null)),
+                    validator: (value) => value!.isEmpty
+                        ? AppLocalizations.of(context).notDoEmpty
+                        : null)),
             const SizedBox(width: 10),
             Expanded(
               flex: 2,
               child: CustomTextField(
-                hintText: 'Номер',
+                hintText: AppLocalizations.of(context).number,
                 focusNode: focusNodeTechNumber,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.done,
                 textEditingController: numberController,
                 onFieldSubmitted: (_) => focusNodeTechNumber!.unfocus(),
-                validator: (value) =>
-                    value!.isEmpty ? 'Must not be empty' : null,
+                validator: (value) => value!.isEmpty
+                    ? AppLocalizations.of(context).notDoEmpty
+                    : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
                       mask: '######', filter: {"#": RegExp(r'[0-9]')})
@@ -113,14 +118,17 @@ class VehicleInfoWidget extends StatelessWidget {
       children: [
         const Divider(height: 0, color: AppColors.divider, thickness: 1),
         const SizedBox(height: 8),
-        TitleSubtitle(title: 'Марка и модель', subtitle: data?.model ?? ''),
         TitleSubtitle(
-            title: 'Год выпуска автомобиля',
+            title: AppLocalizations.of(context).model,
+            subtitle: data?.model ?? ''),
+        TitleSubtitle(
+            title: AppLocalizations.of(context).carMadeDate,
             subtitle: data?.issueYear.toString() ?? ''),
         TitleSubtitle(
-            title: 'Тип автомобиля', subtitle: data?.type.toString() ?? ''),
+            title: AppLocalizations.of(context).typeVehicle,
+            subtitle: data?.type.toString() ?? ''),
         TitleSubtitle(
-            title: 'Регион регистрации автомобиля',
+            title: AppLocalizations.of(context).vehicleRegistrationRegion,
             subtitle: data?.address ?? ''),
         const SizedBox(height: 8),
       ],

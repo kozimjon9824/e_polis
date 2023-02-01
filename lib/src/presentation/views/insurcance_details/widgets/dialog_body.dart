@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/app_text_styles.dart';
@@ -30,17 +31,17 @@ class DialogBody extends StatelessWidget {
                   child:
                       const Icon(Icons.close, color: AppColors.primaryColor)),
             ),
-            const Text('Купить', style: AppTextStyles.styleW700S18Grey9),
+            Text(AppLocalizations.of(context).buy,
+                style: AppTextStyles.styleW700S18Grey9),
             const SizedBox(height: 12),
-            const Text(
-                'Зарегистрируйтесь сначала, чтобы купить страховой полис',
+            Text(AppLocalizations.of(context).registerFirstToBuy,
                 style: AppTextStyles.styleW500S14Grey7),
             const SizedBox(height: 40),
             Row(
               children: [
                 Expanded(
                     child: CustomOutlineButton(
-                        text: 'Отмена',
+                        text: AppLocalizations.of(context).cancel,
                         padding: 10,
                         onTap: () {
                           Navigator.pop(context);
@@ -48,7 +49,9 @@ class DialogBody extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: CustomButton(
-                      text: 'Регистрация', padding: 12, onTap: onSubmit),
+                      text: AppLocalizations.of(context).registration,
+                      padding: 12,
+                      onTap: onSubmit),
                 ),
               ],
             )

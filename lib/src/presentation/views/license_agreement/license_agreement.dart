@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:e_polis/src/presentation/components/custom_button.dart';
@@ -60,7 +61,8 @@ class _LicenseAgreementPageState extends State<LicenseAgreementPage> {
     return BlocProvider(
       create: (context) => inject<LicenseAgreementCubit>()..loadData(),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Лицензионное соглашение')),
+        appBar:
+            AppBar(title: Text(AppLocalizations.of(context).licenseAgreement)),
         body: BlocConsumer<LicenseAgreementCubit, LicenseAgreementState>(
           listener: (context, state) {
             state.whenOrNull(
@@ -135,7 +137,7 @@ class BodyWidget extends StatelessWidget {
         controller: _controller,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         children: [
-          const Text('ЛИЦЕНЗИОННОЕ  СОГЛАШЕНИЕ',
+          Text(AppLocalizations.of(context).licenseAgreementMain,
               style: AppTextStyles.styleW700S16Grey9),
           const SizedBox(height: 8),
           Html(data: text),
@@ -143,7 +145,7 @@ class BodyWidget extends StatelessWidget {
           AgreeCheckWidget(onChange: onCheck, value: check),
           const SizedBox(height: 24),
           CustomButton(
-              text: 'Продолжить',
+              text: AppLocalizations.of(context).next,
               bgColor: check ? null : AppColors.primaryColor.withOpacity(0.3),
               onTap: onTap),
           const SizedBox(height: 80),

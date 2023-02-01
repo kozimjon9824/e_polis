@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/presentation/cubits/auth/auth_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
@@ -17,7 +18,8 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false, title: const Text('Профиль')),
+          automaticallyImplyLeading: false,
+          title: Text(AppLocalizations.of(context).profile)),
       body: ListView(
         children: [
           const SizedBox(height: 16),
@@ -26,14 +28,14 @@ class ProfilePage extends StatelessWidget {
           const Divider(height: 0, color: AppColors.grey50, thickness: 1.2),
           const SizedBox(height: 24),
           ProfileItemWidget(
-            title: 'Информация профиля',
+            title: AppLocalizations.of(context).profileInfo,
             icon: AppIcons.profileInfo,
             onTap: () {
               Navigator.pushNamed(context, AppRoutes.profileInfo);
             },
           ),
           ProfileItemWidget(
-            title: 'Язык приложения',
+            title: AppLocalizations.of(context).appLang,
             subTitle: 'Русский язык',
             icon: AppIcons.changeLang,
             onTap: () {
@@ -41,21 +43,21 @@ class ProfilePage extends StatelessWidget {
             },
           ),
           ProfileItemWidget(
-            title: 'Напоминания',
+            title: AppLocalizations.of(context).notifications,
             icon: AppIcons.notification,
             onTap: () {
               Navigator.pushNamed(context, AppRoutes.notificationSetting);
             },
           ),
           ProfileItemWidget(
-            title: 'О Нас',
+            title: AppLocalizations.of(context).about,
             icon: AppIcons.about,
             onTap: () {
               Navigator.pushNamed(context, AppRoutes.about);
             },
           ),
           ProfileItemWidget(
-            title: 'Центр помощи',
+            title: AppLocalizations.of(context).helpCenter,
             icon: AppIcons.questionMark,
             onTap: () {
               Navigator.pushNamed(context, AppRoutes.helperCenter);
@@ -71,7 +73,7 @@ class ProfilePage extends StatelessWidget {
     return SafeArea(
       minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
       child: CustomOutlineButton(
-        text: 'Выйти',
+        text: AppLocalizations.of(context).exit,
         onTap: () {
           showDialog(
               context: context,

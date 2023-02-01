@@ -27,16 +27,12 @@ class _CarouselPromoWidgetState extends State<CarouselPromoWidget> {
     return Column(
       children: [
         CarouselSlider(
-          items:
-              // (false)
-              //     ? [1, 2, 3].map((_) => const ShimmerContainer()).toList()
-              //     :
-              widget.banners
-                  .map((banner) => CarouselPic(
-                        image: banner.photo ?? '',
-                        onTap: () {},
-                      ))
-                  .toList(),
+          items: widget.banners
+              .map((banner) => CarouselPic(
+                    image: banner.photo ?? '',
+                    onTap: () {},
+                  ))
+              .toList(),
           carouselController: _controller,
           options: CarouselOptions(
               height: 170,
@@ -104,23 +100,3 @@ class CarouselPic extends StatelessWidget {
     );
   }
 }
-
-// class ShimmerContainer extends StatelessWidget {
-//   const ShimmerContainer({
-//     Key? key,
-//   }) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Shimmer.fromColors(
-//       baseColor: Colors.grey[300] ?? Colors.grey,
-//       highlightColor: Colors.grey[100] ?? Colors.grey,
-//       child: Container(
-//         height: 160,
-//         decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(8), color: AppColors.grey),
-//         width: MediaQuery.of(context).size.width * 311 / 375,
-//       ),
-//     );
-//   }
-// }

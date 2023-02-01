@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../../injector.dart';
@@ -68,7 +69,7 @@ class LimitlessDriverView extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         CustomOutlineButton(
-                            text: 'Добавить водителя',
+                            text: AppLocalizations.of(context).addDriver,
                             onTap: () {
                               context
                                   .read<LimitlessDriverTabBarCubit>()
@@ -76,7 +77,7 @@ class LimitlessDriverView extends StatelessWidget {
                             }),
                         const SizedBox(height: 16),
                         CustomButton(
-                          text: 'Продолжить',
+                          text: AppLocalizations.of(context).next,
                           onTap: () {},
                         ),
                       ],

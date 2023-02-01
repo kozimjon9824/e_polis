@@ -58,7 +58,6 @@ class InsuranceItem extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(14),
         child: Stack(
-          // fit: StackFit.expand,
           children: [
             CachedNetworkImage(
                 imageUrl: image, fit: BoxFit.fill, width: double.infinity),

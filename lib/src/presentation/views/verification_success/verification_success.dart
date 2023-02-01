@@ -3,6 +3,7 @@ import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:e_polis/src/presentation/components/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../generated/l10n.dart';
 import '../../../core/routes/app_routes.dart';
 
 class VerificationSuccessPage extends StatelessWidget {
@@ -19,17 +20,16 @@ class VerificationSuccessPage extends StatelessWidget {
           children: [
             SvgPicture.asset(AppIcons.successDoc),
             const SizedBox(height: 24),
-            const Text('Учетная запись подтверждена',
+            Text(AppLocalizations.of(context).accountVerified,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.styleW700S24Grey9),
             const SizedBox(height: 12),
-            const Text(
-                'Ваша учетная запись успешно подтверждена, теперь давайте наслаждаться функциями Epolis',
+            Text(AppLocalizations.of(context).accountVerifiedDescription,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.styleW500S14Grey6),
             const SizedBox(height: 40),
             CustomButton(
-                text: 'Подтвердить',
+                text: AppLocalizations.of(context).confirm,
                 onTap: () {
                   Navigator.pushNamed(context, AppRoutes.licenseAgreement);
                 }),

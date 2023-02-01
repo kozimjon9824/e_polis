@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:e_polis/src/data/models/book/book_model.dart';
@@ -6,9 +7,6 @@ import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/contract_information/contract_information_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-
 import '../../../../../data/models/contract_information/request/contract_info_request.dart';
 import '../../../../components/custom_button.dart';
 import '../../../../cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
@@ -75,13 +73,14 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                             bookState.failure.getLocalizedMessage(context));
                       }
                       if (bookState.status == StateStatus.success) {
-                        showSuccessMessage(context, 'Success');
+                        showSuccessMessage(
+                            context, AppLocalizations.of(context).success);
                       }
                     },
                     builder: (context, bookState) {
                       final bookCubit = context.read<BookCubit>();
                       return CustomButton(
-                        text: 'Продолжить',
+                        text: AppLocalizations.of(context).next,
                         isLoading: (bookState.status == StateStatus.loading) ||
                             (contractState.status == StateStatus.loading),
                         onTap: () {

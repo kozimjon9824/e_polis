@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
 import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
@@ -68,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(height: 24),
                       FilterTabs(
                         tabs: [
-                          'Все',
+                          AppLocalizations.of(context).all,
                           ...?data?.products
                               ?.map((e) => e.category?.name ?? '')
                               .toSet()
@@ -76,7 +77,6 @@ class _HomePageState extends State<HomePage> {
                         ],
                         selectedTab: state.tab,
                         onTap: (String value) {
-                          print('IND:$value');
                           tabCubit.changeTab(value);
                         },
                       ),

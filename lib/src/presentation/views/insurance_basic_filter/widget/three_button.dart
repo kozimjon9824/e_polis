@@ -1,6 +1,7 @@
 import 'package:e_polis/src/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/app_text_styles.dart';
 import '../../../cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
@@ -18,13 +19,13 @@ class ThreeButton extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Срок действия страхового полиса',
+            Text(AppLocalizations.of(context).termsOfInsurance,
                 style: AppTextStyles.styleW600S14Grey9),
             const SizedBox(height: 7),
             Row(
               children: [
                 SwitchBtn(
-                    title: '6 месяцев',
+                    title: AppLocalizations.of(context).sixMonth,
                     onTap: () {
                       cubit.selectPeriod(PERIOD_MONTHS);
                     },
@@ -32,13 +33,13 @@ class ThreeButton extends StatelessWidget {
                     borderRadius: const BorderRadius.horizontal(
                         left: Radius.circular(8))),
                 SwitchBtn(
-                    title: '1 год',
+                    title: AppLocalizations.of(context).oneYear,
                     onTap: () {
                       cubit.selectPeriod(PERIOD_YEAR);
                     },
                     bgColor: status == PERIOD_YEAR ? AppColors.green : null),
                 SwitchBtn(
-                    title: '20 дней',
+                    title: AppLocalizations.of(context).twentyDays,
                     onTap: () {
                       cubit.selectPeriod(PERIOD_DAYS);
                     },

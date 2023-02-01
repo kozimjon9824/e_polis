@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/app_text_styles.dart';
 import '../../../../components/custom_button.dart';
@@ -23,23 +24,27 @@ class ExitDialogBody extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Выход', style: AppTextStyles.styleW700S18Grey9),
+            Text(AppLocalizations.of(context).exit,
+                style: AppTextStyles.styleW700S18Grey9),
             const SizedBox(height: 12),
-            const Text('Вы хотите выйти из приложения',
+            Text(AppLocalizations.of(context).doYouWantExit,
                 style: AppTextStyles.styleW500S14Grey7),
             const SizedBox(height: 40),
             Row(
               children: [
                 Expanded(
                     child: CustomOutlineButton(
-                        text: 'Нет',
+                        text: AppLocalizations.of(context).no,
                         padding: 10,
                         onTap: () {
                           Navigator.pop(context);
                         })),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: CustomButton(text: 'Да', padding: 12, onTap: onTap),
+                  child: CustomButton(
+                      text: AppLocalizations.of(context).yes,
+                      padding: 12,
+                      onTap: onTap),
                 ),
               ],
             )

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
@@ -67,7 +68,7 @@ class Profile extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, AppRoutes.login);
                   },
-                  child: Text('Регистрация',
+                  child: Text(AppLocalizations.of(context).registration,
                       style: AppTextStyles.styleW700S16Grey9
                           .copyWith(color: AppColors.primaryColor)),
                 )
@@ -75,7 +76,7 @@ class Profile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(fullName ?? 'Имя Фамилия',
+                      Text(fullName ?? AppLocalizations.of(context).nameSurname,
                           style: AppTextStyles.styleW700S16Grey9),
                       const SizedBox(height: 6),
                       Text(phone ?? '+998 90 123 45 67',

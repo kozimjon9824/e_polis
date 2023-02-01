@@ -7,6 +7,8 @@ import 'package:e_polis/src/presentation/cubits/my_progress_products/progress_pr
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'generated/l10n.dart';
 import 'injector.dart';
 import 'src/core/constants/constants.dart';
 import 'src/core/routes/app_pages.dart';
@@ -52,12 +54,19 @@ class MyApp extends StatelessWidget {
             onGenerateRoute: RouteGenerateKit().generateKit,
             // navigatorKey: navigatorKey,
             navigatorKey: alice.getNavigatorKey(),
-            supportedLocales: const [Locale(EN)],
-            locale: const Locale(RU),
-            // locale: Locale(state.language),
-            // builder: (context, child) {
-            //   return ScrollConfiguration(behavior: MyBehavior(), child: child!);
-            // },
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale(RU),
+              Locale(UZ),
+              Locale(EN),
+            ],
+            // locale: const Locale(RU),
+            locale: Locale(state.language ?? RU),
             initialRoute: AppRoutes.splash,
           );
         },
@@ -67,6 +76,10 @@ class MyApp extends StatelessWidget {
 }
 
 final alice = Alice(showNotification: true, navigatorKey: navigatorKey);
+
+// builder: (context, child) {
+//   return ScrollConfiguration(behavior: MyBehavior(), child: child!);
+// },
 
 // class MyBehavior extends ScrollBehavior {
 //   @override

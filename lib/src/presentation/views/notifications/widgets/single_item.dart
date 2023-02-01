@@ -3,6 +3,7 @@ import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../../../data/models/notification/notification_model.dart';
 
 class NotificationItem extends StatelessWidget {
@@ -41,15 +42,16 @@ class NotificationItem extends StatelessWidget {
         Text(notification.text ?? '', style: AppTextStyles.styleW500S14Grey7),
         const SizedBox(height: 4),
         InkWell(
-            onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                'Купить страховку',
-                style: AppTextStyles.styleW700S14Grey9
-                    .copyWith(color: AppColors.primaryColor),
-              ),
-            ))
+          onTap: () {},
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              AppLocalizations.of(context).buyInsurance,
+              style: AppTextStyles.styleW700S14Grey9
+                  .copyWith(color: AppColors.primaryColor),
+            ),
+          ),
+        )
       ]),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
@@ -81,25 +82,25 @@ class SuccessBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   PriceTile(
-                      title: 'Цена полиса',
+                      title: AppLocalizations.of(context).polisPrice,
                       price:
                           numberFormat(insuranceDetails?.policyAmount?.toInt()),
                       textStyle: AppTextStyles.styleW700S18Green),
                   const SizedBox(height: 12),
                   PriceTile(
-                    title: 'Страховая сумма',
+                    title: AppLocalizations.of(context).insurancePrice,
                     price: numberFormat(
                         insuranceDetails?.insuranceAmount?.toInt()),
                   ),
                   const SizedBox(height: 12),
                   PriceTile(
                     title:
-                        'Страхование вреда, причиненного жизни и здоровью пострадавшей стороны',
+                        AppLocalizations.of(context).insuranceDamagePriceTitle,
                     price: numberFormat(insuranceDetails?.lifeDamage?.toInt()),
                   ),
                   const SizedBox(height: 12),
                   PriceTile(
-                    title: 'Возмещение ущерба имуществу потерпевшего',
+                    title: AppLocalizations.of(context).compensationPriceTitle,
                     price:
                         numberFormat(insuranceDetails?.propertyDamage?.toInt()),
                   ),
@@ -110,7 +111,7 @@ class SuccessBody extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         minimum: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: CustomButton(
-          text: 'КУПИТЬ',
+          text: AppLocalizations.of(context).buy,
           onTap: () {
             if (context.read<AuthCubit>().state is UnAuthenticatedState) {
               showDialog(

@@ -4,6 +4,7 @@ import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
 
 class CustomStepper extends StatelessWidget implements PreferredSizeWidget {
@@ -70,7 +71,8 @@ class CustomStepper extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   for (int i = 0; i < 4; i++)
                     StepperText(
-                        title: 'Общая информация', isActive: currentIndex >= i),
+                        title: getTitles(context)[i],
+                        isActive: currentIndex >= i),
                 ],
               ),
             ),
@@ -79,6 +81,13 @@ class CustomStepper extends StatelessWidget implements PreferredSizeWidget {
       },
     );
   }
+
+  List<String> getTitles(BuildContext context) => [
+        AppLocalizations.of(context).generalInfo,
+        AppLocalizations.of(context).driverDetails,
+        AppLocalizations.of(context).contractDetails,
+        AppLocalizations.of(context).payment,
+      ];
 
   Widget liner(bool isActive) {
     return Expanded(

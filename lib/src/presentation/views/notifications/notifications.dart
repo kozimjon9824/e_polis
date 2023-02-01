@@ -5,6 +5,7 @@ import 'package:e_polis/src/presentation/components/loading.dart';
 import 'package:e_polis/src/presentation/cubits/notifications/notifications_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../generated/l10n.dart';
 import '../../../../injector.dart';
 import '../../components/pagination_widget.dart';
 import 'widgets/single_item.dart';
@@ -17,7 +18,7 @@ class NotificationPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => inject<NotificationsCubit>()..loadNotification(),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Уведомления')),
+        appBar: AppBar(title: Text(AppLocalizations.of(context).notification)),
         body: BlocBuilder<NotificationsCubit, NotificationsState>(
           builder: (context, state) {
             if (state.status == StateStatus.loading) {
@@ -29,8 +30,8 @@ class NotificationPage extends StatelessWidget {
               });
             }
             if (state.notifications.isEmpty) {
-              return const Center(
-                  child: Text('Нет уведомления',
+              return Center(
+                  child: Text(AppLocalizations.of(context).noNotification,
                       style: AppTextStyles.styleW500S16Black));
             }
             return SafeArea(

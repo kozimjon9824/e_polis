@@ -2,6 +2,7 @@ import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
+import '../../../../../../../generated/l10n.dart';
 import '../../../../../../core/themes/app_colors.dart';
 import '../../../../../../data/models/contract_information/response/contract_info_response.dart';
 import '../../../../../components/custom_mask.dart';
@@ -25,21 +26,24 @@ class ContractDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedRoundContainer(
-      title: 'Информация о контракте',
+      title: AppLocalizations.of(context).contractInfo,
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-      clearText: contract != null ? 'Очистить информацию' : null,
+      clearText:
+          contract != null ? AppLocalizations.of(context).clearData : null,
       showChildren2: true,
       onClear: onClear,
       children: [
         const SizedBox(height: 8),
         CustomTextField(
-          label: 'Дата начало контракта',
+          label: AppLocalizations.of(context).contractStartDate,
           hintText: '02.12.2022',
           keyboardType: TextInputType.datetime,
           textEditingController: dateController,
           textInputAction: TextInputAction.done,
           focusNode: focusNode,
-          validator: (value) => (value?.isEmpty ?? false) ? 'Enter date' : null,
+          validator: (value) => (value?.isEmpty ?? false)
+              ? AppLocalizations.of(context).enterDate
+              : null,
           inputFormatters: [
             MaskTextInputFormatter(
                 mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')})
@@ -48,18 +52,20 @@ class ContractDetails extends StatelessWidget {
         const SizedBox(height: 8),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
         TitleSubtitle(
-            title: 'Дата окончания срока действия контракта',
+            title: AppLocalizations.of(context).contractExpirationDate,
             subtitle: contract?.endDate ?? ''),
-        const TitleSubtitle(
-            title: 'Иметь привилегию', subtitle: 'Не привилегированный'),
+        TitleSubtitle(
+            title: AppLocalizations.of(context).haveThePrivilege,
+            subtitle: AppLocalizations.of(context).notPrivileged),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
         TitleSubtitle(
-            title: 'Цена полиса',
-            subtitle: '${numberFormat(contract?.policyAmount?.toInt())} сум'),
-        TitleSubtitle(
-            title: 'Страховая сумма',
+            title: AppLocalizations.of(context).polisPrice,
             subtitle:
-                '${numberFormat(contract?.insuranceAmount?.toInt())} сум'),
+                '${numberFormat(contract?.policyAmount?.toInt())} ${AppLocalizations.of(context).sum}'),
+        TitleSubtitle(
+            title: AppLocalizations.of(context).insurancePrice,
+            subtitle:
+                '${numberFormat(contract?.insuranceAmount?.toInt())} ${AppLocalizations.of(context).sum}'),
       ],
     );
   }

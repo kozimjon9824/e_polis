@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,7 @@ class SearchBar extends StatelessWidget implements PreferredSizeWidget {
                 onChanged: onChange,
                 style: AppTextStyles.styleW500S14Grey9,
                 decoration: InputDecoration(
-                  hintText: 'Search',
+                  hintText: AppLocalizations.of(context).search,
                   hintStyle: AppTextStyles.styleW500S14Grey6,
                   contentPadding: const EdgeInsets.symmetric(vertical: 18),
                   prefixIcon: Padding(
@@ -112,7 +113,8 @@ class SearchBar extends StatelessWidget implements PreferredSizeWidget {
                 onTap: onCancel,
                 child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Close', style: cancelTextStyle())),
+                    child: Text(AppLocalizations.of(context).close,
+                        style: cancelTextStyle())),
               )
           ],
         ),

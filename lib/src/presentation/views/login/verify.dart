@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/error/error.dart';
 import 'package:flutter/material.dart';
@@ -34,11 +35,11 @@ class _VerifyPageState extends State<VerifyPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Подтвердить код',
+                    Text(AppLocalizations.of(context).confirmCode,
                         style: AppTextStyles.styleW700S24Grey9),
                     const SizedBox(height: 12),
                     Text(
-                        'Пожалуйста, введите код, который вы отправили на $arguments',
+                        '${AppLocalizations.of(context).verifyPageMainText} $arguments',
                         style: AppTextStyles.styleW500S14Grey7),
                     const SizedBox(height: 32),
                     BlocBuilder<VerifyCubit, VerifyState>(
@@ -51,11 +52,14 @@ class _VerifyPageState extends State<VerifyPage> {
                     ),
                     const SizedBox(height: 24),
                     Row(
-                      children: const [
-                        Text('Повторно отправить код через',
+                      children: [
+                        Text(
+                            AppLocalizations.of(context)
+                                .resendCodeAfterSomeTime,
                             style: AppTextStyles.styleW500S14Grey9),
-                        SizedBox(width: 4),
-                        Text('00:48', style: AppTextStyles.styleW500S14Primary),
+                        const SizedBox(width: 4),
+                        const Text('00:48',
+                            style: AppTextStyles.styleW500S14Primary),
                       ],
                     ),
                   ],
@@ -84,7 +88,7 @@ class _VerifyPageState extends State<VerifyPage> {
           },
           builder: (context, state) {
             return CustomButton(
-              text: 'Подтвердить',
+              text: AppLocalizations.of(context).confirm,
               isLoading: state == const VerifyState.loading(),
               onTap: () {
                 context

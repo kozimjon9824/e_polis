@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
 import 'package:e_polis/src/core/themes/app_text_styles.dart';
@@ -15,14 +16,12 @@ class LanguagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LanguageCubit, LanguageState>(
       builder: (context, state) {
-        return state.maybeWhen(
-            orElse: () => buildScaffold('', context),
-            loaded: (language) => buildScaffold(language, context));
+        return buildScaffold(state.language, context);
       },
     );
   }
 
-  Widget buildScaffold(String language, BuildContext context) {
+  Widget buildScaffold(String? language, BuildContext context) {
     final cubit = context.read<LanguageCubit>();
     return Scaffold(
       appBar: AppBar(),
@@ -32,14 +31,15 @@ class LanguagePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 40),
-            const Text('Выберите язык', style: AppTextStyles.styleW700S24Grey9),
+            Text(AppLocalizations.of(context).chooseLanguage,
+                style: AppTextStyles.styleW700S24Grey9),
             const SizedBox(height: 12),
-            const Text('Добро пожаловать в epolis Выберите язык приложения',
+            Text(AppLocalizations.of(context).languagePageMainText,
                 style: AppTextStyles.styleW500S14Grey7),
             const SizedBox(height: 32),
             LanguageButton(
               icon: AppIcons.uz,
-              title: "O’zbek tili",
+              title: AppLocalizations.of(context).uzbekLang,
               isActive: language == UZ,
               onTap: () {
                 cubit.saveAppLang(UZ);
@@ -48,7 +48,7 @@ class LanguagePage extends StatelessWidget {
             const SizedBox(height: 16),
             LanguageButton(
               icon: AppIcons.ru,
-              title: "Русский язык",
+              title: AppLocalizations.of(context).russianLang,
               isActive: language == RU,
               onTap: () {
                 cubit.saveAppLang(RU);
@@ -62,7 +62,7 @@ class LanguagePage extends StatelessWidget {
           : SafeArea(
               minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: CustomButton(
-                text: 'Продолжить',
+                text: AppLocalizations.of(context).next,
                 onTap: () {
                   Navigator.pushNamed(context, AppRoutes.onBoarding);
                 },

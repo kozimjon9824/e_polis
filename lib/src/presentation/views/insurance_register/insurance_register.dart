@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
@@ -37,7 +38,7 @@ class _InsuranceRegistrationPageState extends State<InsuranceRegistrationPage> {
           builder: (context, state) {
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Оформление страховки'),
+                title: Text(AppLocalizations.of(context).bookInsurance),
                 bottom: CustomStepper(currentIndex: state.index),
               ),
               body: IndexedStack(index: state.index, children: [

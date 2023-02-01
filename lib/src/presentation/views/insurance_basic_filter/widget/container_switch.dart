@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/app_text_styles.dart';
 import '../../../cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
@@ -18,13 +19,13 @@ class ContainerSwitch extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8),
-            const Text('Количество водителей',
+            Text(AppLocalizations.of(context).numberOfDrivers,
                 style: AppTextStyles.styleW600S14Grey9),
             const SizedBox(height: 7),
             Row(
               children: [
                 SwitchBtn(
-                    title: 'До 5 человек',
+                    title: AppLocalizations.of(context).upTo5Human,
                     onTap: () {
                       cubit.selectDriversCount(false);
                     },
@@ -32,7 +33,7 @@ class ContainerSwitch extends StatelessWidget {
                     borderRadius: const BorderRadius.horizontal(
                         left: Radius.circular(8))),
                 SwitchBtn(
-                    title: 'Не ограничен',
+                    title: AppLocalizations.of(context).limitless,
                     onTap: () {
                       cubit.selectDriversCount(true);
                     },

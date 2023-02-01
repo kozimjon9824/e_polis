@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
@@ -52,15 +53,14 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
                     Description(text: productData.description ?? ''),
                     const SizedBox(height: 22),
                     DropDownButton<String>(
-                      label: 'Регион регистрации автомобиля',
-                      hint: 'Выберите регион',
+                      label: AppLocalizations.of(context)
+                          .vehicleRegistrationRegion,
+                      hint: AppLocalizations.of(context).selectRegion,
                       items: dropDownState.regionsList
                           .map((item) => DropdownMenuItem<String>(
                               value: item,
-                              child: Text(
-                                item,
-                                style: AppTextStyles.styleW400S14Grey6,
-                              )))
+                              child: Text(item,
+                                  style: AppTextStyles.styleW400S14Grey6)))
                           .toList(),
                       onChanged: (value) {
                         int key = dropDownCubit.getRegionKey(value ?? '');
@@ -69,21 +69,19 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
                     ),
                     const SizedBox(height: 22),
                     DropDownButton<String>(
-                      label: 'Тип автомобиля',
-                      hint: 'Выберите тип автомобиля',
-                      items: dropDownState.vehiclesList
-                          .map((item) => DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(
-                                item,
-                                style: AppTextStyles.styleW400S14Grey6,
-                              )))
-                          .toList(),
-                      onChanged: (value) {
-                        int key = dropDownCubit.getVehicleTypeKey(value ?? '');
-                        cubit.selectVehicleType(key);
-                      },
-                    ),
+                        label: AppLocalizations.of(context).typeVehicle,
+                        hint: AppLocalizations.of(context).selectTypeVehicle,
+                        items: dropDownState.vehiclesList
+                            .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(item,
+                                    style: AppTextStyles.styleW400S14Grey6)))
+                            .toList(),
+                        onChanged: (value) {
+                          int key =
+                              dropDownCubit.getVehicleTypeKey(value ?? '');
+                          cubit.selectVehicleType(key);
+                        }),
                     const SizedBox(height: 22),
                     const ContainerSwitch(),
                     const SizedBox(height: 22),
@@ -94,12 +92,13 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
           bottomNavigationBar: SafeArea(
             minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: CustomButton(
-              text: 'Расчет цены',
+              text: AppLocalizations.of(context).priceCalculation,
               onTap: () {
                 if (cubit.isValid()) {
                   Navigator.pushNamed(context, AppRoutes.basicFilterResult);
                 } else {
-                  showErrorMessage(context, 'Select basic fields!');
+                  showErrorMessage(
+                      context, AppLocalizations.of(context).selectBasicFields);
                 }
               },
             ),

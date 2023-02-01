@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,9 @@ class ErrorView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(onPressed: onTap, child: const Text('Retry')),
+              TextButton(
+                  onPressed: onTap,
+                  child: Text(AppLocalizations.of(context).retry)),
             ],
           )
         ],

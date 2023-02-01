@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/data/models/book/book_model.dart';
 import 'package:e_polis/src/presentation/components/snackbars.dart';
@@ -77,12 +78,15 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 children: [
                   AnimatedRoundContainer(
-                    title: '${widget.index}-Водитель',
+                    title:
+                        '${widget.index}-${AppLocalizations.of(context).driver}',
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 10),
                     padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
                     showChildren2: state.driverData != null,
-                    clearText: state.driverData != null ? 'Удалить' : null,
+                    clearText: state.driverData != null
+                        ? AppLocalizations.of(context).delete
+                        : null,
                     onClear: () {
                       cubit.clearDriverData();
                       context
@@ -124,7 +128,7 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                   const SizedBox(height: 20),
                   if (widget.index != 5)
                     CustomOutlineButton(
-                        text: 'Добавить водителя',
+                        text: AppLocalizations.of(context).addDriver,
                         onTap: () {
                           context.read<LimitedDriverTabBarCubit>().addTab();
                         }),
@@ -135,7 +139,7 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
             bottomNavigationBar: SafeArea(
               minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
               child: CustomButton(
-                text: 'Продолжить',
+                text: AppLocalizations.of(context).next,
                 isLoading: state.status == StateStatus.loading,
                 onTap: () {
                   if (!formKey.currentState!.validate()) {

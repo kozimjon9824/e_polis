@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -43,10 +44,10 @@ class InsuranceDetail extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Text('Цена полиса',
+                  Text(AppLocalizations.of(context).polisPrice,
                       style: AppTextStyles.styleW400S14Grey6),
                   const SizedBox(height: 4),
-                  Text('$polisPrice сум',
+                  Text('$polisPrice ${AppLocalizations.of(context).sum}',
                       style: AppTextStyles.styleW700S18Green)
                 ],
               )
@@ -55,10 +56,10 @@ class InsuranceDetail extends StatelessWidget {
           const Divider(height: 28, color: AppColors.grey300),
           Row(
             children: [
-              const Expanded(
-                  child: Text('Страховая сумма',
+              Expanded(
+                  child: Text(AppLocalizations.of(context).insurancePrice,
                       style: AppTextStyles.styleW400S14Grey6)),
-              Text('$insurancePrice сум',
+              Text('$insurancePrice ${AppLocalizations.of(context).sum}',
                   style: AppTextStyles.styleW600S14Grey9),
             ],
           ),
@@ -67,14 +68,15 @@ class InsuranceDetail extends StatelessWidget {
             children: [
               Expanded(
                   child: CustomOutlineButton(
-                      text: 'Подробно', padding: 10, onTap: onDetailTap)),
+                      text: AppLocalizations.of(context).inDetail,
+                      padding: 10,
+                      onTap: onDetailTap)),
               const SizedBox(width: 16),
               Expanded(
                 child: CustomButton(
-                  text: 'КУПИТЬ',
-                  padding: 12,
-                  onTap: onBuy,
-                ),
+                    text: AppLocalizations.of(context).buy,
+                    padding: 12,
+                    onTap: onBuy),
               ),
             ],
           )

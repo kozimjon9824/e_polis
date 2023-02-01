@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
@@ -19,7 +20,7 @@ class HelperCenterPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => inject<FaqCubit>()..loadData(),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Центр помощи')),
+        appBar: AppBar(title: Text(AppLocalizations.of(context).helpCenter)),
         body: BlocBuilder<FaqCubit, FaqState>(
           builder: (context, state) {
             return state.when(
@@ -27,14 +28,14 @@ class HelperCenterPage extends StatelessWidget {
                 error: (failure) => ErrorView(onTap: () {
                       context.read<FaqCubit>().loadData();
                     }),
-                loaded: (data) => faqData(data));
+                loaded: (data) => faqData(context, data));
           },
         ),
       ),
     );
   }
 
-  ListView faqData(List<QuestionAnswer> data) {
+  ListView faqData(BuildContext context, List<QuestionAnswer> data) {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       children: [
@@ -44,12 +45,11 @@ class HelperCenterPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(12), color: AppColors.grey50),
           child: Column(
             children: [
-              const Text('Как мы можем помочь?',
+              Text(AppLocalizations.of(context).howCanWeHelp,
                   textAlign: TextAlign.center,
                   style: AppTextStyles.styleW700S18Grey9),
               const SizedBox(height: 8),
-              const Text(
-                  'Не нашли ответ, который искали? Свяжитесь с нашим центром поддержки!',
+              Text(AppLocalizations.of(context).helpMainText,
                   textAlign: TextAlign.center,
                   style: AppTextStyles.styleW500S14Grey7),
               const SizedBox(height: 16),
@@ -68,7 +68,7 @@ class HelperCenterPage extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
-        const Text('Популярные вопросы',
+        Text(AppLocalizations.of(context).popularQuestions,
             style: AppTextStyles.styleW700S18Grey9),
         const SizedBox(height: 16),
         ListView.separated(

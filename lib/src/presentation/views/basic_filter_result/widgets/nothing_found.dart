@@ -3,6 +3,8 @@ import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class NothingFound extends StatelessWidget {
   const NothingFound({Key? key}) : super(key: key);
 
@@ -12,9 +14,9 @@ class NothingFound extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text('Мы нашли 0 страховых компаний',
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Text(AppLocalizations.of(context).weFoundZero,
               style: AppTextStyles.styleW500S14Grey9),
         ),
         Expanded(

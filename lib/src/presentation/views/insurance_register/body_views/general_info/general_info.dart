@@ -7,6 +7,7 @@ import 'package:e_polis/src/presentation/cubits/check_vehicle_info/check_vehicle
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../components/custom_button.dart';
 import '../../../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
 import 'widgets/car_info.dart';
@@ -83,7 +84,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
               minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
               child: CustomButton(
                 isLoading: state.status == StateStatus.loading,
-                text: 'Продолжить',
+                text: AppLocalizations.of(context).next,
                 onTap: () {
                   if (!formKey.currentState!.validate()) {
                     return;
@@ -137,6 +138,9 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
     vehicleController.dispose();
     series.dispose();
     number.dispose();
+    numberID.dispose();
+    seriesID.dispose();
+    phoneController.dispose();
     focusNodeSeriesID.dispose();
     focusNodeNumberID.dispose();
     focusNodePhone.dispose();

@@ -1,6 +1,7 @@
 import 'package:e_polis/src/presentation/cubits/limitless_driver_tabbar/limitless_driver_tab_bar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../../../generated/l10n.dart';
 import '../../../../../../../../injector.dart';
 import '../../../../../../../core/utils/helper_models.dart';
 import '../../../../../../../core/utils/utils.dart';
@@ -77,14 +78,15 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 children: [
                   AnimatedRoundContainer(
-                    title: '${widget.index}-Водитель',
+                    title:
+                        '${widget.index}-${AppLocalizations.of(context).driver}',
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 10),
                     padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
                     showChildren2: state.driverData != null,
                     clearText: state.driverData == null
-                        ? 'Удалить'
-                        : 'Очистить информацию',
+                        ? AppLocalizations.of(context).delete
+                        : AppLocalizations.of(context).clearData,
                     onClear: () {
                       if (state.driverData != null) {
                         cubit.clearDriverData();
@@ -128,7 +130,7 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                   ),
                   const SizedBox(height: 20),
                   CustomOutlineButton(
-                      text: 'Добавить водителя',
+                      text: AppLocalizations.of(context).addDriver,
                       onTap: () =>
                           context.read<LimitlessDriverTabBarCubit>().addTab()),
                   const SizedBox(height: 24),
@@ -138,7 +140,7 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
             bottomNavigationBar: SafeArea(
               minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
               child: CustomButton(
-                text: 'Продолжить',
+                text: AppLocalizations.of(context).next,
                 isLoading: state.status == StateStatus.loading,
                 onTap: () {
                   if (!formKey.currentState!.validate()) {

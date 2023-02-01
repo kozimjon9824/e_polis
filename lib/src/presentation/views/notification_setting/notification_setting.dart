@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,16 +12,16 @@ class NotificationSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Всплывающие напоминания')),
+      appBar:
+          AppBar(title: Text(AppLocalizations.of(context).notificationSetting)),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8),
         child: Column(
           children: [
             ListTile(
-              title: const Text('Всплывающие напоминания',
+              title: Text(AppLocalizations.of(context).notificationSetting,
                   style: AppTextStyles.styleW700S14Grey9),
-              subtitle: const Text(
-                  'Receive recommendations based on your activities',
+              subtitle: Text(AppLocalizations.of(context).notificationOnOffText,
                   style: AppTextStyles.styleW500S12Grey5),
               trailing: CupertinoSwitch(
                   value: true,
@@ -28,9 +29,9 @@ class NotificationSettingPage extends StatelessWidget {
                   onChanged: (value) {}),
             ),
             ListTile(
-              title: const Text('Получайте оповещения на свою телефону',
+              title: Text(AppLocalizations.of(context).notificationOnPhone,
                   style: AppTextStyles.styleW700S14Grey9),
-              subtitle: const Text('Оповещение  и советы ',
+              subtitle: Text(AppLocalizations.of(context).alertAndTips,
                   style: AppTextStyles.styleW500S12Grey5),
               trailing: CupertinoSwitch(
                   value: false,
@@ -38,9 +39,10 @@ class NotificationSettingPage extends StatelessWidget {
                   onChanged: (value) {}),
             ),
             ListTile(
-              title: const Text('Новостная рассылка',
+              title: Text(AppLocalizations.of(context).newsLatter,
                   style: AppTextStyles.styleW700S14Grey9),
-              subtitle: const Text('Новости и рекламная информация',
+              subtitle: Text(
+                  AppLocalizations.of(context).newAndPromotionalInformation,
                   style: AppTextStyles.styleW500S12Grey5),
               trailing: CupertinoSwitch(
                   value: false,
@@ -53,7 +55,7 @@ class NotificationSettingPage extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: CustomButton(
-          text: 'Сохранить изменения',
+          text: AppLocalizations.of(context).saveChanges,
           onTap: () {
             Navigator.pop(context);
           },

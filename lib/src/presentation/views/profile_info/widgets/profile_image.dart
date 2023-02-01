@@ -1,9 +1,8 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import '../../../../../generated/l10n.dart';
 import '../../../../core/themes/app_icons.dart';
 import '../../../../core/themes/app_text_styles.dart';
 
@@ -46,7 +45,7 @@ class ProfileImage extends StatelessWidget {
         const SizedBox(height: 8),
         TextButton(
             onPressed: onTap,
-            child: const Text('Добавить изображение',
+            child: Text(AppLocalizations.of(context).pickImage,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.styleW600S16Grey9)),
       ],

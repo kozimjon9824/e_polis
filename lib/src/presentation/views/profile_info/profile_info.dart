@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import '../../../../generated/l10n.dart';
 import '../../../core/themes/app_icons.dart';
 import '../../../data/models/user_profile/user_profile.dart';
 import '../../components/custom_button.dart';
@@ -33,7 +34,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
     return BlocProvider(
       create: (context) => inject<UpdateProfileCubit>()..loadUserData(),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Информация профиля')),
+        appBar: AppBar(title: Text(AppLocalizations.of(context).profileInfo)),
         body: BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
           builder: (context, state) {
             var data = state.user;
@@ -63,17 +64,19 @@ class _ProfileInfoState extends State<ProfileInfo> {
               }),
           const SizedBox(height: 40),
           CustomTextField(
-            label: 'Имя',
+            label: AppLocalizations.of(context).firstName,
             textEditingController: nameController,
             textInputAction: TextInputAction.next,
-            validator: (value) => value!.isEmpty ? 'Must not be empty' : null,
+            validator: (value) =>
+                value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
           ),
           const SizedBox(height: 24),
           CustomTextField(
-            label: 'Фамилия',
+            label: AppLocalizations.of(context).lastName,
             textEditingController: lastNameController,
             textInputAction: TextInputAction.next,
-            validator: (value) => value!.isEmpty ? 'Must not be empty' : null,
+            validator: (value) =>
+                value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
           ),
           const SizedBox(height: 24),
           phoneCustomPrefixTextField(),
@@ -88,7 +91,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
         if (state.status == StateStatus.success) {
           context.read<MainScreenDataCubit>().loadData();
           Navigator.pop(context);
-          showSuccessMessage(context, 'Successfully updated!');
+          showSuccessMessage(
+              context, AppLocalizations.of(context).profileUpdated);
         }
         if (state.status == StateStatus.error) {
           showErrorMessage(context, state.failure.getLocalizedMessage(context));
@@ -98,7 +102,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
         return SafeArea(
           minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: CustomButton(
-            text: 'Сохранить изменения',
+            text: AppLocalizations.of(context).saveChanges,
             isLoading: state.status == StateStatus.loading,
             onTap: () {
               if (formKey.currentState!.validate()) {
@@ -122,7 +126,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 
   Widget phoneCustomPrefixTextField() {
     return CustomPrefixTextField(
-      label: 'Номер телефона',
+      label: AppLocalizations.of(context).phoneNumber,
       hintText: '(--) --- -- --',
       textInputAction: TextInputAction.done,
       textEditingController: phoneController,

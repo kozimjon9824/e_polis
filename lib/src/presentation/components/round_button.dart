@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import '../../core/themes/app_colors.dart';
 import '../../core/themes/app_text_styles.dart';
@@ -28,10 +29,10 @@ class RoundButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
           child: isChangeShape
-              ? const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   child: Center(
-                    child: Text('Начать пользоваться',
+                    child: Text(AppLocalizations.of(context).startUsing,
                         style: AppTextStyles.styleW600S16White),
                   ),
                 )

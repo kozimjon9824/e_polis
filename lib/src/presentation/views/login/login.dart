@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
 import 'package:e_polis/src/presentation/cubits/login/login_cubit.dart';
@@ -21,9 +22,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final controller = TextEditingController();
   final mask = MaskTextInputFormatter(
-      mask: '(##) ### ## ##',
-      filter: {"#": RegExp(r'[0-9]')},
-      type: MaskAutoCompletionType.lazy);
+      mask: '(##) ### ## ##', filter: {"#": RegExp(r'[0-9]')});
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +38,10 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Номер телефона',
+                    Text(AppLocalizations.of(context).phoneNumber,
                         style: AppTextStyles.styleW700S24Grey9),
                     const SizedBox(height: 12),
-                    const Text(
-                        'Введите свой номер телефона, мы отправим код подтверждения на вашу телефон',
+                    Text(AppLocalizations.of(context).loginMainText,
                         style: AppTextStyles.styleW500S14Grey7),
                     const SizedBox(height: 32),
                     phoneCustomPrefixTextField(),
@@ -76,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
       child: SafeArea(
         minimum: const EdgeInsets.fromLTRB(20, 12, 20, 20),
         child: CustomButton(
-          text: 'ОТправить СМС',
+          text: AppLocalizations.of(context).sendSms,
           isLoading: loading,
           onTap: () {
             if (mask.getUnmaskedText().length == 9) {
@@ -90,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget phoneCustomPrefixTextField() {
     return CustomPrefixTextField(
-      label: 'Номер телефона',
+      label: AppLocalizations.of(context).phoneNumber,
       hintText: '(--) --- -- --',
       autoFocus: true,
       textInputAction: TextInputAction.done,

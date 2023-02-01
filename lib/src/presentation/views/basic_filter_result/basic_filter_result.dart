@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/presentation/cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +31,7 @@ class _BasicFilterResultPageState extends State<BasicFilterResultPage> {
       controller: keyboardController,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Результаты расчета'),
+          title: Text(AppLocalizations.of(context).calculationResults),
           bottom: SearchBar(
               onCancel: () {
                 controller.text = '';

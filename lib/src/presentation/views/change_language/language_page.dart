@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
 import 'package:e_polis/src/presentation/cubits/language/language_cubit.dart';
@@ -35,7 +36,7 @@ class ChangeLanguagePage extends StatelessWidget {
 
   Scaffold buildScaffold(String language, BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Язык приложения')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).appLang)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
         child: Column(
@@ -43,7 +44,7 @@ class ChangeLanguagePage extends StatelessWidget {
           children: [
             LanguageButton(
               icon: AppIcons.uz,
-              title: "O’zbek tili",
+              title: AppLocalizations.of(context).uzbekLang,
               isActive: language == UZ,
               onTap: () {
                 context.read<LanguageSettingCubit>().selectAppLang(UZ);
@@ -52,7 +53,7 @@ class ChangeLanguagePage extends StatelessWidget {
             const SizedBox(height: 16),
             LanguageButton(
               icon: AppIcons.ru,
-              title: "Русский язык",
+              title: AppLocalizations.of(context).russianLang,
               isActive: language == RU,
               onTap: () {
                 context.read<LanguageSettingCubit>().selectAppLang(RU);
@@ -64,13 +65,11 @@ class ChangeLanguagePage extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: CustomButton(
-          text: 'Сохранить изменения',
+          text: AppLocalizations.of(context).saveChanges,
           onTap: () {
-            context.read<LanguageCubit>().state.whenOrNull(loaded: (lang) {
-              if (lang != language) {
-                context.read<LanguageSettingCubit>().saveAppLang(language);
-              }
-            });
+            if (context.read<LanguageCubit>().state.language != language) {
+              context.read<LanguageSettingCubit>().saveAppLang(language);
+            }
           },
         ),
       ),

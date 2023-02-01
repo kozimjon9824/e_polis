@@ -1,12 +1,11 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-
 import '../../../../../../core/themes/app_colors.dart';
 import '../../../../../../core/themes/app_icons.dart';
 import '../../../../../../core/themes/app_text_styles.dart';
 import '../../../../../../data/models/vehicle_information/response/vehicle_info_response.dart';
-import '../../../../../components/custom_mask.dart';
 import '../../../../../components/custom_text_field.dart';
 import '../../../widgets/animated_container.dart';
 import '../../../widgets/widgets.dart';
@@ -37,21 +36,27 @@ class DriverInformationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedRoundContainer(
-      title: 'Информация о владельце',
+      title: AppLocalizations.of(context).driverInfo,
       padding: const EdgeInsets.fromLTRB(10, 8, 10, 16),
       padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
-      clearText: isValidated == true ? 'Очистить информацию' : null,
+      clearText:
+          isValidated == true ? AppLocalizations.of(context).clearData : null,
       showChildren2: isValidated == true,
       onClear: onClear,
       children2: [
-        phoneCustomTextField(),
+        phoneCustomTextField(context),
       ],
       children: [
-        TitleSubtitle(title: 'Ф.И.О', subtitle: ownerData?.fullName ?? ''),
-        TitleSubtitle(title: 'ЖШШИР', subtitle: ownerData?.pinfl ?? ''),
+        TitleSubtitle(
+            title: AppLocalizations.of(context).fio,
+            subtitle: ownerData?.fullName ?? ''),
+        TitleSubtitle(
+            title: AppLocalizations.of(context).pinFl,
+            subtitle: ownerData?.pinfl ?? ''),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
         const SizedBox(height: 8),
-        const Text('Паспорта/ID карта', style: AppTextStyles.styleW600S14Grey9),
+        Text(AppLocalizations.of(context).passport,
+            style: AppTextStyles.styleW600S14Grey9),
         const SizedBox(height: 6),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -92,9 +97,9 @@ class DriverInformationWidget extends StatelessWidget {
     );
   }
 
-  Widget phoneCustomTextField() {
+  Widget phoneCustomTextField(BuildContext context) {
     return CustomPrefixTextField(
-      label: 'Номер телефона',
+      label: AppLocalizations.of(context).phoneNumber,
       hintText: '(--) --- -- --',
       textInputAction: TextInputAction.done,
       textEditingController: phoneController,

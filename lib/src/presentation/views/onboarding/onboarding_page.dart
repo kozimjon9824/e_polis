@@ -1,5 +1,6 @@
 import 'package:e_polis/src/core/themes/app_icons.dart';
 import 'package:flutter/material.dart';
+import '../../../../generated/l10n.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/themes/app_text_styles.dart';
@@ -28,7 +29,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               Navigator.pushNamedAndRemoveUntil(
                   context, AppRoutes.main, (route) => false);
             },
-            child: const Text('Пропустить',
+            child: Text(AppLocalizations.of(context).skip,
                 style: AppTextStyles.styleW400S14Grey6))
       ]),
       body: PageView(
@@ -40,21 +41,18 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         children: [
           OnBoardingItemPage(
             logo: AppIcons.onBoarding1,
-            title: 'Получить страховой полис онлайн за 5 минут',
-            subTitle:
-                'Сравним цены от 20 разных страховых и поможем выбрать самую низкую',
+            title: AppLocalizations.of(context).onBoardingTitle1,
+            subTitle: AppLocalizations.of(context).onBoardingText1,
           ),
           OnBoardingItemPage(
             logo: AppIcons.onBoarding1,
-            title: 'Автоматически заполним данные',
-            subTitle:
-                'Погрузим информацию из баз. Данные не нужно будет вводить вручную',
+            title: AppLocalizations.of(context).onBoardingTitle2,
+            subTitle: AppLocalizations.of(context).onBoardingText2,
           ),
           OnBoardingItemPage(
             logo: AppIcons.onBoarding1,
-            title: 'Живая и дружелюбная 24/7 техническая поддержка',
-            subTitle:
-                'Оперативно придём на помощь и поможем решить все проблемы',
+            title: AppLocalizations.of(context).onBoardingTitle3,
+            subTitle: AppLocalizations.of(context).onBoardingText3,
           ),
         ],
       ),

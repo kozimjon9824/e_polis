@@ -1,7 +1,7 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../../../../core/themes/app_text_styles.dart';
 import '../../../../../../core/utils/helper_models.dart';
 
@@ -18,7 +18,10 @@ class _PaymentTypesState extends State<PaymentTypes> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const Text('Способ оплаты', style: AppTextStyles.styleW600S14Grey9),
+      Text(
+        AppLocalizations.of(context).paymentType,
+        style: AppTextStyles.styleW600S14Grey9,
+      ),
       const SizedBox(height: 8),
       ListView.separated(
           shrinkWrap: true,

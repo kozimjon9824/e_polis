@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/presentation/cubits/auth/auth_cubit.dart';
 import 'package:e_polis/src/presentation/views/main_tabs/my_polis/tab_views/archived_insurance.dart';
@@ -44,10 +45,10 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              title: const Text('Мои полисы'),
+              title: Text(AppLocalizations.of(context).myPolicies),
               bottom: TabBarWidget(
                 tabController: _tabController,
-                tabs: tabs,
+                tabs: tabs(),
                 onTap: (index) {
                   context.read<ProductTabManagerCubit>().changeTab(index);
                 },
@@ -74,7 +75,11 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
     );
   }
 
-  List tabs = ['Действующие', 'В оформлении', 'Архиные'];
+  List<String> tabs() => [
+        AppLocalizations.of(context).operating,
+        AppLocalizations.of(context).inDesign,
+        AppLocalizations.of(context).archived
+      ];
 
   Widget bottomButtons() {
     return SafeArea(
@@ -83,14 +88,14 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomOutlineButton(
-            text: 'Добавить полис',
+            text: AppLocalizations.of(context).addPolis,
             onTap: () {
               Navigator.pushNamed(context, AppRoutes.addPolis);
             },
           ),
           const SizedBox(height: 16),
           CustomButton(
-            text: 'Купить полис',
+            text: AppLocalizations.of(context).buyPolis,
             onTap: () {},
           ),
         ],

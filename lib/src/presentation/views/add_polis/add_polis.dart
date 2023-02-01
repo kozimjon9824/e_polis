@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:e_polis/src/presentation/components/custom_text_field.dart';
 import 'package:e_polis/src/presentation/cubits/add_product/add_product_cubit.dart';
@@ -26,50 +27,50 @@ class _AddPolisPageState extends State<AddPolisPage> {
     return BlocProvider(
       create: (context) => inject<AddProductCubit>(),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Добавить полис')),
+        appBar: AppBar(title: Text(AppLocalizations.of(context).addPolis)),
         body: Form(
           key: formKey,
           child: ListView(
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
             children: [
-              Text('Вы можете добавить полис ',
+              Text(AppLocalizations.of(context).youCanAddPolis,
                   style: AppTextStyles.styleW700S18Grey9
                       .copyWith(fontWeight: FontWeight.w600)),
               const SizedBox(height: 22),
               DropDownButton<String>(
-                label: 'Тип полиса',
-                // hint: 'Выберите тип полиса',
-                value: 'ОСАГО',
-                items: ['ОСАГО']
-                    .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: AppTextStyles.styleW400S14Grey6,
-                        )))
-                    .toList(),
-                onChanged: (value) {},
-                onSaved: (value) {},
-              ),
+                  label: AppLocalizations.of(context).typePolis,
+                  // hint: 'Выберите тип полиса',
+                  value: 'ОСАГО',
+                  items: ['ОСАГО']
+                      .map((item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            item,
+                            style: AppTextStyles.styleW400S14Grey6,
+                          )))
+                      .toList(),
+                  onChanged: (value) {}),
               const SizedBox(height: 14),
               CustomTextField(
-                label: 'Серия и номер полиса',
+                label: AppLocalizations.of(context).seriesNumberPolis,
                 hintText: 'ААА 1234ABCD',
                 textInputAction: TextInputAction.next,
                 textEditingController: insuranceController,
                 textCapitalization: TextCapitalization.characters,
-                validator: (value) =>
-                    value!.isEmpty ? 'Must not be empty' : null,
+                validator: (value) => value!.isEmpty
+                    ? AppLocalizations.of(context).notDoEmpty
+                    : null,
               ),
               const SizedBox(height: 14),
               CustomTextField(
-                label: 'Номер транспорта',
+                label: AppLocalizations.of(context).vehicleNumber,
                 hintText: '01 A 000 AA or 01 777 AAA',
                 textInputAction: TextInputAction.done,
                 textCapitalization: TextCapitalization.characters,
                 textEditingController: carController,
-                validator: (value) =>
-                    value!.isEmpty ? 'Must not be empty' : null,
+                validator: (value) => value!.isEmpty
+                    ? AppLocalizations.of(context).notDoEmpty
+                    : null,
                 inputFormatters: [SpecialMaskTextInputFormatter()],
               ),
             ],
@@ -82,14 +83,15 @@ class _AddPolisPageState extends State<AddPolisPage> {
                     context, failure.getLocalizedMessage(context)),
                 loaded: () {
                   Navigator.pop(context);
-                  showSuccessMessage(context, 'Successfully added');
+                  showSuccessMessage(
+                      context, AppLocalizations.of(context).successfullyAdded);
                 });
           },
           builder: (context, state) {
             return SafeArea(
               minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: CustomButton(
-                text: 'Добавить полис',
+                text: AppLocalizations.of(context).addPolis,
                 isLoading: state == const AddProductState.loading(),
                 onTap: () {
                   if (formKey.currentState!.validate()) {

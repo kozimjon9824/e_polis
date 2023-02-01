@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../generated/l10n.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/themes/app_text_styles.dart';
 
@@ -24,11 +25,10 @@ class AgreeCheckWidget extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           side: const BorderSide(width: 2, color: AppColors.grey300),
         ),
-        const Expanded(
+        Expanded(
           child: Padding(
-            padding: EdgeInsets.only(left: 6.0, top: 4),
-            child: Text(
-                'Я полностью согласен с условиями Пользователкого соглашения',
+            padding: const EdgeInsets.only(left: 6.0, top: 4),
+            child: Text(AppLocalizations.of(context).iAmAgree,
                 style: AppTextStyles.styleW500S14Grey9),
           ),
         ),

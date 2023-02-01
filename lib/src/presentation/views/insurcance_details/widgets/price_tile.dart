@@ -1,5 +1,5 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/app_text_styles.dart';
 
@@ -23,7 +23,7 @@ class PriceTile extends StatelessWidget {
           Text(title, style: AppTextStyles.styleW400S12Grey7),
           const SizedBox(height: 4),
           Text(
-            '$price сум',
+            '$price ${AppLocalizations.of(context).sum}',
             style: textStyle ??
                 AppTextStyles.styleW600S16White
                     .copyWith(color: AppColors.grey900),

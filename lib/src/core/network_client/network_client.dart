@@ -15,6 +15,7 @@ import 'retry.dart';
 
 class NetworkClient {
   String _token = '';
+  String _lang = '';
   late final Dio api;
 
   Future<Dio> init(SharedPreferences preferences) async {
@@ -24,9 +25,11 @@ class NetworkClient {
       /// onRequest
       onRequest: (options, handler) async {
         _token = preferences.getString(ACCESS_TOKEN) ?? '';
+        _lang = preferences.getString(APP_LANGUAGE) ?? RU;
         debugPrint(_token);
         if (_token != '') {
           options.headers['Authorization'] = 'Bearer $_token';
+          options.headers['Accept-Language'] = _lang;
         }
         return handler.next(options);
       },
@@ -56,7 +59,10 @@ class NetworkClient {
           RequestOptions requestOptions = error.requestOptions;
           final options = Options(
             method: requestOptions.method,
-            headers: {'Authorization': 'Bearer $_token'},
+            headers: {
+              'Authorization': 'Bearer $_token',
+              'Accept-Language': _lang
+            },
           );
           late Response cloneReq;
           try {

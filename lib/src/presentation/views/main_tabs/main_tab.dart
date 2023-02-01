@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -50,18 +51,18 @@ class _MainPageState extends State<MainPage> {
         unselectedLabelStyle: AppTextStyles.styleW500S14Grey4,
         items: [
           BottomNavigationBarItem(
-              label: 'Главная',
-              tooltip: 'Главная',
+              label: AppLocalizations.of(context).home,
+              tooltip: AppLocalizations.of(context).home,
               activeIcon: SvgPicture.asset(AppIcons.activeHome),
               icon: SvgPicture.asset(AppIcons.home)),
           BottomNavigationBarItem(
-              label: 'Мои полисы',
-              tooltip: 'Мои полисы',
+              label: AppLocalizations.of(context).myPolicies,
+              tooltip: AppLocalizations.of(context).myPolicies,
               activeIcon: SvgPicture.asset(AppIcons.activeBriefcase),
               icon: SvgPicture.asset(AppIcons.briefcase)),
           BottomNavigationBarItem(
-              label: 'Профиль',
-              tooltip: 'Профиль',
+              label: AppLocalizations.of(context).profile,
+              tooltip: AppLocalizations.of(context).profile,
               activeIcon: SvgPicture.asset(AppIcons.activeProfile),
               icon: SvgPicture.asset(AppIcons.profile)),
         ],

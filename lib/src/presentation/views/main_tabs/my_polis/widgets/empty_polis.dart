@@ -1,3 +1,4 @@
+import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
 import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +14,9 @@ class EmptyPolis extends StatelessWidget {
       children: [
         SvgPicture.asset(AppIcons.docs),
         const SizedBox(height: 28),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 32.0),
-          child: Text('У вас еще нет страховки. Купите или добавить страховку',
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          child: Text(AppLocalizations.of(context).emptyPolis,
               textAlign: TextAlign.center,
               style: AppTextStyles.styleW500S14Grey7),
         )
