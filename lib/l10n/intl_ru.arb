@@ -139,5 +139,19 @@
   "success": "Успех",
   "driverDetails": "Инфомация Водителя",
   "contractDetails": "Информация о контракте",
-  "paymentType": "Способ оплаты"
+  "paymentType": "Способ оплаты",
+  "expend": "Продлить",
+  "buyNow": "Купить снова",
+  "update": "Обновить",
+  "from": "От",
+  "toDate": "До",
+  "serverError": "Ошибка сервера",
+  "checkInternetConnection": "Проверьте интернет-соединение",
+  "unknownFailure": "Неизвестный сбой",
+  "invalidDriverPassport": "Недействительный паспорт водителя",
+  "enteredWrongData": "Вы ввели неверные данные!",
+  "mustNotEmptyFailure": "Поля не должны быть пустыми",
+  "unAuthFailure": "Ошибка неавторизации",
+  "WrongCode": "Неверный код, введите правильный код",
+  "cacheError": "Сбой кеша"
 }

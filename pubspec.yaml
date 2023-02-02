@@ -61,6 +61,8 @@ dependencies:
   freezed_annotation: ^2.2.0
   flutter_html: ^3.0.0-alpha.6
   http_parser: ^4.0.2
+  percent_indicator: ^4.2.2
+
 
 dev_dependencies:
   flutter_test:
@@ -76,7 +78,7 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
-#  generate: true
+  generate: true
 
   assets:
     - assets/fonts/
@@ -88,6 +90,6 @@ flutter:
       fonts:
         - asset: assets/fonts/Gilroy/Gilroy-Regular.ttf
 
-#flutter_intl:
-#  enabled: true
-#  class_name: AppLocalizations
+flutter_intl:
+  enabled: true
+  class_name: AppLocalizations

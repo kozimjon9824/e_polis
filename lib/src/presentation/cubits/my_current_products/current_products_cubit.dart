@@ -15,8 +15,10 @@ class CurrentProductsCubit extends Cubit<CurrentProductsState> {
       : super(const CurrentProductsState.loading());
   final MyCurrentProductsUseCase _useCase;
 
-  Future<void> loadData() async {
-    emit(const CurrentProductsState.loading());
+  Future<void> loadData([bool isRefresh = false]) async {
+    if (!isRefresh) {
+      emit(const CurrentProductsState.loading());
+    }
     var result = await _useCase.call(NoParams());
     result.fold(
         (failure) => emit(CurrentProductsState.error(failure)),

@@ -14,7 +14,11 @@ class ArchivedInsuranceView extends StatelessWidget {
       builder: (context, state) {
         return state.when(
             loading: () => const LoadingWidget(),
-            loaded: (data) => SingleProduct(productList: data),
+            loaded: (data) => RefreshIndicator(
+                onRefresh: () async {
+                  await context.read<ArchivedProductsCubit>().loadData(true);
+                },
+                child: ArchivedSingleProduct(productList: data)),
             error: (failure) => ErrorView(
                 errorText: failure.getLocalizedMessage(context),
                 onTap: () {

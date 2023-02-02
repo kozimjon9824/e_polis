@@ -16,8 +16,10 @@ class ArchivedProductsCubit extends Cubit<ArchivedProductsState> {
 
   final MyArchivedProductsUseCase _useCase;
 
-  Future<void> loadData() async {
-    emit(const ArchivedProductsState.loading());
+  Future<void> loadData([bool isRefresh = false]) async {
+    if (!isRefresh) {
+      emit(const ArchivedProductsState.loading());
+    }
     var result = await _useCase.call(NoParams());
     result.fold(
         (failure) => emit(ArchivedProductsState.error(failure)),

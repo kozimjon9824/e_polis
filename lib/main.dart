@@ -18,6 +18,7 @@ import 'src/core/utils/utils.dart';
 import 'src/presentation/cubits/auth/auth_cubit.dart';
 import 'src/presentation/cubits/language/language_cubit.dart';
 import 'src/presentation/cubits/my_current_products/current_products_cubit.dart';
+import 'src/presentation/cubits/my_product_tab_controller/product_tab_manager_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
             create: (context) => inject<LanguageCubit>()..loadAppLang()),
         BlocProvider(create: (context) => inject<InsuranceBasicFilterCubit>()),
         BlocProvider(create: (context) => inject<DropDownValuesCubit>()),
+        BlocProvider(create: (context) => inject<ProductTabManagerCubit>()),
       ],
       child: BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, state) {
@@ -88,3 +90,4 @@ final alice = Alice(showNotification: true, navigatorKey: navigatorKey);
 // }
 
 //flutter build apk --release
+//  @JsonSerializable(includeIfNull: false)

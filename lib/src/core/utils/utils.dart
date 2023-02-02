@@ -59,6 +59,7 @@ String dateConverter(
     required String inFormat,
     required String outFormat}) {
   try {
+    if (date.isEmpty) return '';
     final format = DateFormat(inFormat);
     DateTime gettingDate = format.parse(date);
     final DateFormat formatter = DateFormat(outFormat);

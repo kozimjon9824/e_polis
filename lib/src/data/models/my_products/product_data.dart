@@ -19,7 +19,8 @@ class ProductModel with _$ProductModel {
       String? logo,
       String? name,
       String? number,
-      String? expireAt}) = _ProductModel;
+      String? expireAt,
+      int? expirePercent}) = _ProductModel;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);

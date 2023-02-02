@@ -118,7 +118,8 @@ class __$$_ProfileUpdateRequestCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$_ProfileUpdateRequest implements _ProfileUpdateRequest {
   const _$_ProfileUpdateRequest({this.firstName, this.lastName, this.photo});
 

@@ -3,6 +3,7 @@ import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
 import 'package:e_polis/src/presentation/cubits/language/language_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/language_setting/language_setting_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../injector.dart';
@@ -20,9 +21,10 @@ class ChangeLanguagePage extends StatelessWidget {
       child: BlocConsumer<LanguageSettingCubit, LanguageSettingState>(
         listener: (context, state) {
           state.whenOrNull(success: () {
-            context.read<LanguageCubit>().loadAppLang();
             Navigator.pushNamedAndRemoveUntil(
                 context, AppRoutes.splash, (route) => false);
+            context.read<LanguageCubit>().loadAppLang();
+            context.read<MainScreenDataCubit>().loadData();
           });
         },
         builder: (context, state) {

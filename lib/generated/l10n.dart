@@ -1459,6 +1459,146 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Продлить`
+  String get expend {
+    return Intl.message(
+      'Продлить',
+      name: 'expend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Купить снова`
+  String get buyNow {
+    return Intl.message(
+      'Купить снова',
+      name: 'buyNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Обновить`
+  String get update {
+    return Intl.message(
+      'Обновить',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `От`
+  String get from {
+    return Intl.message(
+      'От',
+      name: 'from',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `До`
+  String get toDate {
+    return Intl.message(
+      'До',
+      name: 'toDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка сервера`
+  String get serverError {
+    return Intl.message(
+      'Ошибка сервера',
+      name: 'serverError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Проверьте интернет-соединение`
+  String get checkInternetConnection {
+    return Intl.message(
+      'Проверьте интернет-соединение',
+      name: 'checkInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неизвестный сбой`
+  String get unknownFailure {
+    return Intl.message(
+      'Неизвестный сбой',
+      name: 'unknownFailure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Недействительный паспорт водителя`
+  String get invalidDriverPassport {
+    return Intl.message(
+      'Недействительный паспорт водителя',
+      name: 'invalidDriverPassport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Вы ввели неверные данные!`
+  String get enteredWrongData {
+    return Intl.message(
+      'Вы ввели неверные данные!',
+      name: 'enteredWrongData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Поля не должны быть пустыми`
+  String get mustNotEmptyFailure {
+    return Intl.message(
+      'Поля не должны быть пустыми',
+      name: 'mustNotEmptyFailure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка неавторизации`
+  String get unAuthFailure {
+    return Intl.message(
+      'Ошибка неавторизации',
+      name: 'unAuthFailure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неверный код, введите правильный код`
+  String get WrongCode {
+    return Intl.message(
+      'Неверный код, введите правильный код',
+      name: 'WrongCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сбой кеша`
+  String get cacheError {
+    return Intl.message(
+      'Сбой кеша',
+      name: 'cacheError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

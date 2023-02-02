@@ -18,6 +18,7 @@ class AppColors {
   static const grey600 = Color(0xFF677985);
   static const grey900 = Color(0xFF012033);
   static const red = Color(0xFFFF4C6D);
+  static const orange = Color(0xFFFFD023);
   static const green = Color(0xFF05CC6C);
   static const green300 = Color(0xFF61E79B);
   static const divider = Color(0xFFE6E6E6);

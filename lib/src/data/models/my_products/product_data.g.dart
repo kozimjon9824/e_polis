@@ -25,6 +25,7 @@ _$_ProductModel _$$_ProductModelFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       number: json['number'] as String?,
       expireAt: json['expireAt'] as String?,
+      expirePercent: json['expirePercent'] as int?,
     );
 
 Map<String, dynamic> _$$_ProductModelToJson(_$_ProductModel instance) =>
@@ -34,4 +35,5 @@ Map<String, dynamic> _$$_ProductModelToJson(_$_ProductModel instance) =>
       'name': instance.name,
       'number': instance.number,
       'expireAt': instance.expireAt,
+      'expirePercent': instance.expirePercent,
     };

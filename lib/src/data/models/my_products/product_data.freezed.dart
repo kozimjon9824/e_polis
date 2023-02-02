@@ -170,6 +170,7 @@ mixin _$ProductModel {
   String? get name => throw _privateConstructorUsedError;
   String? get number => throw _privateConstructorUsedError;
   String? get expireAt => throw _privateConstructorUsedError;
+  int? get expirePercent => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -188,7 +189,8 @@ abstract class $ProductModelCopyWith<$Res> {
       String? logo,
       String? name,
       String? number,
-      String? expireAt});
+      String? expireAt,
+      int? expirePercent});
 }
 
 /// @nodoc
@@ -209,6 +211,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? name = freezed,
     Object? number = freezed,
     Object? expireAt = freezed,
+    Object? expirePercent = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -231,6 +234,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.expireAt
           : expireAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      expirePercent: freezed == expirePercent
+          ? _value.expirePercent
+          : expirePercent // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -248,7 +255,8 @@ abstract class _$$_ProductModelCopyWith<$Res>
       String? logo,
       String? name,
       String? number,
-      String? expireAt});
+      String? expireAt,
+      int? expirePercent});
 }
 
 /// @nodoc
@@ -267,6 +275,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? number = freezed,
     Object? expireAt = freezed,
+    Object? expirePercent = freezed,
   }) {
     return _then(_$_ProductModel(
       id: freezed == id
@@ -289,6 +298,10 @@ class __$$_ProductModelCopyWithImpl<$Res>
           ? _value.expireAt
           : expireAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      expirePercent: freezed == expirePercent
+          ? _value.expirePercent
+          : expirePercent // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -297,7 +310,12 @@ class __$$_ProductModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ProductModel implements _ProductModel {
   const _$_ProductModel(
-      {this.id, this.logo, this.name, this.number, this.expireAt});
+      {this.id,
+      this.logo,
+      this.name,
+      this.number,
+      this.expireAt,
+      this.expirePercent});
 
   factory _$_ProductModel.fromJson(Map<String, dynamic> json) =>
       _$$_ProductModelFromJson(json);
@@ -312,10 +330,12 @@ class _$_ProductModel implements _ProductModel {
   final String? number;
   @override
   final String? expireAt;
+  @override
+  final int? expirePercent;
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, logo: $logo, name: $name, number: $number, expireAt: $expireAt)';
+    return 'ProductModel(id: $id, logo: $logo, name: $name, number: $number, expireAt: $expireAt, expirePercent: $expirePercent)';
   }
 
   @override
@@ -328,13 +348,15 @@ class _$_ProductModel implements _ProductModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.number, number) || other.number == number) &&
             (identical(other.expireAt, expireAt) ||
-                other.expireAt == expireAt));
+                other.expireAt == expireAt) &&
+            (identical(other.expirePercent, expirePercent) ||
+                other.expirePercent == expirePercent));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, logo, name, number, expireAt);
+      Object.hash(runtimeType, id, logo, name, number, expireAt, expirePercent);
 
   @JsonKey(ignore: true)
   @override
@@ -356,7 +378,8 @@ abstract class _ProductModel implements ProductModel {
       final String? logo,
       final String? name,
       final String? number,
-      final String? expireAt}) = _$_ProductModel;
+      final String? expireAt,
+      final int? expirePercent}) = _$_ProductModel;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$_ProductModel.fromJson;
@@ -371,6 +394,8 @@ abstract class _ProductModel implements ProductModel {
   String? get number;
   @override
   String? get expireAt;
+  @override
+  int? get expirePercent;
   @override
   @JsonKey(ignore: true)
   _$$_ProductModelCopyWith<_$_ProductModel> get copyWith =>

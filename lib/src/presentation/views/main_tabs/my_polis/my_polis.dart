@@ -5,7 +5,6 @@ import 'package:e_polis/src/presentation/views/main_tabs/my_polis/tab_views/arch
 import 'package:e_polis/src/presentation/views/main_tabs/my_polis/tab_views/progress_insurance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../injector.dart';
 import '../../../components/custom_button.dart';
 import '../../../cubits/my_archived_product/archived_products_cubit.dart';
 import '../../../cubits/my_current_products/current_products_cubit.dart';
@@ -38,40 +37,37 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => inject<ProductTabManagerCubit>(),
-      child: BlocBuilder<ProductTabManagerCubit, ProductTabManagerState>(
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              title: Text(AppLocalizations.of(context).myPolicies),
-              bottom: TabBarWidget(
-                tabController: _tabController,
-                tabs: tabs(),
-                onTap: (index) {
-                  context.read<ProductTabManagerCubit>().changeTab(index);
-                },
-              ),
+    return BlocBuilder<ProductTabManagerCubit, ProductTabManagerState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text(AppLocalizations.of(context).myPolicies),
+            bottom: TabBarWidget(
+              tabController: _tabController,
+              tabs: tabs(),
+              onTap: (index) {
+                context.read<ProductTabManagerCubit>().changeTab(index);
+              },
             ),
-            body: (context.read<AuthCubit>().state is UnAuthenticatedState)
-                ? const UnAuthPolis()
-                : TabBarView(
-                    controller: _tabController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: const [
-                      CurrentInsuranceView(),
-                      ProgressInsuranceView(),
-                      ArchivedInsuranceView()
-                    ],
-                  ),
-            bottomNavigationBar:
-                (context.read<AuthCubit>().state is UnAuthenticatedState)
-                    ? null
-                    : bottomButtons(),
-          );
-        },
-      ),
+          ),
+          body: (context.read<AuthCubit>().state is UnAuthenticatedState)
+              ? const UnAuthPolis()
+              : TabBarView(
+                  controller: _tabController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: const [
+                    CurrentInsuranceView(),
+                    ProgressInsuranceView(),
+                    ArchivedInsuranceView()
+                  ],
+                ),
+          bottomNavigationBar:
+              (context.read<AuthCubit>().state is UnAuthenticatedState)
+                  ? null
+                  : bottomButtons(),
+        );
+      },
     );
   }
 

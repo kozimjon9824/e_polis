@@ -62,34 +62,39 @@ class _HomePageState extends State<HomePage> {
               body: BlocBuilder<FilterTabManagerCubit, FilterTabManagerState>(
                 builder: (context, state) {
                   var tabCubit = context.read<FilterTabManagerCubit>();
-                  return ListView(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    children: [
-                      CarouselPromoWidget(banners: data?.banners ?? []),
-                      const SizedBox(height: 24),
-                      FilterTabs(
-                        tabs: [
-                          AppLocalizations.of(context).all,
-                          ...?data?.products
-                              ?.map((e) => e.category?.name ?? '')
-                              .toSet()
-                              .toList()
-                        ],
-                        selectedTab: state.tab,
-                        onTap: (String value) {
-                          tabCubit.changeTab(value);
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      InsuranceTypesBody(
-                          products: (state.tab == ALL)
-                              ? (data?.products ?? [])
-                              : data?.products
-                                      ?.where((element) =>
-                                          element.category?.name == state.tab)
-                                      .toList() ??
-                                  [])
-                    ],
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      await context.read<MainScreenDataCubit>().loadData(true);
+                    },
+                    child: ListView(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      children: [
+                        CarouselPromoWidget(banners: data?.banners ?? []),
+                        const SizedBox(height: 24),
+                        FilterTabs(
+                          tabs: [
+                            AppLocalizations.of(context).all,
+                            ...?data?.products
+                                ?.map((e) => e.category?.name ?? '')
+                                .toSet()
+                                .toList()
+                          ],
+                          selectedTab: state.tab,
+                          onTap: (String value) {
+                            tabCubit.changeTab(value);
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        InsuranceTypesBody(
+                            products: (state.tab == ALL)
+                                ? (data?.products ?? [])
+                                : data?.products
+                                        ?.where((element) =>
+                                            element.category?.name == state.tab)
+                                        .toList() ??
+                                    [])
+                      ],
+                    ),
                   );
                 },
               ),

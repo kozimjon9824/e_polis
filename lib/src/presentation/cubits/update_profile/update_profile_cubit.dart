@@ -37,8 +37,9 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     var id = await uploadPhoto();
     if (id == '') return;
     emit(state.copyWith(status: StateStatus.loading));
-    var result = await _profileUseCase.call(ProfileParams(
-        ProfileUpdateRequest(firstName: fName, lastName: lName, photo: id)));
+    var request =
+        ProfileUpdateRequest(firstName: fName, lastName: lName, photo: id);
+    var result = await _profileUseCase.call(ProfileParams(request));
     result.fold(
         (failure) =>
             emit(state.copyWith(failure: failure, status: StateStatus.error)),

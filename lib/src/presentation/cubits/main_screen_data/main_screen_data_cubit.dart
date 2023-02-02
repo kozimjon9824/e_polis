@@ -12,8 +12,10 @@ class MainScreenDataCubit extends Cubit<MainScreenDataState> {
       : super(const MainScreenDataState.initial());
   final GetMainScreenDataUseCase _mainScreenDataUseCase;
 
-  void loadData() async {
-    emit(const MainScreenDataState.loading());
+  Future<void> loadData([bool isRefresh = false]) async {
+    if (!isRefresh) {
+      emit(const MainScreenDataState.loading());
+    }
     var result = await _mainScreenDataUseCase.call(NoParams());
     result.fold((failure) => emit(MainScreenDataState.error(failure)),
         (response) => emit(MainScreenDataState.loaded(response)));

@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "WrongCode": MessageLookupByLibrary.simpleMessage(
+            "Неверный код, введите правильный код"),
         "about": MessageLookupByLibrary.simpleMessage("О Нас"),
         "aboutUs": MessageLookupByLibrary.simpleMessage(
             "Epolis входит в ТОП-5 страховых компаний Узбекистана, являясь второй крупнейшей страховой компанией страны по объемам активов. Динамичный рост рыночной доли по сборам, капиталу и инвестициям! Epolis экспортно-импортная акциядорлик жамияти суғурта компанииси умий суғурта бозорида ўз фаолиятини олиб боради ва суғурта фаолияти классификаторига кўра мавжуд 17 турдаги суғуртанинг барчаси билан шуғулланади"),
@@ -44,7 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "buy": MessageLookupByLibrary.simpleMessage("КУПИТЬ"),
         "buyInsurance":
             MessageLookupByLibrary.simpleMessage("Купить страховку"),
+        "buyNow": MessageLookupByLibrary.simpleMessage("Купить снова"),
         "buyPolis": MessageLookupByLibrary.simpleMessage("Купить полис"),
+        "cacheError": MessageLookupByLibrary.simpleMessage("Сбой кеша"),
         "calculationResults":
             MessageLookupByLibrary.simpleMessage("Результаты расчета"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
@@ -52,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Год выпуска автомобиля"),
         "cardDate": MessageLookupByLibrary.simpleMessage("Срок действия карты"),
         "cardNumber": MessageLookupByLibrary.simpleMessage("Номер карты"),
+        "checkInternetConnection": MessageLookupByLibrary.simpleMessage(
+            "Проверьте интернет-соединение"),
         "chooseLanguage": MessageLookupByLibrary.simpleMessage("Выберите язык"),
         "clearData":
             MessageLookupByLibrary.simpleMessage("Очистить информацию"),
@@ -86,9 +92,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterCardDetails": MessageLookupByLibrary.simpleMessage(
             "Пожалуйста, введите данные карты для оплаты"),
         "enterDate": MessageLookupByLibrary.simpleMessage("Введите дату"),
+        "enteredWrongData":
+            MessageLookupByLibrary.simpleMessage("Вы ввели неверные данные!"),
         "exit": MessageLookupByLibrary.simpleMessage("Выйти"),
+        "expend": MessageLookupByLibrary.simpleMessage("Продлить"),
         "fio": MessageLookupByLibrary.simpleMessage("Ф.И.О"),
         "firstName": MessageLookupByLibrary.simpleMessage("Имя"),
+        "from": MessageLookupByLibrary.simpleMessage("От"),
         "generalInfo": MessageLookupByLibrary.simpleMessage("Общая информация"),
         "haveThePrivilege":
             MessageLookupByLibrary.simpleMessage("Иметь привилегию"),
@@ -110,6 +120,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Страхование вреда, причиненного жизни и здоровью пострадавшей стороны"),
         "insurancePrice":
             MessageLookupByLibrary.simpleMessage("Страховая сумма"),
+        "invalidDriverPassport": MessageLookupByLibrary.simpleMessage(
+            "Недействительный паспорт водителя"),
         "languagePageMainText": MessageLookupByLibrary.simpleMessage(
             "Добро пожаловать в epolis Выберите язык приложения"),
         "lastName": MessageLookupByLibrary.simpleMessage("Фамилия"),
@@ -122,6 +134,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введите свой номер телефона, мы отправим код подтверждения на вашу телефон"),
         "mm_YY": MessageLookupByLibrary.simpleMessage("ММ/ГГ"),
         "model": MessageLookupByLibrary.simpleMessage("Марка и модель"),
+        "mustNotEmptyFailure":
+            MessageLookupByLibrary.simpleMessage("Поля не должны быть пустыми"),
         "myPolicies": MessageLookupByLibrary.simpleMessage("Мои полисы"),
         "nameSurname": MessageLookupByLibrary.simpleMessage("Имя Фамилия"),
         "newAndPromotionalInformation": MessageLookupByLibrary.simpleMessage(
@@ -200,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "series": MessageLookupByLibrary.simpleMessage("Серия"),
         "seriesNumberPolis":
             MessageLookupByLibrary.simpleMessage("Серия и номер полиса"),
+        "serverError": MessageLookupByLibrary.simpleMessage("Ошибка сервера"),
         "sixMonth": MessageLookupByLibrary.simpleMessage("6 месяцев"),
         "skip": MessageLookupByLibrary.simpleMessage("Пропустить"),
         "startUsing":
@@ -211,10 +226,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "techPassport": MessageLookupByLibrary.simpleMessage("Техпаспорт"),
         "termsOfInsurance": MessageLookupByLibrary.simpleMessage(
             "Срок действия страхового полиса"),
+        "toDate": MessageLookupByLibrary.simpleMessage("До"),
         "twentyDays": MessageLookupByLibrary.simpleMessage("20 дней"),
         "typePolis": MessageLookupByLibrary.simpleMessage("Тип полиса"),
         "typeVehicle": MessageLookupByLibrary.simpleMessage("Тип автомобиля"),
+        "unAuthFailure":
+            MessageLookupByLibrary.simpleMessage("Ошибка неавторизации"),
+        "unknownFailure":
+            MessageLookupByLibrary.simpleMessage("Неизвестный сбой"),
         "upTo5Human": MessageLookupByLibrary.simpleMessage("До 5 человек"),
+        "update": MessageLookupByLibrary.simpleMessage("Обновить"),
         "uzbekLang": MessageLookupByLibrary.simpleMessage("Узбекский язык"),
         "vehicleNumber":
             MessageLookupByLibrary.simpleMessage("Номер транспорта"),

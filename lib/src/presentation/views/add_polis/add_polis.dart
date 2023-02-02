@@ -9,6 +9,8 @@ import '../../components/custom_button.dart';
 import '../../components/custom_mask.dart';
 import '../../components/drop_down_button.dart';
 import '../../components/snackbars.dart';
+import '../../cubits/my_current_products/current_products_cubit.dart';
+import '../../cubits/my_product_tab_controller/product_tab_manager_cubit.dart';
 
 class AddPolisPage extends StatefulWidget {
   const AddPolisPage({Key? key}) : super(key: key);
@@ -44,10 +46,8 @@ class _AddPolisPageState extends State<AddPolisPage> {
                   items: ['ОСАГО']
                       .map((item) => DropdownMenuItem<String>(
                           value: item,
-                          child: Text(
-                            item,
-                            style: AppTextStyles.styleW400S14Grey6,
-                          )))
+                          child: Text(item,
+                              style: AppTextStyles.styleW400S14Grey6)))
                       .toList(),
                   onChanged: (value) {}),
               const SizedBox(height: 14),
@@ -83,6 +83,8 @@ class _AddPolisPageState extends State<AddPolisPage> {
                     context, failure.getLocalizedMessage(context)),
                 loaded: () {
                   Navigator.pop(context);
+                  context.read<CurrentProductsCubit>().loadData();
+                  context.read<ProductTabManagerCubit>().changeTab(0);
                   showSuccessMessage(
                       context, AppLocalizations.of(context).successfullyAdded);
                 });
