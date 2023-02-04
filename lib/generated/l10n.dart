@@ -690,10 +690,10 @@ class AppLocalizations {
     );
   }
 
-  /// `ОТправить СМС`
+  /// `Отправить СМС`
   String get sendSms {
     return Intl.message(
-      'ОТправить СМС',
+      'Отправить СМС',
       name: 'sendSms',
       desc: '',
       args: [],
@@ -1595,6 +1595,36 @@ class AppLocalizations {
     return Intl.message(
       'Сбой кеша',
       name: 'cacheError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Повторно отправить код`
+  String get reSendCode {
+    return Intl.message(
+      'Повторно отправить код',
+      name: 'reSendCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выбирать`
+  String get select {
+    return Intl.message(
+      'Выбирать',
+      name: 'select',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выберите дату`
+  String get selectDate {
+    return Intl.message(
+      'Выберите дату',
+      name: 'selectDate',
       desc: '',
       args: [],
     );

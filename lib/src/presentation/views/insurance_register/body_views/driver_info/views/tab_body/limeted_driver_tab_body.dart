@@ -35,6 +35,7 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
   final numberFocus = FocusNode();
   final dateFocus = FocusNode();
   final formKey = GlobalKey<FormState>();
+  final formKey2 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,29 +43,31 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
       create: (context) => inject<AddDriverCubit>(),
       child: BlocConsumer<AddDriverCubit, AddDriverState>(
         listener: (context, state) {
+          var driverCubit = context.read<LimitedDriverTabBarCubit>();
           if (state.status == StateStatus.error) {
-            context.read<LimitedDriverTabBarCubit>().addDriverData(
+            driverCubit.addDriverData(
                 index: widget.index - 1,
                 model: IndexedDriverModel(isSuccess: false));
             showErrorMessage(
                 context, state.failure.getLocalizedMessage(context));
           }
           if (state.status == StateStatus.success) {
-            context.read<LimitedDriverTabBarCubit>().addDriverData(
-                index: widget.index - 1,
-                model: IndexedDriverModel(
-                    isSuccess: true,
-                    driverModel: DriverModel(
-                        birthDate: dateConverter(
-                            date: dateController.text,
-                            inFormat: 'dd/MM/yyyy',
-                            outFormat: 'yyyy-MM-dd'),
-                        passport: DriverPassport(
-                            series: seriesController.text,
-                            number: numberController.text))));
+            var model = IndexedDriverModel(
+                isSuccess: true,
+                driverModel: DriverModel(
+                    birthDate: dateConverter(
+                        date: dateController.text,
+                        inFormat: 'dd/MM/yyyy',
+                        outFormat: 'yyyy-MM-dd'),
+                    passport: DriverPassport(
+                        series: seriesController.text,
+                        number: numberController.text)));
+
+            driverCubit.addDriverData(index: widget.index - 1, model: model);
           }
         },
         builder: (context, state) {
+          var driverCubit = context.read<LimitedDriverTabBarCubit>();
           var cubit = context.read<AddDriverCubit>();
           if (state.driverData != null) {
             licenseDate.text = state.driverData?.driverLicense?.startDate ?? '';
@@ -72,69 +75,67 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
             licenseSeries.text = state.driverData?.driverLicense?.series ?? '';
           }
           return Scaffold(
-            body: Form(
-              key: formKey,
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
-                children: [
-                  AnimatedRoundContainer(
-                    title:
-                        '${widget.index}-${AppLocalizations.of(context).driver}',
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 10),
-                    padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
-                    showChildren2: state.driverData != null,
-                    clearText: state.driverData != null
-                        ? AppLocalizations.of(context).delete
-                        : null,
-                    onClear: () {
-                      cubit.clearDriverData();
-                      context
-                          .read<LimitedDriverTabBarCubit>()
-                          .removeTab(widget.index - 1);
-                    },
-                    children2: [
-                      BlocBuilder<DropDownValuesCubit, DropDownValuesState>(
-                        builder: (context, dropDownState) {
-                          return Child2Body(
+            body: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              children: [
+                AnimatedRoundContainer(
+                  title:
+                      '${widget.index}-${AppLocalizations.of(context).driver}',
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+                  padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
+                  showChildren2: state.driverData != null,
+                  clearText: state.driverData != null
+                      ? AppLocalizations.of(context).delete
+                      : null,
+                  onClear: () {
+                    cubit.clearDriverData();
+                    driverCubit.removeTab(widget.index - 1);
+                  },
+                  children2: [
+                    BlocBuilder<DropDownValuesCubit, DropDownValuesState>(
+                      builder: (context, dropDownState) {
+                        return Form(
+                          key: formKey2,
+                          child: Child2Body(
                               onChange: (value) {
                                 int key = context
                                     .read<DropDownValuesCubit>()
                                     .getRelativeKey(value ?? '');
-                                context
-                                    .read<LimitedDriverTabBarCubit>()
-                                    .selectDriverRelationShip(
-                                        index: widget.index - 1,
-                                        relativeKey: key);
+                                driverCubit.selectDriverRelationShip(
+                                    index: widget.index - 1, relativeKey: key);
                               },
                               dropDownValues: dropDownState.relativeList,
                               data: state.driverData,
                               licenseSeries: licenseSeries,
                               licenseNumber: licenseNumber,
-                              licenseDate: licenseDate);
-                        },
-                      )
-                    ],
-                    children: [
-                      Child1Body(
+                              licenseDate: licenseDate),
+                        );
+                      },
+                    )
+                  ],
+                  children: [
+                    Form(
+                      key: formKey,
+                      child: Child1Body(
                           seriesController: seriesController,
                           numberController: numberController,
                           dateController: dateController,
                           dateFocus: dateFocus,
                           seriesFocus: seriesFocus,
-                          numberFocus: numberFocus)
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  if (widget.index != 5)
-                    CustomOutlineButton(
-                        text: AppLocalizations.of(context).addDriver,
-                        onTap: () {
-                          context.read<LimitedDriverTabBarCubit>().addTab();
-                        }),
-                  if (widget.index != 5) const SizedBox(height: 24),
-                ],
-              ),
+                          numberFocus: numberFocus),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 20),
+                if (widget.index != 5)
+                  CustomOutlineButton(
+                      text: AppLocalizations.of(context).addDriver,
+                      onTap: () {
+                        driverCubit.addTab();
+                      }),
+                if (widget.index != 5) const SizedBox(height: 24),
+              ],
             ),
             bottomNavigationBar: SafeArea(
               minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
@@ -157,11 +158,12 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                         birth: date,
                         series: seriesController.text,
                         number: numberController.text);
-                  } else if (context
-                      .read<LimitedDriverTabBarCubit>()
-                      .isAllCompleted()) {
+                  } else if (driverCubit.isAllCompleted()) {
+                    if (!formKey2.currentState!.validate()) {
+                      return;
+                    }
                     List<IndexedDriverModel> driverList =
-                        context.read<LimitedDriverTabBarCubit>().state.drivers;
+                        driverCubit.state.drivers;
                     context.read<BookCubit>().onDriverListData(
                         driverList.map((e) => e.driverModel!).toList());
                     context

@@ -22,7 +22,11 @@ ProfileUpdateRequest _$ProfileUpdateRequestFromJson(Map<String, dynamic> json) {
 mixin _$ProfileUpdateRequest {
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   String? get photo => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
+  String? get phone => throw _privateConstructorUsedError;
+  String? get otpCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +40,12 @@ abstract class $ProfileUpdateRequestCopyWith<$Res> {
           $Res Function(ProfileUpdateRequest) then) =
       _$ProfileUpdateRequestCopyWithImpl<$Res, ProfileUpdateRequest>;
   @useResult
-  $Res call({String? firstName, String? lastName, String? photo});
+  $Res call(
+      {String? firstName,
+      String? lastName,
+      @JsonKey(includeIfNull: false) String? photo,
+      @JsonKey(includeIfNull: false) String? phone,
+      String? otpCode});
 }
 
 /// @nodoc
@@ -56,6 +65,8 @@ class _$ProfileUpdateRequestCopyWithImpl<$Res,
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? photo = freezed,
+    Object? phone = freezed,
+    Object? otpCode = freezed,
   }) {
     return _then(_value.copyWith(
       firstName: freezed == firstName
@@ -70,6 +81,14 @@ class _$ProfileUpdateRequestCopyWithImpl<$Res,
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
               as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otpCode: freezed == otpCode
+          ? _value.otpCode
+          : otpCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -82,7 +101,12 @@ abstract class _$$_ProfileUpdateRequestCopyWith<$Res>
       __$$_ProfileUpdateRequestCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? firstName, String? lastName, String? photo});
+  $Res call(
+      {String? firstName,
+      String? lastName,
+      @JsonKey(includeIfNull: false) String? photo,
+      @JsonKey(includeIfNull: false) String? phone,
+      String? otpCode});
 }
 
 /// @nodoc
@@ -99,6 +123,8 @@ class __$$_ProfileUpdateRequestCopyWithImpl<$Res>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? photo = freezed,
+    Object? phone = freezed,
+    Object? otpCode = freezed,
   }) {
     return _then(_$_ProfileUpdateRequest(
       firstName: freezed == firstName
@@ -113,15 +139,27 @@ class __$$_ProfileUpdateRequestCopyWithImpl<$Res>
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
               as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otpCode: freezed == otpCode
+          ? _value.otpCode
+          : otpCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
-
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable()
 class _$_ProfileUpdateRequest implements _ProfileUpdateRequest {
-  const _$_ProfileUpdateRequest({this.firstName, this.lastName, this.photo});
+  const _$_ProfileUpdateRequest(
+      {this.firstName,
+      this.lastName,
+      @JsonKey(includeIfNull: false) this.photo,
+      @JsonKey(includeIfNull: false) this.phone,
+      this.otpCode});
 
   factory _$_ProfileUpdateRequest.fromJson(Map<String, dynamic> json) =>
       _$$_ProfileUpdateRequestFromJson(json);
@@ -131,11 +169,17 @@ class _$_ProfileUpdateRequest implements _ProfileUpdateRequest {
   @override
   final String? lastName;
   @override
+  @JsonKey(includeIfNull: false)
   final String? photo;
+  @override
+  @JsonKey(includeIfNull: false)
+  final String? phone;
+  @override
+  final String? otpCode;
 
   @override
   String toString() {
-    return 'ProfileUpdateRequest(firstName: $firstName, lastName: $lastName, photo: $photo)';
+    return 'ProfileUpdateRequest(firstName: $firstName, lastName: $lastName, photo: $photo, phone: $phone, otpCode: $otpCode)';
   }
 
   @override
@@ -147,12 +191,15 @@ class _$_ProfileUpdateRequest implements _ProfileUpdateRequest {
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
-            (identical(other.photo, photo) || other.photo == photo));
+            (identical(other.photo, photo) || other.photo == photo) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.otpCode, otpCode) || other.otpCode == otpCode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, firstName, lastName, photo);
+  int get hashCode =>
+      Object.hash(runtimeType, firstName, lastName, photo, phone, otpCode);
 
   @JsonKey(ignore: true)
   @override
@@ -173,7 +220,9 @@ abstract class _ProfileUpdateRequest implements ProfileUpdateRequest {
   const factory _ProfileUpdateRequest(
       {final String? firstName,
       final String? lastName,
-      final String? photo}) = _$_ProfileUpdateRequest;
+      @JsonKey(includeIfNull: false) final String? photo,
+      @JsonKey(includeIfNull: false) final String? phone,
+      final String? otpCode}) = _$_ProfileUpdateRequest;
 
   factory _ProfileUpdateRequest.fromJson(Map<String, dynamic> json) =
       _$_ProfileUpdateRequest.fromJson;
@@ -183,7 +232,13 @@ abstract class _ProfileUpdateRequest implements ProfileUpdateRequest {
   @override
   String? get lastName;
   @override
+  @JsonKey(includeIfNull: false)
   String? get photo;
+  @override
+  @JsonKey(includeIfNull: false)
+  String? get phone;
+  @override
+  String? get otpCode;
   @override
   @JsonKey(ignore: true)
   _$$_ProfileUpdateRequestCopyWith<_$_ProfileUpdateRequest> get copyWith =>

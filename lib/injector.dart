@@ -45,6 +45,7 @@ import 'package:e_polis/src/presentation/cubits/my_current_products/current_prod
 import 'package:e_polis/src/presentation/cubits/my_progress_products/progress_products_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/notifications/notifications_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/product_details/product_details_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/timer/timer_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/update_profile/update_profile_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/verify/verify_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -79,6 +80,7 @@ Future<void> initDi() async {
   inject.registerFactory(() => LanguageCubit(inject(), inject()));
   inject.registerFactory(() => LanguageSettingCubit(inject(), inject()));
   inject.registerFactory(() => FaqCubit(inject()));
+  inject.registerFactory(() => TimerCubit());
 
   // product
   inject.registerFactory(() => ProductTabManagerCubit());

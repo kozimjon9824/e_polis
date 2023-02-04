@@ -41,6 +41,7 @@ class AppIcons {
   static final email = getPath('ic_email');
   static final phone = getPath('ic_phone');
   static final archiveLiner = getPath('ic_archive');
+  static final calendar = getPath('ic_calendar');
 
   // images
   static final appLogo = getImagePath('app_logo');

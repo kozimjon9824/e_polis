@@ -39,8 +39,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => inject<ProgressProductsCubit>()),
         BlocProvider(create: (context) => inject<ArchivedProductsCubit>()),
         BlocProvider(
-            create: (context) => inject<MainScreenDataCubit>()..loadData(),
-            lazy: false),
+            create: (context) => inject<MainScreenDataCubit>()..loadData()),
         BlocProvider(
             create: (context) => inject<LanguageCubit>()..loadAppLang()),
         BlocProvider(create: (context) => inject<InsuranceBasicFilterCubit>()),

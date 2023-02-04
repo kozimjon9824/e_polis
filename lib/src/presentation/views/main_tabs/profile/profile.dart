@@ -81,22 +81,20 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget logoutBtn(BuildContext context) {
-    return SafeArea(
-      minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-      child: CustomOutlineButton(
-        text: AppLocalizations.of(context).exit,
-        onTap: () {
-          showDialog(
-              context: context,
-              builder: (_) => ExitDialogBody(onTap: () {
-                    context.read<AuthCubit>().logout();
-                    context.read<MainScreenDataCubit>().loadData();
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, AppRoutes.main, (route) => false);
-                  }));
-        },
-      ),
-    );
-  }
+  Widget logoutBtn(BuildContext context) => SafeArea(
+        minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+        child: CustomOutlineButton(
+          text: AppLocalizations.of(context).exit,
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (_) => ExitDialogBody(onTap: () {
+                      context.read<AuthCubit>().logout();
+                      context.read<MainScreenDataCubit>().loadData();
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, AppRoutes.main, (route) => false);
+                    }));
+          },
+        ),
+      );
 }

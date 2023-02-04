@@ -8,10 +8,12 @@ class CustomPinPut extends StatelessWidget {
     Key? key,
     this.textController,
     this.forceErrorState,
+    this.onChange,
   }) : super(key: key);
 
   final TextEditingController? textController;
   final bool? forceErrorState;
+  final Function(String code)? onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class CustomPinPut extends StatelessWidget {
         forceErrorState: forceErrorState ?? false,
         errorText: '',
         controller: textController,
-        onChanged: (code) {},
+        onChanged: onChange,
         length: 5,
         androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
         pinputAutovalidateMode: PinputAutovalidateMode.onSubmit);

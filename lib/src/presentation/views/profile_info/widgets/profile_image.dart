@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../generated/l10n.dart';
@@ -29,10 +30,8 @@ class ProfileImage extends StatelessWidget {
                   fit: BoxFit.cover,
                   height: 116,
                   width: 116,
-                  placeholder: (context, url) => const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: CircularProgressIndicator(),
-                  ),
+                  progressIndicatorBuilder: (_, __, ___) =>
+                      const CupertinoActivityIndicator(),
                   errorWidget: (context, url, error) =>
                       SvgPicture.asset(AppIcons.bigAvatar),
                 ),

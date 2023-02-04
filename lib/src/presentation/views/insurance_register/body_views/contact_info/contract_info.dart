@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../data/models/contract_information/request/contract_info_request.dart';
 import '../../../../components/custom_button.dart';
 import '../../../../cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
+import '../../../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
 import '../../../insurance_basic_filter/widget/three_button.dart';
 import '../../../insurcance_details/insurance_details.dart';
 import 'widgets/contract_detail.dart';
@@ -54,13 +55,12 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                     Form(
                       key: formKey,
                       child: ContractDetails(
-                        dateController: dateController,
-                        contract: contractState.contract,
-                        focusNode: focusNode,
-                        onClear: () {
-                          contractCubit.onClear();
-                        },
-                      ),
+                          dateController: dateController,
+                          contract: contractState.contract,
+                          focusNode: focusNode,
+                          onClear: () {
+                            contractCubit.onClear();
+                          }),
                     )
                   ],
                 ),
@@ -75,6 +75,9 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                       if (bookState.status == StateStatus.success) {
                         showSuccessMessage(
                             context, AppLocalizations.of(context).success);
+                        context
+                            .read<ManageInsuranceStackViewsCubit>()
+                            .changeIndex(3);
                       }
                     },
                     builder: (context, bookState) {
@@ -90,7 +93,7 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                           }
                           var date = dateConverter(
                               date: dateController.text,
-                              inFormat: 'dd/MM/yyyy',
+                              inFormat: 'dd.MM.yyyy',
                               outFormat: 'yyyy-MM-dd');
                           if (contractState.contract == null) {
                             var contract = ContractInfoRequest(

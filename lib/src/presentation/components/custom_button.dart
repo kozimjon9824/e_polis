@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/themes/app_colors.dart';
@@ -42,7 +45,9 @@ class CustomButton extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               isLoading
-                  ? const CircularProgressIndicator(color: AppColors.white)
+                  ? (Platform.isAndroid
+                      ? const CircularProgressIndicator(color: AppColors.white)
+                      : const CupertinoActivityIndicator())
                   : Text(text, style: AppTextStyles.styleW700S16White),
             ],
           ),

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:e_polis/src/core/themes/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoadingWidget extends StatelessWidget {
@@ -6,9 +9,12 @@ class LoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-          child: CircularProgressIndicator(color: AppColors.primaryColor)),
+          child: Platform.isAndroid
+              ? const CircularProgressIndicator(color: AppColors.primaryColor)
+              : const CupertinoActivityIndicator(
+                  color: AppColors.primaryColor, radius: 18)),
     );
   }
 }

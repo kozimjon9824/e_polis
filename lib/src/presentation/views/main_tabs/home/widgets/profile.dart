@@ -3,6 +3,7 @@ import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -48,7 +49,7 @@ class ProfileWidget extends StatelessWidget {
               fit: BoxFit.cover,
               height: 50,
               width: 50,
-              placeholder: (context, url) => const CircularProgressIndicator(),
+              placeholder: (context, url) => const CupertinoActivityIndicator(),
               errorWidget: (context, url, error) =>
                   SvgPicture.asset(AppIcons.avatar),
             ),

@@ -16,8 +16,10 @@ class VerifyCubit extends Cubit<VerifyState> {
   void verify({required String code, required String phone}) async {
     emit(const VerifyState.loading());
     var result = await _verifyUseCase
-        .call(VerifyParams(VerifyRequest(phone: phone, otp: code)));
+        .call(VerifyParams(VerifyRequest(phone: '998$phone', otp: code)));
     result.fold((failure) => emit(VerifyState.error(failure)),
         (response) => emit(const VerifyState.success()));
   }
+
+  void loadInitial() => emit(const VerifyState.initial());
 }

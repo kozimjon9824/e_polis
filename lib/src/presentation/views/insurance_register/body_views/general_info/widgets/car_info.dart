@@ -46,11 +46,14 @@ class CarInformationWidget extends StatelessWidget {
       ],
       children: [
         CustomTextField(
-          label: AppLocalizations.of(context).cardNumber,
+          label: AppLocalizations.of(context).vehicleNumber,
           hintText: '01 М 001 ХА',
           textEditingController: vehicleController,
           keyboardType: TextInputType.text,
-          inputFormatters: [SpecialMaskTextInputFormatter()],
+          inputFormatters: [
+            SpecialMaskTextInputFormatter(
+                initialText: vehicleController.text.replaceAll(' ', ''))
+          ],
           textCapitalization: TextCapitalization.characters,
           textInputAction: TextInputAction.next,
           focusNode: focusNodeVehicleNumber,
@@ -76,9 +79,11 @@ class CarInformationWidget extends StatelessWidget {
                         focusNodeTechNumber!.requestFocus(),
                     inputFormatters: [
                       MaskTextInputFormatter(
-                          mask: '###', filter: {"#": RegExp(r'[A-Z]')})
+                          mask: '###',
+                          initialText: seriesController.text,
+                          filter: {"#": RegExp(r'[A-Z]')})
                     ],
-                    validator: (value) => value!.isEmpty
+                    validator: (value) => value!.length < 3
                         ? AppLocalizations.of(context).notDoEmpty
                         : null)),
             const SizedBox(width: 10),
@@ -91,12 +96,14 @@ class CarInformationWidget extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 textEditingController: numberController,
                 onFieldSubmitted: (_) => focusNodeTechNumber!.unfocus(),
-                validator: (value) => value!.isEmpty
+                validator: (value) => value!.length < 6
                     ? AppLocalizations.of(context).notDoEmpty
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
-                      mask: '######', filter: {"#": RegExp(r'[0-9]')})
+                      mask: '######',
+                      initialText: numberController.text,
+                      filter: {"#": RegExp(r'[0-9]')})
                 ],
               ),
             ),

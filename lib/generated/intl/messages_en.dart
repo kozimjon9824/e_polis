@@ -194,6 +194,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Информация профиля"),
         "profileUpdated":
             MessageLookupByLibrary.simpleMessage("Профиль успешно обновлен!"),
+        "reSendCode":
+            MessageLookupByLibrary.simpleMessage("Повторно отправить код"),
         "registerFirstToBuy": MessageLookupByLibrary.simpleMessage(
             "Зарегистрируйтесь сначала, чтобы купить страховой полис"),
         "registration": MessageLookupByLibrary.simpleMessage("Регистрация"),
@@ -205,12 +207,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveChanges":
             MessageLookupByLibrary.simpleMessage("Сохранить изменения"),
         "search": MessageLookupByLibrary.simpleMessage("Поиск"),
+        "select": MessageLookupByLibrary.simpleMessage("Выбирать"),
         "selectBasicFields":
             MessageLookupByLibrary.simpleMessage("Выберите основные поля!"),
+        "selectDate": MessageLookupByLibrary.simpleMessage("Выберите дату"),
         "selectRegion": MessageLookupByLibrary.simpleMessage("Выберите регион"),
         "selectTypeVehicle":
             MessageLookupByLibrary.simpleMessage("Выберите тип автомобиля"),
-        "sendSms": MessageLookupByLibrary.simpleMessage("ОТправить СМС"),
+        "sendSms": MessageLookupByLibrary.simpleMessage("Отправить СМС"),
         "series": MessageLookupByLibrary.simpleMessage("Серия"),
         "seriesNumberPolis":
             MessageLookupByLibrary.simpleMessage("Серия и номер полиса"),

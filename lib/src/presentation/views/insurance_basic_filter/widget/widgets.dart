@@ -17,7 +17,7 @@ class Description extends StatelessWidget {
       colorClickableText: AppColors.primaryColor,
       trimMode: TrimMode.Line,
       trimCollapsedText: '\n${AppLocalizations.of(context).inDetail}',
-      trimExpandedText: '\nСкрывать${AppLocalizations.of(context).hide}',
+      trimExpandedText: '\n${AppLocalizations.of(context).hide}',
       style: AppTextStyles.styleW400S14Grey6
           .copyWith(color: AppColors.grey900, height: 1.5),
       moreStyle: AppTextStyles.styleW600S14Primary,

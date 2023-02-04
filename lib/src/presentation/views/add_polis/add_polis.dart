@@ -3,6 +3,7 @@ import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:e_polis/src/presentation/components/custom_text_field.dart';
 import 'package:e_polis/src/presentation/cubits/add_product/add_product_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../injector.dart';
 import '../../components/custom_button.dart';
@@ -41,20 +42,21 @@ class _AddPolisPageState extends State<AddPolisPage> {
               const SizedBox(height: 22),
               DropDownButton<String>(
                   label: AppLocalizations.of(context).typePolis,
-                  // hint: 'Выберите тип полиса',
                   value: 'ОСАГО',
                   items: ['ОСАГО']
                       .map((item) => DropdownMenuItem<String>(
                           value: item,
                           child: Text(item,
                               style: AppTextStyles.styleW400S14Grey6)))
-                      .toList(),
-                  onChanged: (value) {}),
+                      .toList()),
               const SizedBox(height: 14),
               CustomTextField(
                 label: AppLocalizations.of(context).seriesNumberPolis,
                 hintText: 'ААА 1234ABCD',
                 textInputAction: TextInputAction.next,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z0-9 ]')),
+                ],
                 textEditingController: insuranceController,
                 textCapitalization: TextCapitalization.characters,
                 validator: (value) => value!.isEmpty

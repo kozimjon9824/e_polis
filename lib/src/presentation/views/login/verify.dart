@@ -1,6 +1,7 @@
 import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/error/error.dart';
+import 'package:e_polis/src/presentation/cubits/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/routes/app_routes.dart';
@@ -9,6 +10,7 @@ import '../../components/custom_button.dart';
 import '../../components/pinput_sms_auto_fill.dart';
 import '../../components/snackbars.dart';
 import '../../cubits/verify/verify_cubit.dart';
+import 'widgets/timer_widget.dart';
 
 class VerifyPage extends StatefulWidget {
   const VerifyPage({Key? key}) : super(key: key);
@@ -39,28 +41,25 @@ class _VerifyPageState extends State<VerifyPage> {
                         style: AppTextStyles.styleW700S24Grey9),
                     const SizedBox(height: 12),
                     Text(
-                        '${AppLocalizations.of(context).verifyPageMainText} $arguments',
+                        '${AppLocalizations.of(context).verifyPageMainText} +998$arguments',
                         style: AppTextStyles.styleW500S14Grey7),
                     const SizedBox(height: 32),
                     BlocBuilder<VerifyCubit, VerifyState>(
                       builder: (context, state) {
                         return CustomPinPut(
                             textController: textController,
+                            onChange: (_) {
+                              context.read<VerifyCubit>().loadInitial();
+                            },
                             forceErrorState: state ==
                                 const VerifyState.error(WrongCodeFailure()));
                       },
                     ),
                     const SizedBox(height: 24),
-                    Row(
-                      children: [
-                        Text(
-                            AppLocalizations.of(context)
-                                .resendCodeAfterSomeTime,
-                            style: AppTextStyles.styleW500S14Grey9),
-                        const SizedBox(width: 4),
-                        const Text('00:48',
-                            style: AppTextStyles.styleW500S14Primary),
-                      ],
+                    TimeWidget(
+                      onResend: () {
+                        inject<LoginCubit>().login(arguments);
+                      },
                     ),
                   ],
                 ),

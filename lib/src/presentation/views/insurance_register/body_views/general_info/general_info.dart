@@ -34,6 +34,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
   final focusNodeTechNumber = FocusNode();
   final focusNodeVehicleNumber = FocusNode();
   final formKey = GlobalKey<FormState>();
+  final formKey2 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +50,12 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
         builder: (context, state) {
           var cubit = context.read<CheckVehicleInfoCubit>();
           return Scaffold(
-            body: Form(
-              key: formKey,
-              child: ListView(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                children: [
-                  CarInformationWidget(
+            body: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              children: [
+                Form(
+                  key: formKey,
+                  child: CarInformationWidget(
                     vehicleController: vehicleController,
                     seriesController: series,
                     numberController: number,
@@ -65,9 +65,12 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     focusNodeVehicleNumber: focusNodeVehicleNumber,
                     onClear: () => cubit.onClearVehicleData(),
                   ),
-                  if (state.vehicleInfo != null) const SizedBox(height: 16),
-                  if (state.vehicleInfo != null)
-                    DriverInformationWidget(
+                ),
+                if (state.vehicleInfo != null) const SizedBox(height: 16),
+                if (state.vehicleInfo != null)
+                  Form(
+                    key: formKey2,
+                    child: DriverInformationWidget(
                       seriesID: seriesID,
                       numberID: numberID,
                       phoneController: phoneController,
@@ -77,8 +80,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                       focusNodeSeriesID: focusNodeSeriesID,
                       focusNodePhone: focusNodePhone,
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
             bottomNavigationBar: SafeArea(
               minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
@@ -101,9 +104,15 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                         techPasSer: series.text,
                         techPasNum: number.text);
                   } else if (!state.isPassportValidated) {
+                    if (!formKey2.currentState!.validate()) {
+                      return;
+                    }
                     cubit.validatePassport(
                         series: seriesID.text, number: numberID.text);
                   } else {
+                    if (!formKey2.currentState!.validate()) {
+                      return;
+                    }
                     var owner = state.vehicleInfo?.owner;
                     var phone = MaskTextInputFormatter(
                             mask: '(##) ### ## ##',

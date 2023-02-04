@@ -4,6 +4,7 @@ import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -44,7 +45,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                 file: state.selectedFile, data: data, context: context);
           },
         ),
-        bottomNavigationBar: button(),
+        bottomNavigationBar: saveButton(),
       ),
     );
   }
@@ -67,6 +68,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
             label: AppLocalizations.of(context).firstName,
             textEditingController: nameController,
             textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.name,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z ]')),
+            ],
             validator: (value) =>
                 value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
           ),
@@ -75,6 +80,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
             label: AppLocalizations.of(context).lastName,
             textEditingController: lastNameController,
             textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.name,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z ]')),
+            ],
             validator: (value) =>
                 value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
           ),
@@ -85,7 +94,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
     );
   }
 
-  Widget button() {
+  Widget saveButton() {
     return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
       listener: (context, state) {
         if (state.status == StateStatus.success) {
@@ -99,6 +108,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
         }
       },
       builder: (context, state) {
+        var data = state.user;
         return SafeArea(
           minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: CustomButton(
@@ -106,8 +116,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
             isLoading: state.status == StateStatus.loading,
             onTap: () {
               if (formKey.currentState!.validate()) {
-                context.read<UpdateProfileCubit>().updateProfile(
-                    nameController.text, lastNameController.text);
+                if (data?.photo != phoneMask.unmaskText(phoneController.text)) {
+                } else {
+                  context.read<UpdateProfileCubit>().updateProfile(
+                      nameController.text, lastNameController.text);
+                }
               }
             },
           ),
@@ -124,6 +137,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
     phoneController.dispose();
   }
 
+  final phoneMask = MaskTextInputFormatter(
+      mask: '(##) ### ## ##',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.eager);
+
   Widget phoneCustomPrefixTextField() {
     return CustomPrefixTextField(
       label: AppLocalizations.of(context).phoneNumber,
@@ -131,10 +149,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
       textInputAction: TextInputAction.done,
       textEditingController: phoneController,
       textInputType: TextInputType.phone,
-      inputFormatters: [
-        MaskTextInputFormatter(
-            mask: '(##) ### ## ##', filter: {"#": RegExp(r'[0-9]')})
-      ],
+      inputFormatters: [phoneMask],
       prefixIcon: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 30),
         child: Row(

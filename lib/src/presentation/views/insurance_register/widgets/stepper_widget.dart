@@ -157,13 +157,16 @@ class StepperText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-        child: Text(title,
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            style: AppTextStyles.styleW500S12Grey9.copyWith(
-                color: isActive ? AppColors.grey900 : AppColors.grey500)),
+      child: Align(
+        alignment: Alignment.center,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+          child: Text(title,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              style: AppTextStyles.styleW500S12Grey9.copyWith(
+                  color: isActive ? AppColors.grey900 : AppColors.grey500)),
+        ),
       ),
     );
   }

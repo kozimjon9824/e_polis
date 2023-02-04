@@ -12,11 +12,16 @@ _$_ProfileUpdateRequest _$$_ProfileUpdateRequestFromJson(
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
       photo: json['photo'] as String?,
+      phone: json['phone'] as String?,
+      otpCode: json['otpCode'] as String?,
     );
 
 Map<String, dynamic> _$$_ProfileUpdateRequestToJson(
     _$_ProfileUpdateRequest instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'firstName': instance.firstName,
+    'lastName': instance.lastName,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -24,8 +29,8 @@ Map<String, dynamic> _$$_ProfileUpdateRequestToJson(
     }
   }
 
-  writeNotNull('firstName', instance.firstName);
-  writeNotNull('lastName', instance.lastName);
   writeNotNull('photo', instance.photo);
+  writeNotNull('phone', instance.phone);
+  val['otpCode'] = instance.otpCode;
   return val;
 }

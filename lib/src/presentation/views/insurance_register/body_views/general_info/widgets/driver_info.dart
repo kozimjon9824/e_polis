@@ -71,9 +71,14 @@ class DriverInformationWidget extends StatelessWidget {
                   textEditingController: seriesID,
                   textCapitalization: TextCapitalization.characters,
                   focusNode: focusNodeSeriesID,
+                  validator: (value) => value!.length < 2
+                      ? AppLocalizations.of(context).notDoEmpty
+                      : null,
                   inputFormatters: [
                     MaskTextInputFormatter(
-                        mask: '##', filter: {"#": RegExp(r'[A-Z]')})
+                        mask: '##',
+                        initialText: seriesID.text,
+                        filter: {"#": RegExp(r'[A-Z]')})
                   ],
                 )),
             const SizedBox(width: 10),
@@ -85,9 +90,14 @@ class DriverInformationWidget extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 textEditingController: numberID,
                 focusNode: focusNodeNumberID,
+                validator: (value) => value!.length < 6
+                    ? AppLocalizations.of(context).notDoEmpty
+                    : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
-                      mask: '#######', filter: {"#": RegExp(r'[0-9]')})
+                      mask: '#######',
+                      initialText: numberID.text,
+                      filter: {"#": RegExp(r'[0-9]')})
                 ],
               ),
             ),
@@ -105,9 +115,13 @@ class DriverInformationWidget extends StatelessWidget {
       textEditingController: phoneController,
       textInputType: TextInputType.phone,
       focusNode: focusNodePhone,
+      validator: (value) =>
+          value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
       inputFormatters: [
         MaskTextInputFormatter(
-            mask: '(##) ### ## ##', filter: {"#": RegExp(r'[0-9]')})
+            mask: '(##) ### ## ##',
+            type: MaskAutoCompletionType.eager,
+            filter: {"#": RegExp(r'[0-9]')})
       ],
       prefixIcon: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 30),

@@ -34,19 +34,23 @@ class ContractDetails extends StatelessWidget {
       onClear: onClear,
       children: [
         const SizedBox(height: 8),
-        CustomTextField(
+        CustomDatePickTextField(
           label: AppLocalizations.of(context).contractStartDate,
           hintText: '02.12.2022',
           keyboardType: TextInputType.datetime,
           textEditingController: dateController,
           textInputAction: TextInputAction.done,
           focusNode: focusNode,
-          validator: (value) => (value?.isEmpty ?? false)
+          validator: (value) => (value!.length < 10)
               ? AppLocalizations.of(context).enterDate
               : null,
+          dateFormat: 'dd.MM.yyyy',
           inputFormatters: [
             MaskTextInputFormatter(
-                mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')})
+                mask: '##.##.####',
+                initialText: dateController.text.replaceAll('.', ''),
+                type: MaskAutoCompletionType.eager,
+                filter: {"#": RegExp(r'[0-9]')})
           ],
         ),
         const SizedBox(height: 8),

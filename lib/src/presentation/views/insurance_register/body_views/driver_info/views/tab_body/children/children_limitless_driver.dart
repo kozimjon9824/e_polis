@@ -46,12 +46,14 @@ class LimitlessDriverChild1Body extends StatelessWidget {
                   textEditingController: seriesController,
                   focusNode: seriesFocus,
                   onFieldSubmitted: (_) => numberFocus!.requestFocus(),
-                  validator: (value) => value!.isEmpty
+                  validator: (value) => value!.length < 2
                       ? AppLocalizations.of(context).notDoEmpty
                       : null,
                   inputFormatters: [
                     MaskTextInputFormatter(
-                        mask: '##', filter: {"#": RegExp(r'[A-Z]')})
+                        mask: '##',
+                        initialText: seriesController.text,
+                        filter: {"#": RegExp(r'[A-Z]')})
                   ],
                 )),
             const SizedBox(width: 10),
@@ -64,30 +66,36 @@ class LimitlessDriverChild1Body extends StatelessWidget {
                 textEditingController: numberController,
                 focusNode: numberFocus,
                 onFieldSubmitted: (_) => dateFocus!.requestFocus(),
-                validator: (value) => value!.isEmpty
+                validator: (value) => value!.length < 6
                     ? AppLocalizations.of(context).notDoEmpty
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
-                      mask: '#######', filter: {"#": RegExp(r'[0-9]')})
+                      mask: '#######',
+                      initialText: numberController.text,
+                      filter: {"#": RegExp(r'[0-9]')})
                 ],
               ),
             ),
           ],
         ),
         const SizedBox(height: 16),
-        CustomTextField(
+        CustomDatePickTextField(
           label: AppLocalizations.of(context).dateOfBirth,
           hintText: AppLocalizations.of(context).ddMMYY,
           keyboardType: TextInputType.datetime,
           textEditingController: dateController,
           textInputAction: TextInputAction.done,
           focusNode: dateFocus,
-          validator: (value) =>
-              value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
+          dateFormat: 'dd/MM/yyyy',
+          validator: (value) => value!.length < 10
+              ? AppLocalizations.of(context).notDoEmpty
+              : null,
           inputFormatters: [
             MaskTextInputFormatter(
-                mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')})
+                mask: '##/##/####',
+                initialText: dateController.text.replaceAll('/', ''),
+                filter: {"#": RegExp(r'[0-9]')})
           ],
         ),
       ],
@@ -143,9 +151,14 @@ class LimitlessDriverChild2Body extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   textEditingController: licenseSeries,
                   textCapitalization: TextCapitalization.characters,
+                  validator: (value) => value!.length < 2
+                      ? AppLocalizations.of(context).notDoEmpty
+                      : null,
                   inputFormatters: [
                     MaskTextInputFormatter(
-                        mask: '##', filter: {"#": RegExp(r'[A-Z]')})
+                        mask: '##',
+                        initialText: licenseSeries.text,
+                        filter: {"#": RegExp(r'[A-Z]')})
                   ],
                 )),
             const SizedBox(width: 10),
@@ -156,23 +169,34 @@ class LimitlessDriverChild2Body extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 textEditingController: licenseNumber,
+                validator: (value) => value!.length < 6
+                    ? AppLocalizations.of(context).notDoEmpty
+                    : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
-                      mask: '#######', filter: {"#": RegExp(r'[0-9]')})
+                      mask: '#######',
+                      initialText: licenseNumber.text,
+                      filter: {"#": RegExp(r'[0-9]')})
                 ],
               ),
             ),
           ],
         ),
         const SizedBox(height: 16),
-        CustomTextField(
+        CustomDatePickTextField(
             label: AppLocalizations.of(context).date,
             hintText: AppLocalizations.of(context).ddMMYY,
             keyboardType: TextInputType.datetime,
             textEditingController: licenseDate,
+            validator: (value) => value!.length < 10
+                ? AppLocalizations.of(context).notDoEmpty
+                : null,
+            dateFormat: 'dd/MM/yyyy',
             inputFormatters: [
               MaskTextInputFormatter(
-                  mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')})
+                  mask: '##/##/####',
+                  initialText: licenseDate.text.replaceAll('/', ''),
+                  filter: {"#": RegExp(r'[0-9]')})
             ],
             textInputAction: TextInputAction.done),
         const SizedBox(height: 8),
