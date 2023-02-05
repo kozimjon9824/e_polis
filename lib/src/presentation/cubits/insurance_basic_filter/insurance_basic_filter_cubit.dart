@@ -29,7 +29,12 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
   void clearData() {
     emit(state.copyWith(
         status: StateStatus.unknown,
+        id: null,
         basicFilterRequest: const BasicFilterRequest()));
+  }
+
+  void inputProductId(String id) {
+    emit(state.copyWith(status: StateStatus.unknown, id: id));
   }
 
   void selectDriversCount(bool isVip) {

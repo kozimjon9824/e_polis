@@ -2,6 +2,7 @@ part of 'archived_products_cubit.dart';
 
 @freezed
 class ArchivedProductsState with _$ArchivedProductsState {
+  const factory ArchivedProductsState.initial() = _Initial;
   const factory ArchivedProductsState.loading() = _Loading;
 
   const factory ArchivedProductsState.loaded(

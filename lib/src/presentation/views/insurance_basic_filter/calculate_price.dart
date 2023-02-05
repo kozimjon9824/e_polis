@@ -27,7 +27,7 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
   @override
   void initState() {
     super.initState();
-    context.read<InsuranceBasicFilterCubit>().clearData();
+    // context.read<InsuranceBasicFilterCubit>().clearData();
     context.read<DropDownValuesCubit>().loadValues();
   }
 
@@ -38,69 +38,75 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
     return BlocBuilder<InsuranceBasicFilterCubit, InsuranceBasicFilterState>(
       builder: (context, state) {
         var cubit = context.read<InsuranceBasicFilterCubit>();
-        return Scaffold(
-          appBar: AppBar(title: Text(productData.name ?? '')),
-          body: BlocBuilder<DropDownValuesCubit, DropDownValuesState>(
-            builder: (context, dropDownState) {
-              var dropDownCubit = context.read<DropDownValuesCubit>();
-              if (dropDownState.status == StateStatus.loading) {
-                return const LoadingWidget();
-              }
-              return ListView(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  children: [
-                    Description(text: productData.description ?? ''),
-                    const SizedBox(height: 22),
-                    DropDownButton<String>(
-                      label: AppLocalizations.of(context)
-                          .vehicleRegistrationRegion,
-                      hint: AppLocalizations.of(context).selectRegion,
-                      items: dropDownState.regionsList
-                          .map((item) => DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(item,
-                                  style: AppTextStyles.styleW400S14Grey6)))
-                          .toList(),
-                      onChanged: (value) {
-                        int key = dropDownCubit.getRegionKey(value ?? '');
-                        cubit.selectRegion(key);
-                      },
-                    ),
-                    const SizedBox(height: 22),
-                    DropDownButton<String>(
-                        label: AppLocalizations.of(context).typeVehicle,
-                        hint: AppLocalizations.of(context).selectTypeVehicle,
-                        items: dropDownState.vehiclesList
+        return WillPopScope(
+          onWillPop: () {
+            cubit.clearData();
+            return Future.value(true);
+          },
+          child: Scaffold(
+            appBar: AppBar(title: Text(productData.name ?? '')),
+            body: BlocBuilder<DropDownValuesCubit, DropDownValuesState>(
+              builder: (context, dropDownState) {
+                var dropDownCubit = context.read<DropDownValuesCubit>();
+                if (dropDownState.status == StateStatus.loading) {
+                  return const LoadingWidget();
+                }
+                return ListView(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 16),
+                    children: [
+                      Description(text: productData.description ?? ''),
+                      const SizedBox(height: 22),
+                      DropDownButton<String>(
+                        label: AppLocalizations.of(context)
+                            .vehicleRegistrationRegion,
+                        hint: AppLocalizations.of(context).selectRegion,
+                        items: dropDownState.regionsList
                             .map((item) => DropdownMenuItem<String>(
                                 value: item,
                                 child: Text(item,
                                     style: AppTextStyles.styleW400S14Grey6)))
                             .toList(),
                         onChanged: (value) {
-                          int key =
-                              dropDownCubit.getVehicleTypeKey(value ?? '');
-                          cubit.selectVehicleType(key);
-                        }),
-                    const SizedBox(height: 22),
-                    const ContainerSwitch(),
-                    const SizedBox(height: 22),
-                    const ThreeButton()
-                  ]);
-            },
-          ),
-          bottomNavigationBar: SafeArea(
-            minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: CustomButton(
-              text: AppLocalizations.of(context).priceCalculation,
-              onTap: () {
-                if (cubit.isValid()) {
-                  Navigator.pushNamed(context, AppRoutes.basicFilterResult);
-                } else {
-                  showErrorMessage(
-                      context, AppLocalizations.of(context).selectBasicFields);
-                }
+                          int key = dropDownCubit.getRegionKey(value ?? '');
+                          cubit.selectRegion(key);
+                        },
+                      ),
+                      const SizedBox(height: 22),
+                      DropDownButton<String>(
+                          label: AppLocalizations.of(context).typeVehicle,
+                          hint: AppLocalizations.of(context).selectTypeVehicle,
+                          items: dropDownState.vehiclesList
+                              .map((item) => DropdownMenuItem<String>(
+                                  value: item,
+                                  child: Text(item,
+                                      style: AppTextStyles.styleW400S14Grey6)))
+                              .toList(),
+                          onChanged: (value) {
+                            int key =
+                                dropDownCubit.getVehicleTypeKey(value ?? '');
+                            cubit.selectVehicleType(key);
+                          }),
+                      const SizedBox(height: 22),
+                      const ContainerSwitch(),
+                      const SizedBox(height: 22),
+                      const ThreeButton()
+                    ]);
               },
+            ),
+            bottomNavigationBar: SafeArea(
+              minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: CustomButton(
+                text: AppLocalizations.of(context).priceCalculation,
+                onTap: () {
+                  if (cubit.isValid()) {
+                    Navigator.pushNamed(context, AppRoutes.basicFilterResult);
+                  } else {
+                    showErrorMessage(context,
+                        AppLocalizations.of(context).selectBasicFields);
+                  }
+                },
+              ),
             ),
           ),
         );

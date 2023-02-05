@@ -2,6 +2,7 @@ part of 'progress_products_cubit.dart';
 
 @freezed
 class ProgressProductsState with _$ProgressProductsState {
+  const factory ProgressProductsState.initial() = _Initial;
   const factory ProgressProductsState.loading() = _Loading;
 
   const factory ProgressProductsState.loaded(

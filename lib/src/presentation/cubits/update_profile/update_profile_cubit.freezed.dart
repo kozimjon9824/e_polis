@@ -19,6 +19,7 @@ mixin _$UpdateProfileState {
   StateStatus get status => throw _privateConstructorUsedError;
   UserProfileResponse? get user => throw _privateConstructorUsedError;
   File? get selectedFile => throw _privateConstructorUsedError;
+  bool get isPhoneVerify => throw _privateConstructorUsedError;
   Failure get failure => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,6 +37,7 @@ abstract class $UpdateProfileStateCopyWith<$Res> {
       {StateStatus status,
       UserProfileResponse? user,
       File? selectedFile,
+      bool isPhoneVerify,
       Failure failure});
 
   $UserProfileResponseCopyWith<$Res>? get user;
@@ -57,6 +59,7 @@ class _$UpdateProfileStateCopyWithImpl<$Res, $Val extends UpdateProfileState>
     Object? status = null,
     Object? user = freezed,
     Object? selectedFile = freezed,
+    Object? isPhoneVerify = null,
     Object? failure = null,
   }) {
     return _then(_value.copyWith(
@@ -72,6 +75,10 @@ class _$UpdateProfileStateCopyWithImpl<$Res, $Val extends UpdateProfileState>
           ? _value.selectedFile
           : selectedFile // ignore: cast_nullable_to_non_nullable
               as File?,
+      isPhoneVerify: null == isPhoneVerify
+          ? _value.isPhoneVerify
+          : isPhoneVerify // ignore: cast_nullable_to_non_nullable
+              as bool,
       failure: null == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -104,6 +111,7 @@ abstract class _$$_UpdateProfileStateCopyWith<$Res>
       {StateStatus status,
       UserProfileResponse? user,
       File? selectedFile,
+      bool isPhoneVerify,
       Failure failure});
 
   @override
@@ -124,6 +132,7 @@ class __$$_UpdateProfileStateCopyWithImpl<$Res>
     Object? status = null,
     Object? user = freezed,
     Object? selectedFile = freezed,
+    Object? isPhoneVerify = null,
     Object? failure = null,
   }) {
     return _then(_$_UpdateProfileState(
@@ -139,6 +148,10 @@ class __$$_UpdateProfileStateCopyWithImpl<$Res>
           ? _value.selectedFile
           : selectedFile // ignore: cast_nullable_to_non_nullable
               as File?,
+      isPhoneVerify: null == isPhoneVerify
+          ? _value.isPhoneVerify
+          : isPhoneVerify // ignore: cast_nullable_to_non_nullable
+              as bool,
       failure: null == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -154,6 +167,7 @@ class _$_UpdateProfileState implements _UpdateProfileState {
       {this.status = StateStatus.unknown,
       this.user,
       this.selectedFile,
+      this.isPhoneVerify = false,
       this.failure = const UnknownFailure()});
 
   @override
@@ -165,11 +179,14 @@ class _$_UpdateProfileState implements _UpdateProfileState {
   final File? selectedFile;
   @override
   @JsonKey()
+  final bool isPhoneVerify;
+  @override
+  @JsonKey()
   final Failure failure;
 
   @override
   String toString() {
-    return 'UpdateProfileState(status: $status, user: $user, selectedFile: $selectedFile, failure: $failure)';
+    return 'UpdateProfileState(status: $status, user: $user, selectedFile: $selectedFile, isPhoneVerify: $isPhoneVerify, failure: $failure)';
   }
 
   @override
@@ -181,12 +198,14 @@ class _$_UpdateProfileState implements _UpdateProfileState {
             (identical(other.user, user) || other.user == user) &&
             (identical(other.selectedFile, selectedFile) ||
                 other.selectedFile == selectedFile) &&
+            (identical(other.isPhoneVerify, isPhoneVerify) ||
+                other.isPhoneVerify == isPhoneVerify) &&
             (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, user, selectedFile, failure);
+  int get hashCode => Object.hash(
+      runtimeType, status, user, selectedFile, isPhoneVerify, failure);
 
   @JsonKey(ignore: true)
   @override
@@ -201,6 +220,7 @@ abstract class _UpdateProfileState implements UpdateProfileState {
       {final StateStatus status,
       final UserProfileResponse? user,
       final File? selectedFile,
+      final bool isPhoneVerify,
       final Failure failure}) = _$_UpdateProfileState;
 
   @override
@@ -209,6 +229,8 @@ abstract class _UpdateProfileState implements UpdateProfileState {
   UserProfileResponse? get user;
   @override
   File? get selectedFile;
+  @override
+  bool get isPhoneVerify;
   @override
   Failure get failure;
   @override

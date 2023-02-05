@@ -2,6 +2,7 @@ part of 'current_products_cubit.dart';
 
 @freezed
 class CurrentProductsState with _$CurrentProductsState {
+  const factory CurrentProductsState.initial() = _Initial;
   const factory CurrentProductsState.loading() = _Loading;
 
   const factory CurrentProductsState.loaded(

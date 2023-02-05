@@ -8,14 +8,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/themes/app_text_styles.dart';
 import '../../../../data/models/basic_filter/response/basic_filter_response.dart';
+import '../../../cubits/auth/auth_cubit.dart';
 import '../../insurcance_details/insurance_details.dart';
+import '../../insurcance_details/widgets/dialog_body.dart';
 import 'insurance_details.dart';
 import 'nothing_found.dart';
 
 class InsurancesResults extends StatelessWidget {
-  const InsurancesResults({
-    Key? key,
-  }) : super(key: key);
+  const InsurancesResults({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,25 @@ class BodyWidget extends StatelessWidget {
                   polisPrice: numberFormat(list[index].policyAmount?.toInt()),
                   insurancePrice:
                       numberFormat(list[index].insuranceAmount?.toInt()),
-                  onBuy: () {},
+                  onBuy: () {
+                    context
+                        .read<InsuranceBasicFilterCubit>()
+                        .inputProductId(list[index].id ?? '');
+                    if (context.read<AuthCubit>().state
+                        is UnAuthenticatedState) {
+                      showDialog(
+                          context: context,
+                          builder: (_) => DialogBody(onSubmit: () {
+                                Navigator.pop(context);
+                                Navigator.pushNamed(context, AppRoutes.login);
+                              }));
+                    } else {
+                      Navigator.pushNamed(
+                          context, AppRoutes.insuranceRegistration,
+                          arguments: InsurancePageArguments(
+                              id: list[index].id ?? '', request: request));
+                    }
+                  },
                   onDetailTap: () {
                     Navigator.pushNamed(context, AppRoutes.insuranceDetails,
                         arguments: InsurancePageArguments(

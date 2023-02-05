@@ -20,4 +20,5 @@ class AppRoutes {
   static const cardInput = '/cardInput';
   static const helperCenter = '/helperCenter';
   static const notification = '/notification';
+  static const verifyPhone = '/verifyPhone';
 }

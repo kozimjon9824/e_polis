@@ -4,6 +4,7 @@ import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:e_polis/src/presentation/components/custom_button.dart';
 import 'package:e_polis/src/presentation/components/loading.dart';
 import 'package:e_polis/src/presentation/components/round_button.dart';
+import 'package:e_polis/src/presentation/cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/license_agreement/license_agreement_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import '../../components/error_view.dart';
 import '../../components/snackbars.dart';
 import 'package:flutter_html/flutter_html.dart';
 import '../../cubits/auth/auth_cubit.dart';
+import '../insurcance_details/insurance_details.dart';
 import 'widgets.dart';
 
 class LicenseAgreementPage extends StatefulWidget {
@@ -88,8 +90,23 @@ class _LicenseAgreementPageState extends State<LicenseAgreementPage> {
                         if (check) {
                           context.read<MainScreenDataCubit>().loadData();
                           context.read<AuthCubit>().checkUserToAuth();
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, AppRoutes.main, (route) => false);
+                          final cubit =
+                              context.read<InsuranceBasicFilterCubit>().state;
+                          var id = cubit.id;
+                          if (id == null) {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, AppRoutes.main, (route) => false);
+                          } else {
+                            Navigator.of(context)
+                              ..pop()
+                              ..pop()
+                              ..pop()
+                              ..pop()
+                              ..pushNamed(AppRoutes.insuranceRegistration,
+                                  arguments: InsurancePageArguments(
+                                      id: id,
+                                      request: cubit.basicFilterRequest));
+                          }
                         }
                       },
                     ));

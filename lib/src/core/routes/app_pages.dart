@@ -17,6 +17,7 @@ import 'package:e_polis/src/presentation/views/onboarding/onboarding_page.dart';
 import 'package:e_polis/src/presentation/views/profile_info/profile_info.dart';
 import 'package:e_polis/src/presentation/views/splash/splash_page.dart';
 import 'package:e_polis/src/presentation/views/verification_success/verification_success.dart';
+import 'package:e_polis/src/presentation/views/verify_change_phone/verify_phone.dart';
 import 'package:flutter/material.dart';
 import '../../presentation/views/about/about.dart';
 import 'app_routes.dart';
@@ -85,6 +86,10 @@ class RouteGenerateKit {
             settings: RouteSettings(arguments: args));
       case AppRoutes.notification:
         return simpleRoute(const NotificationPage());
+      case AppRoutes.verifyPhone:
+        return MaterialPageRoute(
+            builder: (context) => const VerifyChangePhonePage(),
+            settings: RouteSettings(arguments: args));
     }
     return null;
   }

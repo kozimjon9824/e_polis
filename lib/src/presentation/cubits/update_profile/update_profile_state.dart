@@ -6,5 +6,6 @@ class UpdateProfileState with _$UpdateProfileState {
       {@Default(StateStatus.unknown) StateStatus status,
       UserProfileResponse? user,
       File? selectedFile,
+      @Default(false) bool isPhoneVerify,
       @Default(UnknownFailure()) Failure failure}) = _UpdateProfileState;
 }

@@ -29,8 +29,10 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     result.fold(
         (failure) =>
             emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) =>
-            emit(state.copyWith(status: StateStatus.unknown, user: response)));
+        (response) => emit(state.copyWith(
+            status: StateStatus.unknown,
+            user: response,
+            isPhoneVerify: false)));
   }
 
   void updateProfile(String fName, String lName) async {
@@ -43,7 +45,27 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     result.fold(
         (failure) =>
             emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) => emit(state.copyWith(status: StateStatus.success)));
+        (response) => emit(
+            state.copyWith(status: StateStatus.success, isPhoneVerify: false)));
+  }
+
+  void updateProfileAndSendOptCode(
+      String fName, String lName, String phone) async {
+    var id = await uploadPhoto();
+    if (id == '') return;
+    emit(state.copyWith(status: StateStatus.loading));
+    var request = ProfileUpdateRequest(
+        firstName: fName,
+        lastName: lName,
+        photo: id,
+        phone: '998$phone',
+        otpCode: null);
+    var result = await _profileUseCase.call(ProfileParams(request));
+    result.fold(
+        (failure) =>
+            emit(state.copyWith(failure: failure, status: StateStatus.error)),
+        (response) => emit(
+            state.copyWith(status: StateStatus.success, isPhoneVerify: true)));
   }
 
   Future<String?> uploadPhoto() async {

@@ -36,6 +36,9 @@ class ProfileRepository extends IProfileRepository {
       if (e.response?.statusCode == 422) {
         return const Left(EmptyFieldFailure());
       }
+      if (e.response?.statusCode == 400) {
+        return const Left(WrongCodeFailure());
+      }
       return Left(
         (e.response?.statusCode == 401)
             ? const UnAuthorizationFailure()

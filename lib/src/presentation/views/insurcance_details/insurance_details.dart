@@ -14,6 +14,7 @@ import '../../../data/models/insurance_details/insurance_details.dart';
 import '../../components/custom_button.dart';
 import '../../components/loading.dart';
 import '../../cubits/auth/auth_cubit.dart';
+import '../../cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import 'widgets/dialog_body.dart';
 import 'widgets/price_tile.dart';
 
@@ -113,10 +114,14 @@ class SuccessBody extends StatelessWidget {
         child: CustomButton(
           text: AppLocalizations.of(context).buy,
           onTap: () {
+            context
+                .read<InsuranceBasicFilterCubit>()
+                .inputProductId(argument.id);
             if (context.read<AuthCubit>().state is UnAuthenticatedState) {
               showDialog(
                   context: context,
                   builder: (_) => DialogBody(onSubmit: () {
+                        Navigator.pop(context);
                         Navigator.pushNamed(context, AppRoutes.login);
                       }));
             } else {

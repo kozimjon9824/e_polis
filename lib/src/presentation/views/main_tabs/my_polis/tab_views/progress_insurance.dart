@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../components/error_view.dart';
 import '../../../../components/loading.dart';
 import '../widgets/insurance_details.dart';
+import '../widgets/unauth_polis.dart';
 
 class ProgressInsuranceView extends StatelessWidget {
   const ProgressInsuranceView({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class ProgressInsuranceView extends StatelessWidget {
     return BlocBuilder<ProgressProductsCubit, ProgressProductsState>(
       builder: (context, state) {
         return state.when(
+            initial: () => const UnAuthPolis(),
             loading: () => const LoadingWidget(),
             loaded: (data) => RefreshIndicator(
                 onRefresh: () async {

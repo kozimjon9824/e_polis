@@ -12,7 +12,7 @@ part 'current_products_cubit.freezed.dart';
 
 class CurrentProductsCubit extends Cubit<CurrentProductsState> {
   CurrentProductsCubit(this._useCase)
-      : super(const CurrentProductsState.loading());
+      : super(const CurrentProductsState.initial());
   final MyCurrentProductsUseCase _useCase;
 
   Future<void> loadData([bool isRefresh = false]) async {

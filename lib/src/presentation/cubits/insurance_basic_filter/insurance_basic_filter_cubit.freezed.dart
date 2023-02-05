@@ -19,6 +19,7 @@ mixin _$InsuranceBasicFilterState {
   StateStatus get status => throw _privateConstructorUsedError;
   Failure get failure => throw _privateConstructorUsedError;
   List<BasicFilterData>? get data => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   BasicFilterRequest get basicFilterRequest =>
       throw _privateConstructorUsedError;
 
@@ -37,6 +38,7 @@ abstract class $InsuranceBasicFilterStateCopyWith<$Res> {
       {StateStatus status,
       Failure failure,
       List<BasicFilterData>? data,
+      String? id,
       BasicFilterRequest basicFilterRequest});
 
   $BasicFilterRequestCopyWith<$Res> get basicFilterRequest;
@@ -59,6 +61,7 @@ class _$InsuranceBasicFilterStateCopyWithImpl<$Res,
     Object? status = null,
     Object? failure = null,
     Object? data = freezed,
+    Object? id = freezed,
     Object? basicFilterRequest = null,
   }) {
     return _then(_value.copyWith(
@@ -74,6 +77,10 @@ class _$InsuranceBasicFilterStateCopyWithImpl<$Res,
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<BasicFilterData>?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       basicFilterRequest: null == basicFilterRequest
           ? _value.basicFilterRequest
           : basicFilterRequest // ignore: cast_nullable_to_non_nullable
@@ -104,6 +111,7 @@ abstract class _$$_InsuranceBasicFilterStateCopyWith<$Res>
       {StateStatus status,
       Failure failure,
       List<BasicFilterData>? data,
+      String? id,
       BasicFilterRequest basicFilterRequest});
 
   @override
@@ -126,6 +134,7 @@ class __$$_InsuranceBasicFilterStateCopyWithImpl<$Res>
     Object? status = null,
     Object? failure = null,
     Object? data = freezed,
+    Object? id = freezed,
     Object? basicFilterRequest = null,
   }) {
     return _then(_$_InsuranceBasicFilterState(
@@ -141,6 +150,10 @@ class __$$_InsuranceBasicFilterStateCopyWithImpl<$Res>
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<BasicFilterData>?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       basicFilterRequest: null == basicFilterRequest
           ? _value.basicFilterRequest
           : basicFilterRequest // ignore: cast_nullable_to_non_nullable
@@ -156,6 +169,7 @@ class _$_InsuranceBasicFilterState implements _InsuranceBasicFilterState {
       {this.status = StateStatus.unknown,
       this.failure = const UnknownFailure(),
       final List<BasicFilterData>? data,
+      this.id,
       this.basicFilterRequest = const BasicFilterRequest()})
       : _data = data;
 
@@ -176,12 +190,14 @@ class _$_InsuranceBasicFilterState implements _InsuranceBasicFilterState {
   }
 
   @override
+  final String? id;
+  @override
   @JsonKey()
   final BasicFilterRequest basicFilterRequest;
 
   @override
   String toString() {
-    return 'InsuranceBasicFilterState(status: $status, failure: $failure, data: $data, basicFilterRequest: $basicFilterRequest)';
+    return 'InsuranceBasicFilterState(status: $status, failure: $failure, data: $data, id: $id, basicFilterRequest: $basicFilterRequest)';
   }
 
   @override
@@ -192,13 +208,14 @@ class _$_InsuranceBasicFilterState implements _InsuranceBasicFilterState {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.failure, failure) || other.failure == failure) &&
             const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.basicFilterRequest, basicFilterRequest) ||
                 other.basicFilterRequest == basicFilterRequest));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, status, failure,
-      const DeepCollectionEquality().hash(_data), basicFilterRequest);
+      const DeepCollectionEquality().hash(_data), id, basicFilterRequest);
 
   @JsonKey(ignore: true)
   @override
@@ -213,6 +230,7 @@ abstract class _InsuranceBasicFilterState implements InsuranceBasicFilterState {
           {final StateStatus status,
           final Failure failure,
           final List<BasicFilterData>? data,
+          final String? id,
           final BasicFilterRequest basicFilterRequest}) =
       _$_InsuranceBasicFilterState;
 
@@ -222,6 +240,8 @@ abstract class _InsuranceBasicFilterState implements InsuranceBasicFilterState {
   Failure get failure;
   @override
   List<BasicFilterData>? get data;
+  @override
+  String? get id;
   @override
   BasicFilterRequest get basicFilterRequest;
   @override

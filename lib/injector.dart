@@ -30,6 +30,7 @@ import 'package:e_polis/src/domain/usecases/setting/get_app_lang.dart';
 import 'package:e_polis/src/presentation/cubits/add_driver/add_driver_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/add_product/add_product_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/change_phone_verify/change_phone_verify_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/check_vehicle_info/check_vehicle_info_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/contract_information/contract_information_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/drop_down_values/drop_down_values_cubit.dart';
@@ -109,6 +110,7 @@ Future<void> initDi() async {
   // profile cubit
   inject
       .registerFactory(() => UpdateProfileCubit(inject(), inject(), inject()));
+  inject.registerFactory(() => ChangePhoneVerifyCubit(inject()));
 
   /// UseCases
 

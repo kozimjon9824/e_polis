@@ -12,7 +12,7 @@ part 'archived_products_cubit.freezed.dart';
 
 class ArchivedProductsCubit extends Cubit<ArchivedProductsState> {
   ArchivedProductsCubit(this._useCase)
-      : super(const ArchivedProductsState.loading());
+      : super(const ArchivedProductsState.initial());
 
   final MyArchivedProductsUseCase _useCase;
 

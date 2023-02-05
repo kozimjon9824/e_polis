@@ -33,7 +33,9 @@ class ProfilePage extends StatelessWidget {
             title: AppLocalizations.of(context).profileInfo,
             icon: AppIcons.profileInfo,
             onTap: () {
-              Navigator.pushNamed(context, AppRoutes.profileInfo);
+              if ((context.read<AuthCubit>().state is AuthenticatedState)) {
+                Navigator.pushNamed(context, AppRoutes.profileInfo);
+              }
             },
           ),
           BlocBuilder<LanguageCubit, LanguageState>(
@@ -88,12 +90,20 @@ class ProfilePage extends StatelessWidget {
           onTap: () {
             showDialog(
                 context: context,
-                builder: (_) => ExitDialogBody(onTap: () {
-                      context.read<AuthCubit>().logout();
-                      context.read<MainScreenDataCubit>().loadData();
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, AppRoutes.main, (route) => false);
-                    }));
+                builder: (_) => BlocConsumer<AuthCubit, AuthState>(
+                      listener: (context, state) {
+                        if (state is UnAuthenticatedState) {
+                          context.read<MainScreenDataCubit>().loadData();
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, AppRoutes.main, (route) => false);
+                        }
+                      },
+                      builder: (context, state) {
+                        return ExitDialogBody(onTap: () {
+                          context.read<AuthCubit>().logout();
+                        });
+                      },
+                    ));
           },
         ),
       );

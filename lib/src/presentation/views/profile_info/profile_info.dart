@@ -9,7 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../../generated/l10n.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/themes/app_icons.dart';
+import '../../../data/models/profile_update/profile_update.dart';
 import '../../../data/models/user_profile/user_profile.dart';
 import '../../components/custom_button.dart';
 import '../../components/custom_text_field.dart';
@@ -37,6 +39,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
       child: Scaffold(
         appBar: AppBar(title: Text(AppLocalizations.of(context).profileInfo)),
         body: BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
+          buildWhen: (pre, cur) => cur.status != StateStatus.loading,
           builder: (context, state) {
             var data = state.user;
             lastNameController.text = data?.lastName ?? '';
@@ -96,12 +99,20 @@ class _ProfileInfoState extends State<ProfileInfo> {
 
   Widget saveButton() {
     return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state.status == StateStatus.success) {
-          context.read<MainScreenDataCubit>().loadData();
-          Navigator.pop(context);
-          showSuccessMessage(
-              context, AppLocalizations.of(context).profileUpdated);
+          if (state.isPhoneVerify) {
+            Navigator.pushNamed(context, AppRoutes.verifyPhone,
+                arguments: ProfileUpdateRequest(
+                    firstName: nameController.text,
+                    lastName: lastNameController.text,
+                    phone: '998${phoneMask.unmaskText(phoneController.text)}'));
+          } else {
+            context.read<MainScreenDataCubit>().loadData();
+            Navigator.pop(context);
+            showSuccessMessage(
+                context, AppLocalizations.of(context).profileUpdated);
+          }
         }
         if (state.status == StateStatus.error) {
           showErrorMessage(context, state.failure.getLocalizedMessage(context));
@@ -116,7 +127,12 @@ class _ProfileInfoState extends State<ProfileInfo> {
             isLoading: state.status == StateStatus.loading,
             onTap: () {
               if (formKey.currentState!.validate()) {
-                if (data?.photo != phoneMask.unmaskText(phoneController.text)) {
+                String phone = phoneMask.unmaskText(phoneController.text);
+                if (data?.photo != phone && phone.isNotEmpty) {
+                  context
+                      .read<UpdateProfileCubit>()
+                      .updateProfileAndSendOptCode(
+                          nameController.text, lastNameController.text, phone);
                 } else {
                   context.read<UpdateProfileCubit>().updateProfile(
                       nameController.text, lastNameController.text);

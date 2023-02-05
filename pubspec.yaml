@@ -78,7 +78,7 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
-#  generate: true
+  generate: true
 
   assets:
     - assets/fonts/
@@ -90,6 +90,6 @@ flutter:
       fonts:
         - asset: assets/fonts/Gilroy/Gilroy-Regular.ttf
 
-#flutter_intl:
-#  enabled: true
-#  class_name: AppLocalizations
+flutter_intl:
+  enabled: true
+  class_name: AppLocalizations
