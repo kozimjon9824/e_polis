@@ -9,4 +9,7 @@ class InitialState extends AuthState {}
 
 class AuthenticatedState extends AuthState {}
 
-class UnAuthenticatedState extends AuthState {}
+class UnAuthenticatedState extends AuthState {
+  final String lang;
+  UnAuthenticatedState(this.lang);
+}

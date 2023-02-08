@@ -1,11 +1,12 @@
 import 'package:e_polis/generated/l10n.dart';
+import 'package:e_polis/src/core/utils/utils.dart';
+import 'package:e_polis/src/presentation/components/loading.dart';
 import 'package:e_polis/src/presentation/cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import '../../components/search_bar.dart';
 import 'widgets/body_widget.dart';
-import 'widgets/nothing_found.dart';
 
 class BasicFilterResultPage extends StatefulWidget {
   const BasicFilterResultPage({Key? key}) : super(key: key);
@@ -29,24 +30,36 @@ class _BasicFilterResultPageState extends State<BasicFilterResultPage> {
   Widget build(BuildContext context) {
     return KeyboardVisibilityProvider(
       controller: keyboardController,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context).calculationResults),
-          bottom: SearchBar(
-              onCancel: () {
-                controller.text = '';
-                _focusNode.unfocus();
-              },
-              focus: _focusNode,
-              autoFocus: false,
-              hasWord: false,
-              onChange: (word) {},
-              onClear: () {
-                controller.text = '';
-              },
-              controller: controller),
-        ),
-        body: false ? const NothingFound() : const InsurancesResults(),
+      child: BlocBuilder<InsuranceBasicFilterCubit, InsuranceBasicFilterState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(AppLocalizations.of(context).calculationResults),
+              bottom: SearchBar(
+                  onCancel: () {
+                    controller.text = '';
+                    _focusNode.unfocus();
+                    context.read<InsuranceBasicFilterCubit>().clearSearch();
+                  },
+                  focus: _focusNode,
+                  autoFocus: false,
+                  hasWord: controller.text.isNotEmpty,
+                  onChange: (word) {
+                    context.read<InsuranceBasicFilterCubit>().searchData(word);
+                  },
+                  onClear: () {
+                    controller.text = '';
+                    // context.read<InsuranceBasicFilterCubit>().clearSearch();
+                  },
+                  controller: controller),
+            ),
+            body: (state.status == StateStatus.loading)
+                ? const LoadingWidget()
+                : (state.searchResult != null && keyboardController.isVisible)
+                    ? const SearchResults()
+                    : const InsurancesResults(),
+          );
+        },
       ),
     );
   }

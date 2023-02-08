@@ -1,6 +1,6 @@
 class AppRoutes {
   AppRoutes._();
-  static const splash = '/splash';
+  static const splash = '/';
   static const onBoarding = '/onBoarding';
   static const language = '/language';
   static const changeLanguage = '/changeLanguage';
@@ -21,4 +21,5 @@ class AppRoutes {
   static const helperCenter = '/helperCenter';
   static const notification = '/notification';
   static const verifyPhone = '/verifyPhone';
+  static const paymentSuccess = '/paymentSuccess';
 }

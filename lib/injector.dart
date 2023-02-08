@@ -73,7 +73,7 @@ final inject = GetIt.instance;
 
 Future<void> initDi() async {
   /// cubit initialization : auth
-  inject.registerFactory(() => AuthCubit(inject(), inject()));
+  inject.registerFactory(() => AuthCubit(inject(), inject(), inject()));
   inject.registerFactory(() => LoginCubit(inject()));
   inject.registerFactory(() => VerifyCubit(inject()));
 
@@ -167,7 +167,7 @@ Future<void> initDi() async {
   inject.registerLazySingleton(() => pref);
 
   // api client init for network requests dio
-  inject.registerFactory(() => NetworkClient());
+  inject.registerLazySingleton(() => NetworkClient());
   var dio = await inject<NetworkClient>().init(inject());
-  inject.registerFactory(() => ApiClient(dio, BASE_URL));
+  inject.registerLazySingleton(() => ApiClient(dio, BASE_URL));
 }

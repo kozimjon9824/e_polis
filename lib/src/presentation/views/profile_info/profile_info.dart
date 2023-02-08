@@ -32,6 +32,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
   final phoneController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  final phoneMask = MaskTextInputFormatter(
+      mask: '(##) ### ## ##',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.eager);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -39,11 +44,13 @@ class _ProfileInfoState extends State<ProfileInfo> {
       child: Scaffold(
         appBar: AppBar(title: Text(AppLocalizations.of(context).profileInfo)),
         body: BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
-          buildWhen: (pre, cur) => cur.status != StateStatus.loading,
+          buildWhen: (pre, cur) => cur.status == StateStatus.unknown,
           builder: (context, state) {
             var data = state.user;
             lastNameController.text = data?.lastName ?? '';
             nameController.text = data?.firstName ?? '';
+            phoneController.text =
+                phoneMask.maskText(data?.phone?.substring(3) ?? '');
             return profileBodyWidget(
                 file: state.selectedFile, data: data, context: context);
           },
@@ -128,7 +135,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
             onTap: () {
               if (formKey.currentState!.validate()) {
                 String phone = phoneMask.unmaskText(phoneController.text);
-                if (data?.photo != phone && phone.isNotEmpty) {
+                if (data?.phone != '998$phone' && phone.isNotEmpty) {
                   context
                       .read<UpdateProfileCubit>()
                       .updateProfileAndSendOptCode(
@@ -153,11 +160,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
     phoneController.dispose();
   }
 
-  final phoneMask = MaskTextInputFormatter(
-      mask: '(##) ### ## ##',
-      filter: {"#": RegExp(r'[0-9]')},
-      type: MaskAutoCompletionType.eager);
-
   Widget phoneCustomPrefixTextField() {
     return CustomPrefixTextField(
       label: AppLocalizations.of(context).phoneNumber,
@@ -165,7 +167,16 @@ class _ProfileInfoState extends State<ProfileInfo> {
       textInputAction: TextInputAction.done,
       textEditingController: phoneController,
       textInputType: TextInputType.phone,
-      inputFormatters: [phoneMask],
+      inputFormatters: [
+        MaskTextInputFormatter(
+            mask: '(##) ### ## ##',
+            initialText: phoneMask.unmaskText(phoneController.text),
+            filter: {"#": RegExp(r'[0-9]')},
+            type: MaskAutoCompletionType.eager)
+      ],
+      validator: (value) => value!.length < 14
+          ? AppLocalizations.of(context).invalidLength
+          : null,
       prefixIcon: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 30),
         child: Row(

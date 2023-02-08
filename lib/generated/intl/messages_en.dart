@@ -22,11 +22,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "SuccessDes": MessageLookupByLibrary.simpleMessage(
+            "Поздравляем, оплата прошла успешно Обязательное Э-ОСАГО страхование"),
         "WrongCode": MessageLookupByLibrary.simpleMessage(
             "Неверный код, введите правильный код"),
         "about": MessageLookupByLibrary.simpleMessage("О Нас"),
         "aboutUs": MessageLookupByLibrary.simpleMessage(
-            "Epolis входит в ТОП-5 страховых компаний Узбекистана, являясь второй крупнейшей страховой компанией страны по объемам активов. Динамичный рост рыночной доли по сборам, капиталу и инвестициям! Epolis экспортно-импортная акциядорлик жамияти суғурта компанииси умий суғурта бозорида ўз фаолиятини олиб боради ва суғурта фаолияти классификаторига кўра мавжуд 17 турдаги суғуртанинг барчаси билан шуғулланади"),
+            "Epolis входит в ТОП-5 страховых компаний Узбекистана, являясь второй крупнейшей страховой компанией страны по объемам активов. Динамичный рост рыночной доли по сборам, капиталу и инвестициям!\nEpolis экспортно-импортная акциядорлик жамияти суғурта компанииси умий суғурта бозорида ўз фаолиятини олиб боради ва суғурта фаолияти классификаторига кўра мавжуд 17 турдаги суғуртанинг барчаси билан шуғулланади"),
         "accountVerified":
             MessageLookupByLibrary.simpleMessage("Учетная запись подтверждена"),
         "accountVerifiedDescription": MessageLookupByLibrary.simpleMessage(
@@ -48,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Купить страховку"),
         "buyNow": MessageLookupByLibrary.simpleMessage("Купить снова"),
         "buyPolis": MessageLookupByLibrary.simpleMessage("Купить полис"),
+        "byCard": MessageLookupByLibrary.simpleMessage("с картой"),
         "cacheError": MessageLookupByLibrary.simpleMessage("Сбой кеша"),
         "calculationResults":
             MessageLookupByLibrary.simpleMessage("Результаты расчета"),
@@ -62,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "clearData":
             MessageLookupByLibrary.simpleMessage("Очистить информацию"),
         "close": MessageLookupByLibrary.simpleMessage("Закрыть"),
+        "commission": MessageLookupByLibrary.simpleMessage("Коммисия"),
         "compensationPriceTitle": MessageLookupByLibrary.simpleMessage(
             "Возмещение ущерба имуществу потерпевшего"),
         "confirm": MessageLookupByLibrary.simpleMessage("Подтвердить"),
@@ -80,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "doYouWantExit": MessageLookupByLibrary.simpleMessage(
             "Вы хотите выйти из приложения"),
+        "downloadPayDoc":
+            MessageLookupByLibrary.simpleMessage("Скачать квитацию"),
         "driver": MessageLookupByLibrary.simpleMessage("Водитель"),
         "driverDetails":
             MessageLookupByLibrary.simpleMessage("Инфомация Водителя"),
@@ -98,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expend": MessageLookupByLibrary.simpleMessage("Продлить"),
         "fio": MessageLookupByLibrary.simpleMessage("Ф.И.О"),
         "firstName": MessageLookupByLibrary.simpleMessage("Имя"),
+        "foundQuantity": MessageLookupByLibrary.simpleMessage("Мы нашли"),
         "from": MessageLookupByLibrary.simpleMessage("От"),
         "generalInfo": MessageLookupByLibrary.simpleMessage("Общая информация"),
         "haveThePrivilege":
@@ -122,6 +129,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Страховая сумма"),
         "invalidDriverPassport": MessageLookupByLibrary.simpleMessage(
             "Недействительный паспорт водителя"),
+        "invalidLength":
+            MessageLookupByLibrary.simpleMessage("Текст недействителен"),
         "languagePageMainText": MessageLookupByLibrary.simpleMessage(
             "Добро пожаловать в epolis Выберите язык приложения"),
         "lastName": MessageLookupByLibrary.simpleMessage("Фамилия"),
@@ -137,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mustNotEmptyFailure":
             MessageLookupByLibrary.simpleMessage("Поля не должны быть пустыми"),
         "myPolicies": MessageLookupByLibrary.simpleMessage("Мои полисы"),
+        "name": MessageLookupByLibrary.simpleMessage("Имя"),
         "nameSurname": MessageLookupByLibrary.simpleMessage("Имя Фамилия"),
         "newAndPromotionalInformation": MessageLookupByLibrary.simpleMessage(
             "Новости и рекламная информация"),
@@ -178,6 +188,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ourMission": MessageLookupByLibrary.simpleMessage("Наш миссия"),
         "passport": MessageLookupByLibrary.simpleMessage("Паспорта/ID карта"),
         "pay": MessageLookupByLibrary.simpleMessage("ОПЛАТИТЬ"),
+        "payType": MessageLookupByLibrary.simpleMessage("Метод оплаты"),
+        "payed": MessageLookupByLibrary.simpleMessage("Оплачен"),
         "payment": MessageLookupByLibrary.simpleMessage("Оплата"),
         "paymentAmount": MessageLookupByLibrary.simpleMessage("Сумма оплаты"),
         "paymentType": MessageLookupByLibrary.simpleMessage("Способ оплаты"),
@@ -223,7 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "skip": MessageLookupByLibrary.simpleMessage("Пропустить"),
         "startUsing":
             MessageLookupByLibrary.simpleMessage("Начать пользоваться"),
-        "success": MessageLookupByLibrary.simpleMessage("Успех"),
+        "status": MessageLookupByLibrary.simpleMessage("Статус"),
+        "success": MessageLookupByLibrary.simpleMessage("Успешно"),
         "successfullyAdded":
             MessageLookupByLibrary.simpleMessage("полис успешно добавлена"),
         "sum": MessageLookupByLibrary.simpleMessage("сум"),
@@ -231,6 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "termsOfInsurance": MessageLookupByLibrary.simpleMessage(
             "Срок действия страхового полиса"),
         "toDate": MessageLookupByLibrary.simpleMessage("До"),
+        "totalAmount": MessageLookupByLibrary.simpleMessage("Общая сумма"),
         "twentyDays": MessageLookupByLibrary.simpleMessage("20 дней"),
         "typePolis": MessageLookupByLibrary.simpleMessage("Тип полиса"),
         "typeVehicle": MessageLookupByLibrary.simpleMessage("Тип автомобиля"),

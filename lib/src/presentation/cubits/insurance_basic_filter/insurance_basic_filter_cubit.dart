@@ -26,6 +26,24 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
             state.copyWith(status: StateStatus.unknown, data: response.data)));
   }
 
+  void searchData(String text) async {
+    if (text.length < 2) {
+      return;
+    }
+    emit(state.copyWith(status: StateStatus.loading));
+    await Future.delayed(const Duration(milliseconds: 500));
+    var list = state.data ?? [];
+    final searchResult = list
+        .where((element) =>
+            (element.policyAmount?.toString().contains(text) ?? false))
+        .toList();
+    emit(state.copyWith(
+        status: StateStatus.unknown, searchResult: searchResult));
+  }
+
+  void clearSearch() =>
+      emit(state.copyWith(status: StateStatus.unknown, searchResult: null));
+
   void clearData() {
     emit(state.copyWith(
         status: StateStatus.unknown,

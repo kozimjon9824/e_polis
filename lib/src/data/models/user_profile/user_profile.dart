@@ -8,6 +8,7 @@ class UserProfileResponse with _$UserProfileResponse {
   const factory UserProfileResponse(
       {String? lastName,
       String? firstName,
+      String? phone,
       String? photo}) = _UserProfileResponse;
 
   factory UserProfileResponse.fromJson(Map<String, dynamic> json) =>

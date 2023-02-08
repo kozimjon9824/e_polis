@@ -75,18 +75,15 @@ class SearchBar extends StatelessWidget implements PreferredSizeWidget {
                       padding: const EdgeInsets.all(12.0),
                       child: SvgPicture.asset(AppIcons.search,
                           height: 19, width: 19)),
-                  // suffixIcon: (isKeyboardVisible && (hasWord ?? false))
-                  //     ? InkWell(
-                  //         onTap: onClear,
-                  //         child: Padding(
-                  //           padding: const EdgeInsets.all(8.0),
-                  //           child: SvgPicture.asset(
-                  //               'assets/icons/ic_search_clear.svg',
-                  //               height: 18,
-                  //               width: 18),
-                  //         ),
-                  //       )
-                  //     : null,
+                  suffixIcon: (isKeyboardVisible && (hasWord ?? false))
+                      ? InkWell(
+                          onTap: onClear,
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(Icons.clear),
+                          ),
+                        )
+                      : null,
                   filled: true,
                   fillColor: AppColors.grey50,
                   border: const OutlineInputBorder(

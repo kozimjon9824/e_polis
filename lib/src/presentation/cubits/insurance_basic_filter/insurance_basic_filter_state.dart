@@ -8,6 +8,7 @@ class InsuranceBasicFilterState with _$InsuranceBasicFilterState {
       @Default(UnknownFailure())
           Failure failure,
       List<BasicFilterData>? data,
+      List<BasicFilterData>? searchResult,
       String? id,
       @Default(BasicFilterRequest())
           BasicFilterRequest basicFilterRequest}) = _InsuranceBasicFilterState;

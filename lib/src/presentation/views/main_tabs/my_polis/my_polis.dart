@@ -28,7 +28,9 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    if ((context.read<AuthCubit>().state is AuthenticatedState)) {
+    print('INIT-IN');
+    if (BlocProvider.of<AuthCubit>(context).state is AuthenticatedState) {
+      print('INIT-OUT');
       context.read<CurrentProductsCubit>().loadData();
       context.read<ProgressProductsCubit>().loadData();
       context.read<ArchivedProductsCubit>().loadData();
@@ -51,7 +53,8 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
               },
             ),
           ),
-          body: (context.read<AuthCubit>().state is UnAuthenticatedState)
+          body: (BlocProvider.of<AuthCubit>(context).state
+                  is UnAuthenticatedState)
               ? const UnAuthPolis()
               : TabBarView(
                   controller: _tabController,
@@ -62,10 +65,10 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
                     ArchivedInsuranceView()
                   ],
                 ),
-          bottomNavigationBar:
-              (context.read<AuthCubit>().state is UnAuthenticatedState)
-                  ? null
-                  : bottomButtons(),
+          bottomNavigationBar: (BlocProvider.of<AuthCubit>(context).state
+                  is UnAuthenticatedState)
+              ? null
+              : bottomButtons(),
         );
       },
     );

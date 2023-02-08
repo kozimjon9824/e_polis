@@ -36,6 +36,29 @@ class InsurancesResults extends StatelessWidget {
   }
 }
 
+class SearchResults extends StatelessWidget {
+  const SearchResults({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<InsuranceBasicFilterCubit, InsuranceBasicFilterState>(
+      builder: (context, state) {
+        if (state.status == StateStatus.loading) {
+          return const LoadingWidget();
+        }
+        if (state.searchResult?.isEmpty ?? false) {
+          return const NothingFound();
+        }
+        return BodyWidget(
+            list: state.searchResult ?? [],
+            request: state.basicFilterRequest,
+            text:
+                '${AppLocalizations.of(context).foundQuantity} ${state.searchResult?.length ?? 0}');
+      },
+    );
+  }
+}
+
 class BodyWidget extends StatelessWidget {
   const BodyWidget({
     Key? key,
@@ -55,40 +78,38 @@ class BodyWidget extends StatelessWidget {
         Text(text, style: AppTextStyles.styleW400S14Grey6),
         const SizedBox(height: 24),
         ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (_, index) => InsuranceDetail(
-                  image: list[index].logo,
-                  polisPrice: numberFormat(list[index].policyAmount?.toInt()),
-                  insurancePrice:
-                      numberFormat(list[index].insuranceAmount?.toInt()),
-                  onBuy: () {
-                    context
-                        .read<InsuranceBasicFilterCubit>()
-                        .inputProductId(list[index].id ?? '');
-                    if (context.read<AuthCubit>().state
-                        is UnAuthenticatedState) {
-                      showDialog(
-                          context: context,
-                          builder: (_) => DialogBody(onSubmit: () {
-                                Navigator.pop(context);
-                                Navigator.pushNamed(context, AppRoutes.login);
-                              }));
-                    } else {
-                      Navigator.pushNamed(
-                          context, AppRoutes.insuranceRegistration,
-                          arguments: InsurancePageArguments(
-                              id: list[index].id ?? '', request: request));
-                    }
-                  },
-                  onDetailTap: () {
-                    Navigator.pushNamed(context, AppRoutes.insuranceDetails,
-                        arguments: InsurancePageArguments(
-                            id: list[index].id ?? '', request: request));
-                  },
-                ),
-            separatorBuilder: (_, __) => const SizedBox(height: 16),
-            itemCount: list.length)
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (_, index) => InsuranceDetail(
+            image: list[index].logo,
+            polisPrice: numberFormat(list[index].policyAmount?.toInt()),
+            insurancePrice: numberFormat(list[index].insuranceAmount?.toInt()),
+            onBuy: () {
+              context
+                  .read<InsuranceBasicFilterCubit>()
+                  .inputProductId(list[index].id ?? '');
+              if (context.read<AuthCubit>().state is UnAuthenticatedState) {
+                showDialog(
+                    context: context,
+                    builder: (_) => DialogBody(onSubmit: () {
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, AppRoutes.login);
+                        }));
+              } else {
+                Navigator.pushNamed(context, AppRoutes.insuranceRegistration,
+                    arguments: InsurancePageArguments(
+                        id: list[index].id ?? '', request: request));
+              }
+            },
+            onDetailTap: () {
+              Navigator.pushNamed(context, AppRoutes.insuranceDetails,
+                  arguments: InsurancePageArguments(
+                      id: list[index].id ?? '', request: request));
+            },
+          ),
+          separatorBuilder: (_, __) => const SizedBox(height: 16),
+          itemCount: list.length,
+        )
       ],
     );
   }

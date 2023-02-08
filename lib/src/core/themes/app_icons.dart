@@ -46,6 +46,7 @@ class AppIcons {
   // images
   static final appLogo = getImagePath('app_logo');
   static final successDoc = getImagePath('success_doc');
+  static final paymentSuccess = getImagePath('payment_success');
   static final onBoarding1 = getImagePath('onboarding1');
   static final onBoarding2 = getImagePath('onboarding2');
   static final onBoarding3 = getImagePath('onboarding3');

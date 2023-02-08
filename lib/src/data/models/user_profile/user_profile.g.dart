@@ -11,6 +11,7 @@ _$_UserProfileResponse _$$_UserProfileResponseFromJson(
     _$_UserProfileResponse(
       lastName: json['lastName'] as String?,
       firstName: json['firstName'] as String?,
+      phone: json['phone'] as String?,
       photo: json['photo'] as String?,
     );
 
@@ -19,5 +20,6 @@ Map<String, dynamic> _$$_UserProfileResponseToJson(
     <String, dynamic>{
       'lastName': instance.lastName,
       'firstName': instance.firstName,
+      'phone': instance.phone,
       'photo': instance.photo,
     };

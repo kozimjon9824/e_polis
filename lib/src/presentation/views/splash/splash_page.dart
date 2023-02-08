@@ -27,12 +27,15 @@ class _SplashPageState extends State<SplashPage> {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthenticatedState) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, AppRoutes.main, (route) => true);
+          Navigator.pushReplacementNamed(context, AppRoutes.main);
         }
         if (state is UnAuthenticatedState) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, AppRoutes.language, (route) => false);
+          String language = state.lang;
+          if (language == '') {
+            Navigator.pushReplacementNamed(context, AppRoutes.language);
+          } else {
+            Navigator.pushReplacementNamed(context, AppRoutes.onBoarding);
+          }
         }
       },
       child: Scaffold(

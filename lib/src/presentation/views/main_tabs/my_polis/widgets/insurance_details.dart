@@ -72,11 +72,12 @@ class ProgressSingleProduct extends StatelessWidget {
       itemBuilder: (_, index) {
         var data = productList[index];
         double percent = (data.expirePercent ?? 0.1) / 100;
-        final color = (percent > 50)
-            ? AppColors.primaryColor
-            : (percent > 20)
-                ? AppColors.orange
-                : AppColors.red;
+        const color = AppColors.orange;
+        // (percent > 50)
+        //     ? AppColors.primaryColor
+        //     : (percent > 20)
+        //         ? AppColors.orange
+        //         : AppColors.red;
         return InsuranceDetails(
             statusIcon: LinearPercentIndicator(
               width: 180.0,

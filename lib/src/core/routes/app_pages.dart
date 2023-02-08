@@ -14,6 +14,7 @@ import 'package:e_polis/src/presentation/views/main_tabs/main_tab.dart';
 import 'package:e_polis/src/presentation/views/notification_setting/notification_setting.dart';
 import 'package:e_polis/src/presentation/views/notifications/notifications.dart';
 import 'package:e_polis/src/presentation/views/onboarding/onboarding_page.dart';
+import 'package:e_polis/src/presentation/views/payment_success/payment_success.dart';
 import 'package:e_polis/src/presentation/views/profile_info/profile_info.dart';
 import 'package:e_polis/src/presentation/views/splash/splash_page.dart';
 import 'package:e_polis/src/presentation/views/verification_success/verification_success.dart';
@@ -89,6 +90,10 @@ class RouteGenerateKit {
       case AppRoutes.verifyPhone:
         return MaterialPageRoute(
             builder: (context) => const VerifyChangePhonePage(),
+            settings: RouteSettings(arguments: args));
+      case AppRoutes.paymentSuccess:
+        return MaterialPageRoute(
+            builder: (context) => const PaymentSuccessPage(),
             settings: RouteSettings(arguments: args));
     }
     return null;

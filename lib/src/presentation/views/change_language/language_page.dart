@@ -22,7 +22,7 @@ class ChangeLanguagePage extends StatelessWidget {
         listener: (context, state) {
           state.whenOrNull(success: () {
             Navigator.pushNamedAndRemoveUntil(
-                context, AppRoutes.splash, (route) => false);
+                context, AppRoutes.main, (route) => false);
             context.read<LanguageCubit>().loadAppLang();
             context.read<MainScreenDataCubit>().loadData();
           });

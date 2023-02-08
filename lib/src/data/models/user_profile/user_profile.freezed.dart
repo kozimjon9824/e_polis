@@ -22,6 +22,7 @@ UserProfileResponse _$UserProfileResponseFromJson(Map<String, dynamic> json) {
 mixin _$UserProfileResponse {
   String? get lastName => throw _privateConstructorUsedError;
   String? get firstName => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,8 @@ abstract class $UserProfileResponseCopyWith<$Res> {
           UserProfileResponse value, $Res Function(UserProfileResponse) then) =
       _$UserProfileResponseCopyWithImpl<$Res, UserProfileResponse>;
   @useResult
-  $Res call({String? lastName, String? firstName, String? photo});
+  $Res call(
+      {String? lastName, String? firstName, String? phone, String? photo});
 }
 
 /// @nodoc
@@ -54,6 +56,7 @@ class _$UserProfileResponseCopyWithImpl<$Res, $Val extends UserProfileResponse>
   $Res call({
     Object? lastName = freezed,
     Object? firstName = freezed,
+    Object? phone = freezed,
     Object? photo = freezed,
   }) {
     return _then(_value.copyWith(
@@ -64,6 +67,10 @@ class _$UserProfileResponseCopyWithImpl<$Res, $Val extends UserProfileResponse>
       firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
               as String?,
       photo: freezed == photo
           ? _value.photo
@@ -81,7 +88,8 @@ abstract class _$$_UserProfileResponseCopyWith<$Res>
       __$$_UserProfileResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? lastName, String? firstName, String? photo});
+  $Res call(
+      {String? lastName, String? firstName, String? phone, String? photo});
 }
 
 /// @nodoc
@@ -97,6 +105,7 @@ class __$$_UserProfileResponseCopyWithImpl<$Res>
   $Res call({
     Object? lastName = freezed,
     Object? firstName = freezed,
+    Object? phone = freezed,
     Object? photo = freezed,
   }) {
     return _then(_$_UserProfileResponse(
@@ -107,6 +116,10 @@ class __$$_UserProfileResponseCopyWithImpl<$Res>
       firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
               as String?,
       photo: freezed == photo
           ? _value.photo
@@ -119,7 +132,8 @@ class __$$_UserProfileResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserProfileResponse implements _UserProfileResponse {
-  const _$_UserProfileResponse({this.lastName, this.firstName, this.photo});
+  const _$_UserProfileResponse(
+      {this.lastName, this.firstName, this.phone, this.photo});
 
   factory _$_UserProfileResponse.fromJson(Map<String, dynamic> json) =>
       _$$_UserProfileResponseFromJson(json);
@@ -129,11 +143,13 @@ class _$_UserProfileResponse implements _UserProfileResponse {
   @override
   final String? firstName;
   @override
+  final String? phone;
+  @override
   final String? photo;
 
   @override
   String toString() {
-    return 'UserProfileResponse(lastName: $lastName, firstName: $firstName, photo: $photo)';
+    return 'UserProfileResponse(lastName: $lastName, firstName: $firstName, phone: $phone, photo: $photo)';
   }
 
   @override
@@ -145,12 +161,14 @@ class _$_UserProfileResponse implements _UserProfileResponse {
                 other.lastName == lastName) &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.photo, photo) || other.photo == photo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, lastName, firstName, photo);
+  int get hashCode =>
+      Object.hash(runtimeType, lastName, firstName, phone, photo);
 
   @JsonKey(ignore: true)
   @override
@@ -171,6 +189,7 @@ abstract class _UserProfileResponse implements UserProfileResponse {
   const factory _UserProfileResponse(
       {final String? lastName,
       final String? firstName,
+      final String? phone,
       final String? photo}) = _$_UserProfileResponse;
 
   factory _UserProfileResponse.fromJson(Map<String, dynamic> json) =
@@ -180,6 +199,8 @@ abstract class _UserProfileResponse implements UserProfileResponse {
   String? get lastName;
   @override
   String? get firstName;
+  @override
+  String? get phone;
   @override
   String? get photo;
   @override

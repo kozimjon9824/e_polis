@@ -88,4 +88,7 @@ class AppTextStyles {
 
   static const styleW500S14White = TextStyle(
       fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.white);
+
+  static const styleW700S24Green = TextStyle(
+      fontSize: 24, fontWeight: FontWeight.w700, color: AppColors.green);
 }

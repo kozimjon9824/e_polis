@@ -26,8 +26,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       appBar: AppBar(automaticallyImplyLeading: true, actions: [
         TextButton(
             onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, AppRoutes.main, (route) => false);
+              Navigator.pushReplacementNamed(context, AppRoutes.main);
             },
             child: Text(AppLocalizations.of(context).skip,
                 style: AppTextStyles.styleW400S14Grey6))
@@ -72,8 +71,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     setState(() {});
                   }
                   if (pageIndex == 3) {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, AppRoutes.main, (route) => false);
+                    Navigator.pushReplacementNamed(context, AppRoutes.main);
                   }
                 },
                 icon: Icons.arrow_forward_rounded,

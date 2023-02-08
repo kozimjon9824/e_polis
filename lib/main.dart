@@ -34,20 +34,21 @@ class MyApp extends StatelessWidget {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+            create: (context) => inject<LanguageCubit>()..loadAppLang()),
         BlocProvider(create: (context) => inject<AuthCubit>()),
         BlocProvider(create: (context) => inject<CurrentProductsCubit>()),
         BlocProvider(create: (context) => inject<ProgressProductsCubit>()),
         BlocProvider(create: (context) => inject<ArchivedProductsCubit>()),
         BlocProvider(
             create: (context) => inject<MainScreenDataCubit>()..loadData()),
-        BlocProvider(
-            create: (context) => inject<LanguageCubit>()..loadAppLang()),
         BlocProvider(create: (context) => inject<InsuranceBasicFilterCubit>()),
         BlocProvider(create: (context) => inject<DropDownValuesCubit>()),
         BlocProvider(create: (context) => inject<ProductTabManagerCubit>()),
       ],
       child: BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, state) {
+          String language = state.language ?? EN;
           return MaterialApp(
             title: 'E-Polis',
             debugShowCheckedModeBanner: false,
@@ -66,8 +67,15 @@ class MyApp extends StatelessWidget {
               Locale(UZ),
               Locale(EN),
             ],
-            // locale: const Locale(RU),
-            locale: Locale(state.language ?? RU),
+            builder: (context, child) {
+              final mediaQueryData = MediaQuery.of(context);
+              final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.3);
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(textScaleFactor: scale),
+                child: child!,
+              );
+            },
+            locale: Locale(language == '' ? RU : language),
             initialRoute: AppRoutes.splash,
           );
         },
@@ -77,16 +85,6 @@ class MyApp extends StatelessWidget {
 }
 
 final alice = Alice(showNotification: true, navigatorKey: navigatorKey);
-
-// builder: (context, child) {
-//   return ScrollConfiguration(behavior: MyBehavior(), child: child!);
-// },
-
-// class MyBehavior extends ScrollBehavior {
-//   @override
-//   ScrollPhysics getScrollPhysics(BuildContext context) =>
-//       const ClampingScrollPhysics();
-// }
 
 //flutter build apk --release
 //  @JsonSerializable(includeIfNull: false)

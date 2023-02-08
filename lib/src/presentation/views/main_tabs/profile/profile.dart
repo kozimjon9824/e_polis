@@ -33,7 +33,7 @@ class ProfilePage extends StatelessWidget {
             title: AppLocalizations.of(context).profileInfo,
             icon: AppIcons.profileInfo,
             onTap: () {
-              if ((context.read<AuthCubit>().state is AuthenticatedState)) {
+              if (context.read<AuthCubit>().state is AuthenticatedState) {
                 Navigator.pushNamed(context, AppRoutes.profileInfo);
               }
             },
@@ -79,7 +79,10 @@ class ProfilePage extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: logoutBtn(context),
+      bottomNavigationBar:
+          (context.read<AuthCubit>().state is AuthenticatedState)
+              ? logoutBtn(context)
+              : null,
     );
   }
 
@@ -89,21 +92,22 @@ class ProfilePage extends StatelessWidget {
           text: AppLocalizations.of(context).exit,
           onTap: () {
             showDialog(
-                context: context,
-                builder: (_) => BlocConsumer<AuthCubit, AuthState>(
-                      listener: (context, state) {
-                        if (state is UnAuthenticatedState) {
-                          context.read<MainScreenDataCubit>().loadData();
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, AppRoutes.main, (route) => false);
-                        }
-                      },
-                      builder: (context, state) {
-                        return ExitDialogBody(onTap: () {
-                          context.read<AuthCubit>().logout();
-                        });
-                      },
-                    ));
+              context: context,
+              builder: (_) => BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state is UnAuthenticatedState) {
+                    context.read<MainScreenDataCubit>().loadData();
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, AppRoutes.main, (route) => false);
+                  }
+                },
+                builder: (context, state) {
+                  return ExitDialogBody(onTap: () {
+                    context.read<AuthCubit>().logout();
+                  });
+                },
+              ),
+            );
           },
         ),
       );
