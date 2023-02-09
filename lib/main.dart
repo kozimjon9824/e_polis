@@ -1,4 +1,3 @@
-import 'package:alice/alice.dart';
 import 'package:e_polis/src/presentation/cubits/drop_down_values/drop_down_values_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
@@ -54,8 +53,8 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: appThemeData,
             onGenerateRoute: RouteGenerateKit().generateKit,
-            // navigatorKey: navigatorKey,
-            navigatorKey: alice.getNavigatorKey(),
+            navigatorKey: navigatorKey,
+            // navigatorKey: alice.getNavigatorKey(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -84,7 +83,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-final alice = Alice(showNotification: true, navigatorKey: navigatorKey);
+// final alice = Alice(showNotification: true, navigatorKey: navigatorKey);
 
 //flutter build apk --release
 //  @JsonSerializable(includeIfNull: false)
