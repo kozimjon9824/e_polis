@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/themes/app_text_styles.dart';
+import '../../../../../core/utils/utils.dart';
 
 class ProfileWidget extends StatelessWidget {
   const ProfileWidget({
@@ -54,16 +55,17 @@ class ProfileWidget extends StatelessWidget {
                   SvgPicture.asset(AppIcons.avatar),
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(fullName ?? AppLocalizations.of(context).nameSurname,
                     style: AppTextStyles.styleW700S16Grey9),
-                const SizedBox(height: 6),
-                Text(phone ?? '+998 90 123 45 67',
-                    style: AppTextStyles.styleW500S16Grey4),
+                const SizedBox(height: 5),
+                Text(getMaskedPhone(phone) ?? '+998 90 123 45 67',
+                    style: AppTextStyles.styleW600S14Grey9
+                        .copyWith(color: AppColors.grey700)),
               ],
             ),
           )

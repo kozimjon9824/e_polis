@@ -57,7 +57,7 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                 driverModel: DriverModel(
                     birthDate: dateConverter(
                         date: dateController.text,
-                        inFormat: 'dd/MM/yyyy',
+                        inFormat: 'dd.MM.yyyy',
                         outFormat: 'yyyy-MM-dd'),
                     passport: DriverPassport(
                         series: seriesController.text,
@@ -69,10 +69,14 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
         builder: (context, state) {
           var driverCubit = context.read<LimitedDriverTabBarCubit>();
           var cubit = context.read<AddDriverCubit>();
-          if (state.driverData != null) {
-            licenseDate.text = state.driverData?.driverLicense?.startDate ?? '';
-            licenseNumber.text = state.driverData?.driverLicense?.number ?? '';
-            licenseSeries.text = state.driverData?.driverLicense?.series ?? '';
+          var driverData = state.driverData;
+          if (driverData != null) {
+            licenseDate.text = dateConverter(
+                date: driverData.driverLicense?.startDate ?? '',
+                inFormat: 'yyyy-MM-dd',
+                outFormat: 'dd.MM.yyyy');
+            licenseNumber.text = driverData.driverLicense?.number ?? '';
+            licenseSeries.text = driverData.driverLicense?.series ?? '';
           }
           return Scaffold(
             body: ListView(
@@ -85,12 +89,15 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
                   padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
                   showChildren2: state.driverData != null,
-                  clearText: state.driverData != null
+                  clearText: (state.driverData != null || widget.index != 1)
                       ? AppLocalizations.of(context).delete
                       : null,
                   onClear: () {
-                    cubit.clearDriverData();
-                    driverCubit.removeTab(widget.index - 1);
+                    if (state.driverData != null) {
+                      cubit.clearDriverData();
+                    } else {
+                      driverCubit.removeTab(widget.index - 1);
+                    }
                   },
                   children2: [
                     BlocBuilder<DropDownValuesCubit, DropDownValuesState>(
@@ -152,7 +159,7 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                   if (state.driverData == null) {
                     String date = dateConverter(
                         date: dateController.text,
-                        inFormat: 'dd/MM/yyyy',
+                        inFormat: 'dd.MM.yyyy',
                         outFormat: 'yyyy-MM-dd');
                     cubit.addDriver(
                         birth: date,
@@ -169,6 +176,9 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(2);
+                  } else {
+                    showErrorMessage(context,
+                        AppLocalizations.of(context).enterAllDriversInputs);
                   }
                 },
               ),

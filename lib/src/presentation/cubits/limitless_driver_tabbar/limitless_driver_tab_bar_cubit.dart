@@ -17,6 +17,10 @@ class LimitlessDriverTabBarCubit extends Cubit<LimitlessDriverTabBarState> {
 
   void addTab() {
     var tabs = List.of(state.drivers);
+    int count = tabs.length;
+    if (count == 10) {
+      return;
+    }
     tabs.add(IndexedDriverModel());
     emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
   }

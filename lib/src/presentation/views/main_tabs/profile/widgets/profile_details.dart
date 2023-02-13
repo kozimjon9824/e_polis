@@ -3,6 +3,7 @@ import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
+import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,7 @@ class Profile extends StatelessWidget {
                       Text(fullName ?? AppLocalizations.of(context).nameSurname,
                           style: AppTextStyles.styleW700S16Grey9),
                       const SizedBox(height: 6),
-                      Text(phone ?? '+998 90 123 45 67',
+                      Text(getMaskedPhone(phone) ?? '+998 90 123 45 67',
                           maxLines: 1, style: AppTextStyles.styleW500S16Grey4),
                     ],
                   ),

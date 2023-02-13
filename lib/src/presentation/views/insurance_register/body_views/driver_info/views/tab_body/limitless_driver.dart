@@ -42,6 +42,9 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
     return BlocProvider(
       create: (context) => inject<AddDriverCubit>(),
       child: BlocConsumer<AddDriverCubit, AddDriverState>(
+        listenWhen: (pre, cur) =>
+            cur.status == StateStatus.success ||
+            cur.status == StateStatus.error,
         listener: (context, state) {
           var driverCubit = context.read<LimitlessDriverTabBarCubit>();
           if (state.status == StateStatus.error) {
@@ -59,7 +62,7 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                     driverModel: DriverModel(
                         birthDate: dateConverter(
                             date: dateController.text,
-                            inFormat: 'dd/MM/yyyy',
+                            inFormat: 'dd.MM.yyyy',
                             outFormat: 'yyyy-MM-dd'),
                         passport: DriverPassport(
                             series: seriesController.text,
@@ -69,10 +72,14 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
         builder: (context, state) {
           var cubit = context.read<AddDriverCubit>();
           var driverCubit = context.read<LimitlessDriverTabBarCubit>();
-          if (state.driverData != null) {
-            licenseDate.text = state.driverData?.driverLicense?.startDate ?? '';
-            licenseNumber.text = state.driverData?.driverLicense?.number ?? '';
-            licenseSeries.text = state.driverData?.driverLicense?.series ?? '';
+          var driverData = state.driverData;
+          if (driverData != null) {
+            licenseDate.text = dateConverter(
+                date: driverData.driverLicense?.startDate ?? '',
+                inFormat: 'yyyy-MM-dd',
+                outFormat: 'dd.MM.yyyy');
+            licenseNumber.text = driverData.driverLicense?.number ?? '';
+            licenseSeries.text = driverData.driverLicense?.series ?? '';
           }
           return Scaffold(
             body: ListView(
@@ -152,7 +159,7 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                   if (state.driverData == null) {
                     String date = dateConverter(
                         date: dateController.text,
-                        inFormat: 'dd/MM/yyyy',
+                        inFormat: 'dd.MM.yyyy',
                         outFormat: 'yyyy-MM-dd');
                     cubit.addDriver(
                         birth: date,
@@ -169,6 +176,9 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(2);
+                  } else {
+                    showErrorMessage(context,
+                        AppLocalizations.of(context).enterAllDriversInputs);
                   }
                 },
               ),

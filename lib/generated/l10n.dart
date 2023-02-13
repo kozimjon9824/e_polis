@@ -1739,6 +1739,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Заполнить все входные данные водителей`
+  String get enterAllDriversInputs {
+    return Intl.message(
+      'Заполнить все входные данные водителей',
+      name: 'enterAllDriversInputs',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

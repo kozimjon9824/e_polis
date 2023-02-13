@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../../../../core/themes/app_colors.dart';
+import '../../../../../../core/themes/app_text_styles.dart';
 import '../../../../../../data/models/vehicle_information/response/vehicle_info_response.dart';
 import '../../../../../components/custom_mask.dart';
 import '../../../../../components/custom_text_field.dart';
@@ -62,13 +63,15 @@ class CarInformationWidget extends StatelessWidget {
               value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
         ),
         const SizedBox(height: 16),
+        Text(AppLocalizations.of(context).techPassport,
+            style: AppTextStyles.styleW600S14Grey9),
+        const SizedBox(height: 6),
         Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
                 flex: 1,
                 child: CustomTextField(
-                    label: AppLocalizations.of(context).techPassport,
                     hintText: AppLocalizations.of(context).series,
                     textEditingController: seriesController,
                     keyboardType: TextInputType.text,

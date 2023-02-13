@@ -95,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Водительские права"),
         "emptyPolis": MessageLookupByLibrary.simpleMessage(
             "У вас еще нет страховки. Купите или добавить страховку"),
+        "enterAllDriversInputs": MessageLookupByLibrary.simpleMessage(
+            "Заполнить все входные данные водителей"),
         "enterCardDetails": MessageLookupByLibrary.simpleMessage(
             "Пожалуйста, введите данные карты для оплаты"),
         "enterDate": MessageLookupByLibrary.simpleMessage("Введите дату"),

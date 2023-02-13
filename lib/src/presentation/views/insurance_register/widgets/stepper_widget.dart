@@ -122,12 +122,12 @@ class StepperStep extends StatelessWidget {
           child: Container(
             height: 18,
             width: 18,
+            alignment: Alignment.center,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: AppColors.grey500, width: 1)),
-            child: Center(
-                child: Text((index + 1).toString(),
-                    style: AppTextStyles.styleW700S12Grey5)),
+            child: Text((index + 1).toString(),
+                style: AppTextStyles.styleW700S12Grey5),
           ),
         ),
       );

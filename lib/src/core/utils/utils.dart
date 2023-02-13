@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 enum StateStatus { loading, success, error, unknown }
 
@@ -118,7 +119,15 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
       );
     }
 
-    // If the new value and old value are the same, just return as-is
     return newValue;
   }
+}
+
+String? getMaskedPhone(String? phone) {
+  if (phone == null) return null;
+  final phoneMask = MaskTextInputFormatter(
+      mask: '### ## ### ## ##',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.eager);
+  return '+${phoneMask.maskText(phone)}';
 }

@@ -59,8 +59,7 @@ class DriverInformationWidget extends StatelessWidget {
             style: AppTextStyles.styleW600S14Grey9),
         const SizedBox(height: 6),
         Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          textBaseline: TextBaseline.ideographic,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
                 flex: 1,
@@ -74,6 +73,7 @@ class DriverInformationWidget extends StatelessWidget {
                   validator: (value) => value!.length < 2
                       ? AppLocalizations.of(context).notDoEmpty
                       : null,
+                  onFieldSubmitted: (_) => focusNodeNumberID!.requestFocus(),
                   inputFormatters: [
                     MaskTextInputFormatter(
                         mask: '##',

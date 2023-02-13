@@ -167,6 +167,8 @@
   "name": "Имя",
   "commission": "Коммисия",
   "totalAmount": "Общая сумма",
-  "downloadPayDoc": "Скачать квитацию"
+  "downloadPayDoc": "Скачать квитацию",
+  "enterAllDriversInputs": "Заполнить все входные данные водителей"
+
 
 }

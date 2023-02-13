@@ -34,7 +34,7 @@ class Child1Body extends StatelessWidget {
             style: AppTextStyles.styleW600S14Grey9),
         const SizedBox(height: 6),
         Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
                 flex: 1,
@@ -90,11 +90,11 @@ class Child1Body extends StatelessWidget {
           onFieldSubmitted: (_) => dateFocus?.unfocus(),
           validator: (value) =>
               value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
-          dateFormat: 'dd/MM/yyyy',
+          dateFormat: 'dd.MM.yyyy',
           inputFormatters: [
             MaskTextInputFormatter(
-                mask: '##/##/####',
-                initialText: dateController.text.replaceAll('/', ''),
+                mask: '##.##.####',
+                initialText: dateController.text.replaceAll('', ''),
                 type: MaskAutoCompletionType.eager,
                 filter: {"#": RegExp(r'[0-9]')})
           ],
@@ -145,7 +145,7 @@ class Child2Body extends StatelessWidget {
             style: AppTextStyles.styleW600S14Grey9),
         const SizedBox(height: 6),
         Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
                 flex: 1,
@@ -195,11 +195,11 @@ class Child2Body extends StatelessWidget {
           validator: (value) => value!.length < 10
               ? AppLocalizations.of(context).notDoEmpty
               : null,
-          dateFormat: 'dd/MM/yyyy',
+          dateFormat: 'dd.MM.yyyy',
           inputFormatters: [
             MaskTextInputFormatter(
-                mask: '##/##/####',
-                initialText: licenseDate.text.replaceAll('/', ''),
+                mask: '##.##.####',
+                initialText: licenseDate.text.replaceAll('.', ''),
                 filter: {"#": RegExp(r'[0-9]')})
           ],
           textInputAction: TextInputAction.done,

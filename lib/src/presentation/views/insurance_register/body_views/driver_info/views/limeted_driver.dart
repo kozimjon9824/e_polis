@@ -11,61 +11,53 @@ class LimitedDriverView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => inject<LimitedDriverTabBarCubit>(),
-      child: BlocBuilder<LimitedDriverTabBarCubit, LimitedDriverTabBarState>(
-        builder: (context, state) {
-          var cubit = context.read<LimitedDriverTabBarCubit>();
-          return Scaffold(
-            body: NestedScrollView(
-              headerSliverBuilder: (BuildContext context, bool _) {
-                return [
-                  SliverPadding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 16),
-                    sliver: SliverList(
-                      delegate: SliverChildListDelegate([
-                        Row(children: [
-                          for (int i = 1; i <= state.drivers.length; i++)
-                            TextBtn(
-                                title: i.toString(),
-                                onTap: () {
-                                  cubit.changeTab(i - 1);
-                                },
-                                bgColor: (state.drivers[i - 1].isSuccess ==
-                                        null)
-                                    ? null
-                                    : (state.drivers[i - 1].isSuccess == true)
-                                        ? AppColors.green
-                                        : AppColors.green300,
-                                borderRadius: (i == 1)
-                                    ? const BorderRadius.horizontal(
-                                        left: Radius.circular(8))
-                                    : (i == 5)
-                                        ? const BorderRadius.horizontal(
-                                            right: Radius.circular(8))
-                                        : null),
-                          Visibility(
-                            visible: state.drivers.length != 5,
-                            child: IconBtn(onTap: () => cubit.addTab()),
-                          )
-                        ]),
+    return BlocBuilder<LimitedDriverTabBarCubit, LimitedDriverTabBarState>(
+      builder: (context, state) {
+        var cubit = context.read<LimitedDriverTabBarCubit>();
+        return Scaffold(
+          body: NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool _) {
+              return [
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 16),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate([
+                      Row(children: [
+                        for (int i = 1; i <= state.drivers.length; i++)
+                          TextBtn(
+                              title: i.toString(),
+                              onTap: () {
+                                cubit.changeTab(i - 1);
+                              },
+                              bgColor: (state.drivers[i - 1].isSuccess == null)
+                                  ? null
+                                  : (state.drivers[i - 1].isSuccess == true)
+                                      ? AppColors.green
+                                      : AppColors.green300,
+                              borderRadius: BorderRadius.horizontal(
+                                  left: Radius.circular(i == 1 ? 8 : 0),
+                                  right: Radius.circular(i == 5 ? 8 : 0))),
+                        Visibility(
+                          visible: state.drivers.length != 5,
+                          child: IconBtn(onTap: () => cubit.addTab()),
+                        )
                       ]),
-                    ),
+                    ]),
                   ),
-                ];
-              },
-              body: IndexedStack(
-                index: state.currentIndex,
-                children: [
-                  for (int i = 1; i <= state.drivers.length; i++)
-                    DriverInputDetailsBody(index: i)
-                ],
-              ),
+                ),
+              ];
+            },
+            body: IndexedStack(
+              index: state.currentIndex,
+              children: [
+                for (int i = 1; i <= state.drivers.length; i++)
+                  DriverInputDetailsBody(index: i)
+              ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
