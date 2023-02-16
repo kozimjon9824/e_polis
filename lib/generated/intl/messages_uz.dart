@@ -23,252 +23,254 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "SuccessDes": MessageLookupByLibrary.simpleMessage(
-            "Поздравляем, оплата прошла успешно Обязательное Э-ОСАГО страхование"),
-        "WrongCode": MessageLookupByLibrary.simpleMessage(
-            "Неверный код, введите правильный код"),
+            "Табриклаймиз, ТВЭФЖМС полиси учун тўлов муваффақиятли амалга оширилди"),
+        "WrongCode":
+            MessageLookupByLibrary.simpleMessage("Код нотўғри киритилди"),
         "about": MessageLookupByLibrary.simpleMessage("О Нас"),
         "aboutUs": MessageLookupByLibrary.simpleMessage(
-            "Epolis входит в ТОП-5 страховых компаний Узбекистана, являясь второй крупнейшей страховой компанией страны по объемам активов. Динамичный рост рыночной доли по сборам, капиталу и инвестициям!\nEpolis экспортно-импортная акциядорлик жамияти суғурта компанииси умий суғурта бозорида ўз фаолиятини олиб боради ва суғурта фаолияти классификаторига кўра мавжуд 17 турдаги суғуртанинг барчаси билан шуғулланади"),
+            "Epolis платформаси суғурта полисларини ахборот технологияларини қўллаган ҳолда кундалик вазифаларни енгиллаштиришга интилмоқда. Epolis мобил иловаси орқали ТВЭФЖМС (ОСАГО) ҳамда саёхатчиларни суғурталаш учун суғурта мукофоти ва суғурта полиси учун тўловни бир зумда амалга ошириш мумкин.\nХеч қандай навбатларсиз суғурта полисини тез ва осон сотиб олинг! Epolis платформасида рўйхатдан ўтинг ва суғурта ҳизматларидан фойдаланинг."),
         "accountVerified":
-            MessageLookupByLibrary.simpleMessage("Учетная запись подтверждена"),
+            MessageLookupByLibrary.simpleMessage("Қайд ёзуви тасдиқланди"),
         "accountVerifiedDescription": MessageLookupByLibrary.simpleMessage(
-            "Ваша учетная запись успешно подтверждена, теперь давайте наслаждаться функциями Epolis"),
-        "addDriver": MessageLookupByLibrary.simpleMessage("Добавить водителя"),
-        "addPolis": MessageLookupByLibrary.simpleMessage("Добавить полис"),
+            "Сизнинг қайд ёзувингиз муваффақиятли тасдиқланди, энди Epolis хизматларидан фойдаланишингиз мумкин"),
+        "addDriver": MessageLookupByLibrary.simpleMessage("Хайдовчи қўшиш"),
+        "addPolis": MessageLookupByLibrary.simpleMessage("Полис қўшиш"),
         "alertAndTips":
-            MessageLookupByLibrary.simpleMessage("Оповещение  и советы "),
-        "all": MessageLookupByLibrary.simpleMessage("Все"),
+            MessageLookupByLibrary.simpleMessage("Огоҳлантириш ва маслаҳатлар"),
+        "all": MessageLookupByLibrary.simpleMessage("Хаммаси"),
         "anAuthText": MessageLookupByLibrary.simpleMessage(
-            "Сначала зарегистрируйтесь, чтобы добавить или приобрести страховой полис"),
-        "appLang": MessageLookupByLibrary.simpleMessage("Язык приложения"),
-        "archived": MessageLookupByLibrary.simpleMessage("Архивные"),
-        "autoNumber": MessageLookupByLibrary.simpleMessage("Номер авто"),
-        "bookInsurance":
-            MessageLookupByLibrary.simpleMessage("Оформление страховки"),
-        "buy": MessageLookupByLibrary.simpleMessage("КУПИТЬ"),
+            "Суғурта полисини сотиб олиш ёки қўшиш учун аввал рўйхатдан ўтинг"),
+        "appLang": MessageLookupByLibrary.simpleMessage("Дастур тили"),
+        "archived": MessageLookupByLibrary.simpleMessage("Архив"),
+        "autoNumber": MessageLookupByLibrary.simpleMessage("Давлат рақами"),
+        "bookInsurance": MessageLookupByLibrary.simpleMessage(
+            "Суғурта полисини расмийлаштириш"),
+        "buy": MessageLookupByLibrary.simpleMessage("Сотиб олиш"),
         "buyInsurance":
-            MessageLookupByLibrary.simpleMessage("Купить страховку"),
-        "buyNow": MessageLookupByLibrary.simpleMessage("Купить снова"),
-        "buyPolis": MessageLookupByLibrary.simpleMessage("Купить полис"),
-        "byCard": MessageLookupByLibrary.simpleMessage("с картой"),
-        "cacheError": MessageLookupByLibrary.simpleMessage("Сбой кеша"),
+            MessageLookupByLibrary.simpleMessage("Полис сотиб олиш"),
+        "buyNow": MessageLookupByLibrary.simpleMessage("Яна сотиб олиш"),
+        "buyPolis": MessageLookupByLibrary.simpleMessage("Полис сотиб олиш"),
+        "byCard": MessageLookupByLibrary.simpleMessage("картадан"),
+        "cacheError": MessageLookupByLibrary.simpleMessage("Кешдаги носозлик"),
         "calculationResults":
-            MessageLookupByLibrary.simpleMessage("Результаты расчета"),
-        "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+            MessageLookupByLibrary.simpleMessage("Ҳисоблаш натижалари"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Бекор қилиш"),
         "carMadeDate":
-            MessageLookupByLibrary.simpleMessage("Год выпуска автомобиля"),
-        "cardDate": MessageLookupByLibrary.simpleMessage("Срок действия карты"),
-        "cardNumber": MessageLookupByLibrary.simpleMessage("Номер карты"),
+            MessageLookupByLibrary.simpleMessage("Ишлаб чиқарилган йил"),
+        "cardDate": MessageLookupByLibrary.simpleMessage(
+            "Картининг амал қилиш муддати"),
+        "cardNumber": MessageLookupByLibrary.simpleMessage("Карта рақами"),
         "checkInternetConnection": MessageLookupByLibrary.simpleMessage(
-            "Проверьте интернет-соединение"),
-        "chooseLanguage": MessageLookupByLibrary.simpleMessage("Выберите язык"),
+            "Интернетга уланишни текширинг"),
+        "chooseLanguage": MessageLookupByLibrary.simpleMessage("Тилни танланг"),
         "clearData":
-            MessageLookupByLibrary.simpleMessage("Очистить информацию"),
-        "close": MessageLookupByLibrary.simpleMessage("Закрыть"),
+            MessageLookupByLibrary.simpleMessage("Маълумотларни тозалаш"),
+        "close": MessageLookupByLibrary.simpleMessage("Ёпиш"),
         "commission": MessageLookupByLibrary.simpleMessage("Коммисия"),
         "compensationPriceTitle": MessageLookupByLibrary.simpleMessage(
-            "Возмещение ущерба имуществу потерпевшего"),
-        "confirm": MessageLookupByLibrary.simpleMessage("Подтвердить"),
-        "confirmCode": MessageLookupByLibrary.simpleMessage("Подтвердить код"),
+            "Жавбрланувчининг мол-мулкига етказилган зарарни қоплаш"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Тасдиқлаш"),
+        "confirmCode": MessageLookupByLibrary.simpleMessage("Кодни тасдиқлаш"),
         "contractDetails":
-            MessageLookupByLibrary.simpleMessage("Информация о контракте"),
-        "contractExpirationDate": MessageLookupByLibrary.simpleMessage(
-            "Дата окончания срока действия контракта"),
+            MessageLookupByLibrary.simpleMessage("Полис маълумотлари"),
+        "contractExpirationDate":
+            MessageLookupByLibrary.simpleMessage("Тугаш санаси"),
         "contractInfo":
-            MessageLookupByLibrary.simpleMessage("Информация о контракте"),
+            MessageLookupByLibrary.simpleMessage("Шартнома ҳақида маълумот"),
         "contractStartDate":
-            MessageLookupByLibrary.simpleMessage("Дата начало контракта"),
-        "date": MessageLookupByLibrary.simpleMessage("Дата"),
-        "dateOfBirth": MessageLookupByLibrary.simpleMessage("Дата рождения"),
-        "ddMMYY": MessageLookupByLibrary.simpleMessage("ДД/ММ/ГГГГ"),
-        "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
-        "doYouWantExit": MessageLookupByLibrary.simpleMessage(
-            "Вы хотите выйти из приложения"),
+            MessageLookupByLibrary.simpleMessage("Бошланиш санаси"),
+        "date": MessageLookupByLibrary.simpleMessage("Сана"),
+        "dateOfBirth": MessageLookupByLibrary.simpleMessage("Туғилган йил"),
+        "ddMMYY": MessageLookupByLibrary.simpleMessage("КК/ОО/ЙЙЙЙ"),
+        "delete": MessageLookupByLibrary.simpleMessage("Ўчириш"),
+        "doYouWantExit":
+            MessageLookupByLibrary.simpleMessage("Сиз иловадан чиқмоқчимисиз?"),
         "downloadPayDoc":
-            MessageLookupByLibrary.simpleMessage("Скачать квитацию"),
-        "driver": MessageLookupByLibrary.simpleMessage("Водитель"),
+            MessageLookupByLibrary.simpleMessage("Квитанцияни юклаб олиш"),
+        "driver": MessageLookupByLibrary.simpleMessage("Хайдовчи"),
         "driverDetails":
-            MessageLookupByLibrary.simpleMessage("Инфомация Водителя"),
+            MessageLookupByLibrary.simpleMessage("Хайдовчи маълумотлари"),
         "driverInfo":
-            MessageLookupByLibrary.simpleMessage("Информация о владельце"),
+            MessageLookupByLibrary.simpleMessage("Эгаси ҳақида маълумот"),
         "driverLicense":
-            MessageLookupByLibrary.simpleMessage("Водительские права"),
+            MessageLookupByLibrary.simpleMessage("Хайдовчилик гувохномаси"),
         "emptyPolis": MessageLookupByLibrary.simpleMessage(
-            "У вас еще нет страховки. Купите или добавить страховку"),
+            "Сизда хали суғурта полиси йўқ. Суғурта полисини сотиб олинг ёки қўшинг"),
         "enterAllDriversInputs": MessageLookupByLibrary.simpleMessage(
-            "Заполнить все входные данные водителей"),
+            "Ҳайдовчи ҳақидаги барча маълумотларни тўлдиринг"),
         "enterCardDetails": MessageLookupByLibrary.simpleMessage(
-            "Пожалуйста, введите данные карты для оплаты"),
-        "enterDate": MessageLookupByLibrary.simpleMessage("Введите дату"),
-        "enteredWrongData":
-            MessageLookupByLibrary.simpleMessage("Вы ввели неверные данные!"),
-        "exit": MessageLookupByLibrary.simpleMessage("Выйти"),
-        "expend": MessageLookupByLibrary.simpleMessage("Продлить"),
-        "fio": MessageLookupByLibrary.simpleMessage("Ф.И.О"),
-        "firstName": MessageLookupByLibrary.simpleMessage("Имя"),
-        "foundQuantity": MessageLookupByLibrary.simpleMessage("Мы нашли"),
-        "from": MessageLookupByLibrary.simpleMessage("От"),
-        "generalInfo": MessageLookupByLibrary.simpleMessage("Общая информация"),
-        "haveThePrivilege":
-            MessageLookupByLibrary.simpleMessage("Иметь привилегию"),
-        "helpCenter": MessageLookupByLibrary.simpleMessage("Центр помощи"),
+            "Илтимос тўлов учун карта маълумотларини киритинг"),
+        "enterDate": MessageLookupByLibrary.simpleMessage("Сана киритинг"),
+        "enteredWrongData": MessageLookupByLibrary.simpleMessage(
+            "Сиз нотўғри маълумот киритдингиз!"),
+        "exit": MessageLookupByLibrary.simpleMessage("Чиқиш"),
+        "expend": MessageLookupByLibrary.simpleMessage("Узайтириш"),
+        "fio": MessageLookupByLibrary.simpleMessage("Ф.И.Ш"),
+        "firstName": MessageLookupByLibrary.simpleMessage("Исм"),
+        "foundQuantity": MessageLookupByLibrary.simpleMessage("Биз топдик"),
+        "from": MessageLookupByLibrary.simpleMessage("дан"),
+        "generalInfo":
+            MessageLookupByLibrary.simpleMessage("Умумий маълумотлар"),
+        "haveThePrivilege": MessageLookupByLibrary.simpleMessage("Имтиёз"),
+        "helpCenter": MessageLookupByLibrary.simpleMessage("Ёрдам маркази"),
         "helpMainText": MessageLookupByLibrary.simpleMessage(
-            "Не нашли ответ, который искали? Свяжитесь с нашим центром поддержки!"),
-        "hide": MessageLookupByLibrary.simpleMessage("Скрывать"),
-        "holderName": MessageLookupByLibrary.simpleMessage("Имя владельца"),
-        "home": MessageLookupByLibrary.simpleMessage("Главная"),
-        "howCanWeHelp":
-            MessageLookupByLibrary.simpleMessage("Как мы можем помочь?"),
+            "Сиз излаётган жавобни топмадингизми? Ёрдам марказимизга мурожаат қилинг!"),
+        "hide": MessageLookupByLibrary.simpleMessage("Яшириш"),
+        "holderName":
+            MessageLookupByLibrary.simpleMessage("Карта эгасининг исми"),
+        "home": MessageLookupByLibrary.simpleMessage("Бош"),
+        "howCanWeHelp": MessageLookupByLibrary.simpleMessage(
+            "Қандай қилиб ёрдам бера оламиз?"),
         "iAmAgree": MessageLookupByLibrary.simpleMessage(
-            "Я полностью согласен с условиями Пользователкого соглашения"),
-        "inDesign": MessageLookupByLibrary.simpleMessage("В оформлении"),
-        "inDetail": MessageLookupByLibrary.simpleMessage("Подробно"),
-        "infoAboutCar":
-            MessageLookupByLibrary.simpleMessage("Информация об автомобиле"),
+            "Суғуртанинг оммавий офертаси шартларига розиман"),
+        "inDesign": MessageLookupByLibrary.simpleMessage("Жараёнда"),
+        "inDetail": MessageLookupByLibrary.simpleMessage("Батафсил"),
+        "infoAboutCar": MessageLookupByLibrary.simpleMessage(
+            "Автотранспорт ҳақида маълумот"),
         "insuranceDamagePriceTitle": MessageLookupByLibrary.simpleMessage(
-            "Страхование вреда, причиненного жизни и здоровью пострадавшей стороны"),
+            "Жабрланувчининг ҳаёти ва соғлиғига етказилган зарарни қоплаш"),
         "insurancePrice":
-            MessageLookupByLibrary.simpleMessage("Страховая сумма"),
-        "invalidDriverPassport": MessageLookupByLibrary.simpleMessage(
-            "Недействительный паспорт водителя"),
-        "invalidLength":
-            MessageLookupByLibrary.simpleMessage("Текст недействителен"),
+            MessageLookupByLibrary.simpleMessage("Суғурта суммаси"),
+        "invalidDriverPassport":
+            MessageLookupByLibrary.simpleMessage("Хайдовчи паспорти нотўғри"),
+        "invalidLength": MessageLookupByLibrary.simpleMessage("Матнда хатолик"),
         "languagePageMainText": MessageLookupByLibrary.simpleMessage(
-            "Добро пожаловать в epolis Выберите язык приложения"),
+            "Epolis га хуш келибсиз, тилни танланг"),
         "lastName": MessageLookupByLibrary.simpleMessage("Фамилия"),
         "licenseAgreement":
-            MessageLookupByLibrary.simpleMessage("Лицензионное соглашение"),
+            MessageLookupByLibrary.simpleMessage("Лицензия шартномаси"),
         "licenseAgreementMain":
-            MessageLookupByLibrary.simpleMessage("ЛИЦЕНЗИОННОЕ  СОГЛАШЕНИЕ"),
-        "limitless": MessageLookupByLibrary.simpleMessage("Не ограничен"),
+            MessageLookupByLibrary.simpleMessage("ЛИЦЕНЗИЯ ШАРТНОМАСИ"),
+        "limitless": MessageLookupByLibrary.simpleMessage("Чекланмаган"),
         "loginMainText": MessageLookupByLibrary.simpleMessage(
-            "Введите свой номер телефона, мы отправим код подтверждения на вашу телефон"),
-        "mm_YY": MessageLookupByLibrary.simpleMessage("ММ/ГГ"),
-        "model": MessageLookupByLibrary.simpleMessage("Марка и модель"),
-        "mustNotEmptyFailure":
-            MessageLookupByLibrary.simpleMessage("Поля не должны быть пустыми"),
-        "myPolicies": MessageLookupByLibrary.simpleMessage("Мои полисы"),
-        "name": MessageLookupByLibrary.simpleMessage("Имя"),
-        "nameSurname": MessageLookupByLibrary.simpleMessage("Имя Фамилия"),
+            "Телефон рақамингизни киритинг, биз тасдиқлаш кодини телефонингизга юборамиз"),
+        "mm_YY": MessageLookupByLibrary.simpleMessage("ОО/ЙЙ"),
+        "model": MessageLookupByLibrary.simpleMessage("Марка ва модель"),
+        "mustNotEmptyFailure": MessageLookupByLibrary.simpleMessage(
+            "Майдонлар бўш бўлиши мумкин эмас"),
+        "myPolicies": MessageLookupByLibrary.simpleMessage("Менинг полисларим"),
+        "name": MessageLookupByLibrary.simpleMessage("Исм"),
+        "nameSurname": MessageLookupByLibrary.simpleMessage("Исм Фамилия"),
         "newAndPromotionalInformation": MessageLookupByLibrary.simpleMessage(
-            "Новости и рекламная информация"),
-        "newsLatter":
-            MessageLookupByLibrary.simpleMessage("Новостная рассылка"),
-        "next": MessageLookupByLibrary.simpleMessage("Продолжить"),
-        "no": MessageLookupByLibrary.simpleMessage("Нет"),
+            "Янгиликлар ва реклама маълумотлари"),
+        "newsLatter": MessageLookupByLibrary.simpleMessage("Янгиликлар"),
+        "next": MessageLookupByLibrary.simpleMessage("Давом этиш"),
+        "no": MessageLookupByLibrary.simpleMessage("Йўқ"),
         "noNotification":
-            MessageLookupByLibrary.simpleMessage("Нет уведомления"),
+            MessageLookupByLibrary.simpleMessage("Эслатмалар мавжуд эмас"),
         "notDoEmpty":
-            MessageLookupByLibrary.simpleMessage("Не должно быть пустым"),
+            MessageLookupByLibrary.simpleMessage("Бўш бўлиши мумкин эмас"),
         "notPrivileged":
-            MessageLookupByLibrary.simpleMessage("Не привилегированный"),
-        "notification": MessageLookupByLibrary.simpleMessage("Уведомления"),
+            MessageLookupByLibrary.simpleMessage("Имтиёзга эга эмас"),
+        "notification": MessageLookupByLibrary.simpleMessage("Эслатмалар"),
         "notificationOnOffText": MessageLookupByLibrary.simpleMessage(
-            "Получайте рекомендации на основе вашей деятельности"),
-        "notificationOnPhone": MessageLookupByLibrary.simpleMessage(
-            "Получайте оповещения на свою телефону"),
+            "Фаолиятингиз асосида тавсиялар олинг"),
+        "notificationOnPhone":
+            MessageLookupByLibrary.simpleMessage("Огоҳлантиришларни созлаш"),
         "notificationSetting":
-            MessageLookupByLibrary.simpleMessage("Всплывающие напоминания"),
-        "notifications": MessageLookupByLibrary.simpleMessage("Напоминания"),
-        "number": MessageLookupByLibrary.simpleMessage("Номер"),
+            MessageLookupByLibrary.simpleMessage("Эслатмалар"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Эслатмалар"),
+        "number": MessageLookupByLibrary.simpleMessage("Рақами"),
         "numberOfDrivers":
-            MessageLookupByLibrary.simpleMessage("Количество водителей"),
+            MessageLookupByLibrary.simpleMessage("Хайдовчилар сони"),
         "onBoardingText1": MessageLookupByLibrary.simpleMessage(
-            "Сравним цены от 20 разных страховых и поможем выбрать самую низкую"),
+            "20 хил суғурта компаниялари махсулотларини таққослаймиз ва энг паст нарх таклифини аниқлашда ёрдам берамиз "),
         "onBoardingText2": MessageLookupByLibrary.simpleMessage(
-            "Погрузим информацию из баз. Данные не нужно будет вводить вручную"),
+            "Биз маълумотларни базадан юклаб оламиз. Маълумотларни қўлда киритиш шарт эмас"),
         "onBoardingText3": MessageLookupByLibrary.simpleMessage(
-            "Оперативно придём на помощь и поможем решить все проблемы"),
+            "Биз тезда ёрдамга келамиз ва барча муаммоларни ҳал қилишга ёрдам берамиз"),
         "onBoardingTitle1": MessageLookupByLibrary.simpleMessage(
-            "Получить страховой полис онлайн за 5 минут"),
+            "5 дақиқада онлайн суғурта полисини сотиб олиш"),
         "onBoardingTitle2": MessageLookupByLibrary.simpleMessage(
-            "Автоматически заполним данные"),
+            "Маълумотларни автомат тўлдирамиз"),
         "onBoardingTitle3": MessageLookupByLibrary.simpleMessage(
-            "Живая и дружелюбная 24/7 техническая поддержка"),
-        "oneYear": MessageLookupByLibrary.simpleMessage("1 год"),
-        "operating": MessageLookupByLibrary.simpleMessage("Действующие"),
+            "Жонли ва дўстона 24/7 техник ёрдам"),
+        "oneYear": MessageLookupByLibrary.simpleMessage("1 йил"),
+        "operating": MessageLookupByLibrary.simpleMessage("Амалда"),
         "ourMission": MessageLookupByLibrary.simpleMessage("Наш миссия"),
-        "passport": MessageLookupByLibrary.simpleMessage("Паспорта/ID карта"),
-        "pay": MessageLookupByLibrary.simpleMessage("ОПЛАТИТЬ"),
-        "payType": MessageLookupByLibrary.simpleMessage("Метод оплаты"),
-        "payed": MessageLookupByLibrary.simpleMessage("Оплачен"),
-        "payment": MessageLookupByLibrary.simpleMessage("Оплата"),
-        "paymentAmount": MessageLookupByLibrary.simpleMessage("Сумма оплаты"),
-        "paymentType": MessageLookupByLibrary.simpleMessage("Способ оплаты"),
-        "phoneNumber": MessageLookupByLibrary.simpleMessage("Номер телефона"),
-        "pickImage":
-            MessageLookupByLibrary.simpleMessage("Добавить изображение"),
+        "passport": MessageLookupByLibrary.simpleMessage("Паспорт/ID карта"),
+        "pay": MessageLookupByLibrary.simpleMessage("Тўлаш"),
+        "payType": MessageLookupByLibrary.simpleMessage("Тўлов тури"),
+        "payed": MessageLookupByLibrary.simpleMessage("Тўланган"),
+        "payment": MessageLookupByLibrary.simpleMessage("Тўлов"),
+        "paymentAmount": MessageLookupByLibrary.simpleMessage("Тўлов суммаси"),
+        "paymentType": MessageLookupByLibrary.simpleMessage("Тўлов тури"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Телефон рақам"),
+        "pickImage": MessageLookupByLibrary.simpleMessage("Расм қўшиш"),
         "pinFl": MessageLookupByLibrary.simpleMessage("ЖШШИР"),
-        "polisPrice": MessageLookupByLibrary.simpleMessage("Цена полиса"),
-        "popularQuestions":
-            MessageLookupByLibrary.simpleMessage("Популярные вопросы"),
-        "priceCalculation": MessageLookupByLibrary.simpleMessage("Расчет цены"),
+        "polisPrice": MessageLookupByLibrary.simpleMessage("Полис нархи"),
+        "popularQuestions": MessageLookupByLibrary.simpleMessage(
+            "Тез-тез сщраладиган саволлар"),
+        "priceCalculation": MessageLookupByLibrary.simpleMessage("Ҳисоблаш"),
         "profile": MessageLookupByLibrary.simpleMessage("Профиль"),
         "profileInfo":
-            MessageLookupByLibrary.simpleMessage("Информация профиля"),
-        "profileUpdated":
-            MessageLookupByLibrary.simpleMessage("Профиль успешно обновлен!"),
+            MessageLookupByLibrary.simpleMessage("Профил ҳақида маълумот"),
+        "profileUpdated": MessageLookupByLibrary.simpleMessage(
+            "Профиль муваффақиятли янгиланди!"),
         "reSendCode":
-            MessageLookupByLibrary.simpleMessage("Повторно отправить код"),
+            MessageLookupByLibrary.simpleMessage("Кодни қайта юбориш"),
         "registerFirstToBuy": MessageLookupByLibrary.simpleMessage(
-            "Зарегистрируйтесь сначала, чтобы купить страховой полис"),
-        "registration": MessageLookupByLibrary.simpleMessage("Регистрация"),
-        "relationShip": MessageLookupByLibrary.simpleMessage("Родство"),
-        "resendCodeAfterSomeTime": MessageLookupByLibrary.simpleMessage(
-            "Повторно отправить код через"),
-        "retry": MessageLookupByLibrary.simpleMessage("Повторить попытку"),
-        "russianLang": MessageLookupByLibrary.simpleMessage("Русский язык"),
+            "Полис сотиб олиш учун рўйхатдан ўтинг"),
+        "registration": MessageLookupByLibrary.simpleMessage("Рўйхатдан ўтиш"),
+        "relationShip":
+            MessageLookupByLibrary.simpleMessage("Қариндошлик даражаси"),
+        "resendCodeAfterSomeTime":
+            MessageLookupByLibrary.simpleMessage("Кодни қайта юбориш"),
+        "retry": MessageLookupByLibrary.simpleMessage("Қайта уриниб кўриш"),
+        "russianLang": MessageLookupByLibrary.simpleMessage("Рус тили"),
         "saveChanges":
-            MessageLookupByLibrary.simpleMessage("Сохранить изменения"),
-        "search": MessageLookupByLibrary.simpleMessage("Поиск"),
-        "select": MessageLookupByLibrary.simpleMessage("Выбирать"),
-        "selectBasicFields":
-            MessageLookupByLibrary.simpleMessage("Выберите основные поля!"),
-        "selectDate": MessageLookupByLibrary.simpleMessage("Выберите дату"),
-        "selectRegion": MessageLookupByLibrary.simpleMessage("Выберите регион"),
-        "selectTypeVehicle":
-            MessageLookupByLibrary.simpleMessage("Выберите тип автомобиля"),
-        "sendSms": MessageLookupByLibrary.simpleMessage("Отправить СМС"),
+            MessageLookupByLibrary.simpleMessage("Ўзгаришларни сақлаш"),
+        "search": MessageLookupByLibrary.simpleMessage("Излаш"),
+        "select": MessageLookupByLibrary.simpleMessage("Танлаш"),
+        "selectBasicFields": MessageLookupByLibrary.simpleMessage(
+            "Асосий майдонларни белгиланг!"),
+        "selectDate": MessageLookupByLibrary.simpleMessage("Санани танланг"),
+        "selectRegion":
+            MessageLookupByLibrary.simpleMessage("Вилоятни танланг"),
+        "selectTypeVehicle": MessageLookupByLibrary.simpleMessage(
+            "Автотранспорт турини танланг"),
+        "sendSms": MessageLookupByLibrary.simpleMessage("СМС юбориш"),
         "series": MessageLookupByLibrary.simpleMessage("Серия"),
         "seriesNumberPolis":
-            MessageLookupByLibrary.simpleMessage("Серия и номер полиса"),
-        "serverError": MessageLookupByLibrary.simpleMessage("Ошибка сервера"),
-        "sixMonth": MessageLookupByLibrary.simpleMessage("6 месяцев"),
-        "skip": MessageLookupByLibrary.simpleMessage("Пропустить"),
+            MessageLookupByLibrary.simpleMessage("Полис серия ва рақами"),
+        "serverError": MessageLookupByLibrary.simpleMessage("Сервер хатолиги"),
+        "sixMonth": MessageLookupByLibrary.simpleMessage("6 ой"),
+        "skip": MessageLookupByLibrary.simpleMessage("Ўтказиб юбориш"),
         "startUsing":
-            MessageLookupByLibrary.simpleMessage("Начать пользоваться"),
-        "status": MessageLookupByLibrary.simpleMessage("Статус"),
-        "success": MessageLookupByLibrary.simpleMessage("Успешно"),
+            MessageLookupByLibrary.simpleMessage("Фойдаланишни бошлаш"),
+        "status": MessageLookupByLibrary.simpleMessage("Ҳолати"),
+        "success":
+            MessageLookupByLibrary.simpleMessage("Муваффақиятли бажарилди"),
         "successfullyAdded":
-            MessageLookupByLibrary.simpleMessage("полис успешно добавлена"),
+            MessageLookupByLibrary.simpleMessage("Полис муваффақиятли қўшилди"),
         "sum": MessageLookupByLibrary.simpleMessage("сум"),
         "techPassport": MessageLookupByLibrary.simpleMessage("Техпаспорт"),
         "termsOfInsurance": MessageLookupByLibrary.simpleMessage(
-            "Срок действия страхового полиса"),
-        "toDate": MessageLookupByLibrary.simpleMessage("До"),
-        "totalAmount": MessageLookupByLibrary.simpleMessage("Общая сумма"),
-        "twentyDays": MessageLookupByLibrary.simpleMessage("20 дней"),
-        "typePolis": MessageLookupByLibrary.simpleMessage("Тип полиса"),
-        "typeVehicle": MessageLookupByLibrary.simpleMessage("Тип автомобиля"),
+            "Суғурта полисининг амал қилиш муддати"),
+        "toDate": MessageLookupByLibrary.simpleMessage("гача"),
+        "totalAmount": MessageLookupByLibrary.simpleMessage("Умумий сумма"),
+        "twentyDays": MessageLookupByLibrary.simpleMessage("20 кун"),
+        "typePolis": MessageLookupByLibrary.simpleMessage("Полис тури"),
+        "typeVehicle":
+            MessageLookupByLibrary.simpleMessage("Автотранспорт тури"),
         "unAuthFailure":
-            MessageLookupByLibrary.simpleMessage("Ошибка неавторизации"),
+            MessageLookupByLibrary.simpleMessage("Авторизацияда хатолик"),
         "unknownFailure":
-            MessageLookupByLibrary.simpleMessage("Неизвестный сбой"),
-        "upTo5Human": MessageLookupByLibrary.simpleMessage("До 5 человек"),
-        "update": MessageLookupByLibrary.simpleMessage("Обновить"),
-        "uzbekLang": MessageLookupByLibrary.simpleMessage("Узбекский язык"),
-        "vehicleNumber":
-            MessageLookupByLibrary.simpleMessage("Номер транспорта"),
+            MessageLookupByLibrary.simpleMessage("Номаълум носозлик"),
+        "upTo5Human": MessageLookupByLibrary.simpleMessage("5 нафаргача"),
+        "update": MessageLookupByLibrary.simpleMessage("Янгилаш"),
+        "uzbekLang": MessageLookupByLibrary.simpleMessage("Ўзбек тили"),
+        "vehicleNumber": MessageLookupByLibrary.simpleMessage("Давлат рақами"),
         "vehicleRegistrationRegion": MessageLookupByLibrary.simpleMessage(
-            "Регион регистрации автомобиля"),
+            "Автотранспорт воситаси рўйхатдан ўтган вилоят"),
         "verifyPageMainText": MessageLookupByLibrary.simpleMessage(
-            "Пожалуйста, введите код, который вы отправили на"),
+            "Илтимос юборилган кодни киритинг"),
         "weFoundSeveralOffers": MessageLookupByLibrary.simpleMessage(
-            "Мы нашли несколько предложений от страховых компаний"),
+            "Биз суғурта компанияларидан бир нечта таклифларни топдик"),
         "weFoundZero": MessageLookupByLibrary.simpleMessage(
-            "Мы нашли 0 страховых компаний"),
-        "yes": MessageLookupByLibrary.simpleMessage("Да"),
+            "Биз 0 та суғурта компаниясини топдик"),
+        "yes": MessageLookupByLibrary.simpleMessage("Ҳа"),
         "youCanAddPolis":
-            MessageLookupByLibrary.simpleMessage("Вы можете добавить полис ")
+            MessageLookupByLibrary.simpleMessage("Сиз полис қўшишингиз мумкин ")
       };
 }

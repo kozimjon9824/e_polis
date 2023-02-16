@@ -112,29 +112,15 @@ class LimitlessDriverView extends StatelessWidget {
                     children: [
                       CustomOutlineButton(
                           text: AppLocalizations.of(context).addDriver,
-                          onTap: () {
-                            context.read<LimitlessDriverTabBarCubit>().addTab();
-                          }),
+                          onTap: () => cubit.addTab()),
                       const SizedBox(height: 16),
                       CustomButton(
                         text: AppLocalizations.of(context).next,
                         onTap: () {
-                          var driverCubit =
-                              context.read<LimitedDriverTabBarCubit>();
-                          if (driverCubit.isAllCompleted()) {
-                            List<IndexedDriverModel> driverList =
-                                driverCubit.state.drivers;
-                            context.read<BookCubit>().onDriverListData(
-                                driverList.map((e) => e.driverModel!).toList());
-                            context
-                                .read<ManageInsuranceStackViewsCubit>()
-                                .changeIndex(2);
-                          } else {
-                            showErrorMessage(
-                                context,
-                                AppLocalizations.of(context)
-                                    .enterAllDriversInputs);
-                          }
+                          context.read<BookCubit>().onDriverListData([]);
+                          context
+                              .read<ManageInsuranceStackViewsCubit>()
+                              .changeIndex(2);
                         },
                       ),
                     ],

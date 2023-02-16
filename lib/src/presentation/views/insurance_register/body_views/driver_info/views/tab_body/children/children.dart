@@ -16,7 +16,8 @@ class Child1Body extends StatelessWidget {
       required this.dateController,
       this.seriesFocus,
       this.numberFocus,
-      this.dateFocus})
+      this.dateFocus,
+      required this.onRequest})
       : super(key: key);
   final TextEditingController seriesController;
   final TextEditingController numberController;
@@ -24,6 +25,7 @@ class Child1Body extends StatelessWidget {
   final FocusNode? seriesFocus;
   final FocusNode? numberFocus;
   final FocusNode? dateFocus;
+  final Function() onRequest;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class Child1Body extends StatelessWidget {
                   focusNode: seriesFocus,
                   onFieldSubmitted: (_) => numberFocus?.requestFocus(),
                   validator: (value) => value!.length < 2
-                      ? AppLocalizations.of(context).notDoEmpty
+                      ? AppLocalizations.of(context).invalidLength
                       : null,
                   inputFormatters: [
                     MaskTextInputFormatter(
@@ -55,6 +57,11 @@ class Child1Body extends StatelessWidget {
                         initialText: seriesController.text,
                         filter: {"#": RegExp(r'[A-Z]')})
                   ],
+                  onChange: (value) {
+                    if (value.length == 2) {
+                      numberFocus?.requestFocus();
+                    }
+                  },
                 )),
             const SizedBox(width: 10),
             Expanded(
@@ -67,7 +74,7 @@ class Child1Body extends StatelessWidget {
                 focusNode: numberFocus,
                 onFieldSubmitted: (_) => dateFocus?.requestFocus(),
                 validator: (value) => value!.length < 6
-                    ? AppLocalizations.of(context).notDoEmpty
+                    ? AppLocalizations.of(context).invalidLength
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
@@ -75,6 +82,11 @@ class Child1Body extends StatelessWidget {
                       initialText: numberController.text,
                       filter: {"#": RegExp(r'[0-9]')})
                 ],
+                onChange: (value) {
+                  if (value.length == 7) {
+                    dateFocus?.requestFocus();
+                  }
+                },
               ),
             ),
           ],
@@ -88,8 +100,9 @@ class Child1Body extends StatelessWidget {
           textInputAction: TextInputAction.done,
           focusNode: dateFocus,
           onFieldSubmitted: (_) => dateFocus?.unfocus(),
-          validator: (value) =>
-              value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
+          validator: (value) => value!.isEmpty
+              ? AppLocalizations.of(context).invalidLength
+              : null,
           dateFormat: 'dd.MM.yyyy',
           inputFormatters: [
             MaskTextInputFormatter(
@@ -98,6 +111,16 @@ class Child1Body extends StatelessWidget {
                 type: MaskAutoCompletionType.eager,
                 filter: {"#": RegExp(r'[0-9]')})
           ],
+          onChange: (value) {
+            if (value.length == 10) {
+              dateFocus?.unfocus();
+              onRequest();
+            }
+          },
+          onDate: () {
+            dateFocus?.unfocus();
+            onRequest();
+          },
         ),
       ],
     );
@@ -112,7 +135,10 @@ class Child2Body extends StatelessWidget {
       required this.licenseNumber,
       required this.licenseDate,
       this.dropDownValues = const [],
-      this.onChange})
+      this.onChange,
+      this.licenseSeriesNode,
+      this.licenseNumberNode,
+      this.licenseDateNode})
       : super(key: key);
 
   final DriverPassportInputResponse? data;
@@ -121,6 +147,9 @@ class Child2Body extends StatelessWidget {
   final TextEditingController licenseDate;
   final List<String> dropDownValues;
   final Function(String? value)? onChange;
+  final FocusNode? licenseSeriesNode;
+  final FocusNode? licenseNumberNode;
+  final FocusNode? licenseDateNode;
 
   @override
   Widget build(BuildContext context) {
@@ -154,9 +183,11 @@ class Child2Body extends StatelessWidget {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   textEditingController: licenseSeries,
+                  focusNode: licenseSeriesNode,
                   textCapitalization: TextCapitalization.characters,
+                  onFieldSubmitted: (_) => licenseNumberNode!.requestFocus(),
                   validator: (value) => value!.length < 2
-                      ? AppLocalizations.of(context).notDoEmpty
+                      ? AppLocalizations.of(context).invalidLength
                       : null,
                   inputFormatters: [
                     MaskTextInputFormatter(
@@ -164,6 +195,11 @@ class Child2Body extends StatelessWidget {
                         initialText: licenseSeries.text,
                         filter: {"#": RegExp(r'[A-Z]')})
                   ],
+                  onChange: (value) {
+                    if (value.length == 2) {
+                      licenseNumberNode!.requestFocus();
+                    }
+                  },
                 )),
             const SizedBox(width: 10),
             Expanded(
@@ -173,8 +209,10 @@ class Child2Body extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 textEditingController: licenseNumber,
+                focusNode: licenseNumberNode,
+                onFieldSubmitted: (_) => licenseDateNode!.requestFocus(),
                 validator: (value) => value!.length < 6
-                    ? AppLocalizations.of(context).notDoEmpty
+                    ? AppLocalizations.of(context).invalidLength
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
@@ -182,6 +220,11 @@ class Child2Body extends StatelessWidget {
                       initialText: licenseNumber.text,
                       filter: {"#": RegExp(r'[0-9]')})
                 ],
+                onChange: (value) {
+                  if (value.length == 7) {
+                    licenseDateNode!.requestFocus();
+                  }
+                },
               ),
             ),
           ],
@@ -191,9 +234,12 @@ class Child2Body extends StatelessWidget {
           label: AppLocalizations.of(context).date,
           hintText: AppLocalizations.of(context).ddMMYY,
           keyboardType: TextInputType.datetime,
+          textInputAction: TextInputAction.done,
           textEditingController: licenseDate,
+          focusNode: licenseDateNode,
+          onFieldSubmitted: (_) => licenseDateNode!.unfocus(),
           validator: (value) => value!.length < 10
-              ? AppLocalizations.of(context).notDoEmpty
+              ? AppLocalizations.of(context).invalidLength
               : null,
           dateFormat: 'dd.MM.yyyy',
           inputFormatters: [
@@ -202,7 +248,12 @@ class Child2Body extends StatelessWidget {
                 initialText: licenseDate.text.replaceAll('.', ''),
                 filter: {"#": RegExp(r'[0-9]')})
           ],
-          textInputAction: TextInputAction.done,
+          onChange: (value) {
+            if (value.length == 10) {
+              licenseDateNode!.unfocus();
+            }
+          },
+          onDate: () {},
         ),
       ],
     );

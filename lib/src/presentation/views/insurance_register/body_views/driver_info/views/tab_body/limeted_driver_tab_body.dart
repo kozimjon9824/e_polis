@@ -34,6 +34,9 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
   final seriesFocus = FocusNode();
   final numberFocus = FocusNode();
   final dateFocus = FocusNode();
+  final licenseSeriesNode = FocusNode();
+  final licenseNumberNode = FocusNode();
+  final licenseDateNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
 
@@ -42,6 +45,9 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
     return BlocProvider(
       create: (context) => inject<AddDriverCubit>(),
       child: BlocConsumer<AddDriverCubit, AddDriverState>(
+        listenWhen: (pre, cur) =>
+            cur.status == StateStatus.error ||
+            cur.status == StateStatus.success,
         listener: (context, state) {
           var driverCubit = context.read<LimitedDriverTabBarCubit>();
           if (state.status == StateStatus.error) {
@@ -116,7 +122,10 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                               data: state.driverData,
                               licenseSeries: licenseSeries,
                               licenseNumber: licenseNumber,
-                              licenseDate: licenseDate),
+                              licenseDate: licenseDate,
+                              licenseSeriesNode: licenseSeriesNode,
+                              licenseNumberNode: licenseNumberNode,
+                              licenseDateNode: licenseDateNode),
                         );
                       },
                     )
@@ -125,12 +134,27 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                     Form(
                       key: formKey,
                       child: Child1Body(
-                          seriesController: seriesController,
-                          numberController: numberController,
-                          dateController: dateController,
-                          dateFocus: dateFocus,
-                          seriesFocus: seriesFocus,
-                          numberFocus: numberFocus),
+                        seriesController: seriesController,
+                        numberController: numberController,
+                        dateController: dateController,
+                        dateFocus: dateFocus,
+                        seriesFocus: seriesFocus,
+                        numberFocus: numberFocus,
+                        onRequest: () {
+                          if (formKey.currentState!.validate()) {
+                            if (state.driverData == null) {
+                              String date = dateConverter(
+                                  date: dateController.text,
+                                  inFormat: 'dd.MM.yyyy',
+                                  outFormat: 'yyyy-MM-dd');
+                              cubit.addDriver(
+                                  birth: date,
+                                  series: seriesController.text,
+                                  number: numberController.text);
+                            }
+                          }
+                        },
+                      ),
                     )
                   ],
                 ),
@@ -201,5 +225,8 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
     dateFocus.dispose();
     seriesFocus.dispose();
     numberFocus.dispose();
+    licenseNumberNode.dispose();
+    licenseSeriesNode.dispose();
+    licenseDateNode.dispose();
   }
 }

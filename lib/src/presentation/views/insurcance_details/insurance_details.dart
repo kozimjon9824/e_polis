@@ -8,6 +8,7 @@ import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:e_polis/src/data/models/basic_filter/request/basic_filter_request.dart';
 import 'package:e_polis/src/presentation/components/error_view.dart';
 import 'package:e_polis/src/presentation/cubits/insurance_details/insurance_details_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/models/insurance_details/insurance_details.dart';
@@ -32,7 +33,11 @@ class InsuranceDetailsPage extends StatelessWidget {
         builder: (context, state) {
           return state.when(
               loading: () => const LoadingWidget(),
-              error: (failure) => ErrorView(onTap: () {}),
+              error: (failure) => ErrorView(onTap: () {
+                    context
+                        .read<InsuranceDetailsCubit>()
+                        .loadData(arguments.id, arguments.request);
+                  }),
               loaded: (data) {
                 return SuccessBody(insuranceDetails: data, argument: arguments);
               });
@@ -67,7 +72,13 @@ class SuccessBody extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: CachedNetworkImage(
-                    imageUrl: insuranceDetails?.logo ?? '', height: 44),
+                  imageUrl: insuranceDetails?.logo ?? '',
+                  height: 44,
+                  width: 200,
+                  fit: BoxFit.cover,
+                  errorWidget: (_, __, ___) => const SizedBox.shrink(),
+                  placeholder: (_, __) => const CupertinoActivityIndicator(),
+                ),
               ),
             ),
             const SizedBox(height: 24),

@@ -145,7 +145,12 @@ class InsuranceDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CachedNetworkImage(imageUrl: product?.logo ?? '', height: 30),
+          CachedNetworkImage(
+            imageUrl: product?.logo ?? '',
+            height: 30,
+            width: 130,
+            errorWidget: (_, __, ___) => const SizedBox.shrink(),
+          ),
           const SizedBox(height: 18),
           Text(product?.name ?? '', style: AppTextStyles.styleW700S16Grey9),
           const SizedBox(height: 5),

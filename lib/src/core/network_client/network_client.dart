@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../injector.dart';
-import '../../../main.dart';
 import '../../data/models/refresh_token/refresh_token.dart';
 import '../../presentation/cubits/auth/auth_cubit.dart';
 import '../constants/constants.dart';
@@ -93,6 +92,7 @@ class NetworkClient {
   Future<void> refreshToken(SharedPreferences preferences) async {
     String refreshToken = preferences.getString(REFRESH_TOKEN) ?? '';
     if (refreshToken == '') {
+      await _goToLoginScreen();
       return;
     }
     try {
@@ -108,12 +108,13 @@ class NetworkClient {
         _token = token.accessToken ?? '';
         await Future.wait([
           preferences.setString(ACCESS_TOKEN, token.accessToken ?? ''),
-          preferences.setString(
-              REFRESH_TOKEN, token.refreshToken ?? refreshToken)
+          preferences.setString(REFRESH_TOKEN, token.refreshToken ?? '')
         ]);
       }
       if (response.statusCode == 401) {
         _token = '';
+        await preferences.setString(REFRESH_TOKEN, '');
+        await _goToLoginScreen();
         debugPrint('TTT401 : ${response.data} ${response.statusMessage}');
       }
     } catch (err) {

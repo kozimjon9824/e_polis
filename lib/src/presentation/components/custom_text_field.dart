@@ -8,27 +8,28 @@ import '../../core/themes/app_colors.dart';
 import '../../core/themes/app_text_styles.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {Key? key,
-      this.textEditingController,
-      this.onChange,
-      this.hintText,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.obscure,
-      this.textInputAction,
-      this.fillColor,
-      this.preIconColor,
-      this.validator,
-      this.autoFocus,
-      this.focusNode,
-      this.initialValue,
-      this.label,
-      this.inputFormatters,
-      this.keyboardType,
-      this.textCapitalization,
-      this.onFieldSubmitted})
-      : super(key: key);
+  const CustomTextField({
+    Key? key,
+    this.textEditingController,
+    this.onChange,
+    this.hintText,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.obscure,
+    this.textInputAction,
+    this.fillColor,
+    this.preIconColor,
+    this.validator,
+    this.autoFocus,
+    this.focusNode,
+    this.initialValue,
+    this.label,
+    this.inputFormatters,
+    this.keyboardType,
+    this.textCapitalization,
+    this.onFieldSubmitted,
+    this.onEditingCompleted,
+  }) : super(key: key);
 
   final TextEditingController? textEditingController;
   final Function(String value)? onChange;
@@ -48,6 +49,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextCapitalization? textCapitalization;
   final ValueChanged<String>? onFieldSubmitted;
+  final VoidCallback? onEditingCompleted;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +74,7 @@ class CustomTextField extends StatelessWidget {
           keyboardType: keyboardType,
           cursorColor: AppColors.primaryColor,
           onFieldSubmitted: onFieldSubmitted,
+          onEditingComplete: onEditingCompleted,
           decoration: InputDecoration(
             // prefixIcon: Icon(prefixIcon, size: 22, color: preIconColor),
             suffixIcon: suffixIcon,
@@ -126,7 +129,8 @@ class CustomDatePickTextField extends StatelessWidget {
       this.keyboardType,
       this.textCapitalization,
       this.onFieldSubmitted,
-      this.dateFormat})
+      this.dateFormat,
+      required this.onDate})
       : super(key: key);
 
   final TextEditingController? textEditingController;
@@ -147,6 +151,7 @@ class CustomDatePickTextField extends StatelessWidget {
   final TextCapitalization? textCapitalization;
   final ValueChanged<String>? onFieldSubmitted;
   final String? dateFormat;
+  final Function() onDate;
 
   @override
   Widget build(BuildContext context) {
@@ -179,6 +184,7 @@ class CustomDatePickTextField extends StatelessWidget {
                       onSave: (DateTime date) {
                         textEditingController?.text =
                             DateFormat(dateFormat).format(date);
+                        onDate();
                       });
                 },
                 child: Padding(

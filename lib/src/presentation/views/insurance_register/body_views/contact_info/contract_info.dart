@@ -33,6 +33,7 @@ class _ContactInfoViewState extends State<ContactInfoView> {
     return BlocProvider(
       create: (context) => inject<ContractInformationCubit>(),
       child: BlocConsumer<ContractInformationCubit, ContractInformationState>(
+        listenWhen: (pre, cur) => cur.status == StateStatus.error,
         listener: (context, contractState) {
           if (contractState.status == StateStatus.error) {
             showErrorMessage(
@@ -55,12 +56,33 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                     Form(
                       key: formKey,
                       child: ContractDetails(
-                          dateController: dateController,
-                          contract: contractState.contract,
-                          focusNode: focusNode,
-                          onClear: () {
-                            contractCubit.onClear();
-                          }),
+                        dateController: dateController,
+                        contract: contractState.contract,
+                        focusNode: focusNode,
+                        onClear: () {
+                          contractCubit.onClear();
+                        },
+                        onRequest: () {
+                          if (formKey.currentState!.validate()) {
+                            focusNode.unfocus();
+                            var date = dateConverter(
+                                date: dateController.text,
+                                inFormat: 'dd.MM.yyyy',
+                                outFormat: 'yyyy-MM-dd');
+                            if (contractState.contract == null) {
+                              var contract = ContractInfoRequest(
+                                  region: filterData.region,
+                                  period: filterData.period,
+                                  isVip: filterData.isVip,
+                                  vehicleType: filterData.vehicleType,
+                                  startDate: date);
+                              contractCubit.loadContractInfo(
+                                  productId: widget.arguments.id,
+                                  request: contract);
+                            }
+                          }
+                        },
+                      ),
                     )
                   ],
                 ),

@@ -21,6 +21,7 @@ class CarInformationWidget extends StatelessWidget {
     this.focusNodeTechSeries,
     this.focusNodeTechNumber,
     this.focusNodeVehicleNumber,
+    required this.onRequest,
   }) : super(key: key);
 
   final VehicleInfoResponse? vehicleInfo;
@@ -31,6 +32,7 @@ class CarInformationWidget extends StatelessWidget {
   final FocusNode? focusNodeTechSeries;
   final FocusNode? focusNodeTechNumber;
   final FocusNode? focusNodeVehicleNumber;
+  final Function() onRequest;
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +52,31 @@ class CarInformationWidget extends StatelessWidget {
           label: AppLocalizations.of(context).vehicleNumber,
           hintText: '01 М 001 ХА',
           textEditingController: vehicleController,
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.visiblePassword,
           inputFormatters: [
             SpecialMaskTextInputFormatter(
-                initialText: vehicleController.text.replaceAll(' ', ''))
+                initialText: vehicleController.text.replaceAll(' ', '')),
+            UpperCaseTextFormatter(),
           ],
           textCapitalization: TextCapitalization.characters,
           textInputAction: TextInputAction.next,
           focusNode: focusNodeVehicleNumber,
           onFieldSubmitted: (_) => focusNodeTechSeries!.requestFocus(),
-          validator: (value) =>
-              value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
+          validator: (value) => (value!.length < 10 ||
+                  (value.length == 10 &&
+                      !RegExp('[0-9]').hasMatch(value.substring(3, 4))))
+              ? AppLocalizations.of(context).invalidLength
+              : null,
+          onChange: (value) {
+            if (value.length == 10) {
+              if (RegExp('[0-9]').hasMatch(value.substring(3, 4))) {
+                focusNodeTechSeries!.requestFocus();
+              }
+            }
+            if (value.length == 11) {
+              focusNodeTechSeries!.requestFocus();
+            }
+          },
         ),
         const SizedBox(height: 16),
         Text(AppLocalizations.of(context).techPassport,
@@ -72,23 +88,28 @@ class CarInformationWidget extends StatelessWidget {
             Expanded(
                 flex: 1,
                 child: CustomTextField(
-                    hintText: AppLocalizations.of(context).series,
-                    textEditingController: seriesController,
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    textCapitalization: TextCapitalization.characters,
-                    focusNode: focusNodeTechSeries,
-                    onFieldSubmitted: (_) =>
-                        focusNodeTechNumber!.requestFocus(),
-                    inputFormatters: [
-                      MaskTextInputFormatter(
-                          mask: '###',
-                          initialText: seriesController.text,
-                          filter: {"#": RegExp(r'[A-Z]')})
-                    ],
-                    validator: (value) => value!.length < 3
-                        ? AppLocalizations.of(context).notDoEmpty
-                        : null)),
+                  hintText: AppLocalizations.of(context).series,
+                  textEditingController: seriesController,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  textCapitalization: TextCapitalization.characters,
+                  focusNode: focusNodeTechSeries,
+                  onFieldSubmitted: (_) => focusNodeTechNumber!.requestFocus(),
+                  inputFormatters: [
+                    MaskTextInputFormatter(
+                        mask: '###',
+                        initialText: seriesController.text,
+                        filter: {"#": RegExp(r'[A-Z]')})
+                  ],
+                  validator: (value) => value!.length < 3
+                      ? AppLocalizations.of(context).invalidLength
+                      : null,
+                  onChange: (value) {
+                    if (value.length == 3) {
+                      focusNodeTechNumber!.requestFocus();
+                    }
+                  },
+                )),
             const SizedBox(width: 10),
             Expanded(
               flex: 2,
@@ -100,7 +121,7 @@ class CarInformationWidget extends StatelessWidget {
                 textEditingController: numberController,
                 onFieldSubmitted: (_) => focusNodeTechNumber!.unfocus(),
                 validator: (value) => value!.length < 6
-                    ? AppLocalizations.of(context).notDoEmpty
+                    ? AppLocalizations.of(context).invalidLength
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
@@ -108,6 +129,12 @@ class CarInformationWidget extends StatelessWidget {
                       initialText: numberController.text,
                       filter: {"#": RegExp(r'[0-9]')})
                 ],
+                onChange: (value) {
+                  if (value.length == 6) {
+                    focusNodeTechNumber!.unfocus();
+                    onRequest();
+                  }
+                },
               ),
             ),
           ],

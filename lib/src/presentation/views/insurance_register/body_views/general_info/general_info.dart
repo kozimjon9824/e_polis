@@ -64,6 +64,16 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     focusNodeTechSeries: focusNodeTechSeries,
                     focusNodeVehicleNumber: focusNodeVehicleNumber,
                     onClear: () => cubit.onClearVehicleData(),
+                    onRequest: () {
+                      if (formKey.currentState!.validate()) {
+                        if (state.vehicleInfo == null) {
+                          cubit.checkVehicleData(
+                              vehicleNum: vehicleController.text,
+                              techPasSer: series.text,
+                              techPasNum: number.text);
+                        }
+                      }
+                    },
                   ),
                 ),
                 if (state.vehicleInfo != null) const SizedBox(height: 16),
@@ -79,6 +89,13 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                       focusNodeNumberID: focusNodeNumberID,
                       focusNodeSeriesID: focusNodeSeriesID,
                       focusNodePhone: focusNodePhone,
+                      onRequest: () {
+                        if (!state.isPassportValidated &&
+                            formKey2.currentState!.validate()) {
+                          cubit.validatePassport(
+                              series: seriesID.text, number: numberID.text);
+                        }
+                      },
                     ),
                   ),
               ],

@@ -21,7 +21,8 @@ class DriverInformationWidget extends StatelessWidget {
       this.isValidated,
       this.focusNodeSeriesID,
       this.focusNodeNumberID,
-      this.focusNodePhone})
+      this.focusNodePhone,
+      required this.onRequest})
       : super(key: key);
   final OwnerData? ownerData;
   final TextEditingController seriesID;
@@ -32,6 +33,7 @@ class DriverInformationWidget extends StatelessWidget {
   final FocusNode? focusNodeSeriesID;
   final FocusNode? focusNodeNumberID;
   final FocusNode? focusNodePhone;
+  final Function() onRequest;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,7 @@ class DriverInformationWidget extends StatelessWidget {
                   textCapitalization: TextCapitalization.characters,
                   focusNode: focusNodeSeriesID,
                   validator: (value) => value!.length < 2
-                      ? AppLocalizations.of(context).notDoEmpty
+                      ? AppLocalizations.of(context).invalidLength
                       : null,
                   onFieldSubmitted: (_) => focusNodeNumberID!.requestFocus(),
                   inputFormatters: [
@@ -80,6 +82,11 @@ class DriverInformationWidget extends StatelessWidget {
                         initialText: seriesID.text,
                         filter: {"#": RegExp(r'[A-Z]')})
                   ],
+                  onChange: (value) {
+                    if (value.length == 2) {
+                      focusNodeNumberID!.requestFocus();
+                    }
+                  },
                 )),
             const SizedBox(width: 10),
             Expanded(
@@ -91,7 +98,7 @@ class DriverInformationWidget extends StatelessWidget {
                 textEditingController: numberID,
                 focusNode: focusNodeNumberID,
                 validator: (value) => value!.length < 6
-                    ? AppLocalizations.of(context).notDoEmpty
+                    ? AppLocalizations.of(context).invalidLength
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
@@ -99,6 +106,12 @@ class DriverInformationWidget extends StatelessWidget {
                       initialText: numberID.text,
                       filter: {"#": RegExp(r'[0-9]')})
                 ],
+                onChange: (value) {
+                  if (value.length == 6) {
+                    focusNodeNumberID!.unfocus();
+                    onRequest();
+                  }
+                },
               ),
             ),
           ],
@@ -115,14 +128,20 @@ class DriverInformationWidget extends StatelessWidget {
       textEditingController: phoneController,
       textInputType: TextInputType.phone,
       focusNode: focusNodePhone,
-      validator: (value) =>
-          value!.isEmpty ? AppLocalizations.of(context).notDoEmpty : null,
+      validator: (value) => value!.length != 14
+          ? AppLocalizations.of(context).invalidLength
+          : null,
       inputFormatters: [
         MaskTextInputFormatter(
             mask: '(##) ### ## ##',
             type: MaskAutoCompletionType.eager,
             filter: {"#": RegExp(r'[0-9]')})
       ],
+      onChange: (value) {
+        if (value.length == 14) {
+          focusNodePhone!.unfocus();
+        }
+      },
       prefixIcon: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 30),
         child: Row(

@@ -16,12 +16,14 @@ class ContractDetails extends StatelessWidget {
       this.contract,
       required this.dateController,
       this.onClear,
-      required this.focusNode})
+      required this.focusNode,
+      required this.onRequest})
       : super(key: key);
   final ContractInfoResponse? contract;
   final TextEditingController dateController;
   final Function()? onClear;
   final FocusNode focusNode;
+  final Function() onRequest;
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +42,18 @@ class ContractDetails extends StatelessWidget {
           keyboardType: TextInputType.datetime,
           textEditingController: dateController,
           textInputAction: TextInputAction.done,
+          onFieldSubmitted: (_) => focusNode.unfocus(),
           focusNode: focusNode,
           validator: (value) => (value!.length < 10)
               ? AppLocalizations.of(context).enterDate
               : null,
           dateFormat: 'dd.MM.yyyy',
+          onChange: (value) {
+            if (value.length == 10) {
+              focusNode.unfocus();
+              onRequest();
+            }
+          },
           inputFormatters: [
             MaskTextInputFormatter(
                 mask: '##.##.####',
@@ -52,6 +61,10 @@ class ContractDetails extends StatelessWidget {
                 type: MaskAutoCompletionType.eager,
                 filter: {"#": RegExp(r'[0-9]')})
           ],
+          onDate: () {
+            focusNode.unfocus();
+            onRequest();
+          },
         ),
         const SizedBox(height: 8),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),

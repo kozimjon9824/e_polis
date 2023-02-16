@@ -30,6 +30,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
   final nameController = TextEditingController();
   final lastNameController = TextEditingController();
   final phoneController = TextEditingController();
+  final phoneFocus = FocusNode();
   final formKey = GlobalKey<FormState>();
 
   final phoneMask = MaskTextInputFormatter(
@@ -158,6 +159,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
     nameController.dispose();
     lastNameController.dispose();
     phoneController.dispose();
+    phoneFocus.dispose();
   }
 
   Widget phoneCustomPrefixTextField() {
@@ -167,6 +169,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
       textInputAction: TextInputAction.done,
       textEditingController: phoneController,
       textInputType: TextInputType.phone,
+      focusNode: phoneFocus,
       inputFormatters: [
         MaskTextInputFormatter(
             mask: '(##) ### ## ##',
@@ -174,6 +177,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
             filter: {"#": RegExp(r'[0-9]')},
             type: MaskAutoCompletionType.eager)
       ],
+      onChange: (value) {
+        if (value.length == 14) {
+          phoneFocus.unfocus();
+        }
+      },
       validator: (value) => value!.length < 14
           ? AppLocalizations.of(context).invalidLength
           : null,

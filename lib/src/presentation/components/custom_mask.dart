@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class SpecialMaskTextInputFormatter extends MaskTextInputFormatter {
@@ -10,8 +11,8 @@ class SpecialMaskTextInputFormatter extends MaskTextInputFormatter {
             mask: maskA,
             filter: {
               "#": RegExp('[0-9]'),
-              "&": RegExp('[A-Z]'),
-              '£': RegExp(r'[0-9A-Z]')
+              "&": RegExp('[A-Za-z]'),
+              '£': RegExp(r'[0-9A-Za-z]')
             },
             initialText: initialText);
 
@@ -24,11 +25,22 @@ class SpecialMaskTextInputFormatter extends MaskTextInputFormatter {
       if (getMask() != maskA) {
         updateMask(mask: maskA);
       }
-    } else if (RegExp('[A-Z]').hasMatch(isLatter)) {
+    } else if (RegExp('[A-Za-z]').hasMatch(isLatter)) {
       if (getMask() != maskB) {
         updateMask(mask: maskB);
       }
     }
     return super.formatEditUpdate(oldValue, newValue);
+  }
+}
+
+class UpperCaseTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    return TextEditingValue(
+      text: newValue.text.toUpperCase(),
+      selection: newValue.selection,
+    );
   }
 }

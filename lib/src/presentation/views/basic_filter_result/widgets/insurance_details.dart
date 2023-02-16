@@ -38,7 +38,12 @@ class InsuranceDetail extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
                         child: CachedNetworkImage(
-                            imageUrl: image ?? '', height: 30),
+                          imageUrl: image ?? '',
+                          height: 30,
+                          width: 130,
+                          fit: BoxFit.cover,
+                          errorWidget: (_, __, ___) => const SizedBox.shrink(),
+                        ),
                       ))),
               const SizedBox(width: 24),
               Column(

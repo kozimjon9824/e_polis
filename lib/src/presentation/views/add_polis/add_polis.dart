@@ -24,6 +24,7 @@ class _AddPolisPageState extends State<AddPolisPage> {
   final insuranceController = TextEditingController();
   final carController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  final focusNodeVehicleNum = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +69,30 @@ class _AddPolisPageState extends State<AddPolisPage> {
                 label: AppLocalizations.of(context).vehicleNumber,
                 hintText: '01 A 000 AA or 01 777 AAA',
                 textInputAction: TextInputAction.done,
+                keyboardType: TextInputType.visiblePassword,
                 textCapitalization: TextCapitalization.characters,
                 textEditingController: carController,
-                validator: (value) => value!.isEmpty
-                    ? AppLocalizations.of(context).notDoEmpty
+                focusNode: focusNodeVehicleNum,
+                onFieldSubmitted: (_) => focusNodeVehicleNum.unfocus(),
+                validator: (value) => (value!.length < 10 ||
+                        (value.length == 10 &&
+                            !RegExp('[0-9]').hasMatch(value.substring(3, 4))))
+                    ? AppLocalizations.of(context).invalidLength
                     : null,
-                inputFormatters: [SpecialMaskTextInputFormatter()],
+                inputFormatters: [
+                  SpecialMaskTextInputFormatter(),
+                  UpperCaseTextFormatter(),
+                ],
+                onChange: (value) {
+                  if (value.length == 10) {
+                    if (RegExp('[0-9]').hasMatch(value.substring(3, 4))) {
+                      focusNodeVehicleNum.unfocus();
+                    }
+                  }
+                  if (value.length == 11) {
+                    focusNodeVehicleNum.unfocus();
+                  }
+                },
               ),
             ],
           ),
@@ -117,5 +136,6 @@ class _AddPolisPageState extends State<AddPolisPage> {
     super.dispose();
     insuranceController.dispose();
     carController.dispose();
+    focusNodeVehicleNum.dispose();
   }
 }
