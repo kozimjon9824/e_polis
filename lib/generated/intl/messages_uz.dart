@@ -118,7 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hide": MessageLookupByLibrary.simpleMessage("Яшириш"),
         "holderName":
             MessageLookupByLibrary.simpleMessage("Карта эгасининг исми"),
-        "home": MessageLookupByLibrary.simpleMessage("Бош"),
+        "home": MessageLookupByLibrary.simpleMessage("Aсосий"),
         "howCanWeHelp": MessageLookupByLibrary.simpleMessage(
             "Қандай қилиб ёрдам бера оламиз?"),
         "iAmAgree": MessageLookupByLibrary.simpleMessage(
@@ -148,7 +148,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "model": MessageLookupByLibrary.simpleMessage("Марка ва модель"),
         "mustNotEmptyFailure": MessageLookupByLibrary.simpleMessage(
             "Майдонлар бўш бўлиши мумкин эмас"),
-        "myPolicies": MessageLookupByLibrary.simpleMessage("Менинг полисларим"),
+        "myPolicies": MessageLookupByLibrary.simpleMessage("Полисларим"),
         "name": MessageLookupByLibrary.simpleMessage("Исм"),
         "nameSurname": MessageLookupByLibrary.simpleMessage("Исм Фамилия"),
         "newAndPromotionalInformation": MessageLookupByLibrary.simpleMessage(

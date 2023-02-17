@@ -89,6 +89,9 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                 bottomNavigationBar: SafeArea(
                   minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
                   child: BlocConsumer<BookCubit, BookState>(
+                    listenWhen: (pre, cur) =>
+                        cur.status == StateStatus.error ||
+                        cur.status == StateStatus.success,
                     listener: (context, bookState) {
                       if (bookState.status == StateStatus.error) {
                         showErrorMessage(context,
