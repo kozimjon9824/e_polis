@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   final controller = TextEditingController();
   final mask = MaskTextInputFormatter(
       mask: '(##) ### ## ##',
-      filter: {"#": RegExp(r'[0-9]')},
+      filter: {"#": RegExp(r'\d')},
       type: MaskAutoCompletionType.eager);
 
   @override

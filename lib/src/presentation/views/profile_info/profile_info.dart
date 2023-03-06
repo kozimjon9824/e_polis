@@ -35,7 +35,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 
   final phoneMask = MaskTextInputFormatter(
       mask: '(##) ### ## ##',
-      filter: {"#": RegExp(r'[0-9]')},
+      filter: {"#": RegExp(r'\d')},
       type: MaskAutoCompletionType.eager);
 
   @override
@@ -174,7 +174,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
         MaskTextInputFormatter(
             mask: '(##) ### ## ##',
             initialText: phoneMask.unmaskText(phoneController.text),
-            filter: {"#": RegExp(r'[0-9]')},
+            filter: {"#": RegExp(r'\d')},
             type: MaskAutoCompletionType.eager)
       ],
       onChange: (value) {

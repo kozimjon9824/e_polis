@@ -133,7 +133,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     var owner = state.vehicleInfo?.owner;
                     var phone = MaskTextInputFormatter(
                             mask: '(##) ### ## ##',
-                            filter: {"#": RegExp(r'[0-9]')})
+                            filter: {"#": RegExp(r'\d')})
                         .unmaskText(phoneController.text);
                     ApplicantModel applicant = ApplicantModel(
                         phone: phone,

@@ -27,7 +27,6 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
   @override
   void initState() {
     super.initState();
-    // context.read<InsuranceBasicFilterCubit>().clearData();
     context.read<DropDownValuesCubit>().loadValues();
   }
 

@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../injector.dart';
+import '../../../main.dart';
 import '../../data/models/refresh_token/refresh_token.dart';
 import '../../presentation/cubits/auth/auth_cubit.dart';
 import '../constants/constants.dart';
@@ -19,7 +20,7 @@ class NetworkClient {
 
   Future<Dio> init(SharedPreferences preferences) async {
     api = Dio();
-    // api.interceptors.add(alice.getDioInterceptor());
+    api.interceptors.add(alice.getDioInterceptor());
     api.interceptors.add(InterceptorsWrapper(
       /// onRequest
       onRequest: (options, handler) async {

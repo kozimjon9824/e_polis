@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -12,7 +11,7 @@ class SpecialMaskTextInputFormatter extends MaskTextInputFormatter {
             filter: {
               "#": RegExp('[0-9]'),
               "&": RegExp('[A-Za-z]'),
-              '£': RegExp(r'[0-9A-Za-z]')
+              '£': RegExp(r'[\dA-Za-z]')
             },
             initialText: initialText);
 

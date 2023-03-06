@@ -127,7 +127,7 @@ class CarInformationWidget extends StatelessWidget {
                   MaskTextInputFormatter(
                       mask: '######',
                       initialText: numberController.text,
-                      filter: {"#": RegExp(r'[0-9]')})
+                      filter: {"#": RegExp(r'\d')})
                 ],
                 onChange: (value) {
                   if (value.length == 6) {
