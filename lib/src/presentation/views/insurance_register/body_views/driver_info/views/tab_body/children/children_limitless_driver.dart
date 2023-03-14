@@ -80,7 +80,7 @@ class LimitlessDriverChild1Body extends StatelessWidget {
                   MaskTextInputFormatter(
                       mask: '#######',
                       initialText: numberController.text,
-                      filter: {"#": RegExp(r'[0-9]')})
+                      filter: {"#": RegExp(r'\d')})
                 ],
                 onChange: (value) {
                   if (value.length == 7) {
@@ -107,7 +107,7 @@ class LimitlessDriverChild1Body extends StatelessWidget {
             MaskTextInputFormatter(
                 mask: '##.##.####',
                 initialText: dateController.text.replaceAll('.', ''),
-                filter: {"#": RegExp(r'[0-9]')})
+                filter: {"#": RegExp(r'\d')})
           ],
           onChange: (value) {
             if (value.length == 10) {
@@ -213,7 +213,7 @@ class LimitlessDriverChild2Body extends StatelessWidget {
                   MaskTextInputFormatter(
                       mask: '#######',
                       initialText: licenseNumber.text,
-                      filter: {"#": RegExp(r'[0-9]')})
+                      filter: {"#": RegExp(r'\d')})
                 ],
                 onChange: (value) {
                   if (value.length == 7) {
@@ -240,7 +240,7 @@ class LimitlessDriverChild2Body extends StatelessWidget {
             MaskTextInputFormatter(
                 mask: '##.##.####',
                 initialText: licenseDate.text.replaceAll('.', ''),
-                filter: {"#": RegExp(r'[0-9]')})
+                filter: {"#": RegExp(r'\d')})
           ],
           onChange: (value) {
             if (value.length == 10) {

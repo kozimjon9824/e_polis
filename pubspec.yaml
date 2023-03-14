@@ -89,6 +89,26 @@ flutter:
     - family: Gilroy
       fonts:
         - asset: assets/fonts/Gilroy/Gilroy-Regular.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-BlackItalic.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-Black.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-Bold.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-BoldItalic.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-ExtraBold.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-Heavy.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-HeavyItalic.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-Light.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-LightItalic.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-Medium.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-MediumItalic.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-RegularItalic.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-SemiBold.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-SemiBoldItalic.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-Thin.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-ThinItalic.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-UltraLight.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-UltraLightItalic.ttf
+
 
 flutter_intl:
   enabled: true

@@ -1,7 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 // base url for network
-const BASE_URL = 'https://api.epolis.sandbox.uz/';
+const BASE_URL = 'https://epolis.impexonline.uz/api/';
+//'https://api.epolis.sandbox.uz/';
 
 const REFRESH_TOKEN = 'refresh_token';
 const ACCESS_TOKEN = 'access-token';

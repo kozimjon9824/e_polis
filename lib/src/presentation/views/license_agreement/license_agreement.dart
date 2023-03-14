@@ -104,7 +104,9 @@ class _LicenseAgreementPageState extends State<LicenseAgreementPage> {
                         ..pop()
                         ..pushNamed(AppRoutes.insuranceRegistration,
                             arguments: InsurancePageArguments(
-                                id: id, request: cubit.basicFilterRequest));
+                              id: id,
+                              request: cubit.basicFilterRequest,
+                            ));
                     }
                   }
                 },

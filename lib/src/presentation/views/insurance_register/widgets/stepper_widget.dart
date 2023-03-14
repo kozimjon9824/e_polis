@@ -29,36 +29,36 @@ class CustomStepper extends StatelessWidget implements PreferredSizeWidget {
                       currentIndex: currentIndex,
                       index: 0,
                       onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(0);
+                        // context
+                        //     .read<ManageInsuranceStackViewsCubit>()
+                        //     .changeIndex(0);
                       }),
                   liner(currentIndex >= 1),
                   StepperStep(
                       currentIndex: currentIndex,
                       index: 1,
                       onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(1);
+                        // context
+                        //     .read<ManageInsuranceStackViewsCubit>()
+                        //     .changeIndex(1);
                       }),
                   liner(currentIndex >= 2),
                   StepperStep(
                       currentIndex: currentIndex,
                       index: 2,
                       onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(2);
+                        // context
+                        //     .read<ManageInsuranceStackViewsCubit>()
+                        //     .changeIndex(2);
                       }),
                   liner(currentIndex >= 3),
                   StepperStep(
                       currentIndex: currentIndex,
                       index: 3,
                       onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(3);
+                        // context
+                        //     .read<ManageInsuranceStackViewsCubit>()
+                        //     .changeIndex(3);
                       }),
                   const Expanded(flex: 1, child: SizedBox()),
                 ],
@@ -116,7 +116,7 @@ class StepperStep extends StatelessWidget {
   Widget build(BuildContext context) {
     if (currentIndex < index) {
       return InkWell(
-        onTap: onTap,
+        // onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 3),
           child: Container(
@@ -161,11 +161,13 @@ class StepperText extends StatelessWidget {
         alignment: Alignment.center,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
-          child: Text(title,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              style: AppTextStyles.styleW500S12Grey9.copyWith(
-                  color: isActive ? AppColors.grey900 : AppColors.grey500)),
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            style: AppTextStyles.styleW500S12Grey9.copyWith(
+                color: isActive ? AppColors.grey900 : AppColors.grey500),
+          ),
         ),
       ),
     );

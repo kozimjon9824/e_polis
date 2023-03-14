@@ -6,7 +6,7 @@ import 'app_colors.dart';
 
 final appThemeData = ThemeData(
   colorScheme:
-      ColorScheme.fromSwatch().copyWith(secondary: AppColors.primaryColor),
+      ColorScheme.fromSwatch().copyWith(primary: AppColors.primaryColor),
   appBarTheme: const AppBarTheme(
       elevation: 0,
       backgroundColor: Colors.white,
@@ -21,14 +21,15 @@ final appThemeData = ThemeData(
       centerTitle: false,
       titleTextStyle: AppTextStyles.styleW700S18Grey9),
   fontFamily: "Gilroy",
-  backgroundColor: AppColors.backgroundColor,
+  bottomAppBarTheme: const BottomAppBarTheme(color: AppColors.backgroundColor),
   scaffoldBackgroundColor: AppColors.backgroundColor,
   cupertinoOverrideTheme: const CupertinoThemeData(brightness: Brightness.dark),
   visualDensity: VisualDensity.adaptivePlatformDensity,
-  primarySwatch: Colors.red,
   primaryColor: AppColors.primaryColor,
-  pageTransitionsTheme: const PageTransitionsTheme(builders: {
-    TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-  }),
+  pageTransitionsTheme: const PageTransitionsTheme(
+    builders: {
+      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+    },
+  ),
 );

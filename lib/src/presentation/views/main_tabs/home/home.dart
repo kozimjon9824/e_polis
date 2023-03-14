@@ -5,7 +5,6 @@ import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_dat
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../core/constants/constants.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../components/error_view.dart';
 import '../../../components/loading.dart';
@@ -15,18 +14,14 @@ import 'widgets/carausel_widget.dart';
 import 'widgets/filter_tabs.dart';
 import 'widgets/profile.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => inject<FilterTabManagerCubit>()..changeTab(ALL),
+      create: (_) => inject<FilterTabManagerCubit>()
+        ..changeTab(AppLocalizations.of(context).all),
       child: BlocBuilder<MainScreenDataCubit, MainScreenDataState>(
         builder: (context, state) {
           return state.maybeWhen(
@@ -86,7 +81,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const SizedBox(height: 16),
                         InsuranceTypesBody(
-                            products: (state.tab == ALL)
+                            products: (state.tab ==
+                                    AppLocalizations.of(context).all)
                                 ? (data?.products ?? [])
                                 : data?.products
                                         ?.where((element) =>

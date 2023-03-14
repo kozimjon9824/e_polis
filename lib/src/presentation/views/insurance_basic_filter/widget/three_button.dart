@@ -25,27 +25,30 @@ class ThreeButton extends StatelessWidget {
             Row(
               children: [
                 SwitchBtn(
-                    title: AppLocalizations.of(context).sixMonth,
-                    onTap: () {
-                      cubit.selectPeriod(PERIOD_MONTHS);
-                    },
-                    bgColor: status == PERIOD_MONTHS ? AppColors.green : null,
-                    borderRadius: const BorderRadius.horizontal(
-                        left: Radius.circular(8))),
+                  title: AppLocalizations.of(context).twentyDays,
+                  onTap: () {
+                    cubit.selectPeriod(PERIOD_DAYS);
+                  },
+                  bgColor: status == PERIOD_DAYS ? AppColors.green : null,
+                  borderRadius:
+                      const BorderRadius.horizontal(left: Radius.circular(8)),
+                ),
                 SwitchBtn(
-                    title: AppLocalizations.of(context).oneYear,
-                    onTap: () {
-                      cubit.selectPeriod(PERIOD_YEAR);
-                    },
-                    bgColor: status == PERIOD_YEAR ? AppColors.green : null),
+                  title: AppLocalizations.of(context).sixMonth,
+                  onTap: () {
+                    cubit.selectPeriod(PERIOD_MONTHS);
+                  },
+                  bgColor: status == PERIOD_MONTHS ? AppColors.green : null,
+                ),
                 SwitchBtn(
-                    title: AppLocalizations.of(context).twentyDays,
-                    onTap: () {
-                      cubit.selectPeriod(PERIOD_DAYS);
-                    },
-                    bgColor: status == PERIOD_DAYS ? AppColors.green : null,
-                    borderRadius: const BorderRadius.horizontal(
-                        right: Radius.circular(8))),
+                  title: AppLocalizations.of(context).oneYear,
+                  onTap: () {
+                    cubit.selectPeriod(PERIOD_YEAR);
+                  },
+                  bgColor: status == PERIOD_YEAR ? AppColors.green : null,
+                  borderRadius:
+                      const BorderRadius.horizontal(right: Radius.circular(8)),
+                ),
               ],
             ),
           ],

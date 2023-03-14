@@ -26,7 +26,7 @@ class CheckVehicleInfoCubit extends Cubit<CheckVehicleInfoState> {
     emit(state.copyWith(status: StateStatus.loading));
     var result = await _vehicleInfoUseCase.call(CheckVehicleInfoParam(
         VehicleInfoRequest(
-            plateNumber: vehicleNum,
+            plateNumber: vehicleNum.replaceAll(' ', ''),
             technicalPassport:
                 TechnicalPassport(series: techPasSer, number: techPasNum))));
     result.fold(

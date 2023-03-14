@@ -80,7 +80,7 @@ class Child1Body extends StatelessWidget {
                   MaskTextInputFormatter(
                       mask: '#######',
                       initialText: numberController.text,
-                      filter: {"#": RegExp(r'[0-9]')})
+                      filter: {"#": RegExp(r'\d')})
                 ],
                 onChange: (value) {
                   if (value.length == 7) {
@@ -109,7 +109,7 @@ class Child1Body extends StatelessWidget {
                 mask: '##.##.####',
                 initialText: dateController.text.replaceAll('', ''),
                 type: MaskAutoCompletionType.eager,
-                filter: {"#": RegExp(r'[0-9]')})
+                filter: {"#": RegExp(r'\d')})
           ],
           onChange: (value) {
             if (value.length == 10) {
@@ -218,7 +218,7 @@ class Child2Body extends StatelessWidget {
                   MaskTextInputFormatter(
                       mask: '#######',
                       initialText: licenseNumber.text,
-                      filter: {"#": RegExp(r'[0-9]')})
+                      filter: {"#": RegExp(r'\d')})
                 ],
                 onChange: (value) {
                   if (value.length == 7) {
@@ -246,7 +246,7 @@ class Child2Body extends StatelessWidget {
             MaskTextInputFormatter(
                 mask: '##.##.####',
                 initialText: licenseDate.text.replaceAll('.', ''),
-                filter: {"#": RegExp(r'[0-9]')})
+                filter: {"#": RegExp(r'\d')})
           ],
           onChange: (value) {
             if (value.length == 10) {

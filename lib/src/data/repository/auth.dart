@@ -46,8 +46,6 @@ class AuthRepository extends IAuthRepository {
   Future<Either<Failure, VerifyResponse>> verify(VerifyRequest request) async {
     try {
       final response = await _apiClient.verify(request);
-      // await _preferences.setString(ACCESS_TOKEN, response.accessToken ?? '');
-      // await _preferences.setString(REFRESH_TOKEN, response.refreshToken ?? '');
       await Future.wait([
         _preferences.setString(ACCESS_TOKEN, response.accessToken ?? ''),
         _preferences.setString(REFRESH_TOKEN, response.refreshToken ?? '')

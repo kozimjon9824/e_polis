@@ -53,7 +53,7 @@ class NetworkClient {
 
         if (error.response?.statusCode == 401 && _token != '') {
           await refreshToken(preferences);
-          if (_token == '') {
+          if (_token.isEmpty) {
             return;
           }
           RequestOptions requestOptions = error.requestOptions;
@@ -119,8 +119,9 @@ class NetworkClient {
         debugPrint('TTT401 : ${response.data} ${response.statusMessage}');
       }
     } catch (err) {
-      _token = '';
       debugPrint('EEE:$err');
+
+      _token = '';
       await preferences.setString(REFRESH_TOKEN, '');
       await _goToLoginScreen();
     }

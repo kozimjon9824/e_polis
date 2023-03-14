@@ -66,7 +66,10 @@ class InsuranceItem extends StatelessWidget {
                     gradient: LinearGradient(
               begin: Alignment.center,
               end: Alignment.bottomCenter,
-              colors: [Color.fromRGBO(0, 0, 0, 0), Color.fromRGBO(0, 0, 0, 1)],
+              colors: [
+                Color.fromRGBO(0, 0, 0, 0),
+                Color.fromRGBO(0, 0, 0, 1),
+              ],
             ))),
             Positioned(
               bottom: 12,

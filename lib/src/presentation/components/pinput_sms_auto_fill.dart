@@ -30,7 +30,7 @@ class CustomPinPut extends StatelessWidget {
         controller: textController,
         onChanged: onChange,
         length: 5,
-        androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
+        androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsUserConsentApi,
         pinputAutovalidateMode: PinputAutovalidateMode.onSubmit);
   }
 

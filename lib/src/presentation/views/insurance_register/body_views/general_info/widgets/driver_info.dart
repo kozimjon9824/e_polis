@@ -78,9 +78,10 @@ class DriverInformationWidget extends StatelessWidget {
                   onFieldSubmitted: (_) => focusNodeNumberID!.requestFocus(),
                   inputFormatters: [
                     MaskTextInputFormatter(
-                        mask: '##',
-                        initialText: seriesID.text,
-                        filter: {"#": RegExp(r'[A-Z]')})
+                      mask: '##',
+                      initialText: seriesID.text,
+                      filter: {"#": RegExp(r'[A-Z]')},
+                    )
                   ],
                   onChange: (value) {
                     if (value.length == 2) {
@@ -104,10 +105,10 @@ class DriverInformationWidget extends StatelessWidget {
                   MaskTextInputFormatter(
                       mask: '#######',
                       initialText: numberID.text,
-                      filter: {"#": RegExp(r'[0-9]')})
+                      filter: {"#": RegExp(r'\d')})
                 ],
                 onChange: (value) {
-                  if (value.length == 6) {
+                  if (value.length == 7) {
                     focusNodeNumberID!.unfocus();
                     onRequest();
                   }
@@ -135,7 +136,7 @@ class DriverInformationWidget extends StatelessWidget {
         MaskTextInputFormatter(
             mask: '(##) ### ## ##',
             type: MaskAutoCompletionType.eager,
-            filter: {"#": RegExp(r'[0-9]')})
+            filter: {"#": RegExp(r'\d')})
       ],
       onChange: (value) {
         if (value.length == 14) {

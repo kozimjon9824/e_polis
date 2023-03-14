@@ -16,8 +16,10 @@ class LicenseAgreementCubit extends Cubit<LicenseAgreementState> {
   void loadData() async {
     emit(const LicenseAgreementState.loading());
     var result = await _licenseAgreementUseCase.call(NoParams());
-    result.fold((failure) => emit(LicenseAgreementState.error(failure)),
-        (data) => emit(LicenseAgreementState.loaded(text: data)));
+    result.fold(
+      (failure) => emit(LicenseAgreementState.error(failure)),
+      (data) => emit(LicenseAgreementState.loaded(text: data)),
+    );
   }
 
   void checkAgreement(dynamic text, bool status) {

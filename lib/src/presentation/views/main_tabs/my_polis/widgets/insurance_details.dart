@@ -141,7 +141,9 @@ class InsuranceDetails extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12), color: AppColors.grey50),
+        borderRadius: BorderRadius.circular(12),
+        color: AppColors.grey50,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

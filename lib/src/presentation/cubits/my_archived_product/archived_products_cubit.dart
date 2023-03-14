@@ -22,8 +22,9 @@ class ArchivedProductsCubit extends Cubit<ArchivedProductsState> {
     }
     var result = await _useCase.call(NoParams());
     result.fold(
-        (failure) => emit(ArchivedProductsState.error(failure)),
-        (data) =>
-            emit(ArchivedProductsState.loaded(productList: data.data ?? [])));
+      (failure) => emit(ArchivedProductsState.error(failure)),
+      (data) =>
+          emit(ArchivedProductsState.loaded(productList: data.data ?? [])),
+    );
   }
 }

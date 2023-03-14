@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, state) {
-          String language = state.language ?? EN;
+          String language = state.language ?? RU;
           return MaterialApp(
             title: 'E-Polis',
             debugShowCheckedModeBanner: false,
@@ -64,18 +64,20 @@ class MyApp extends StatelessWidget {
             ],
             supportedLocales: const [
               Locale(RU),
-              Locale(UZ),
+              Locale.fromSubtags(languageCode: UZ, scriptCode: 'Cyrl'),
               Locale(EN),
             ],
             builder: (context, child) {
               final mediaQueryData = MediaQuery.of(context);
               final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.3);
               return MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: scale),
+                data: mediaQueryData.copyWith(textScaleFactor: scale),
                 child: child!,
               );
             },
-            locale: Locale(language == '' ? RU : language),
+            locale: Locale.fromSubtags(
+                languageCode: language == '' ? RU : language,
+                scriptCode: 'Cyrl'),
             initialRoute: AppRoutes.splash,
           );
         },
