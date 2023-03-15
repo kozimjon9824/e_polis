@@ -108,6 +108,25 @@ flutter:
         - asset: assets/fonts/Gilroy/Gilroy-ThinItalic.ttf
         - asset: assets/fonts/Gilroy/Gilroy-UltraLight.ttf
         - asset: assets/fonts/Gilroy/Gilroy-UltraLightItalic.ttf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto-Black.ttf
+        - asset: assets/fonts/Roboto/Roboto-BlackItalic.ttf
+        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
+        - asset: assets/fonts/Roboto/Roboto-BoldItalic.ttf
+        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+        - asset: assets/fonts/Roboto/Roboto-MediumItalic.ttf
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto/Roboto-Italic.ttf
+        - asset: assets/fonts/Roboto/Roboto-Light.ttf
+        - asset: assets/fonts/Roboto/Roboto-Thin.ttf
+        - asset: assets/fonts/Roboto/Roboto-ThinItalic.ttf
+        - asset: assets/fonts/Roboto/Roboto-LightItalic.ttf
+
+
+    - family: SFPro
+      fonts:
+        - asset: assets/fonts/SFPro.ttf
 
 
 flutter_intl:
