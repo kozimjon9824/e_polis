@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import '../../components/search_bar.dart';
+import '../../components/snackbars.dart';
 import 'widgets/body_widget.dart';
 
 class BasicFilterResultPage extends StatefulWidget {
@@ -30,7 +31,13 @@ class _BasicFilterResultPageState extends State<BasicFilterResultPage> {
   Widget build(BuildContext context) {
     return KeyboardVisibilityProvider(
       controller: keyboardController,
-      child: BlocBuilder<InsuranceBasicFilterCubit, InsuranceBasicFilterState>(
+      child: BlocConsumer<InsuranceBasicFilterCubit, InsuranceBasicFilterState>(
+        listener: (context, state) {
+          if (state.status == StateStatus.error) {
+            showErrorMessage(
+                context, state.failure.getLocalizedMessage(context));
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(

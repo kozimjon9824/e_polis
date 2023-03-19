@@ -59,7 +59,7 @@ class ContractDetails extends StatelessWidget {
                 mask: '##.##.####',
                 initialText: dateController.text.replaceAll('.', ''),
                 type: MaskAutoCompletionType.eager,
-                filter: {"#": RegExp(r'[0-9]')})
+                filter: {"#": RegExp(r'\d')})
           ],
           onDate: () {
             focusNode.unfocus();

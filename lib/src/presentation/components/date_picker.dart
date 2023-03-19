@@ -6,9 +6,10 @@ import '../../../generated/l10n.dart';
 import '../../core/themes/app_colors.dart';
 import '../../core/themes/app_text_styles.dart';
 
-void selectDate(
-    {required BuildContext context,
-    required Function(DateTime dateTime) onSave}) {
+void selectDate({
+  required BuildContext context,
+  required Function(DateTime dateTime) onSave,
+}) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -25,14 +26,14 @@ void selectDate(
 }
 
 class DateBottomSheetBody extends StatefulWidget {
-  const DateBottomSheetBody(
-      {Key? key,
-      required this.onSave,
-      this.minimumYear,
-      this.maximumYear,
-      this.use24hFormat = false,
-      this.initialDate})
-      : super(key: key);
+  const DateBottomSheetBody({
+    Key? key,
+    required this.onSave,
+    this.minimumYear,
+    this.maximumYear,
+    this.use24hFormat = false,
+    this.initialDate,
+  }) : super(key: key);
   final Function(DateTime dateTime) onSave;
   final int? minimumYear;
   final int? maximumYear;

@@ -13,7 +13,7 @@ class _ApiClient implements ApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://api.epolis.sandbox.uz/';
+    baseUrl ??= 'https://epolis.impexonline.uz/api/';
   }
 
   final Dio _dio;

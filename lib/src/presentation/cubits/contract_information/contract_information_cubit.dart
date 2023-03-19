@@ -23,7 +23,7 @@ class ContractInformationCubit extends Cubit<ContractInformationState> {
         await _contractInfoUseCase.call(ContractInfoParams(productId, request));
     result.fold(
         (failure) =>
-            emit(state.copyWith(failure: failure, status: StateStatus.loading)),
+            emit(state.copyWith(failure: failure, status: StateStatus.error)),
         (response) => emit(
             state.copyWith(status: StateStatus.unknown, contract: response)));
   }

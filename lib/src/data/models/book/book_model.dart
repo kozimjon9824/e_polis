@@ -6,12 +6,13 @@ part 'book_model.g.dart';
 
 @freezed
 class BookModel with _$BookModel {
-  const factory BookModel(
-      {ApplicantModel? applicant,
-      CalculationModel? calculation,
-      String? startDate,
-      VehicleNumber? vehicle,
-      List<DriverModel>? drivers}) = _BookModel;
+  const factory BookModel({
+    ApplicantModel? applicant,
+    CalculationModel? calculation,
+    String? startDate,
+    VehicleNumber? vehicle,
+    List<DriverModel>? drivers,
+  }) = _BookModel;
 
   factory BookModel.fromJson(Map<String, dynamic> json) =>
       _$BookModelFromJson(json);
@@ -31,8 +32,10 @@ class ApplicantPassport with _$ApplicantPassport {
 
 @freezed
 class ApplicantModel with _$ApplicantModel {
-  const factory ApplicantModel({ApplicantPassport? passport, String? phone}) =
-      _ApplicantModel;
+  const factory ApplicantModel({
+    ApplicantPassport? passport,
+    String? phone,
+  }) = _ApplicantModel;
 
   factory ApplicantModel.fromJson(Map<String, dynamic> json) =>
       _$ApplicantModelFromJson(json);
@@ -53,10 +56,11 @@ class CalculationModel with _$CalculationModel {
 
 @freezed
 class DriverModel with _$DriverModel {
-  const factory DriverModel(
-      {String? birthDate,
-      int? relative,
-      DriverPassport? passport}) = _DriverModel;
+  const factory DriverModel({
+    String? birthDate,
+    int? relative,
+    DriverPassport? passport,
+  }) = _DriverModel;
 
   factory DriverModel.fromJson(Map<String, dynamic> json) =>
       _$DriverModelFromJson(json);
@@ -64,8 +68,10 @@ class DriverModel with _$DriverModel {
 
 @freezed
 class DriverPassport with _$DriverPassport {
-  const factory DriverPassport({String? series, String? number}) =
-      _DriverPassport;
+  const factory DriverPassport({
+    String? series,
+    String? number,
+  }) = _DriverPassport;
 
   factory DriverPassport.fromJson(Map<String, dynamic> json) =>
       _$DriverPassportFromJson(json);
@@ -73,7 +79,10 @@ class DriverPassport with _$DriverPassport {
 
 @freezed
 class VehicleNumber with _$VehicleNumber {
-  const factory VehicleNumber({String? plateNumber}) = _VehicleNumber;
+  const factory VehicleNumber({
+    String? plateNumber,
+    DriverPassport? technicalPassport,
+  }) = _VehicleNumber;
 
   factory VehicleNumber.fromJson(Map<String, dynamic> json) =>
       _$VehicleNumberFromJson(json);

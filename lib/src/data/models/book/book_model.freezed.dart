@@ -1177,6 +1177,7 @@ VehicleNumber _$VehicleNumberFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$VehicleNumber {
   String? get plateNumber => throw _privateConstructorUsedError;
+  DriverPassport? get technicalPassport => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1190,7 +1191,9 @@ abstract class $VehicleNumberCopyWith<$Res> {
           VehicleNumber value, $Res Function(VehicleNumber) then) =
       _$VehicleNumberCopyWithImpl<$Res, VehicleNumber>;
   @useResult
-  $Res call({String? plateNumber});
+  $Res call({String? plateNumber, DriverPassport? technicalPassport});
+
+  $DriverPassportCopyWith<$Res>? get technicalPassport;
 }
 
 /// @nodoc
@@ -1207,13 +1210,30 @@ class _$VehicleNumberCopyWithImpl<$Res, $Val extends VehicleNumber>
   @override
   $Res call({
     Object? plateNumber = freezed,
+    Object? technicalPassport = freezed,
   }) {
     return _then(_value.copyWith(
       plateNumber: freezed == plateNumber
           ? _value.plateNumber
           : plateNumber // ignore: cast_nullable_to_non_nullable
               as String?,
+      technicalPassport: freezed == technicalPassport
+          ? _value.technicalPassport
+          : technicalPassport // ignore: cast_nullable_to_non_nullable
+              as DriverPassport?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DriverPassportCopyWith<$Res>? get technicalPassport {
+    if (_value.technicalPassport == null) {
+      return null;
+    }
+
+    return $DriverPassportCopyWith<$Res>(_value.technicalPassport!, (value) {
+      return _then(_value.copyWith(technicalPassport: value) as $Val);
+    });
   }
 }
 
@@ -1225,7 +1245,10 @@ abstract class _$$_VehicleNumberCopyWith<$Res>
       __$$_VehicleNumberCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? plateNumber});
+  $Res call({String? plateNumber, DriverPassport? technicalPassport});
+
+  @override
+  $DriverPassportCopyWith<$Res>? get technicalPassport;
 }
 
 /// @nodoc
@@ -1240,12 +1263,17 @@ class __$$_VehicleNumberCopyWithImpl<$Res>
   @override
   $Res call({
     Object? plateNumber = freezed,
+    Object? technicalPassport = freezed,
   }) {
     return _then(_$_VehicleNumber(
       plateNumber: freezed == plateNumber
           ? _value.plateNumber
           : plateNumber // ignore: cast_nullable_to_non_nullable
               as String?,
+      technicalPassport: freezed == technicalPassport
+          ? _value.technicalPassport
+          : technicalPassport // ignore: cast_nullable_to_non_nullable
+              as DriverPassport?,
     ));
   }
 }
@@ -1253,17 +1281,19 @@ class __$$_VehicleNumberCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_VehicleNumber implements _VehicleNumber {
-  const _$_VehicleNumber({this.plateNumber});
+  const _$_VehicleNumber({this.plateNumber, this.technicalPassport});
 
   factory _$_VehicleNumber.fromJson(Map<String, dynamic> json) =>
       _$$_VehicleNumberFromJson(json);
 
   @override
   final String? plateNumber;
+  @override
+  final DriverPassport? technicalPassport;
 
   @override
   String toString() {
-    return 'VehicleNumber(plateNumber: $plateNumber)';
+    return 'VehicleNumber(plateNumber: $plateNumber, technicalPassport: $technicalPassport)';
   }
 
   @override
@@ -1272,12 +1302,14 @@ class _$_VehicleNumber implements _VehicleNumber {
         (other.runtimeType == runtimeType &&
             other is _$_VehicleNumber &&
             (identical(other.plateNumber, plateNumber) ||
-                other.plateNumber == plateNumber));
+                other.plateNumber == plateNumber) &&
+            (identical(other.technicalPassport, technicalPassport) ||
+                other.technicalPassport == technicalPassport));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, plateNumber);
+  int get hashCode => Object.hash(runtimeType, plateNumber, technicalPassport);
 
   @JsonKey(ignore: true)
   @override
@@ -1294,13 +1326,17 @@ class _$_VehicleNumber implements _VehicleNumber {
 }
 
 abstract class _VehicleNumber implements VehicleNumber {
-  const factory _VehicleNumber({final String? plateNumber}) = _$_VehicleNumber;
+  const factory _VehicleNumber(
+      {final String? plateNumber,
+      final DriverPassport? technicalPassport}) = _$_VehicleNumber;
 
   factory _VehicleNumber.fromJson(Map<String, dynamic> json) =
       _$_VehicleNumber.fromJson;
 
   @override
   String? get plateNumber;
+  @override
+  DriverPassport? get technicalPassport;
   @override
   @JsonKey(ignore: true)
   _$$_VehicleNumberCopyWith<_$_VehicleNumber> get copyWith =>

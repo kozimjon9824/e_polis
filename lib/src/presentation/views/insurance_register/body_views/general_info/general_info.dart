@@ -68,7 +68,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                       if (formKey.currentState!.validate()) {
                         if (state.vehicleInfo == null) {
                           cubit.checkVehicleData(
-                              vehicleNum: vehicleController.text,
+                              vehicleNum:
+                                  vehicleController.text.replaceAll(' ', ''),
                               techPasSer: series.text,
                               techPasNum: number.text);
                         }
@@ -117,7 +118,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                   focusNodeTechNumber.unfocus();
                   if (state.vehicleInfo == null) {
                     cubit.checkVehicleData(
-                        vehicleNum: vehicleController.text,
+                        vehicleNum: vehicleController.text.replaceAll(' ', ''),
                         techPasSer: series.text,
                         techPasNum: number.text);
                   } else if (!state.isPassportValidated) {
@@ -136,15 +137,19 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                             filter: {"#": RegExp(r'\d')})
                         .unmaskText(phoneController.text);
                     ApplicantModel applicant = ApplicantModel(
-                        phone: phone,
-                        passport: ApplicantPassport(
-                            pinfl: owner?.pinfl,
-                            series: seriesID.text,
-                            number: numberID.text));
+                      phone: phone,
+                      passport: ApplicantPassport(
+                          pinfl: owner?.pinfl,
+                          series: seriesID.text,
+                          number: numberID.text),
+                    );
                     context.read<BookCubit>().onApplicantData(applicant);
-                    context
-                        .read<BookCubit>()
-                        .onVehicleNumberData(vehicleController.text);
+                    context.read<BookCubit>().onVehicleNumberData(
+                          vehicleNumber:
+                              vehicleController.text.replaceAll(' ', ''),
+                          series: series.text,
+                          number: number.text,
+                        );
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(1);

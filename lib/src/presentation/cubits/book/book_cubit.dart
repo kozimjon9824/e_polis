@@ -1,6 +1,7 @@
 import 'package:e_polis/src/core/error/error.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:e_polis/src/data/models/book/book_model.dart';
+import 'package:e_polis/src/data/models/vehicle_information/request/vehicle_info_request.dart';
 import 'package:e_polis/src/domain/usecases/main/book.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -30,10 +31,17 @@ class BookCubit extends Cubit<BookState> {
     emit(state.copyWith(status: StateStatus.unknown, requestModel: newModel));
   }
 
-  void onVehicleNumberData(String vehicleNumber) {
+  void onVehicleNumberData({
+    String? vehicleNumber,
+    String? series,
+    String? number,
+  }) {
     BookModel bookModel = state.requestModel;
-    var newModel =
-        bookModel.copyWith(vehicle: VehicleNumber(plateNumber: vehicleNumber));
+    var newModel = bookModel.copyWith(
+      vehicle: VehicleNumber(
+          plateNumber: vehicleNumber,
+          technicalPassport: DriverPassport(series: series, number: number)),
+    );
     emit(state.copyWith(status: StateStatus.unknown, requestModel: newModel));
   }
 

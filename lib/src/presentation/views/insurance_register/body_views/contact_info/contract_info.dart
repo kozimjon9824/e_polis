@@ -7,6 +7,7 @@ import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/contract_information/contract_information_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import '../../../../../data/models/contract_information/request/contract_info_request.dart';
 import '../../../../components/custom_button.dart';
 import '../../../../cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
@@ -24,14 +25,23 @@ class ContactInfoView extends StatefulWidget {
 }
 
 class _ContactInfoViewState extends State<ContactInfoView> {
-  final dateController = TextEditingController();
+  final dateController = TextEditingController(
+      text: DateFormat('dd.MM.yyyy').format(DateTime.now()));
   final formKey = GlobalKey<FormState>();
   final focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => inject<ContractInformationCubit>(),
+      create: (context) => inject<ContractInformationCubit>()
+        ..loadContractInfo(
+            productId: widget.arguments.id,
+            request: ContractInfoRequest(
+                region: widget.arguments.request.region,
+                period: widget.arguments.request.period,
+                isVip: widget.arguments.request.isVip,
+                vehicleType: widget.arguments.request.vehicleType,
+                startDate: DateFormat('yyyy-MM-dd').format(DateTime.now()))),
       child: BlocConsumer<ContractInformationCubit, ContractInformationState>(
         listenWhen: (pre, cur) => cur.status == StateStatus.error,
         listener: (context, contractState) {
@@ -42,8 +52,28 @@ class _ContactInfoViewState extends State<ContactInfoView> {
         },
         builder: (context, contractState) {
           final contractCubit = context.read<ContractInformationCubit>();
-          return BlocBuilder<InsuranceBasicFilterCubit,
+          return BlocConsumer<InsuranceBasicFilterCubit,
               InsuranceBasicFilterState>(
+            listenWhen: (pre, curr) =>
+                pre.basicFilterRequest.period != curr.basicFilterRequest.period,
+            listener: (context, filterState) {
+              var filterData = filterState.basicFilterRequest;
+              if (formKey.currentState!.validate()) {
+                var date = dateConverter(
+                    date: dateController.text,
+                    inFormat: 'dd.MM.yyyy',
+                    outFormat: 'yyyy-MM-dd');
+
+                var contract = ContractInfoRequest(
+                    region: filterData.region,
+                    period: filterData.period,
+                    isVip: filterData.isVip,
+                    vehicleType: filterData.vehicleType,
+                    startDate: date);
+                contractCubit.loadContractInfo(
+                    productId: widget.arguments.id, request: contract);
+              }
+            },
             builder: (context, filterState) {
               var filterData = filterState.basicFilterRequest;
               return Scaffold(
@@ -69,17 +99,15 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                                 date: dateController.text,
                                 inFormat: 'dd.MM.yyyy',
                                 outFormat: 'yyyy-MM-dd');
-                            if (contractState.contract == null) {
-                              var contract = ContractInfoRequest(
-                                  region: filterData.region,
-                                  period: filterData.period,
-                                  isVip: filterData.isVip,
-                                  vehicleType: filterData.vehicleType,
-                                  startDate: date);
-                              contractCubit.loadContractInfo(
-                                  productId: widget.arguments.id,
-                                  request: contract);
-                            }
+                            var contract = ContractInfoRequest(
+                                region: filterData.region,
+                                period: filterData.period,
+                                isVip: filterData.isVip,
+                                vehicleType: filterData.vehicleType,
+                                startDate: date);
+                            contractCubit.loadContractInfo(
+                                productId: widget.arguments.id,
+                                request: contract);
                           }
                         },
                       ),

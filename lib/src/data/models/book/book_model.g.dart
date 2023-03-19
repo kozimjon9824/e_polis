@@ -109,9 +109,14 @@ Map<String, dynamic> _$$_DriverPassportToJson(_$_DriverPassport instance) =>
 _$_VehicleNumber _$$_VehicleNumberFromJson(Map<String, dynamic> json) =>
     _$_VehicleNumber(
       plateNumber: json['plateNumber'] as String?,
+      technicalPassport: json['technicalPassport'] == null
+          ? null
+          : DriverPassport.fromJson(
+              json['technicalPassport'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_VehicleNumberToJson(_$_VehicleNumber instance) =>
     <String, dynamic>{
       'plateNumber': instance.plateNumber,
+      'technicalPassport': instance.technicalPassport,
     };
