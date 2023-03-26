@@ -17,7 +17,8 @@ class TitleSubtitle extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(title, style: AppTextStyles.styleW500S14Grey4),
+              Expanded(
+                  child: Text(title, style: AppTextStyles.styleW500S14Grey4)),
             ],
           ),
           const SizedBox(height: 6),

@@ -32,7 +32,7 @@ class AppIcons {
   static final add = getPath('ic_add');
   static final payMe = getPath('ic_payme');
   static final click = getPath('ic_click');
-  static final apelsin = getPath('ic_apelsin');
+  static final uzum = getPath('ic_uzum');
   static final card = getPath('ic_card');
   static final success = getPath('ic_success');
   static final error = getPath('ic_error');
@@ -52,6 +52,8 @@ class AppIcons {
   static final onBoarding3 = getImagePath('onboarding3');
 
   static String getPath(String iconName) => 'assets/icons/$iconName.svg';
+
+  static String getPngPath(String iconName) => 'assets/icons/$iconName.png';
 
   static String getImagePath(String iconName) => 'assets/images/$iconName.svg';
 }

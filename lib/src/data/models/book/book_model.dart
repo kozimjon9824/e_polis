@@ -7,6 +7,7 @@ part 'book_model.g.dart';
 @freezed
 class BookModel with _$BookModel {
   const factory BookModel({
+    String? paymentProvider,
     ApplicantModel? applicant,
     CalculationModel? calculation,
     String? startDate,

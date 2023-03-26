@@ -13,16 +13,22 @@ class AddProductCubit extends Cubit<AddProductState> {
       : super(const AddProductState.initial());
   final AddProductUseCase _addProductUseCase;
 
-  void addProduct(
-      {required String insuranceNumber, required String carNumber}) async {
+  void addProduct({
+    required String insuranceNumber,
+    required String carNumber,
+  }) async {
     emit(const AddProductState.loading());
     var result = await _addProductUseCase.call(AddProductParams(
-        AddProductRequest(
-            vehicleNumber: carNumber,
-            policy: PolicyFields(
-                series: insuranceNumber.replaceAll(' ', '').substring(0, 3),
-                number: insuranceNumber.replaceAll(' ', '').substring(3)))));
-    result.fold((failure) => emit(AddProductState.error(failure)),
-        (response) => emit(const AddProductState.loaded()));
+      AddProductRequest(
+        vehicleNumber: carNumber,
+        policy: PolicyFields(
+            series: insuranceNumber.replaceAll(' ', '').substring(0, 3),
+            number: insuranceNumber.replaceAll(' ', '').substring(3)),
+      ),
+    ));
+    result.fold(
+      (failure) => emit(AddProductState.error(failure)),
+      (response) => emit(const AddProductState.loaded()),
+    );
   }
 }

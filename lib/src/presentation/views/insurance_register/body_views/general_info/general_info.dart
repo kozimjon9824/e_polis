@@ -137,7 +137,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                             filter: {"#": RegExp(r'\d')})
                         .unmaskText(phoneController.text);
                     ApplicantModel applicant = ApplicantModel(
-                      phone: phone,
+                      phone: "998$phone",
                       passport: ApplicantPassport(
                           pinfl: owner?.pinfl,
                           series: seriesID.text,
@@ -150,6 +150,9 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                           series: series.text,
                           number: number.text,
                         );
+                    context
+                        .read<BookCubit>()
+                        .onPaymentHolder(owner?.fullName ?? '');
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(1);

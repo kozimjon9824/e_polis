@@ -168,6 +168,7 @@
   "commission": "Коммисия",
   "totalAmount": "Общая сумма",
   "downloadPayDoc": "Скачать квитанцию",
-  "enterAllDriversInputs": "Заполнить все входные данные водителей"
+  "enterAllDriversInputs": "Заполнить все входные данные водителей",
+  "paymentInstruction": "Вам выставлен счет на оплату"
 
 }

@@ -6,6 +6,8 @@ import 'package:e_polis/src/domain/usecases/main/book.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../data/models/contract_information/response/contract_info_response.dart';
+
 part 'book_state.dart';
 
 part 'book_cubit.freezed.dart';
@@ -21,13 +23,18 @@ class BookCubit extends Cubit<BookState> {
     result.fold(
         (failure) =>
             emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) => emit(state.copyWith(
-            status: StateStatus.success, responseModel: response)));
+        (response) => emit(state.copyWith(status: StateStatus.success)));
   }
 
   void onApplicantData(ApplicantModel model) {
     BookModel bookModel = state.requestModel;
     var newModel = bookModel.copyWith(applicant: model);
+    emit(state.copyWith(status: StateStatus.unknown, requestModel: newModel));
+  }
+
+  void onPaymentType(String paymentProvider) {
+    BookModel bookModel = state.requestModel;
+    var newModel = bookModel.copyWith(paymentProvider: paymentProvider);
     emit(state.copyWith(status: StateStatus.unknown, requestModel: newModel));
   }
 
@@ -61,5 +68,13 @@ class BookCubit extends Cubit<BookState> {
     BookModel bookModel = state.requestModel;
     var newDate = bookModel.copyWith(startDate: date);
     emit(state.copyWith(status: StateStatus.unknown, requestModel: newDate));
+  }
+
+  void contractInfoData(ContractInfoResponse? contract) {
+    emit(state.copyWith(status: StateStatus.unknown, contract: contract));
+  }
+
+  void onPaymentHolder(String name) {
+    emit(state.copyWith(status: StateStatus.unknown, paymentHolder: name));
   }
 }

@@ -38,7 +38,7 @@ class ContractDetails extends StatelessWidget {
         const SizedBox(height: 8),
         CustomDatePickTextField(
           label: AppLocalizations.of(context).contractStartDate,
-          hintText: '02.12.2022',
+          hintText: '30.12.2022',
           keyboardType: TextInputType.datetime,
           textEditingController: dateController,
           textInputAction: TextInputAction.done,

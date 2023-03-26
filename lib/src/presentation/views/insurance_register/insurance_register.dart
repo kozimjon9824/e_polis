@@ -36,17 +36,32 @@ class _InsuranceRegistrationPageState extends State<InsuranceRegistrationPage> {
         child: BlocBuilder<ManageInsuranceStackViewsCubit,
             ManageInsuranceStackViewsState>(
           builder: (context, state) {
-            return Scaffold(
-              appBar: AppBar(
-                title: Text(AppLocalizations.of(context).bookInsurance),
-                bottom: CustomStepper(currentIndex: state.index),
+            return WillPopScope(
+              onWillPop: () async {
+                if (state.index == 0) {
+                  return true;
+                } else {
+                  context
+                      .read<ManageInsuranceStackViewsCubit>()
+                      .changeIndex(state.index - 1);
+                  return false;
+                }
+              },
+              child: Scaffold(
+                appBar: AppBar(
+                  title: Text(AppLocalizations.of(context).bookInsurance),
+                  bottom: CustomStepper(currentIndex: state.index),
+                ),
+                body: IndexedStack(
+                  index: state.index,
+                  children: [
+                    const GeneralInfoView(),
+                    const DriverInfoView(),
+                    ContactInfoView(arguments: arguments),
+                    PaymentView(arguments: arguments),
+                  ],
+                ),
               ),
-              body: IndexedStack(index: state.index, children: [
-                const GeneralInfoView(),
-                const DriverInfoView(),
-                ContactInfoView(arguments: arguments),
-                const PaymentView(),
-              ]),
             );
           },
         ),

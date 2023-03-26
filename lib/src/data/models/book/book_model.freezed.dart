@@ -20,6 +20,7 @@ BookModel _$BookModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BookModel {
+  String? get paymentProvider => throw _privateConstructorUsedError;
   ApplicantModel? get applicant => throw _privateConstructorUsedError;
   CalculationModel? get calculation => throw _privateConstructorUsedError;
   String? get startDate => throw _privateConstructorUsedError;
@@ -38,7 +39,8 @@ abstract class $BookModelCopyWith<$Res> {
       _$BookModelCopyWithImpl<$Res, BookModel>;
   @useResult
   $Res call(
-      {ApplicantModel? applicant,
+      {String? paymentProvider,
+      ApplicantModel? applicant,
       CalculationModel? calculation,
       String? startDate,
       VehicleNumber? vehicle,
@@ -62,6 +64,7 @@ class _$BookModelCopyWithImpl<$Res, $Val extends BookModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? paymentProvider = freezed,
     Object? applicant = freezed,
     Object? calculation = freezed,
     Object? startDate = freezed,
@@ -69,6 +72,10 @@ class _$BookModelCopyWithImpl<$Res, $Val extends BookModel>
     Object? drivers = freezed,
   }) {
     return _then(_value.copyWith(
+      paymentProvider: freezed == paymentProvider
+          ? _value.paymentProvider
+          : paymentProvider // ignore: cast_nullable_to_non_nullable
+              as String?,
       applicant: freezed == applicant
           ? _value.applicant
           : applicant // ignore: cast_nullable_to_non_nullable
@@ -137,7 +144,8 @@ abstract class _$$_BookModelCopyWith<$Res> implements $BookModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {ApplicantModel? applicant,
+      {String? paymentProvider,
+      ApplicantModel? applicant,
       CalculationModel? calculation,
       String? startDate,
       VehicleNumber? vehicle,
@@ -162,6 +170,7 @@ class __$$_BookModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? paymentProvider = freezed,
     Object? applicant = freezed,
     Object? calculation = freezed,
     Object? startDate = freezed,
@@ -169,6 +178,10 @@ class __$$_BookModelCopyWithImpl<$Res>
     Object? drivers = freezed,
   }) {
     return _then(_$_BookModel(
+      paymentProvider: freezed == paymentProvider
+          ? _value.paymentProvider
+          : paymentProvider // ignore: cast_nullable_to_non_nullable
+              as String?,
       applicant: freezed == applicant
           ? _value.applicant
           : applicant // ignore: cast_nullable_to_non_nullable
@@ -197,7 +210,8 @@ class __$$_BookModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BookModel implements _BookModel {
   const _$_BookModel(
-      {this.applicant,
+      {this.paymentProvider,
+      this.applicant,
       this.calculation,
       this.startDate,
       this.vehicle,
@@ -207,6 +221,8 @@ class _$_BookModel implements _BookModel {
   factory _$_BookModel.fromJson(Map<String, dynamic> json) =>
       _$$_BookModelFromJson(json);
 
+  @override
+  final String? paymentProvider;
   @override
   final ApplicantModel? applicant;
   @override
@@ -227,7 +243,7 @@ class _$_BookModel implements _BookModel {
 
   @override
   String toString() {
-    return 'BookModel(applicant: $applicant, calculation: $calculation, startDate: $startDate, vehicle: $vehicle, drivers: $drivers)';
+    return 'BookModel(paymentProvider: $paymentProvider, applicant: $applicant, calculation: $calculation, startDate: $startDate, vehicle: $vehicle, drivers: $drivers)';
   }
 
   @override
@@ -235,6 +251,8 @@ class _$_BookModel implements _BookModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BookModel &&
+            (identical(other.paymentProvider, paymentProvider) ||
+                other.paymentProvider == paymentProvider) &&
             (identical(other.applicant, applicant) ||
                 other.applicant == applicant) &&
             (identical(other.calculation, calculation) ||
@@ -247,8 +265,14 @@ class _$_BookModel implements _BookModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, applicant, calculation,
-      startDate, vehicle, const DeepCollectionEquality().hash(_drivers));
+  int get hashCode => Object.hash(
+      runtimeType,
+      paymentProvider,
+      applicant,
+      calculation,
+      startDate,
+      vehicle,
+      const DeepCollectionEquality().hash(_drivers));
 
   @JsonKey(ignore: true)
   @override
@@ -266,7 +290,8 @@ class _$_BookModel implements _BookModel {
 
 abstract class _BookModel implements BookModel {
   const factory _BookModel(
-      {final ApplicantModel? applicant,
+      {final String? paymentProvider,
+      final ApplicantModel? applicant,
       final CalculationModel? calculation,
       final String? startDate,
       final VehicleNumber? vehicle,
@@ -275,6 +300,8 @@ abstract class _BookModel implements BookModel {
   factory _BookModel.fromJson(Map<String, dynamic> json) =
       _$_BookModel.fromJson;
 
+  @override
+  String? get paymentProvider;
   @override
   ApplicantModel? get applicant;
   @override

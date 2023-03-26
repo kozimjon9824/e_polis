@@ -127,7 +127,7 @@ String? getMaskedPhone(String? phone) {
   if (phone == null) return null;
   final phoneMask = MaskTextInputFormatter(
       mask: '### ## ### ## ##',
-      filter: {"#": RegExp(r'[0-9]')},
+      filter: {"#": RegExp(r'\d')},
       type: MaskAutoCompletionType.eager);
   return '+${phoneMask.maskText(phone)}';
 }

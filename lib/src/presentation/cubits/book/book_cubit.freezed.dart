@@ -18,8 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BookState {
   StateStatus get status => throw _privateConstructorUsedError;
   Failure get failure => throw _privateConstructorUsedError;
-  BookModel? get responseModel => throw _privateConstructorUsedError;
+  ContractInfoResponse? get contract => throw _privateConstructorUsedError;
   BookModel get requestModel => throw _privateConstructorUsedError;
+  String? get paymentHolder => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookStateCopyWith<BookState> get copyWith =>
@@ -34,10 +35,11 @@ abstract class $BookStateCopyWith<$Res> {
   $Res call(
       {StateStatus status,
       Failure failure,
-      BookModel? responseModel,
-      BookModel requestModel});
+      ContractInfoResponse? contract,
+      BookModel requestModel,
+      String? paymentHolder});
 
-  $BookModelCopyWith<$Res>? get responseModel;
+  $ContractInfoResponseCopyWith<$Res>? get contract;
   $BookModelCopyWith<$Res> get requestModel;
 }
 
@@ -56,8 +58,9 @@ class _$BookStateCopyWithImpl<$Res, $Val extends BookState>
   $Res call({
     Object? status = null,
     Object? failure = null,
-    Object? responseModel = freezed,
+    Object? contract = freezed,
     Object? requestModel = null,
+    Object? paymentHolder = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -68,26 +71,30 @@ class _$BookStateCopyWithImpl<$Res, $Val extends BookState>
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as Failure,
-      responseModel: freezed == responseModel
-          ? _value.responseModel
-          : responseModel // ignore: cast_nullable_to_non_nullable
-              as BookModel?,
+      contract: freezed == contract
+          ? _value.contract
+          : contract // ignore: cast_nullable_to_non_nullable
+              as ContractInfoResponse?,
       requestModel: null == requestModel
           ? _value.requestModel
           : requestModel // ignore: cast_nullable_to_non_nullable
               as BookModel,
+      paymentHolder: freezed == paymentHolder
+          ? _value.paymentHolder
+          : paymentHolder // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $BookModelCopyWith<$Res>? get responseModel {
-    if (_value.responseModel == null) {
+  $ContractInfoResponseCopyWith<$Res>? get contract {
+    if (_value.contract == null) {
       return null;
     }
 
-    return $BookModelCopyWith<$Res>(_value.responseModel!, (value) {
-      return _then(_value.copyWith(responseModel: value) as $Val);
+    return $ContractInfoResponseCopyWith<$Res>(_value.contract!, (value) {
+      return _then(_value.copyWith(contract: value) as $Val);
     });
   }
 
@@ -110,11 +117,12 @@ abstract class _$$_BookStateCopyWith<$Res> implements $BookStateCopyWith<$Res> {
   $Res call(
       {StateStatus status,
       Failure failure,
-      BookModel? responseModel,
-      BookModel requestModel});
+      ContractInfoResponse? contract,
+      BookModel requestModel,
+      String? paymentHolder});
 
   @override
-  $BookModelCopyWith<$Res>? get responseModel;
+  $ContractInfoResponseCopyWith<$Res>? get contract;
   @override
   $BookModelCopyWith<$Res> get requestModel;
 }
@@ -132,8 +140,9 @@ class __$$_BookStateCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? failure = null,
-    Object? responseModel = freezed,
+    Object? contract = freezed,
     Object? requestModel = null,
+    Object? paymentHolder = freezed,
   }) {
     return _then(_$_BookState(
       status: null == status
@@ -144,14 +153,18 @@ class __$$_BookStateCopyWithImpl<$Res>
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as Failure,
-      responseModel: freezed == responseModel
-          ? _value.responseModel
-          : responseModel // ignore: cast_nullable_to_non_nullable
-              as BookModel?,
+      contract: freezed == contract
+          ? _value.contract
+          : contract // ignore: cast_nullable_to_non_nullable
+              as ContractInfoResponse?,
       requestModel: null == requestModel
           ? _value.requestModel
           : requestModel // ignore: cast_nullable_to_non_nullable
               as BookModel,
+      paymentHolder: freezed == paymentHolder
+          ? _value.paymentHolder
+          : paymentHolder // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -162,8 +175,9 @@ class _$_BookState implements _BookState {
   const _$_BookState(
       {this.status = StateStatus.unknown,
       this.failure = const UnknownFailure(),
-      this.responseModel,
-      this.requestModel = const BookModel()});
+      this.contract,
+      this.requestModel = const BookModel(),
+      this.paymentHolder});
 
   @override
   @JsonKey()
@@ -172,14 +186,16 @@ class _$_BookState implements _BookState {
   @JsonKey()
   final Failure failure;
   @override
-  final BookModel? responseModel;
+  final ContractInfoResponse? contract;
   @override
   @JsonKey()
   final BookModel requestModel;
+  @override
+  final String? paymentHolder;
 
   @override
   String toString() {
-    return 'BookState(status: $status, failure: $failure, responseModel: $responseModel, requestModel: $requestModel)';
+    return 'BookState(status: $status, failure: $failure, contract: $contract, requestModel: $requestModel, paymentHolder: $paymentHolder)';
   }
 
   @override
@@ -189,15 +205,17 @@ class _$_BookState implements _BookState {
             other is _$_BookState &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.failure, failure) || other.failure == failure) &&
-            (identical(other.responseModel, responseModel) ||
-                other.responseModel == responseModel) &&
+            (identical(other.contract, contract) ||
+                other.contract == contract) &&
             (identical(other.requestModel, requestModel) ||
-                other.requestModel == requestModel));
+                other.requestModel == requestModel) &&
+            (identical(other.paymentHolder, paymentHolder) ||
+                other.paymentHolder == paymentHolder));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, failure, responseModel, requestModel);
+  int get hashCode => Object.hash(
+      runtimeType, status, failure, contract, requestModel, paymentHolder);
 
   @JsonKey(ignore: true)
   @override
@@ -210,17 +228,20 @@ abstract class _BookState implements BookState {
   const factory _BookState(
       {final StateStatus status,
       final Failure failure,
-      final BookModel? responseModel,
-      final BookModel requestModel}) = _$_BookState;
+      final ContractInfoResponse? contract,
+      final BookModel requestModel,
+      final String? paymentHolder}) = _$_BookState;
 
   @override
   StateStatus get status;
   @override
   Failure get failure;
   @override
-  BookModel? get responseModel;
+  ContractInfoResponse? get contract;
   @override
   BookModel get requestModel;
+  @override
+  String? get paymentHolder;
   @override
   @JsonKey(ignore: true)
   _$$_BookStateCopyWith<_$_BookState> get copyWith =>

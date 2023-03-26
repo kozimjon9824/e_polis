@@ -168,6 +168,7 @@
   "commission": "Коммисия",
   "totalAmount": "Умумий сумма",
   "downloadPayDoc": "Квитанцияни юклаб олиш",
-  "enterAllDriversInputs": "Ҳайдовчи ҳақидаги барча маълумотларни тўлдиринг"
+  "enterAllDriversInputs": "Ҳайдовчи ҳақидаги барча маълумотларни тўлдиринг",
+  "paymentInstruction": "Сиздан тўлов учун ҳисоб-китоб қилинган"
 
 }

@@ -7,6 +7,7 @@ part of 'book_model.dart';
 // **************************************************************************
 
 _$_BookModel _$$_BookModelFromJson(Map<String, dynamic> json) => _$_BookModel(
+      paymentProvider: json['paymentProvider'] as String?,
       applicant: json['applicant'] == null
           ? null
           : ApplicantModel.fromJson(json['applicant'] as Map<String, dynamic>),
@@ -25,6 +26,7 @@ _$_BookModel _$$_BookModelFromJson(Map<String, dynamic> json) => _$_BookModel(
 
 Map<String, dynamic> _$$_BookModelToJson(_$_BookModel instance) =>
     <String, dynamic>{
+      'paymentProvider': instance.paymentProvider,
       'applicant': instance.applicant,
       'calculation': instance.calculation,
       'startDate': instance.startDate,

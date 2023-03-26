@@ -42,21 +42,22 @@ class _AddPolisPageState extends State<AddPolisPage> {
                       .copyWith(fontWeight: FontWeight.w600)),
               const SizedBox(height: 22),
               DropDownButton<String>(
-                  label: AppLocalizations.of(context).typePolis,
-                  value: 'ОСАГО',
-                  items: ['ОСАГО']
-                      .map((item) => DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(item,
-                              style: AppTextStyles.styleW400S14Grey6)))
-                      .toList()),
+                label: AppLocalizations.of(context).typePolis,
+                value: 'ОСАГО',
+                items: ['ОСАГО']
+                    .map((item) => DropdownMenuItem<String>(
+                        value: item,
+                        child:
+                            Text(item, style: AppTextStyles.styleW400S14Grey6)))
+                    .toList(),
+              ),
               const SizedBox(height: 14),
               CustomTextField(
                 label: AppLocalizations.of(context).seriesNumberPolis,
                 hintText: 'ААА 1234ABCD',
                 textInputAction: TextInputAction.next,
                 inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z0-9 ]')),
+                  FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z\d ]')),
                 ],
                 textEditingController: insuranceController,
                 textCapitalization: TextCapitalization.characters,
@@ -119,8 +120,9 @@ class _AddPolisPageState extends State<AddPolisPage> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     context.read<AddProductCubit>().addProduct(
-                        insuranceNumber: insuranceController.text,
-                        carNumber: carController.text);
+                          insuranceNumber: insuranceController.text,
+                          carNumber: carController.text,
+                        );
                   }
                 },
               ),

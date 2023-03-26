@@ -4,13 +4,13 @@ import 'package:e_polis/src/core/usecase/usecase.dart';
 import 'package:e_polis/src/data/models/book/book_model.dart';
 import 'package:e_polis/src/domain/repository/main.dart';
 
-class BookInsuranceUseCase extends UseCase<BookModel, BookParams> {
+class BookInsuranceUseCase extends UseCase<bool, BookParams> {
   final IMainRepository _mainRepository;
 
   BookInsuranceUseCase(this._mainRepository);
 
   @override
-  Future<Either<Failure, BookModel>> call(BookParams params) =>
+  Future<Either<Failure, bool>> call(BookParams params) =>
       _mainRepository.bookInsurance(params.id, params.request);
 }
 

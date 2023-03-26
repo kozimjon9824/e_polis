@@ -44,12 +44,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             subTitle: AppLocalizations.of(context).onBoardingText1,
           ),
           OnBoardingItemPage(
-            logo: AppIcons.onBoarding1,
+            logo: AppIcons.onBoarding2,
             title: AppLocalizations.of(context).onBoardingTitle2,
             subTitle: AppLocalizations.of(context).onBoardingText2,
           ),
           OnBoardingItemPage(
-            logo: AppIcons.onBoarding1,
+            logo: AppIcons.onBoarding3,
             title: AppLocalizations.of(context).onBoardingTitle3,
             subTitle: AppLocalizations.of(context).onBoardingText3,
           ),
@@ -62,20 +62,21 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           children: [
             SmoothDots(pageController: pageController),
             RoundButton(
-                onTap: () {
-                  pageIndex++;
-                  if (pageIndex <= 2) {
-                    pageController.animateToPage(pageIndex,
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.linear);
-                    setState(() {});
-                  }
-                  if (pageIndex == 3) {
-                    Navigator.pushReplacementNamed(context, AppRoutes.main);
-                  }
-                },
-                icon: Icons.arrow_forward_rounded,
-                isChangeShape: pageIndex == 2)
+              onTap: () {
+                pageIndex++;
+                if (pageIndex <= 2) {
+                  pageController.animateToPage(pageIndex,
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.linear);
+                  setState(() {});
+                }
+                if (pageIndex == 3) {
+                  Navigator.pushReplacementNamed(context, AppRoutes.main);
+                }
+              },
+              icon: Icons.arrow_forward_rounded,
+              isChangeShape: pageIndex == 2,
+            )
           ],
         ),
       ),

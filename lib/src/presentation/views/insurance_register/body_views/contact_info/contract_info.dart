@@ -125,13 +125,13 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                         showErrorMessage(context,
                             bookState.failure.getLocalizedMessage(context));
                       }
-                      if (bookState.status == StateStatus.success) {
-                        showSuccessMessage(
-                            context, AppLocalizations.of(context).success);
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(3);
-                      }
+                      // if (bookState.status == StateStatus.success) {
+                      //   showSuccessMessage(
+                      //       context, AppLocalizations.of(context).success);
+                      //   context
+                      //       .read<ManageInsuranceStackViewsCubit>()
+                      //       .changeIndex(3);
+                      // }
                     },
                     builder: (context, bookState) {
                       final bookCubit = context.read<BookCubit>();
@@ -167,7 +167,11 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                             );
                             bookCubit.onCalculationData(calculation);
                             bookCubit.onStartDate(date);
-                            bookCubit.bookInsurance(id: widget.arguments.id);
+                            bookCubit.contractInfoData(contractState.contract);
+                            context
+                                .read<ManageInsuranceStackViewsCubit>()
+                                .changeIndex(3);
+                            // bookCubit.bookInsurance(id: widget.arguments.id);
                           }
                         },
                       );

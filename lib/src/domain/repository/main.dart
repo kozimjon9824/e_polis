@@ -39,8 +39,7 @@ abstract class IMainRepository {
   Future<Either<Failure, InsuranceDetails>> getInsuranceDetails(
       String id, BasicFilterRequest request);
 
-  Future<Either<Failure, BookModel>> bookInsurance(
-      String id, BookModel request);
+  Future<Either<Failure, bool>> bookInsurance(String id, BookModel request);
 
   Future<Either<Failure, SelectValues>> getDropDownValue();
 

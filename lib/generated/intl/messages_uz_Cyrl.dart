@@ -194,6 +194,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "payed": MessageLookupByLibrary.simpleMessage("Тўланган"),
         "payment": MessageLookupByLibrary.simpleMessage("Тўлов"),
         "paymentAmount": MessageLookupByLibrary.simpleMessage("Тўлов суммаси"),
+        "paymentInstruction": MessageLookupByLibrary.simpleMessage(
+            "Сиздан тўлов учун ҳисоб-китоб қилинган"),
         "paymentType": MessageLookupByLibrary.simpleMessage("Тўлов тури"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Телефон рақам"),
         "pickImage": MessageLookupByLibrary.simpleMessage("Расм қўшиш"),

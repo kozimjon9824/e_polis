@@ -1749,6 +1749,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Вам выставлен счет на оплату`
+  String get paymentInstruction {
+    return Intl.message(
+      'Вам выставлен счет на оплату',
+      name: 'paymentInstruction',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

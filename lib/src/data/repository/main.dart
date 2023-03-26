@@ -247,11 +247,11 @@ class MainRepository implements IMainRepository {
   }
 
   @override
-  Future<Either<Failure, BookModel>> bookInsurance(
+  Future<Either<Failure, bool>> bookInsurance(
       String id, BookModel request) async {
     try {
       final response = await _apiClient.bookInsurance(id, request);
-      return Right(response);
+      return const Right(true);
     } on DioError catch (e) {
       if (kDebugMode) {
         print(e);

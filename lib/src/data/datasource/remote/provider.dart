@@ -31,7 +31,7 @@ part 'provider.g.dart';
 @RestApi(baseUrl: BASE_URL)
 abstract class ApiClient {
   factory ApiClient(Dio dio, String baseUrl) {
-    dio.options = BaseOptions(receiveTimeout: 3000, connectTimeout: 3000);
+    dio.options = BaseOptions(receiveTimeout: 30000, connectTimeout: 30000);
     return _ApiClient(dio, baseUrl: baseUrl);
   }
 
@@ -93,7 +93,7 @@ abstract class ApiClient {
       @Path('productId') String id, @Body() BasicFilterRequest request);
 
   @POST('products/osago/{id}')
-  Future<BookModel> bookInsurance(
+  Future<dynamic> bookInsurance(
       @Path('id') String id, @Body() BookModel request);
 
   @GET('products/osago/dictionary')

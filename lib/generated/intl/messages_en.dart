@@ -194,6 +194,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "payed": MessageLookupByLibrary.simpleMessage("Оплачен"),
         "payment": MessageLookupByLibrary.simpleMessage("Оплата"),
         "paymentAmount": MessageLookupByLibrary.simpleMessage("Сумма оплаты"),
+        "paymentInstruction": MessageLookupByLibrary.simpleMessage(
+            "Вам выставлен счет на оплату"),
         "paymentType": MessageLookupByLibrary.simpleMessage("Способ оплаты"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Номер телефона"),
         "pickImage":

@@ -114,6 +114,6 @@ flutter:
         - asset: assets/fonts/SFPro.ttf
 
 
-flutter_intl:
+#flutter_intl:
 #  enabled: true
 #  class_name: AppLocalizations

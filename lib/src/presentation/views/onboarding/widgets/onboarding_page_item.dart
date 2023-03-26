@@ -29,7 +29,7 @@ class OnBoardingItemPage extends StatelessWidget {
                   alignment: Alignment.center, fit: BoxFit.cover),
             ),
           ),
-          const SizedBox(height: 60.0),
+          const SizedBox(height: 50.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32.0),
             child: Text(title,
@@ -43,7 +43,7 @@ class OnBoardingItemPage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: AppTextStyles.styleW500S14Grey7),
           ),
-          const SizedBox(height: 64.0),
+          const SizedBox(height: 60.0),
         ],
       ),
     );
