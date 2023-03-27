@@ -19,7 +19,7 @@ class VehicleData with _$VehicleData {
       {String? model,
       String? address,
       int? issueYear,
-      int? type}) = _VehicleData;
+      dynamic type}) = _VehicleData;
 
   factory VehicleData.fromJson(Map<String, dynamic> json) =>
       _$VehicleDataFromJson(json);

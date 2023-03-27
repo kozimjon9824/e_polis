@@ -210,7 +210,7 @@ mixin _$VehicleData {
   String? get model => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   int? get issueYear => throw _privateConstructorUsedError;
-  int? get type => throw _privateConstructorUsedError;
+  dynamic get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -224,7 +224,7 @@ abstract class $VehicleDataCopyWith<$Res> {
           VehicleData value, $Res Function(VehicleData) then) =
       _$VehicleDataCopyWithImpl<$Res, VehicleData>;
   @useResult
-  $Res call({String? model, String? address, int? issueYear, int? type});
+  $Res call({String? model, String? address, int? issueYear, dynamic type});
 }
 
 /// @nodoc
@@ -261,7 +261,7 @@ class _$VehicleDataCopyWithImpl<$Res, $Val extends VehicleData>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
     ) as $Val);
   }
 }
@@ -274,7 +274,7 @@ abstract class _$$_VehicleDataCopyWith<$Res>
       __$$_VehicleDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? model, String? address, int? issueYear, int? type});
+  $Res call({String? model, String? address, int? issueYear, dynamic type});
 }
 
 /// @nodoc
@@ -309,7 +309,7 @@ class __$$_VehicleDataCopyWithImpl<$Res>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
     ));
   }
 }
@@ -329,7 +329,7 @@ class _$_VehicleData implements _VehicleData {
   @override
   final int? issueYear;
   @override
-  final int? type;
+  final dynamic type;
 
   @override
   String toString() {
@@ -345,12 +345,13 @@ class _$_VehicleData implements _VehicleData {
             (identical(other.address, address) || other.address == address) &&
             (identical(other.issueYear, issueYear) ||
                 other.issueYear == issueYear) &&
-            (identical(other.type, type) || other.type == type));
+            const DeepCollectionEquality().equals(other.type, type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, model, address, issueYear, type);
+  int get hashCode => Object.hash(runtimeType, model, address, issueYear,
+      const DeepCollectionEquality().hash(type));
 
   @JsonKey(ignore: true)
   @override
@@ -371,7 +372,7 @@ abstract class _VehicleData implements VehicleData {
       {final String? model,
       final String? address,
       final int? issueYear,
-      final int? type}) = _$_VehicleData;
+      final dynamic type}) = _$_VehicleData;
 
   factory _VehicleData.fromJson(Map<String, dynamic> json) =
       _$_VehicleData.fromJson;
@@ -383,7 +384,7 @@ abstract class _VehicleData implements VehicleData {
   @override
   int? get issueYear;
   @override
-  int? get type;
+  dynamic get type;
   @override
   @JsonKey(ignore: true)
   _$$_VehicleDataCopyWith<_$_VehicleData> get copyWith =>

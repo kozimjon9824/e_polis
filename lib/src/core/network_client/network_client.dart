@@ -20,7 +20,7 @@ class NetworkClient {
 
   Future<Dio> init(SharedPreferences preferences) async {
     api = Dio();
-    api.interceptors.add(alice.getDioInterceptor());
+    // api.interceptors.add(alice.getDioInterceptor());
     api.interceptors.add(InterceptorsWrapper(
       /// onRequest
       onRequest: (options, handler) async {

@@ -29,7 +29,7 @@ _$_VehicleData _$$_VehicleDataFromJson(Map<String, dynamic> json) =>
       model: json['model'] as String?,
       address: json['address'] as String?,
       issueYear: json['issueYear'] as int?,
-      type: json['type'] as int?,
+      type: json['type'],
     );
 
 Map<String, dynamic> _$$_VehicleDataToJson(_$_VehicleData instance) =>
