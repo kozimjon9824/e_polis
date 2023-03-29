@@ -9,16 +9,17 @@ import '../../../../../../../components/drop_down_button.dart';
 import '../../../../../widgets/widgets.dart';
 
 class Child1Body extends StatelessWidget {
-  const Child1Body(
-      {Key? key,
-      required this.seriesController,
-      required this.numberController,
-      required this.dateController,
-      this.seriesFocus,
-      this.numberFocus,
-      this.dateFocus,
-      required this.onRequest})
-      : super(key: key);
+  const Child1Body({
+    Key? key,
+    required this.seriesController,
+    required this.numberController,
+    required this.dateController,
+    this.seriesFocus,
+    this.numberFocus,
+    this.dateFocus,
+    required this.onRequest,
+  }) : super(key: key);
+
   final TextEditingController seriesController;
   final TextEditingController numberController;
   final TextEditingController dateController;
@@ -32,37 +33,40 @@ class Child1Body extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppLocalizations.of(context).passport,
-            style: AppTextStyles.styleW600S14Grey9),
+        Text(
+          AppLocalizations.of(context).passport,
+          style: AppTextStyles.styleW600S14Grey9,
+        ),
         const SizedBox(height: 6),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-                flex: 1,
-                child: CustomTextField(
-                  hintText: AppLocalizations.of(context).series,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  textCapitalization: TextCapitalization.characters,
-                  textEditingController: seriesController,
-                  focusNode: seriesFocus,
-                  onFieldSubmitted: (_) => numberFocus?.requestFocus(),
-                  validator: (value) => value!.length < 2
-                      ? AppLocalizations.of(context).invalidLength
-                      : null,
-                  inputFormatters: [
-                    MaskTextInputFormatter(
-                        mask: '##',
-                        initialText: seriesController.text,
-                        filter: {"#": RegExp(r'[A-Z]')})
-                  ],
-                  onChange: (value) {
-                    if (value.length == 2) {
-                      numberFocus?.requestFocus();
-                    }
-                  },
-                )),
+              flex: 1,
+              child: CustomTextField(
+                hintText: AppLocalizations.of(context).series,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+                textCapitalization: TextCapitalization.characters,
+                textEditingController: seriesController,
+                focusNode: seriesFocus,
+                onFieldSubmitted: (_) => numberFocus?.requestFocus(),
+                validator: (value) => value!.length < 2
+                    ? AppLocalizations.of(context).invalidLength
+                    : null,
+                inputFormatters: [
+                  MaskTextInputFormatter(
+                      mask: '##',
+                      initialText: seriesController.text,
+                      filter: {"#": RegExp(r'[A-Z]')})
+                ],
+                onChange: (value) {
+                  if (value.length == 2) {
+                    numberFocus?.requestFocus();
+                  }
+                },
+              ),
+            ),
             const SizedBox(width: 10),
             Expanded(
               flex: 2,
@@ -78,9 +82,10 @@ class Child1Body extends StatelessWidget {
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
-                      mask: '#######',
-                      initialText: numberController.text,
-                      filter: {"#": RegExp(r'\d')})
+                    mask: '#######',
+                    initialText: numberController.text,
+                    filter: {"#": RegExp(r'\d')},
+                  )
                 ],
                 onChange: (value) {
                   if (value.length == 7) {
@@ -177,30 +182,32 @@ class Child2Body extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-                flex: 1,
-                child: CustomTextField(
-                  hintText: AppLocalizations.of(context).series,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  textEditingController: licenseSeries,
-                  focusNode: licenseSeriesNode,
-                  textCapitalization: TextCapitalization.characters,
-                  onFieldSubmitted: (_) => licenseNumberNode!.requestFocus(),
-                  validator: (value) => value!.length < 2
-                      ? AppLocalizations.of(context).invalidLength
-                      : null,
-                  inputFormatters: [
-                    MaskTextInputFormatter(
-                        mask: '##',
-                        initialText: licenseSeries.text,
-                        filter: {"#": RegExp(r'[A-Z]')})
-                  ],
-                  onChange: (value) {
-                    if (value.length == 2) {
-                      licenseNumberNode!.requestFocus();
-                    }
-                  },
-                )),
+              flex: 1,
+              child: CustomTextField(
+                hintText: AppLocalizations.of(context).series,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+                textEditingController: licenseSeries,
+                focusNode: licenseSeriesNode,
+                textCapitalization: TextCapitalization.characters,
+                onFieldSubmitted: (_) => licenseNumberNode!.requestFocus(),
+                validator: (value) => value!.length < 2
+                    ? AppLocalizations.of(context).invalidLength
+                    : null,
+                inputFormatters: [
+                  MaskTextInputFormatter(
+                    mask: '##',
+                    initialText: licenseSeries.text,
+                    filter: {"#": RegExp(r'[A-Z]')},
+                  )
+                ],
+                onChange: (value) {
+                  if (value.length == 2) {
+                    licenseNumberNode!.requestFocus();
+                  }
+                },
+              ),
+            ),
             const SizedBox(width: 10),
             Expanded(
               flex: 2,

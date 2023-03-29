@@ -16,9 +16,13 @@ import '../../../../widgets/animated_container.dart';
 import 'children/children.dart';
 
 class DriverInputDetailsBody extends StatefulWidget {
-  const DriverInputDetailsBody({Key? key, required this.index})
-      : super(key: key);
+  const DriverInputDetailsBody({
+    Key? key,
+    required this.index,
+    required this.tabLength,
+  }) : super(key: key);
   final int index;
+  final int tabLength;
 
   @override
   State<DriverInputDetailsBody> createState() => _DriverInputDetailsBodyState();
@@ -159,13 +163,14 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                if (widget.index != 5)
+                if (widget.tabLength != 5)
                   CustomOutlineButton(
-                      text: AppLocalizations.of(context).addDriver,
-                      onTap: () {
-                        driverCubit.addTab();
-                      }),
-                if (widget.index != 5) const SizedBox(height: 24),
+                    text: AppLocalizations.of(context).addDriver,
+                    onTap: () {
+                      driverCubit.addTab();
+                    },
+                  ),
+                if (widget.tabLength != 5) const SizedBox(height: 24),
               ],
             ),
             bottomNavigationBar: SafeArea(

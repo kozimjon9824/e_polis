@@ -20,12 +20,15 @@ class LimitedDriverView extends StatelessWidget {
               return [
                 SliverPadding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 16),
+                    horizontal: 16.0,
+                    vertical: 16,
+                  ),
                   sliver: SliverList(
                     delegate: SliverChildListDelegate([
-                      Row(children: [
-                        for (int i = 1; i <= state.drivers.length; i++)
-                          TextBtn(
+                      Row(
+                        children: [
+                          for (int i = 1; i <= state.drivers.length; i++)
+                            TextBtn(
                               title: i.toString(),
                               onTap: () {
                                 cubit.changeTab(i - 1);
@@ -36,13 +39,16 @@ class LimitedDriverView extends StatelessWidget {
                                       ? AppColors.green
                                       : AppColors.green300,
                               borderRadius: BorderRadius.horizontal(
-                                  left: Radius.circular(i == 1 ? 8 : 0),
-                                  right: Radius.circular(i == 5 ? 8 : 0))),
-                        Visibility(
-                          visible: state.drivers.length != 5,
-                          child: IconBtn(onTap: () => cubit.addTab()),
-                        )
-                      ]),
+                                left: Radius.circular(i == 1 ? 8 : 0),
+                                right: Radius.circular(i == 5 ? 8 : 0),
+                              ),
+                            ),
+                          Visibility(
+                            visible: state.drivers.length != 5,
+                            child: IconBtn(onTap: () => cubit.addTab()),
+                          )
+                        ],
+                      ),
                     ]),
                   ),
                 ),
@@ -52,7 +58,10 @@ class LimitedDriverView extends StatelessWidget {
               index: state.currentIndex,
               children: [
                 for (int i = 1; i <= state.drivers.length; i++)
-                  DriverInputDetailsBody(index: i)
+                  DriverInputDetailsBody(
+                    index: i,
+                    tabLength: state.drivers.length,
+                  )
               ],
             ),
           ),

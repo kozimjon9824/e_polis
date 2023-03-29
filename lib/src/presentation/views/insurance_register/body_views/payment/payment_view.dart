@@ -25,14 +25,12 @@ class PaymentView extends StatelessWidget {
         }
         if (bookState.status == StateStatus.success) {
           showSuccessMessage(context, AppLocalizations.of(context).success);
-
           Navigator.pushNamed(
             context,
             AppRoutes.paymentSuccess,
             arguments: SuccessPageArgs(
               name: bookState.paymentHolder ?? '',
-              amount: numberFormat(((bookState.contract?.policyAmount ?? 0) +
-                  (bookState.contract?.insuranceAmount ?? 0))),
+              amount: numberFormat(bookState.contract?.policyAmount ?? 0),
             ),
           );
         }

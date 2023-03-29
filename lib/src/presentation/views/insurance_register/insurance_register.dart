@@ -21,6 +21,7 @@ class InsuranceRegistrationPage extends StatefulWidget {
 }
 
 class _InsuranceRegistrationPageState extends State<InsuranceRegistrationPage> {
+
   @override
   Widget build(BuildContext context) {
     final arguments =
