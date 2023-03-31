@@ -63,15 +63,17 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
           }
           if (state.status == StateStatus.success) {
             var model = IndexedDriverModel(
-                isSuccess: true,
-                driverModel: DriverModel(
-                    birthDate: dateConverter(
-                        date: dateController.text,
-                        inFormat: 'dd.MM.yyyy',
-                        outFormat: 'yyyy-MM-dd'),
-                    passport: DriverPassport(
-                        series: seriesController.text,
-                        number: numberController.text)));
+              isSuccess: true,
+              driverModel: DriverModel(
+                birthDate: dateConverter(
+                    date: dateController.text,
+                    inFormat: 'dd.MM.yyyy',
+                    outFormat: 'yyyy-MM-dd'),
+                passport: DriverPassport(
+                    series: seriesController.text,
+                    number: numberController.text),
+              ),
+            );
 
             driverCubit.addDriverData(index: widget.index - 1, model: model);
           }
@@ -82,9 +84,10 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
           var driverData = state.driverData;
           if (driverData != null) {
             licenseDate.text = dateConverter(
-                date: driverData.driverLicense?.startDate ?? '',
-                inFormat: 'yyyy-MM-dd',
-                outFormat: 'dd.MM.yyyy');
+              date: driverData.driverLicense?.startDate ?? '',
+              inFormat: 'yyyy-MM-dd',
+              outFormat: 'dd.MM.yyyy',
+            );
             licenseNumber.text = driverData.driverLicense?.number ?? '';
             licenseSeries.text = driverData.driverLicense?.series ?? '';
           }
@@ -105,6 +108,9 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                   onClear: () {
                     if (state.driverData != null) {
                       cubit.clearDriverData();
+                      driverCubit.addDriverData(
+                          index: widget.index - 1,
+                          model: IndexedDriverModel(isSuccess: null));
                     } else {
                       driverCubit.removeTab(widget.index - 1);
                     }
@@ -115,21 +121,22 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                         return Form(
                           key: formKey2,
                           child: Child2Body(
-                              onChange: (value) {
-                                int key = context
-                                    .read<DropDownValuesCubit>()
-                                    .getRelativeKey(value ?? '');
-                                driverCubit.selectDriverRelationShip(
-                                    index: widget.index - 1, relativeKey: key);
-                              },
-                              dropDownValues: dropDownState.relativeList,
-                              data: state.driverData,
-                              licenseSeries: licenseSeries,
-                              licenseNumber: licenseNumber,
-                              licenseDate: licenseDate,
-                              licenseSeriesNode: licenseSeriesNode,
-                              licenseNumberNode: licenseNumberNode,
-                              licenseDateNode: licenseDateNode),
+                            onChange: (value) {
+                              int key = context
+                                  .read<DropDownValuesCubit>()
+                                  .getRelativeKey(value ?? '');
+                              driverCubit.selectDriverRelationShip(
+                                  index: widget.index - 1, relativeKey: key);
+                            },
+                            dropDownValues: dropDownState.relativeList,
+                            data: state.driverData,
+                            licenseSeries: licenseSeries,
+                            licenseNumber: licenseNumber,
+                            licenseDate: licenseDate,
+                            licenseSeriesNode: licenseSeriesNode,
+                            licenseNumberNode: licenseNumberNode,
+                            licenseDateNode: licenseDateNode,
+                          ),
                         );
                       },
                     )
@@ -187,21 +194,26 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                   numberFocus.unfocus();
                   if (state.driverData == null) {
                     String date = dateConverter(
-                        date: dateController.text,
-                        inFormat: 'dd.MM.yyyy',
-                        outFormat: 'yyyy-MM-dd');
+                      date: dateController.text,
+                      inFormat: 'dd.MM.yyyy',
+                      outFormat: 'yyyy-MM-dd',
+                    );
                     cubit.addDriver(
-                        birth: date,
-                        series: seriesController.text,
-                        number: numberController.text);
+                      birth: date,
+                      series: seriesController.text,
+                      number: numberController.text,
+                    );
                   } else if (driverCubit.isAllCompleted()) {
                     if (!formKey2.currentState!.validate()) {
                       return;
                     }
                     List<IndexedDriverModel> driverList =
                         driverCubit.state.drivers;
-                    context.read<BookCubit>().onDriverListData(
-                        driverList.map((e) => e.driverModel!).toList());
+                    context.read<BookCubit>().onDriverListData(driverList
+                        .where((element) => element.driverModel != null)
+                        .toList()
+                        .map((e) => e.driverModel!)
+                        .toList());
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(2);

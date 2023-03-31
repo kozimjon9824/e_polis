@@ -19,8 +19,10 @@ class ThreeButton extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(AppLocalizations.of(context).termsOfInsurance,
-                style: AppTextStyles.styleW600S14Grey9),
+            Text(
+              AppLocalizations.of(context).termsOfInsurance,
+              style: AppTextStyles.styleW600S14Grey9,
+            ),
             const SizedBox(height: 7),
             Row(
               children: [

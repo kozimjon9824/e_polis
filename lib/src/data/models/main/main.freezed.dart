@@ -276,6 +276,7 @@ mixin _$BannerResponse {
   String? get photo => throw _privateConstructorUsedError;
   String? get action => throw _privateConstructorUsedError;
   String? get value => throw _privateConstructorUsedError;
+  MetaData? get meta => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -289,7 +290,9 @@ abstract class $BannerResponseCopyWith<$Res> {
           BannerResponse value, $Res Function(BannerResponse) then) =
       _$BannerResponseCopyWithImpl<$Res, BannerResponse>;
   @useResult
-  $Res call({String? photo, String? action, String? value});
+  $Res call({String? photo, String? action, String? value, MetaData? meta});
+
+  $MetaDataCopyWith<$Res>? get meta;
 }
 
 /// @nodoc
@@ -308,6 +311,7 @@ class _$BannerResponseCopyWithImpl<$Res, $Val extends BannerResponse>
     Object? photo = freezed,
     Object? action = freezed,
     Object? value = freezed,
+    Object? meta = freezed,
   }) {
     return _then(_value.copyWith(
       photo: freezed == photo
@@ -322,7 +326,23 @@ class _$BannerResponseCopyWithImpl<$Res, $Val extends BannerResponse>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as String?,
+      meta: freezed == meta
+          ? _value.meta
+          : meta // ignore: cast_nullable_to_non_nullable
+              as MetaData?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MetaDataCopyWith<$Res>? get meta {
+    if (_value.meta == null) {
+      return null;
+    }
+
+    return $MetaDataCopyWith<$Res>(_value.meta!, (value) {
+      return _then(_value.copyWith(meta: value) as $Val);
+    });
   }
 }
 
@@ -334,7 +354,10 @@ abstract class _$$_BannerResponseCopyWith<$Res>
       __$$_BannerResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? photo, String? action, String? value});
+  $Res call({String? photo, String? action, String? value, MetaData? meta});
+
+  @override
+  $MetaDataCopyWith<$Res>? get meta;
 }
 
 /// @nodoc
@@ -351,6 +374,7 @@ class __$$_BannerResponseCopyWithImpl<$Res>
     Object? photo = freezed,
     Object? action = freezed,
     Object? value = freezed,
+    Object? meta = freezed,
   }) {
     return _then(_$_BannerResponse(
       photo: freezed == photo
@@ -365,6 +389,10 @@ class __$$_BannerResponseCopyWithImpl<$Res>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as String?,
+      meta: freezed == meta
+          ? _value.meta
+          : meta // ignore: cast_nullable_to_non_nullable
+              as MetaData?,
     ));
   }
 }
@@ -374,7 +402,7 @@ class __$$_BannerResponseCopyWithImpl<$Res>
 class _$_BannerResponse
     with DiagnosticableTreeMixin
     implements _BannerResponse {
-  const _$_BannerResponse({this.photo, this.action, this.value});
+  const _$_BannerResponse({this.photo, this.action, this.value, this.meta});
 
   factory _$_BannerResponse.fromJson(Map<String, dynamic> json) =>
       _$$_BannerResponseFromJson(json);
@@ -385,10 +413,12 @@ class _$_BannerResponse
   final String? action;
   @override
   final String? value;
+  @override
+  final MetaData? meta;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BannerResponse(photo: $photo, action: $action, value: $value)';
+    return 'BannerResponse(photo: $photo, action: $action, value: $value, meta: $meta)';
   }
 
   @override
@@ -398,7 +428,8 @@ class _$_BannerResponse
       ..add(DiagnosticsProperty('type', 'BannerResponse'))
       ..add(DiagnosticsProperty('photo', photo))
       ..add(DiagnosticsProperty('action', action))
-      ..add(DiagnosticsProperty('value', value));
+      ..add(DiagnosticsProperty('value', value))
+      ..add(DiagnosticsProperty('meta', meta));
   }
 
   @override
@@ -408,12 +439,13 @@ class _$_BannerResponse
             other is _$_BannerResponse &&
             (identical(other.photo, photo) || other.photo == photo) &&
             (identical(other.action, action) || other.action == action) &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.meta, meta) || other.meta == meta));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, photo, action, value);
+  int get hashCode => Object.hash(runtimeType, photo, action, value, meta);
 
   @JsonKey(ignore: true)
   @override
@@ -433,7 +465,8 @@ abstract class _BannerResponse implements BannerResponse {
   const factory _BannerResponse(
       {final String? photo,
       final String? action,
-      final String? value}) = _$_BannerResponse;
+      final String? value,
+      final MetaData? meta}) = _$_BannerResponse;
 
   factory _BannerResponse.fromJson(Map<String, dynamic> json) =
       _$_BannerResponse.fromJson;
@@ -445,8 +478,151 @@ abstract class _BannerResponse implements BannerResponse {
   @override
   String? get value;
   @override
+  MetaData? get meta;
+  @override
   @JsonKey(ignore: true)
   _$$_BannerResponseCopyWith<_$_BannerResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MetaData _$MetaDataFromJson(Map<String, dynamic> json) {
+  return _MetaData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MetaData {
+  String? get id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MetaDataCopyWith<MetaData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MetaDataCopyWith<$Res> {
+  factory $MetaDataCopyWith(MetaData value, $Res Function(MetaData) then) =
+      _$MetaDataCopyWithImpl<$Res, MetaData>;
+  @useResult
+  $Res call({String? id});
+}
+
+/// @nodoc
+class _$MetaDataCopyWithImpl<$Res, $Val extends MetaData>
+    implements $MetaDataCopyWith<$Res> {
+  _$MetaDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MetaDataCopyWith<$Res> implements $MetaDataCopyWith<$Res> {
+  factory _$$_MetaDataCopyWith(
+          _$_MetaData value, $Res Function(_$_MetaData) then) =
+      __$$_MetaDataCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? id});
+}
+
+/// @nodoc
+class __$$_MetaDataCopyWithImpl<$Res>
+    extends _$MetaDataCopyWithImpl<$Res, _$_MetaData>
+    implements _$$_MetaDataCopyWith<$Res> {
+  __$$_MetaDataCopyWithImpl(
+      _$_MetaData _value, $Res Function(_$_MetaData) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_$_MetaData(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_MetaData with DiagnosticableTreeMixin implements _MetaData {
+  const _$_MetaData({this.id});
+
+  factory _$_MetaData.fromJson(Map<String, dynamic> json) =>
+      _$$_MetaDataFromJson(json);
+
+  @override
+  final String? id;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MetaData(id: $id)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MetaData'))
+      ..add(DiagnosticsProperty('id', id));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MetaData &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MetaDataCopyWith<_$_MetaData> get copyWith =>
+      __$$_MetaDataCopyWithImpl<_$_MetaData>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MetaDataToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MetaData implements MetaData {
+  const factory _MetaData({final String? id}) = _$_MetaData;
+
+  factory _MetaData.fromJson(Map<String, dynamic> json) = _$_MetaData.fromJson;
+
+  @override
+  String? get id;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MetaDataCopyWith<_$_MetaData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

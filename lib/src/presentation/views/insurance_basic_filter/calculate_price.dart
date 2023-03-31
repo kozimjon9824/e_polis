@@ -1,4 +1,5 @@
 import 'package:e_polis/generated/l10n.dart';
+import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_text_styles.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/models/main/main.dart';
 import '../../components/custom_button.dart';
 import '../../components/drop_down_button.dart';
+import '../../cubits/product_details/product_details_cubit.dart';
 import 'widget/container_switch.dart';
 import 'widget/three_button.dart';
 import 'widget/widgets.dart';
@@ -32,39 +34,57 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final productData =
-        ModalRoute.of(context)!.settings.arguments as ProductData;
-    return BlocBuilder<InsuranceBasicFilterCubit, InsuranceBasicFilterState>(
-      builder: (context, state) {
-        var cubit = context.read<InsuranceBasicFilterCubit>();
-        return WillPopScope(
-          onWillPop: () {
-            cubit.clearData();
-            return Future.value(true);
-          },
-          child: Scaffold(
-            appBar: AppBar(title: Text(productData.name ?? '')),
-            body: BlocBuilder<DropDownValuesCubit, DropDownValuesState>(
-              builder: (context, dropDownState) {
-                var dropDownCubit = context.read<DropDownValuesCubit>();
-                if (dropDownState.status == StateStatus.loading) {
-                  return const LoadingWidget();
-                }
-                return ListView(
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
+
+    return BlocProvider(
+      create: (context) => inject<ProductDetailsCubit>()..loadData(productId),
+      child: BlocBuilder<InsuranceBasicFilterCubit, InsuranceBasicFilterState>(
+        builder: (context, state) {
+          var cubit = context.read<InsuranceBasicFilterCubit>();
+          return WillPopScope(
+            onWillPop: () {
+              cubit.clearData();
+              return Future.value(true);
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                title: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+                  builder: (context, state) {
+                    return state.when(
+                      initial: () => const Text('...'),
+                      loading: () => const Text('...'),
+                      loaded: (data) => Text(data.name ?? ''),
+                      error: (failure) => const Text(''),
+                    );
+                  },
+                ),
+              ),
+              body: BlocBuilder<DropDownValuesCubit, DropDownValuesState>(
+                builder: (context, dropDownState) {
+                  var dropDownCubit = context.read<DropDownValuesCubit>();
+                  if (dropDownState.status == StateStatus.loading) {
+                    return const LoadingWidget();
+                  }
+                  return ListView(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 16),
                     children: [
-                      Description(text: productData.description ?? ''),
+                      const Description(),
                       const SizedBox(height: 22),
                       DropDownButton<String>(
                         label: AppLocalizations.of(context)
                             .vehicleRegistrationRegion,
                         hint: AppLocalizations.of(context).selectRegion,
                         items: dropDownState.regionsList
-                            .map((item) => DropdownMenuItem<String>(
+                            .map(
+                              (item) => DropdownMenuItem<String>(
                                 value: item,
-                                child: Text(item,
-                                    style: AppTextStyles.styleW400S14Grey6)))
+                                child: Text(
+                                  item,
+                                  style: AppTextStyles.styleW400S14Grey6,
+                                ),
+                              ),
+                            )
                             .toList(),
                         onChanged: (value) {
                           int key = dropDownCubit.getRegionKey(value ?? '');
@@ -73,43 +93,52 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
                       ),
                       const SizedBox(height: 22),
                       DropDownButton<String>(
-                          label: AppLocalizations.of(context).typeVehicle,
-                          hint: AppLocalizations.of(context).selectTypeVehicle,
-                          items: dropDownState.vehiclesList
-                              .map((item) => DropdownMenuItem<String>(
-                                  value: item,
-                                  child: Text(item,
-                                      style: AppTextStyles.styleW400S14Grey6)))
-                              .toList(),
-                          onChanged: (value) {
-                            int key =
-                                dropDownCubit.getVehicleTypeKey(value ?? '');
-                            cubit.selectVehicleType(key);
-                          }),
+                        label: AppLocalizations.of(context).typeVehicle,
+                        hint: AppLocalizations.of(context).selectTypeVehicle,
+                        items: dropDownState.vehiclesList
+                            .map(
+                              (item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: AppTextStyles.styleW400S14Grey6,
+                                ),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          int key =
+                              dropDownCubit.getVehicleTypeKey(value ?? '');
+                          cubit.selectVehicleType(key);
+                        },
+                      ),
                       const SizedBox(height: 22),
                       const ContainerSwitch(),
                       const SizedBox(height: 22),
                       const ThreeButton()
-                    ]);
-              },
-            ),
-            bottomNavigationBar: SafeArea(
-              minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: CustomButton(
-                text: AppLocalizations.of(context).priceCalculation,
-                onTap: () {
-                  if (cubit.isValid()) {
-                    Navigator.pushNamed(context, AppRoutes.basicFilterResult);
-                  } else {
-                    showErrorMessage(context,
-                        AppLocalizations.of(context).selectBasicFields);
-                  }
+                    ],
+                  );
                 },
               ),
+              bottomNavigationBar: SafeArea(
+                minimum:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: CustomButton(
+                  text: AppLocalizations.of(context).priceCalculation,
+                  onTap: () {
+                    if (cubit.isValid()) {
+                      Navigator.pushNamed(context, AppRoutes.basicFilterResult);
+                    } else {
+                      showErrorMessage(context,
+                          AppLocalizations.of(context).selectBasicFields);
+                    }
+                  },
+                ),
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

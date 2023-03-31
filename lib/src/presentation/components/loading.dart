@@ -10,6 +10,7 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(automaticallyImplyLeading: false),
       body: Center(
           child: Platform.isAndroid
               ? const CircularProgressIndicator(color: AppColors.primaryColor)

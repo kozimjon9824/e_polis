@@ -20,10 +20,11 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
     var result = await _insurancesUseCase
         .call(GetInsuranceParam(state.basicFilterRequest));
     result.fold(
-        (failure) =>
-            emit(state.copyWith(status: StateStatus.error, failure: failure)),
-        (response) => emit(
-            state.copyWith(status: StateStatus.unknown, data: response.data)));
+      (failure) =>
+          emit(state.copyWith(status: StateStatus.error, failure: failure)),
+      (response) => emit(
+          state.copyWith(status: StateStatus.unknown, data: response.data)),
+    );
   }
 
   void searchData(String text) async {
@@ -46,9 +47,10 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
 
   void clearData() {
     emit(state.copyWith(
-        status: StateStatus.unknown,
-        id: null,
-        basicFilterRequest: const BasicFilterRequest()));
+      status: StateStatus.unknown,
+      id: null,
+      basicFilterRequest: const BasicFilterRequest(),
+    ));
   }
 
   void inputProductId(String id) {

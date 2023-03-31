@@ -30,20 +30,21 @@ class LimitlessDriverView extends StatelessWidget {
                       SliverPadding(
                         padding: const EdgeInsets.all(16),
                         sliver: SliverList(
-                          delegate: SliverChildListDelegate([
-                            (state.drivers.length > 4)
-                                ? SizedBox(
-                                    height: 46,
-                                    child: ListView(
-                                      scrollDirection: Axis.horizontal,
-                                      children: [
-                                        for (int i = 1;
-                                            i <= state.drivers.length;
-                                            i++)
-                                          TextBtnWithWidth(
+                          delegate: SliverChildListDelegate(
+                            [
+                              (state.drivers.length > 4)
+                                  ? SizedBox(
+                                      height: 46,
+                                      child: ListView(
+                                        scrollDirection: Axis.horizontal,
+                                        children: [
+                                          for (int i = 1;
+                                              i <= state.drivers.length;
+                                              i++)
+                                            TextBtnWithWidth(
                                               title: i.toString(),
-                                              onTap: () => cubit.changeTab(
-                                                  i - 1),
+                                              onTap: () =>
+                                                  cubit.changeTab(i - 1),
                                               bgColor: (state.drivers[i - 1]
                                                           .isSuccess ==
                                                       null)
@@ -59,38 +60,46 @@ class LimitlessDriverView extends StatelessWidget {
                                                           Radius.circular(
                                                               i == 1 ? 8 : 0),
                                                       right: Radius.circular(
-                                                          i == 10 ? 8 : 0))),
-                                        Visibility(
-                                          visible: state.drivers.length != 10,
-                                          child: IconBtnWithWidth(
-                                              onTap: () => cubit.addTab()),
-                                        )
-                                      ],
-                                    ))
-                                : Row(children: [
-                                    for (int i = 1;
-                                        i <= state.drivers.length;
-                                        i++)
-                                      TextBtn(
-                                          title: i.toString(),
-                                          onTap: () => cubit.changeTab(i - 1),
-                                          bgColor:
-                                              (state.drivers[i - 1].isSuccess ==
-                                                      null)
-                                                  ? null
-                                                  : (state.drivers[i - 1]
-                                                              .isSuccess ==
-                                                          true)
-                                                      ? AppColors.green
-                                                      : AppColors.green300,
-                                          borderRadius: BorderRadius.horizontal(
+                                                          i == 10 ? 8 : 0)),
+                                            ),
+                                          Visibility(
+                                            visible: state.drivers.length != 10,
+                                            child: IconBtnWithWidth(
+                                              onTap: () => cubit.addTab(),
+                                            ),
+                                          )
+                                        ],
+                                      ))
+                                  : Row(
+                                      children: [
+                                        for (int i = 1;
+                                            i <= state.drivers.length;
+                                            i++)
+                                          TextBtn(
+                                            title: i.toString(),
+                                            onTap: () => cubit.changeTab(i - 1),
+                                            bgColor: (state.drivers[i - 1]
+                                                        .isSuccess ==
+                                                    null)
+                                                ? null
+                                                : (state.drivers[i - 1]
+                                                            .isSuccess ==
+                                                        true)
+                                                    ? AppColors.green
+                                                    : AppColors.green300,
+                                            borderRadius:
+                                                BorderRadius.horizontal(
                                               left: Radius.circular(
                                                   i == 1 ? 8 : 0),
                                               right: Radius.circular(
-                                                  i == 6 ? 8 : 0))),
-                                    IconBtn(onTap: () => cubit.addTab())
-                                  ]),
-                          ]),
+                                                  i == 6 ? 8 : 0),
+                                            ),
+                                          ),
+                                        IconBtn(onTap: () => cubit.addTab())
+                                      ],
+                                    ),
+                            ],
+                          ),
                         ),
                       ),
                     ];

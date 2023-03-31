@@ -18,7 +18,9 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   void loadData(String id) async {
     emit(const ProductDetailsState.loading());
     var result = await _detailsUseCase.call(ProductDetailsParams(id));
-    result.fold((failure) => emit(ProductDetailsState.error(failure)),
-        (data) => emit(ProductDetailsState.loaded(data)));
+    result.fold(
+      (failure) => emit(ProductDetailsState.error(failure)),
+      (data) => emit(ProductDetailsState.loaded(data)),
+    );
   }
 }

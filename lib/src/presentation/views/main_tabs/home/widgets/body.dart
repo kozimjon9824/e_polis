@@ -19,18 +19,22 @@ class InsuranceTypesBody extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 20),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 16,
-          childAspectRatio: 164 / 150,
-          crossAxisSpacing: 10),
+        crossAxisCount: 2,
+        mainAxisSpacing: 16,
+        childAspectRatio: 164 / 150,
+        crossAxisSpacing: 10,
+      ),
       itemBuilder: (_, index) {
         var data = products[index];
         return InsuranceItem(
           title: data.name ?? '',
           image: data.photo ?? '',
           onTap: () {
-            Navigator.pushNamed(context, AppRoutes.insuranceBasicFilter,
-                arguments: data);
+            Navigator.pushNamed(
+              context,
+              AppRoutes.insuranceBasicFilter,
+              arguments: data.id ?? '',
+            );
           },
         );
       },
@@ -60,26 +64,35 @@ class InsuranceItem extends StatelessWidget {
         child: Stack(
           children: [
             CachedNetworkImage(
-                imageUrl: image, fit: BoxFit.fill, width: double.infinity),
+              imageUrl: image,
+              fit: BoxFit.cover,
+              height:
+                  (150 / 164) * (MediaQuery.of(context).size.width - 40) / 2,
+              width: double.infinity,
+            ),
             Container(
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-              begin: Alignment.center,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color.fromRGBO(0, 0, 0, 0),
-                Color.fromRGBO(0, 0, 0, 1),
-              ],
-            ))),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.center,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromRGBO(0, 0, 0, 0),
+                    Color.fromRGBO(0, 0, 0, 1),
+                  ],
+                ),
+              ),
+            ),
             Positioned(
               bottom: 12,
               left: 10,
               right: 10,
-              child: Text(title,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.styleW500S14White),
-            )
+              child: Text(
+                title,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.styleW500S14White,
+              ),
+            ),
           ],
         ),
       ),

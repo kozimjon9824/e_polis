@@ -32,15 +32,18 @@ class InsuranceDetailsPage extends StatelessWidget {
       child: BlocBuilder<InsuranceDetailsCubit, InsuranceDetailsState>(
         builder: (context, state) {
           return state.when(
-              loading: () => const LoadingWidget(),
-              error: (failure) => ErrorView(onTap: () {
-                    context
-                        .read<InsuranceDetailsCubit>()
-                        .loadData(arguments.id, arguments.request);
-                  }),
-              loaded: (data) {
-                return SuccessBody(insuranceDetails: data, argument: arguments);
-              });
+            loading: () => const LoadingWidget(),
+            error: (failure) => ErrorView(
+              onTap: () {
+                context
+                    .read<InsuranceDetailsCubit>()
+                    .loadData(arguments.id, arguments.request);
+              },
+            ),
+            loaded: (data) {
+              return SuccessBody(insuranceDetails: data, argument: arguments);
+            },
+          );
         },
       ),
     );
@@ -65,61 +68,64 @@ class SuccessBody extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(insuranceDetails?.name ?? '')),
       body: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: CachedNetworkImage(
-                  imageUrl: insuranceDetails?.logo ?? '',
-                  height: 44,
-                  width: 200,
-                  fit: BoxFit.cover,
-                  errorWidget: (_, __, ___) => const SizedBox.shrink(),
-                  placeholder: (_, __) => const CupertinoActivityIndicator(),
-                ),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: CachedNetworkImage(
+                imageUrl: insuranceDetails?.logo ?? '',
+                height: 44,
+                width: 200,
+                fit: BoxFit.cover,
+                errorWidget: (_, __, ___) => const SizedBox.shrink(),
+                placeholder: (_, __) => const CupertinoActivityIndicator(),
               ),
             ),
-            const SizedBox(height: 24),
-            Text(insuranceDetails?.description ?? '',
-                style: AppTextStyles.styleW400S14Grey9),
-            const SizedBox(height: 24),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: AppColors.grey50),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  PriceTile(
-                      title: AppLocalizations.of(context).polisPrice,
-                      price:
-                          numberFormat(insuranceDetails?.policyAmount?.toInt()),
-                      textStyle: AppTextStyles.styleW700S18Green),
-                  const SizedBox(height: 12),
-                  PriceTile(
-                    title: AppLocalizations.of(context).insurancePrice,
-                    price: numberFormat(
-                        insuranceDetails?.insuranceAmount?.toInt()),
-                  ),
-                  const SizedBox(height: 12),
-                  PriceTile(
-                    title:
-                        AppLocalizations.of(context).insuranceDamagePriceTitle,
-                    price: numberFormat(insuranceDetails?.lifeDamage?.toInt()),
-                  ),
-                  const SizedBox(height: 12),
-                  PriceTile(
-                    title: AppLocalizations.of(context).compensationPriceTitle,
-                    price:
-                        numberFormat(insuranceDetails?.propertyDamage?.toInt()),
-                  ),
-                ],
-              ),
-            )
-          ]),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            insuranceDetails?.description ?? '',
+            style: AppTextStyles.styleW400S14Grey9,
+          ),
+          const SizedBox(height: 24),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: AppColors.grey50,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PriceTile(
+                  title: AppLocalizations.of(context).polisPrice,
+                  price: numberFormat(insuranceDetails?.policyAmount?.toInt()),
+                  textStyle: AppTextStyles.styleW700S18Green,
+                ),
+                const SizedBox(height: 12),
+                PriceTile(
+                  title: AppLocalizations.of(context).insurancePrice,
+                  price:
+                      numberFormat(insuranceDetails?.insuranceAmount?.toInt()),
+                ),
+                const SizedBox(height: 12),
+                PriceTile(
+                  title: AppLocalizations.of(context).insuranceDamagePriceTitle,
+                  price: numberFormat(insuranceDetails?.lifeDamage?.toInt()),
+                ),
+                const SizedBox(height: 12),
+                PriceTile(
+                  title: AppLocalizations.of(context).compensationPriceTitle,
+                  price:
+                      numberFormat(insuranceDetails?.propertyDamage?.toInt()),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
       bottomNavigationBar: SafeArea(
         minimum: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: CustomButton(
@@ -130,14 +136,20 @@ class SuccessBody extends StatelessWidget {
                 .inputProductId(argument.id);
             if (context.read<AuthCubit>().state is UnAuthenticatedState) {
               showDialog(
-                  context: context,
-                  builder: (_) => DialogBody(onSubmit: () {
-                        Navigator.pop(context);
-                        Navigator.pushNamed(context, AppRoutes.login);
-                      }));
+                context: context,
+                builder: (_) => DialogBody(
+                  onSubmit: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, AppRoutes.login);
+                  },
+                ),
+              );
             } else {
-              Navigator.pushNamed(context, AppRoutes.insuranceRegistration,
-                  arguments: argument);
+              Navigator.pushNamed(
+                context,
+                AppRoutes.insuranceRegistration,
+                arguments: argument,
+              );
             }
           },
         ),

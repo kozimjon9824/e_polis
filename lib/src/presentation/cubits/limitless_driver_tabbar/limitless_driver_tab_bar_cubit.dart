@@ -45,8 +45,10 @@ class LimitlessDriverTabBarCubit extends Cubit<LimitlessDriverTabBarState> {
     emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
   }
 
-  void selectDriverRelationShip(
-      {required int index, required int relativeKey}) {
+  void selectDriverRelationShip({
+    required int index,
+    required int relativeKey,
+  }) {
     List<IndexedDriverModel> tabs = List.of(state.drivers);
     IndexedDriverModel newModel = tabs[index];
     var withRelative = newModel.driverModel?.copyWith(relative: relativeKey);
@@ -57,7 +59,6 @@ class LimitlessDriverTabBarCubit extends Cubit<LimitlessDriverTabBarState> {
 
   bool isAllCompleted() {
     var tabs = List.of(state.drivers);
-    return !tabs.any(
-        (element) => (element.isSuccess == null || element.isSuccess == false));
+    return !tabs.any((element) => (element.isSuccess == false));
   }
 }

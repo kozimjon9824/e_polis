@@ -47,9 +47,11 @@ class HomePage extends StatelessWidget {
                   IconButton(
                     onPressed: () =>
                         Navigator.pushNamed(context, AppRoutes.notification),
-                    icon: SvgPicture.asset((data?.hasNotification == true)
-                        ? AppIcons.activeBell
-                        : AppIcons.bell),
+                    icon: SvgPicture.asset(
+                      (data?.hasNotification == true)
+                          ? AppIcons.activeBell
+                          : AppIcons.bell,
+                    ),
                   ),
                   const SizedBox(width: 8)
                 ],
@@ -81,14 +83,15 @@ class HomePage extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         InsuranceTypesBody(
-                            products: (state.tab ==
-                                    AppLocalizations.of(context).all)
-                                ? (data?.products ?? [])
-                                : data?.products
-                                        ?.where((element) =>
-                                            element.category?.name == state.tab)
-                                        .toList() ??
-                                    [])
+                          products: (state.tab ==
+                                  AppLocalizations.of(context).all)
+                              ? (data?.products ?? [])
+                              : data?.products
+                                      ?.where((element) =>
+                                          element.category?.name == state.tab)
+                                      .toList() ??
+                                  [],
+                        )
                       ],
                     ),
                   );

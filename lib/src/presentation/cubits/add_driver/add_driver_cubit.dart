@@ -25,10 +25,11 @@ class AddDriverCubit extends Cubit<AddDriverState> {
             birthdate: birth,
             passport: PassportInputFields(series: series, number: number))));
     result.fold(
-        (failure) =>
-            emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) => emit(
-            state.copyWith(status: StateStatus.success, driverData: response)));
+      (failure) =>
+          emit(state.copyWith(failure: failure, status: StateStatus.error)),
+      (response) => emit(
+          state.copyWith(status: StateStatus.success, driverData: response)),
+    );
   }
 
   void clearDriverData() {

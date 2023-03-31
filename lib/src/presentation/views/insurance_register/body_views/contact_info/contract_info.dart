@@ -35,13 +35,15 @@ class _ContactInfoViewState extends State<ContactInfoView> {
     return BlocProvider(
       create: (context) => inject<ContractInformationCubit>()
         ..loadContractInfo(
-            productId: widget.arguments.id,
-            request: ContractInfoRequest(
-                region: widget.arguments.request.region,
-                period: widget.arguments.request.period,
-                isVip: widget.arguments.request.isVip,
-                vehicleType: widget.arguments.request.vehicleType,
-                startDate: DateFormat('yyyy-MM-dd').format(DateTime.now()))),
+          productId: widget.arguments.id,
+          request: ContractInfoRequest(
+            region: widget.arguments.request.region,
+            period: widget.arguments.request.period,
+            isVip: widget.arguments.request.isVip,
+            vehicleType: widget.arguments.request.vehicleType,
+            startDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+          ),
+        ),
       child: BlocConsumer<ContractInformationCubit, ContractInformationState>(
         listenWhen: (pre, cur) => cur.status == StateStatus.error,
         listener: (context, contractState) {
@@ -55,23 +57,29 @@ class _ContactInfoViewState extends State<ContactInfoView> {
           return BlocConsumer<InsuranceBasicFilterCubit,
               InsuranceBasicFilterState>(
             listenWhen: (pre, curr) =>
-                pre.basicFilterRequest.period != curr.basicFilterRequest.period,
+                (pre.basicFilterRequest.period !=
+                    curr.basicFilterRequest.period) ||
+                (pre.basicFilterRequest.isVip != curr.basicFilterRequest.isVip),
             listener: (context, filterState) {
               var filterData = filterState.basicFilterRequest;
               if (formKey.currentState!.validate()) {
                 var date = dateConverter(
-                    date: dateController.text,
-                    inFormat: 'dd.MM.yyyy',
-                    outFormat: 'yyyy-MM-dd');
+                  date: dateController.text,
+                  inFormat: 'dd.MM.yyyy',
+                  outFormat: 'yyyy-MM-dd',
+                );
 
                 var contract = ContractInfoRequest(
-                    region: filterData.region,
-                    period: filterData.period,
-                    isVip: filterData.isVip,
-                    vehicleType: filterData.vehicleType,
-                    startDate: date);
+                  region: filterData.region,
+                  period: filterData.period,
+                  isVip: filterData.isVip,
+                  vehicleType: filterData.vehicleType,
+                  startDate: date,
+                );
                 contractCubit.loadContractInfo(
-                    productId: widget.arguments.id, request: contract);
+                  productId: widget.arguments.id,
+                  request: contract,
+                );
               }
             },
             builder: (context, filterState) {
@@ -96,18 +104,21 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                           if (formKey.currentState!.validate()) {
                             focusNode.unfocus();
                             var date = dateConverter(
-                                date: dateController.text,
-                                inFormat: 'dd.MM.yyyy',
-                                outFormat: 'yyyy-MM-dd');
+                              date: dateController.text,
+                              inFormat: 'dd.MM.yyyy',
+                              outFormat: 'yyyy-MM-dd',
+                            );
                             var contract = ContractInfoRequest(
-                                region: filterData.region,
-                                period: filterData.period,
-                                isVip: filterData.isVip,
-                                vehicleType: filterData.vehicleType,
-                                startDate: date);
+                              region: filterData.region,
+                              period: filterData.period,
+                              isVip: filterData.isVip,
+                              vehicleType: filterData.vehicleType,
+                              startDate: date,
+                            );
                             contractCubit.loadContractInfo(
-                                productId: widget.arguments.id,
-                                request: contract);
+                              productId: widget.arguments.id,
+                              request: contract,
+                            );
                           }
                         },
                       ),
@@ -145,19 +156,22 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                             return;
                           }
                           var date = dateConverter(
-                              date: dateController.text,
-                              inFormat: 'dd.MM.yyyy',
-                              outFormat: 'yyyy-MM-dd');
+                            date: dateController.text,
+                            inFormat: 'dd.MM.yyyy',
+                            outFormat: 'yyyy-MM-dd',
+                          );
                           if (contractState.contract == null) {
                             var contract = ContractInfoRequest(
-                                region: filterData.region,
-                                period: filterData.period,
-                                isVip: filterData.isVip,
-                                vehicleType: filterData.vehicleType,
-                                startDate: date);
+                              region: filterData.region,
+                              period: filterData.period,
+                              isVip: filterData.isVip,
+                              vehicleType: filterData.vehicleType,
+                              startDate: date,
+                            );
                             contractCubit.loadContractInfo(
-                                productId: widget.arguments.id,
-                                request: contract);
+                              productId: widget.arguments.id,
+                              request: contract,
+                            );
                           } else {
                             var calculation = CalculationModel(
                               region: filterData.region,

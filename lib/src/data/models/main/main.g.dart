@@ -33,6 +33,9 @@ _$_BannerResponse _$$_BannerResponseFromJson(Map<String, dynamic> json) =>
       photo: json['photo'] as String?,
       action: json['action'] as String?,
       value: json['value'] as String?,
+      meta: json['meta'] == null
+          ? null
+          : MetaData.fromJson(json['meta'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_BannerResponseToJson(_$_BannerResponse instance) =>
@@ -40,6 +43,16 @@ Map<String, dynamic> _$$_BannerResponseToJson(_$_BannerResponse instance) =>
       'photo': instance.photo,
       'action': instance.action,
       'value': instance.value,
+      'meta': instance.meta,
+    };
+
+_$_MetaData _$$_MetaDataFromJson(Map<String, dynamic> json) => _$_MetaData(
+      id: json['id'] as String?,
+    );
+
+Map<String, dynamic> _$$_MetaDataToJson(_$_MetaData instance) =>
+    <String, dynamic>{
+      'id': instance.id,
     };
 
 _$_UserData _$$_UserDataFromJson(Map<String, dynamic> json) => _$_UserData(

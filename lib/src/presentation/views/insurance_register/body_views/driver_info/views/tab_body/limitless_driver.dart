@@ -52,24 +52,30 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
           var driverCubit = context.read<LimitlessDriverTabBarCubit>();
           if (state.status == StateStatus.error) {
             driverCubit.addDriverData(
-                index: widget.index - 1,
-                model: IndexedDriverModel(isSuccess: false));
+              index: widget.index - 1,
+              model: IndexedDriverModel(isSuccess: false),
+            );
             showErrorMessage(
                 context, state.failure.getLocalizedMessage(context));
           }
           if (state.status == StateStatus.success) {
             driverCubit.addDriverData(
-                index: widget.index - 1,
-                model: IndexedDriverModel(
-                    isSuccess: true,
-                    driverModel: DriverModel(
-                        birthDate: dateConverter(
-                            date: dateController.text,
-                            inFormat: 'dd.MM.yyyy',
-                            outFormat: 'yyyy-MM-dd'),
-                        passport: DriverPassport(
-                            series: seriesController.text,
-                            number: numberController.text))));
+              index: widget.index - 1,
+              model: IndexedDriverModel(
+                isSuccess: true,
+                driverModel: DriverModel(
+                  birthDate: dateConverter(
+                    date: dateController.text,
+                    inFormat: 'dd.MM.yyyy',
+                    outFormat: 'yyyy-MM-dd',
+                  ),
+                  passport: DriverPassport(
+                    series: seriesController.text,
+                    number: numberController.text,
+                  ),
+                ),
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -78,9 +84,10 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
           var driverData = state.driverData;
           if (driverData != null) {
             licenseDate.text = dateConverter(
-                date: driverData.driverLicense?.startDate ?? '',
-                inFormat: 'yyyy-MM-dd',
-                outFormat: 'dd.MM.yyyy');
+              date: driverData.driverLicense?.startDate ?? '',
+              inFormat: 'yyyy-MM-dd',
+              outFormat: 'dd.MM.yyyy',
+            );
             licenseNumber.text = driverData.driverLicense?.number ?? '';
             licenseSeries.text = driverData.driverLicense?.series ?? '';
           }
@@ -101,6 +108,10 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                   onClear: () {
                     if (state.driverData != null) {
                       cubit.clearDriverData();
+                      driverCubit.addDriverData(
+                        index: widget.index - 1,
+                        model: IndexedDriverModel(isSuccess: null),
+                      );
                     } else {
                       driverCubit.removeTab(widget.index - 1);
                     }
@@ -111,21 +122,24 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                         return Form(
                           key: formKey2,
                           child: LimitlessDriverChild2Body(
-                              onChange: (value) {
-                                int key = context
-                                    .read<DropDownValuesCubit>()
-                                    .getRelativeKey(value ?? '');
-                                driverCubit.selectDriverRelationShip(
-                                    index: widget.index - 1, relativeKey: key);
-                              },
-                              dropDownValues: dropDownState.relativeList,
-                              data: state.driverData,
-                              licenseSeries: licenseSeries,
-                              licenseNumber: licenseNumber,
-                              licenseDate: licenseDate,
-                              licenseSeriesNode: licenseSeriesNode,
-                              licenseNumberNode: licenseNumberNode,
-                              licenseDateNode: licenseDateNode),
+                            onChange: (value) {
+                              int key = context
+                                  .read<DropDownValuesCubit>()
+                                  .getRelativeKey(value ?? '');
+                              driverCubit.selectDriverRelationShip(
+                                index: widget.index - 1,
+                                relativeKey: key,
+                              );
+                            },
+                            dropDownValues: dropDownState.relativeList,
+                            data: state.driverData,
+                            licenseSeries: licenseSeries,
+                            licenseNumber: licenseNumber,
+                            licenseDate: licenseDate,
+                            licenseSeriesNode: licenseSeriesNode,
+                            licenseNumberNode: licenseNumberNode,
+                            licenseDateNode: licenseDateNode,
+                          ),
                         );
                       },
                     )
@@ -144,13 +158,15 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                           if (formKey.currentState!.validate()) {
                             if (state.driverData == null) {
                               String date = dateConverter(
-                                  date: dateController.text,
-                                  inFormat: 'dd.MM.yyyy',
-                                  outFormat: 'yyyy-MM-dd');
+                                date: dateController.text,
+                                inFormat: 'dd.MM.yyyy',
+                                outFormat: 'yyyy-MM-dd',
+                              );
                               cubit.addDriver(
-                                  birth: date,
-                                  series: seriesController.text,
-                                  number: numberController.text);
+                                birth: date,
+                                series: seriesController.text,
+                                number: numberController.text,
+                              );
                             }
                           }
                         },
@@ -160,8 +176,9 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                 ),
                 const SizedBox(height: 20),
                 CustomOutlineButton(
-                    text: AppLocalizations.of(context).addDriver,
-                    onTap: () => driverCubit.addTab()),
+                  text: AppLocalizations.of(context).addDriver,
+                  onTap: () => driverCubit.addTab(),
+                ),
                 const SizedBox(height: 24),
               ],
             ),
@@ -179,21 +196,25 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                   numberFocus.unfocus();
                   if (state.driverData == null) {
                     String date = dateConverter(
-                        date: dateController.text,
-                        inFormat: 'dd.MM.yyyy',
-                        outFormat: 'yyyy-MM-dd');
+                      date: dateController.text,
+                      inFormat: 'dd.MM.yyyy',
+                      outFormat: 'yyyy-MM-dd',
+                    );
                     cubit.addDriver(
-                        birth: date,
-                        series: seriesController.text,
-                        number: numberController.text);
+                      birth: date,
+                      series: seriesController.text,
+                      number: numberController.text,
+                    );
                   } else if (driverCubit.isAllCompleted()) {
                     if (!formKey2.currentState!.validate()) {
                       return;
                     }
                     List<IndexedDriverModel> driverList =
                         driverCubit.state.drivers;
-                    context.read<BookCubit>().onDriverListData(
-                        driverList.map((e) => e.driverModel!).toList());
+                    context.read<BookCubit>().onDriverListData(driverList
+                        .where((element) => element.driverModel != null)
+                        .map((e) => e.driverModel!)
+                        .toList());
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(2);
