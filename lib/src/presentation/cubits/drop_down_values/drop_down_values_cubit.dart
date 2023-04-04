@@ -31,13 +31,14 @@ class DropDownValuesCubit extends Cubit<DropDownValuesState> {
       List<String> relativesList =
           relatives.map((relative) => relative.value ?? '').toList();
       emit(state.copyWith(
-          status: StateStatus.success,
-          regions: regions,
-          regionsList: regionsList,
-          vehicles: vehicleTypes,
-          vehiclesList: vehicleTypesList,
-          relative: relatives,
-          relativeList: relativesList));
+        status: StateStatus.success,
+        regions: regions,
+        regionsList: regionsList,
+        vehicles: vehicleTypes,
+        vehiclesList: vehicleTypesList,
+        relative: relatives,
+        relativeList: relativesList,
+      ));
     });
   }
 

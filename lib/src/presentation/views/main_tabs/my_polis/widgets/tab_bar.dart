@@ -36,20 +36,24 @@ class TabBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 height: 40,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
+                  color: index == _tabController.index
+                      ? AppColors.primary300
+                      : AppColors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
                     color: index == _tabController.index
-                        ? AppColors.primary300
-                        : AppColors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                        color: index == _tabController.index
-                            ? AppColors.primaryColor
-                            : AppColors.grey100)),
+                        ? AppColors.primaryColor
+                        : AppColors.grey100,
+                  ),
+                ),
                 child: Center(
-                  child: Text(tabs[index],
-                      style: index != _tabController.index
-                          ? AppTextStyles.styleW500S14Grey9
-                          : AppTextStyles.styleW500S14White,
-                      maxLines: 1),
+                  child: Text(
+                    tabs[index],
+                    style: index != _tabController.index
+                        ? AppTextStyles.styleW500S14Grey9
+                        : AppTextStyles.styleW500S14White,
+                    maxLines: 1,
+                  ),
                 ),
               ),
             ),

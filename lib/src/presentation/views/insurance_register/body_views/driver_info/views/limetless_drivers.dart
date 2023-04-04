@@ -45,15 +45,21 @@ class LimitlessDriverView extends StatelessWidget {
                                               title: i.toString(),
                                               onTap: () =>
                                                   cubit.changeTab(i - 1),
-                                              bgColor: (state.drivers[i - 1]
-                                                          .isSuccess ==
-                                                      null)
-                                                  ? null
+                                              bgColor: (i - 1 ==
+                                                          state.currentIndex &&
+                                                      (state.drivers[i - 1]
+                                                                  .isSuccess !=
+                                                              true ||
+                                                          !state.drivers[i - 1]
+                                                              .relativeSelected))
+                                                  ? AppColors.green300
                                                   : (state.drivers[i - 1]
-                                                              .isSuccess ==
-                                                          true)
+                                                                  .isSuccess ==
+                                                              true &&
+                                                          state.drivers[i - 1]
+                                                              .relativeSelected)
                                                       ? AppColors.green
-                                                      : AppColors.green300,
+                                                      : null,
                                               borderRadius:
                                                   BorderRadius.horizontal(
                                                       left:
@@ -69,7 +75,8 @@ class LimitlessDriverView extends StatelessWidget {
                                             ),
                                           )
                                         ],
-                                      ))
+                                      ),
+                                    )
                                   : Row(
                                       children: [
                                         for (int i = 1;
@@ -78,15 +85,21 @@ class LimitlessDriverView extends StatelessWidget {
                                           TextBtn(
                                             title: i.toString(),
                                             onTap: () => cubit.changeTab(i - 1),
-                                            bgColor: (state.drivers[i - 1]
-                                                        .isSuccess ==
-                                                    null)
-                                                ? null
+                                            bgColor: (i - 1 ==
+                                                        state.currentIndex &&
+                                                    (state.drivers[i - 1]
+                                                                .isSuccess !=
+                                                            true ||
+                                                        !state.drivers[i - 1]
+                                                            .relativeSelected))
+                                                ? AppColors.green300
                                                 : (state.drivers[i - 1]
-                                                            .isSuccess ==
-                                                        true)
+                                                                .isSuccess ==
+                                                            true &&
+                                                        state.drivers[i - 1]
+                                                            .relativeSelected)
                                                     ? AppColors.green
-                                                    : AppColors.green300,
+                                                    : null,
                                             borderRadius:
                                                 BorderRadius.horizontal(
                                               left: Radius.circular(
@@ -120,8 +133,9 @@ class LimitlessDriverView extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CustomOutlineButton(
-                          text: AppLocalizations.of(context).addDriver,
-                          onTap: () => cubit.addTab()),
+                        text: AppLocalizations.of(context).addDriver,
+                        onTap: () => cubit.addTab(),
+                      ),
                       const SizedBox(height: 16),
                       CustomButton(
                         text: AppLocalizations.of(context).next,

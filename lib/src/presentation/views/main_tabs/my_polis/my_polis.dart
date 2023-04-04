@@ -43,13 +43,16 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(AppLocalizations.of(context).myPolicies),
-            bottom: TabBarWidget(
-              tabController: _tabController,
-              tabs: tabs(),
-              onTap: (index) {
-                context.read<ProductTabManagerCubit>().changeTab(index);
-              },
-            ),
+            bottom: (BlocProvider.of<AuthCubit>(context).state
+                    is UnAuthenticatedState)
+                ? null
+                : TabBarWidget(
+                    tabController: _tabController,
+                    tabs: tabs(),
+                    onTap: (index) {
+                      context.read<ProductTabManagerCubit>().changeTab(index);
+                    },
+                  ),
           ),
           body: (BlocProvider.of<AuthCubit>(context).state
                   is UnAuthenticatedState)

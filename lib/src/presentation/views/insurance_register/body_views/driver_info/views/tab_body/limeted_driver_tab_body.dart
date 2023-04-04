@@ -56,8 +56,9 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
           var driverCubit = context.read<LimitedDriverTabBarCubit>();
           if (state.status == StateStatus.error) {
             driverCubit.addDriverData(
-                index: widget.index - 1,
-                model: IndexedDriverModel(isSuccess: false));
+              index: widget.index - 1,
+              model: IndexedDriverModel(isSuccess: false),
+            );
             showErrorMessage(
                 context, state.failure.getLocalizedMessage(context));
           }
@@ -85,7 +86,7 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
           if (driverData != null) {
             licenseDate.text = dateConverter(
               date: driverData.driverLicense?.startDate ?? '',
-              inFormat: 'yyyy-MM-dd',
+              inFormat: 'dd.MM.yyyy',
               outFormat: 'dd.MM.yyyy',
             );
             licenseNumber.text = driverData.driverLicense?.number ?? '';
@@ -106,11 +107,19 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                       ? AppLocalizations.of(context).delete
                       : null,
                   onClear: () {
+                    seriesController.text = '';
+                    numberController.text = '';
+                    dateController.text = '';
+                    licenseSeries.text = '';
+                    licenseNumber.text = '';
+                    licenseDate.text = '';
+
                     if (state.driverData != null) {
                       cubit.clearDriverData();
                       driverCubit.addDriverData(
-                          index: widget.index - 1,
-                          model: IndexedDriverModel(isSuccess: null));
+                        index: widget.index - 1,
+                        model: IndexedDriverModel(isSuccess: null),
+                      );
                     } else {
                       driverCubit.removeTab(widget.index - 1);
                     }
@@ -126,7 +135,9 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                                   .read<DropDownValuesCubit>()
                                   .getRelativeKey(value ?? '');
                               driverCubit.selectDriverRelationShip(
-                                  index: widget.index - 1, relativeKey: key);
+                                index: widget.index - 1,
+                                relativeKey: key,
+                              );
                             },
                             dropDownValues: dropDownState.relativeList,
                             data: state.driverData,
@@ -151,17 +162,20 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                         dateFocus: dateFocus,
                         seriesFocus: seriesFocus,
                         numberFocus: numberFocus,
+                        readOnly: state.driverData != null,
                         onRequest: () {
                           if (formKey.currentState!.validate()) {
                             if (state.driverData == null) {
                               String date = dateConverter(
-                                  date: dateController.text,
-                                  inFormat: 'dd.MM.yyyy',
-                                  outFormat: 'yyyy-MM-dd');
+                                date: dateController.text,
+                                inFormat: 'dd.MM.yyyy',
+                                outFormat: 'yyyy-MM-dd',
+                              );
                               cubit.addDriver(
-                                  birth: date,
-                                  series: seriesController.text,
-                                  number: numberController.text);
+                                birth: date,
+                                series: seriesController.text,
+                                number: numberController.text,
+                              );
                             }
                           }
                         },
@@ -170,7 +184,7 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                if (widget.tabLength != 5)
+                if (widget.tabLength != 5 && (driverCubit.isAllCompleted()))
                   CustomOutlineButton(
                     text: AppLocalizations.of(context).addDriver,
                     onTap: () {

@@ -6,17 +6,17 @@ import '../../../../core/themes/app_text_styles.dart';
 import 'custom_expension_tile.dart';
 
 class AnimatedRoundContainer extends StatelessWidget {
-  const AnimatedRoundContainer(
-      {Key? key,
-      required this.title,
-      required this.children,
-      this.padding,
-      this.padding2,
-      this.clearText,
-      this.onClear,
-      this.children2,
-      this.showChildren2 = false})
-      : super(key: key);
+  const AnimatedRoundContainer({
+    Key? key,
+    required this.title,
+    required this.children,
+    this.padding,
+    this.padding2,
+    this.clearText,
+    this.onClear,
+    this.children2,
+    this.showChildren2 = false,
+  }) : super(key: key);
 
   final String title;
   final List<Widget> children;
@@ -31,8 +31,9 @@ class AnimatedRoundContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(9),
-          border: Border.all(color: AppColors.primary400)),
+        borderRadius: BorderRadius.circular(9),
+        border: Border.all(color: AppColors.primary400),
+      ),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         clipBehavior: Clip.antiAlias,

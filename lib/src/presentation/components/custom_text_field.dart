@@ -8,28 +8,29 @@ import '../../core/themes/app_colors.dart';
 import '../../core/themes/app_text_styles.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({
-    Key? key,
-    this.textEditingController,
-    this.onChange,
-    this.hintText,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.obscure,
-    this.textInputAction,
-    this.fillColor,
-    this.preIconColor,
-    this.validator,
-    this.autoFocus,
-    this.focusNode,
-    this.initialValue,
-    this.label,
-    this.inputFormatters,
-    this.keyboardType,
-    this.textCapitalization,
-    this.onFieldSubmitted,
-    this.onEditingCompleted,
-  }) : super(key: key);
+  const CustomTextField(
+      {Key? key,
+      this.textEditingController,
+      this.onChange,
+      this.hintText,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.obscure,
+      this.textInputAction,
+      this.fillColor,
+      this.preIconColor,
+      this.validator,
+      this.autoFocus,
+      this.focusNode,
+      this.initialValue,
+      this.label,
+      this.inputFormatters,
+      this.keyboardType,
+      this.textCapitalization,
+      this.onFieldSubmitted,
+      this.onEditingCompleted,
+      this.readOnly})
+      : super(key: key);
 
   final TextEditingController? textEditingController;
   final Function(String value)? onChange;
@@ -50,6 +51,7 @@ class CustomTextField extends StatelessWidget {
   final TextCapitalization? textCapitalization;
   final ValueChanged<String>? onFieldSubmitted;
   final VoidCallback? onEditingCompleted;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,7 @@ class CustomTextField extends StatelessWidget {
           obscureText: obscure ?? false,
           autofocus: autoFocus ?? false,
           focusNode: focusNode,
+          readOnly: readOnly ?? false,
           initialValue: initialValue,
           textCapitalization: textCapitalization ?? TextCapitalization.none,
           inputFormatters: inputFormatters,
@@ -110,28 +113,29 @@ class CustomTextField extends StatelessWidget {
 }
 
 class CustomDatePickTextField extends StatelessWidget {
-  const CustomDatePickTextField(
-      {Key? key,
-      this.textEditingController,
-      this.onChange,
-      this.hintText,
-      this.prefixIcon,
-      this.obscure,
-      this.textInputAction,
-      this.fillColor,
-      this.preIconColor,
-      this.validator,
-      this.autoFocus,
-      this.focusNode,
-      this.initialValue,
-      this.label,
-      this.inputFormatters,
-      this.keyboardType,
-      this.textCapitalization,
-      this.onFieldSubmitted,
-      this.dateFormat,
-      required this.onDate})
-      : super(key: key);
+  const CustomDatePickTextField({
+    Key? key,
+    this.textEditingController,
+    this.onChange,
+    this.hintText,
+    this.prefixIcon,
+    this.obscure,
+    this.textInputAction,
+    this.fillColor,
+    this.preIconColor,
+    this.validator,
+    this.autoFocus,
+    this.focusNode,
+    this.initialValue,
+    this.label,
+    this.inputFormatters,
+    this.keyboardType,
+    this.textCapitalization,
+    this.onFieldSubmitted,
+    this.dateFormat,
+    required this.onDate,
+    this.readOnly,
+  }) : super(key: key);
 
   final TextEditingController? textEditingController;
   final Function(String value)? onChange;
@@ -152,6 +156,7 @@ class CustomDatePickTextField extends StatelessWidget {
   final ValueChanged<String>? onFieldSubmitted;
   final String? dateFormat;
   final Function() onDate;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -176,22 +181,27 @@ class CustomDatePickTextField extends StatelessWidget {
           keyboardType: keyboardType,
           cursorColor: AppColors.primaryColor,
           onFieldSubmitted: onFieldSubmitted,
+          readOnly: readOnly ?? false,
           decoration: InputDecoration(
             suffixIcon: InkWell(
-                onTap: () {
-                  selectDate(
-                      context: context,
-                      onSave: (DateTime date) {
-                        textEditingController?.text =
-                            DateFormat(dateFormat).format(date);
-                        onDate();
-                      });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: SvgPicture.asset(AppIcons.calendar,
-                      height: 16, width: 16),
-                )),
+              onTap: () {
+                selectDate(
+                    context: context,
+                    onSave: (DateTime date) {
+                      textEditingController?.text =
+                          DateFormat(dateFormat).format(date);
+                      onDate();
+                    });
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: SvgPicture.asset(
+                  AppIcons.calendar,
+                  height: 16,
+                  width: 16,
+                ),
+              ),
+            ),
             hintStyle: AppTextStyles.styleW500S14Grey3,
             hintText: hintText,
             filled: true,

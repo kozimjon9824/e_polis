@@ -75,8 +75,9 @@ class MyApp extends StatelessWidget {
               );
             },
             locale: Locale.fromSubtags(
-                languageCode: language == '' ? RU : language,
-                scriptCode: 'Cyrl'),
+              languageCode: language == '' ? RU : language,
+              scriptCode: 'Cyrl',
+            ),
             initialRoute: AppRoutes.splash,
           );
         },

@@ -54,19 +54,23 @@ class CarInformationWidget extends StatelessWidget {
           textEditingController: vehicleController,
           keyboardType: TextInputType.visiblePassword,
           inputFormatters: [
-            SpecialMaskTextInputFormatter(
-                initialText: vehicleController.text.replaceAll(' ', '')),
+            // SpecialMaskTextInputFormatter(
+            //     initialText: vehicleController.text.replaceAll(' ', '')),
             UpperCaseTextFormatter(),
           ],
+          readOnly: vehicleInfo != null,
           textCapitalization: TextCapitalization.characters,
           textInputAction: TextInputAction.next,
           focusNode: focusNodeVehicleNumber,
           onFieldSubmitted: (_) => focusNodeTechSeries!.requestFocus(),
-          validator: (value) => (value!.length < 10 ||
-                  (value.length == 10 &&
-                      !RegExp('[0-9]').hasMatch(value.substring(3, 4))))
+          validator: (value) => (value!.length < 8)
               ? AppLocalizations.of(context).invalidLength
               : null,
+          // validator: (value) => (value!.length < 10 ||
+          //     (value.length == 10 &&
+          //         !RegExp('[0-9]').hasMatch(value.substring(3, 4))))
+          //     ? AppLocalizations.of(context).invalidLength
+          //     : null,
           onChange: (value) {
             if (value.length == 10) {
               if (RegExp('[0-9]').hasMatch(value.substring(3, 4))) {
@@ -79,8 +83,10 @@ class CarInformationWidget extends StatelessWidget {
           },
         ),
         const SizedBox(height: 16),
-        Text(AppLocalizations.of(context).techPassport,
-            style: AppTextStyles.styleW600S14Grey9),
+        Text(
+          AppLocalizations.of(context).techPassport,
+          style: AppTextStyles.styleW600S14Grey9,
+        ),
         const SizedBox(height: 6),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,11 +101,13 @@ class CarInformationWidget extends StatelessWidget {
                 textCapitalization: TextCapitalization.characters,
                 focusNode: focusNodeTechSeries,
                 onFieldSubmitted: (_) => focusNodeTechNumber!.requestFocus(),
+                readOnly: vehicleInfo != null,
                 inputFormatters: [
                   MaskTextInputFormatter(
-                      mask: '###',
-                      initialText: seriesController.text,
-                      filter: {"#": RegExp(r'[A-Z]')})
+                    mask: '###',
+                    initialText: seriesController.text,
+                    filter: {"#": RegExp(r'[A-Z]')},
+                  )
                 ],
                 validator: (value) => value!.length < 3
                     ? AppLocalizations.of(context).invalidLength
@@ -121,14 +129,16 @@ class CarInformationWidget extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 textEditingController: numberController,
                 onFieldSubmitted: (_) => focusNodeTechNumber!.unfocus(),
+                readOnly: vehicleInfo != null,
                 validator: (value) => value!.length < 7
                     ? AppLocalizations.of(context).invalidLength
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
-                      mask: '#######',
-                      initialText: numberController.text,
-                      filter: {"#": RegExp(r'\d')})
+                    mask: '#######',
+                    initialText: numberController.text,
+                    filter: {"#": RegExp(r'\d')},
+                  )
                 ],
                 onChange: (value) {
                   if (value.length == 7) {
@@ -157,17 +167,21 @@ class VehicleInfoWidget extends StatelessWidget {
         const Divider(height: 0, color: AppColors.divider, thickness: 1),
         const SizedBox(height: 8),
         TitleSubtitle(
-            title: AppLocalizations.of(context).model,
-            subtitle: data?.model ?? ''),
+          title: AppLocalizations.of(context).model,
+          subtitle: data?.model ?? '',
+        ),
         TitleSubtitle(
-            title: AppLocalizations.of(context).carMadeDate,
-            subtitle: data?.issueYear.toString() ?? ''),
+          title: AppLocalizations.of(context).carMadeDate,
+          subtitle: data?.issueYear.toString() ?? '',
+        ),
         TitleSubtitle(
-            title: AppLocalizations.of(context).typeVehicle,
-            subtitle: data?.type.toString() ?? ''),
+          title: AppLocalizations.of(context).typeVehicle,
+          subtitle: data?.type.toString() ?? '',
+        ),
         TitleSubtitle(
-            title: AppLocalizations.of(context).vehicleRegistrationRegion,
-            subtitle: data?.address ?? ''),
+          title: AppLocalizations.of(context).vehicleRegistrationRegion,
+          subtitle: data?.address ?? '',
+        ),
         const SizedBox(height: 8),
       ],
     );

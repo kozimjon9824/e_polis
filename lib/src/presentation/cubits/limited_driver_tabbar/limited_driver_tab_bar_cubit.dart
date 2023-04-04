@@ -18,11 +18,16 @@ class LimitedDriverTabBarCubit extends Cubit<LimitedDriverTabBarState> {
   void addTab() {
     var tabs = List.of(state.drivers);
     int count = tabs.length;
-    if (count == 5) {
+    if (count == 5 || !isAllCompleted()) {
       return;
     }
     tabs.add(IndexedDriverModel());
-    emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
+    emit(
+      state.copyWith(
+          status: StateStatus.unknown,
+          drivers: tabs,
+          currentIndex: state.currentIndex + 1),
+    );
   }
 
   void removeTab(int index) {
@@ -60,6 +65,7 @@ class LimitedDriverTabBarCubit extends Cubit<LimitedDriverTabBarState> {
 
   bool isAllCompleted() {
     var tabs = List.of(state.drivers);
-    return !tabs.any((element) => (element.isSuccess == false));
+    return !tabs.any(
+        (element) => (element.isSuccess == false || element.isSuccess == null));
   }
 }

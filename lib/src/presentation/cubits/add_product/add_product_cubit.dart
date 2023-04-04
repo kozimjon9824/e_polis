@@ -22,8 +22,8 @@ class AddProductCubit extends Cubit<AddProductState> {
       AddProductRequest(
         vehicleNumber: carNumber,
         policy: PolicyFields(
-            series: insuranceNumber.replaceAll(' ', '').substring(0, 3),
-            number: insuranceNumber.replaceAll(' ', '').substring(3)),
+            series: insuranceNumber.replaceAll(' ', '').substring(0, 4),
+            number: insuranceNumber.replaceAll(' ', '').substring(4)),
       ),
     ));
     result.fold(

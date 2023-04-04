@@ -63,7 +63,12 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     focusNodeTechNumber: focusNodeTechNumber,
                     focusNodeTechSeries: focusNodeTechSeries,
                     focusNodeVehicleNumber: focusNodeVehicleNumber,
-                    onClear: () => cubit.onClearVehicleData(),
+                    onClear: () {
+                      vehicleController.text = '';
+                      series.text = '';
+                      number.text = '';
+                      cubit.onClearVehicleData();
+                    },
                     onRequest: () {
                       if (formKey.currentState!.validate()) {
                         if (state.vehicleInfo == null) {
@@ -90,6 +95,12 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                       focusNodeNumberID: focusNodeNumberID,
                       focusNodeSeriesID: focusNodeSeriesID,
                       focusNodePhone: focusNodePhone,
+                      onClear: () {
+                        phoneController.text = '';
+                        seriesID.text = '';
+                        numberID.text = '';
+                        cubit.unValidatePassport();
+                      },
                       onRequest: () {
                         if (!state.isPassportValidated &&
                             formKey2.currentState!.validate()) {
@@ -133,9 +144,9 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     }
                     var owner = state.vehicleInfo?.owner;
                     var phone = MaskTextInputFormatter(
-                            mask: '(##) ### ## ##',
-                            filter: {"#": RegExp(r'\d')})
-                        .unmaskText(phoneController.text);
+                      mask: '(##) ### ## ##',
+                      filter: {"#": RegExp(r'\d')},
+                    ).unmaskText(phoneController.text);
                     ApplicantModel applicant = ApplicantModel(
                       phone: "998$phone",
                       passport: ApplicantPassport(

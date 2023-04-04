@@ -33,6 +33,11 @@ final paymentTypeList = [
 class IndexedDriverModel {
   DriverModel? driverModel;
   final bool? isSuccess;
+  bool relativeSelected;
 
-  IndexedDriverModel({this.driverModel, this.isSuccess});
+  IndexedDriverModel({
+    this.driverModel,
+    this.isSuccess,
+    this.relativeSelected = false,
+  });
 }

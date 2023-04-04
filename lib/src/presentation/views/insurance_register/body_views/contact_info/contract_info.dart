@@ -68,7 +68,6 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                   inFormat: 'dd.MM.yyyy',
                   outFormat: 'yyyy-MM-dd',
                 );
-
                 var contract = ContractInfoRequest(
                   region: filterData.region,
                   period: filterData.period,
@@ -98,6 +97,7 @@ class _ContactInfoViewState extends State<ContactInfoView> {
                         contract: contractState.contract,
                         focusNode: focusNode,
                         onClear: () {
+                          dateController.text = '';
                           contractCubit.onClear();
                         },
                         onRequest: () {

@@ -37,9 +37,11 @@ class _AddPolisPageState extends State<AddPolisPage> {
           child: ListView(
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
             children: [
-              Text(AppLocalizations.of(context).youCanAddPolis,
-                  style: AppTextStyles.styleW700S18Grey9
-                      .copyWith(fontWeight: FontWeight.w600)),
+              Text(
+                AppLocalizations.of(context).youCanAddPolis,
+                style: AppTextStyles.styleW700S18Grey9
+                    .copyWith(fontWeight: FontWeight.w600),
+              ),
               const SizedBox(height: 22),
               DropDownButton<String>(
                 label: AppLocalizations.of(context).typePolis,
@@ -75,13 +77,16 @@ class _AddPolisPageState extends State<AddPolisPage> {
                 textEditingController: carController,
                 focusNode: focusNodeVehicleNum,
                 onFieldSubmitted: (_) => focusNodeVehicleNum.unfocus(),
-                validator: (value) => (value!.length < 10 ||
-                        (value.length == 10 &&
-                            !RegExp('[0-9]').hasMatch(value.substring(3, 4))))
+                validator: (value) => (value!.length < 7)
                     ? AppLocalizations.of(context).invalidLength
                     : null,
+                // validator: (value) => (value!.length < 10 ||
+                //         (value.length == 10 &&
+                //             !RegExp('[0-9]').hasMatch(value.substring(3, 4))))
+                //     ? AppLocalizations.of(context).invalidLength
+                //     : null,
                 inputFormatters: [
-                  SpecialMaskTextInputFormatter(),
+                  // SpecialMaskTextInputFormatter(),
                   UpperCaseTextFormatter(),
                 ],
                 onChange: (value) {
@@ -121,7 +126,7 @@ class _AddPolisPageState extends State<AddPolisPage> {
                   if (formKey.currentState!.validate()) {
                     context.read<AddProductCubit>().addProduct(
                           insuranceNumber: insuranceController.text,
-                          carNumber: carController.text,
+                          carNumber: carController.text.replaceAll(' ', ''),
                         );
                   }
                 },

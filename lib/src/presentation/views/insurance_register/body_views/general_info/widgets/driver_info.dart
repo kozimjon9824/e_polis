@@ -72,6 +72,7 @@ class DriverInformationWidget extends StatelessWidget {
                   textEditingController: seriesID,
                   textCapitalization: TextCapitalization.characters,
                   focusNode: focusNodeSeriesID,
+                  readOnly: isValidated,
                   validator: (value) => value!.length < 2
                       ? AppLocalizations.of(context).invalidLength
                       : null,
@@ -98,14 +99,16 @@ class DriverInformationWidget extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 textEditingController: numberID,
                 focusNode: focusNodeNumberID,
+                readOnly: isValidated,
                 validator: (value) => value!.length < 6
                     ? AppLocalizations.of(context).invalidLength
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
-                      mask: '#######',
-                      initialText: numberID.text,
-                      filter: {"#": RegExp(r'\d')})
+                    mask: '#######',
+                    initialText: numberID.text,
+                    filter: {"#": RegExp(r'\d')},
+                  )
                 ],
                 onChange: (value) {
                   if (value.length == 7) {
@@ -134,9 +137,10 @@ class DriverInformationWidget extends StatelessWidget {
           : null,
       inputFormatters: [
         MaskTextInputFormatter(
-            mask: '(##) ### ## ##',
-            type: MaskAutoCompletionType.eager,
-            filter: {"#": RegExp(r'\d')})
+          mask: '(##) ### ## ##',
+          type: MaskAutoCompletionType.eager,
+          filter: {"#": RegExp(r'\d')},
+        )
       ],
       onChange: (value) {
         if (value.length == 14) {

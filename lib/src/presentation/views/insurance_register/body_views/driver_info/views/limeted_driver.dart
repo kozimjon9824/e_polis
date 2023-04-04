@@ -33,11 +33,12 @@ class LimitedDriverView extends StatelessWidget {
                               onTap: () {
                                 cubit.changeTab(i - 1);
                               },
-                              bgColor: (state.drivers[i - 1].isSuccess == null)
-                                  ? null
+                              bgColor: (i - 1 == state.currentIndex &&
+                                      state.drivers[i - 1].isSuccess != true)
+                                  ? AppColors.green300
                                   : (state.drivers[i - 1].isSuccess == true)
                                       ? AppColors.green
-                                      : AppColors.green300,
+                                      : null,
                               borderRadius: BorderRadius.horizontal(
                                 left: Radius.circular(i == 1 ? 8 : 0),
                                 right: Radius.circular(i == 5 ? 8 : 0),

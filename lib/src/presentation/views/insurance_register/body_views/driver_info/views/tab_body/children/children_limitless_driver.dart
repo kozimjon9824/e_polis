@@ -9,16 +9,17 @@ import '../../../../../../../components/drop_down_button.dart';
 import '../../../../../widgets/widgets.dart';
 
 class LimitlessDriverChild1Body extends StatelessWidget {
-  const LimitlessDriverChild1Body(
-      {Key? key,
-      required this.seriesController,
-      required this.numberController,
-      required this.dateController,
-      this.seriesFocus,
-      this.numberFocus,
-      this.dateFocus,
-      required this.onRequest})
-      : super(key: key);
+  const LimitlessDriverChild1Body({
+    Key? key,
+    required this.seriesController,
+    required this.numberController,
+    required this.dateController,
+    this.seriesFocus,
+    this.numberFocus,
+    this.dateFocus,
+    required this.onRequest,
+    required this.readOnly,
+  }) : super(key: key);
   final TextEditingController seriesController;
   final TextEditingController numberController;
   final TextEditingController dateController;
@@ -26,43 +27,49 @@ class LimitlessDriverChild1Body extends StatelessWidget {
   final FocusNode? numberFocus;
   final FocusNode? dateFocus;
   final Function() onRequest;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppLocalizations.of(context).passport,
-            style: AppTextStyles.styleW600S14Grey9),
+        Text(
+          AppLocalizations.of(context).passport,
+          style: AppTextStyles.styleW600S14Grey9,
+        ),
         const SizedBox(height: 6),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-                flex: 1,
-                child: CustomTextField(
-                  hintText: AppLocalizations.of(context).series,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  textCapitalization: TextCapitalization.characters,
-                  textEditingController: seriesController,
-                  focusNode: seriesFocus,
-                  onFieldSubmitted: (_) => numberFocus!.requestFocus(),
-                  validator: (value) => value!.length < 2
-                      ? AppLocalizations.of(context).invalidLength
-                      : null,
-                  inputFormatters: [
-                    MaskTextInputFormatter(
-                        mask: '##',
-                        initialText: seriesController.text,
-                        filter: {"#": RegExp(r'[A-Z]')})
-                  ],
-                  onChange: (value) {
-                    if (value.length == 2) {
-                      numberFocus!.requestFocus();
-                    }
-                  },
-                )),
+              flex: 1,
+              child: CustomTextField(
+                hintText: AppLocalizations.of(context).series,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+                textCapitalization: TextCapitalization.characters,
+                textEditingController: seriesController,
+                focusNode: seriesFocus,
+                onFieldSubmitted: (_) => numberFocus!.requestFocus(),
+                readOnly: readOnly,
+                validator: (value) => value!.length < 2
+                    ? AppLocalizations.of(context).invalidLength
+                    : null,
+                inputFormatters: [
+                  MaskTextInputFormatter(
+                    mask: '##',
+                    initialText: seriesController.text,
+                    filter: {"#": RegExp(r'[A-Z]')},
+                  )
+                ],
+                onChange: (value) {
+                  if (value.length == 2) {
+                    numberFocus!.requestFocus();
+                  }
+                },
+              ),
+            ),
             const SizedBox(width: 10),
             Expanded(
               flex: 2,
@@ -73,14 +80,16 @@ class LimitlessDriverChild1Body extends StatelessWidget {
                 textEditingController: numberController,
                 focusNode: numberFocus,
                 onFieldSubmitted: (_) => dateFocus!.requestFocus(),
+                readOnly: readOnly,
                 validator: (value) => value!.length < 6
                     ? AppLocalizations.of(context).invalidLength
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
-                      mask: '#######',
-                      initialText: numberController.text,
-                      filter: {"#": RegExp(r'\d')})
+                    mask: '#######',
+                    initialText: numberController.text,
+                    filter: {"#": RegExp(r'\d')},
+                  )
                 ],
                 onChange: (value) {
                   if (value.length == 7) {
@@ -100,14 +109,16 @@ class LimitlessDriverChild1Body extends StatelessWidget {
           textInputAction: TextInputAction.done,
           focusNode: dateFocus,
           dateFormat: 'dd.MM.yyyy',
+          readOnly: readOnly,
           validator: (value) => value!.length < 10
               ? AppLocalizations.of(context).invalidLength
               : null,
           inputFormatters: [
             MaskTextInputFormatter(
-                mask: '##.##.####',
-                initialText: dateController.text.replaceAll('.', ''),
-                filter: {"#": RegExp(r'\d')})
+              mask: '##.##.####',
+              initialText: dateController.text.replaceAll('.', ''),
+              filter: {"#": RegExp(r'\d')},
+            )
           ],
           onChange: (value) {
             if (value.length == 10) {
@@ -157,45 +168,53 @@ class LimitlessDriverChild2Body extends StatelessWidget {
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
         const SizedBox(height: 8),
         DropDownButton<String>(
-            label: AppLocalizations.of(context).relationShip,
-            items: dropDownValues
-                .map((item) => DropdownMenuItem<String>(
+          label: AppLocalizations.of(context).relationShip,
+          items: dropDownValues
+              .map(
+                (item) => DropdownMenuItem<String>(
                     value: item,
-                    child: Text(item, style: AppTextStyles.styleW400S14Grey6)))
-                .toList(),
-            onChanged: onChange),
+                    child: Text(item, style: AppTextStyles.styleW400S14Grey6)),
+              )
+              .toList(),
+          onChanged: onChange,
+        ),
         const SizedBox(height: 16),
-        Text(AppLocalizations.of(context).driverLicense,
-            style: AppTextStyles.styleW600S14Grey9),
+        Text(
+          AppLocalizations.of(context).driverLicense,
+          style: AppTextStyles.styleW600S14Grey9,
+        ),
         const SizedBox(height: 6),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-                flex: 1,
-                child: CustomTextField(
-                  hintText: AppLocalizations.of(context).series,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  focusNode: licenseSeriesNode,
-                  textEditingController: licenseSeries,
-                  textCapitalization: TextCapitalization.characters,
-                  onFieldSubmitted: (_) => licenseNumberNode!.requestFocus(),
-                  validator: (value) => value!.length < 2
-                      ? AppLocalizations.of(context).invalidLength
-                      : null,
-                  inputFormatters: [
-                    MaskTextInputFormatter(
-                        mask: '##',
-                        initialText: licenseSeries.text,
-                        filter: {"#": RegExp(r'[A-Z]')})
-                  ],
-                  onChange: (value) {
-                    if (value.length == 2) {
-                      licenseNumberNode!.requestFocus();
-                    }
-                  },
-                )),
+              flex: 1,
+              child: CustomTextField(
+                hintText: AppLocalizations.of(context).series,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+                focusNode: licenseSeriesNode,
+                textEditingController: licenseSeries,
+                textCapitalization: TextCapitalization.characters,
+                onFieldSubmitted: (_) => licenseNumberNode!.requestFocus(),
+                readOnly: data != null,
+                validator: (value) => value!.length < 2
+                    ? AppLocalizations.of(context).invalidLength
+                    : null,
+                inputFormatters: [
+                  MaskTextInputFormatter(
+                    mask: '##',
+                    initialText: licenseSeries.text,
+                    filter: {"#": RegExp(r'[A-Z]')},
+                  )
+                ],
+                onChange: (value) {
+                  if (value.length == 2) {
+                    licenseNumberNode!.requestFocus();
+                  }
+                },
+              ),
+            ),
             const SizedBox(width: 10),
             Expanded(
               flex: 2,
@@ -206,14 +225,16 @@ class LimitlessDriverChild2Body extends StatelessWidget {
                 textEditingController: licenseNumber,
                 focusNode: licenseNumberNode,
                 onFieldSubmitted: (_) => licenseDateNode!.requestFocus(),
+                readOnly: data != null,
                 validator: (value) => value!.length < 6
                     ? AppLocalizations.of(context).invalidLength
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
-                      mask: '#######',
-                      initialText: licenseNumber.text,
-                      filter: {"#": RegExp(r'\d')})
+                    mask: '#######',
+                    initialText: licenseNumber.text,
+                    filter: {"#": RegExp(r'\d')},
+                  )
                 ],
                 onChange: (value) {
                   if (value.length == 7) {
@@ -232,15 +253,17 @@ class LimitlessDriverChild2Body extends StatelessWidget {
           textEditingController: licenseDate,
           focusNode: licenseDateNode,
           onFieldSubmitted: (_) => licenseDateNode!.unfocus(),
+          readOnly: data != null,
           validator: (value) => value!.length < 10
               ? AppLocalizations.of(context).invalidLength
               : null,
           dateFormat: 'dd.MM.yyyy',
           inputFormatters: [
             MaskTextInputFormatter(
-                mask: '##.##.####',
-                initialText: licenseDate.text.replaceAll('.', ''),
-                filter: {"#": RegExp(r'\d')})
+              mask: '##.##.####',
+              initialText: licenseDate.text.replaceAll('.', ''),
+              filter: {"#": RegExp(r'\d')},
+            )
           ],
           onChange: (value) {
             if (value.length == 10) {
@@ -252,8 +275,9 @@ class LimitlessDriverChild2Body extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         TitleSubtitle(
-            title: AppLocalizations.of(context).fio,
-            subtitle: data?.fullName ?? ''),
+          title: AppLocalizations.of(context).fio,
+          subtitle: data?.fullName ?? '',
+        ),
       ],
     );
   }

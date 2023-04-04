@@ -12,7 +12,10 @@ import 'widgets/insurance_prices.dart';
 import 'widgets/payment_types.dart';
 
 class PaymentView extends StatelessWidget {
-  const PaymentView({Key? key, required this.arguments}) : super(key: key);
+  const PaymentView({
+    Key? key,
+    required this.arguments,
+  }) : super(key: key);
   final InsurancePageArguments arguments;
 
   @override

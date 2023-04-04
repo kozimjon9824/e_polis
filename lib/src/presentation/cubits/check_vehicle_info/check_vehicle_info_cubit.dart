@@ -19,10 +19,11 @@ class CheckVehicleInfoCubit extends Cubit<CheckVehicleInfoState> {
   final CheckVehicleInfoUseCase _vehicleInfoUseCase;
   final ValidatePassportUseCase _validatePassportUseCase;
 
-  void checkVehicleData(
-      {required String vehicleNum,
-      required String techPasSer,
-      required String techPasNum}) async {
+  void checkVehicleData({
+    required String vehicleNum,
+    required String techPasSer,
+    required String techPasNum,
+  }) async {
     emit(state.copyWith(status: StateStatus.loading));
     var result = await _vehicleInfoUseCase.call(CheckVehicleInfoParam(
         VehicleInfoRequest(
@@ -30,24 +31,33 @@ class CheckVehicleInfoCubit extends Cubit<CheckVehicleInfoState> {
             technicalPassport:
                 TechnicalPassport(series: techPasSer, number: techPasNum))));
     result.fold(
-        (failure) =>
-            emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) => emit(state.copyWith(
-            status: StateStatus.unknown, vehicleInfo: response)));
+      (failure) =>
+          emit(state.copyWith(failure: failure, status: StateStatus.error)),
+      (response) => emit(
+          state.copyWith(status: StateStatus.unknown, vehicleInfo: response)),
+    );
   }
 
-  void validatePassport(
-      {required String series, required String number}) async {
+  void validatePassport({
+    required String series,
+    required String number,
+  }) async {
     emit(state.copyWith(status: StateStatus.loading));
     var result = await _validatePassportUseCase.call(ValidatePassportParams(
         DriverPassportValidation(
             pinfl: state.vehicleInfo?.owner?.pinfl ?? '',
             passport: PassportData(series: series, number: number))));
     result.fold(
-        (failure) =>
-            emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) => emit(state.copyWith(
-            status: StateStatus.unknown, isPassportValidated: true)));
+      (failure) =>
+          emit(state.copyWith(failure: failure, status: StateStatus.error)),
+      (response) => emit(state.copyWith(
+          status: StateStatus.unknown, isPassportValidated: true)),
+    );
+  }
+
+  void unValidatePassport() {
+    emit(state.copyWith(
+        status: StateStatus.unknown, isPassportValidated: false));
   }
 
   void onClearVehicleData() {

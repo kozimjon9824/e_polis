@@ -20,8 +20,9 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(AppLocalizations.of(context).profile)),
+        automaticallyImplyLeading: false,
+        title: Text(AppLocalizations.of(context).profile),
+      ),
       body: ListView(
         children: [
           const SizedBox(height: 16),
@@ -29,14 +30,17 @@ class ProfilePage extends StatelessWidget {
           const ProfileDetailsWidget(),
           const Divider(height: 0, color: AppColors.grey50, thickness: 1.2),
           const SizedBox(height: 24),
-          ProfileItemWidget(
-            title: AppLocalizations.of(context).profileInfo,
-            icon: AppIcons.profileInfo,
-            onTap: () {
-              if (context.read<AuthCubit>().state is AuthenticatedState) {
-                Navigator.pushNamed(context, AppRoutes.profileInfo);
-              }
-            },
+          Visibility(
+            visible: (context.read<AuthCubit>().state is AuthenticatedState),
+            child: ProfileItemWidget(
+              title: AppLocalizations.of(context).profileInfo,
+              icon: AppIcons.profileInfo,
+              onTap: () {
+                if (context.read<AuthCubit>().state is AuthenticatedState) {
+                  Navigator.pushNamed(context, AppRoutes.profileInfo);
+                }
+              },
+            ),
           ),
           BlocBuilder<LanguageCubit, LanguageState>(
             builder: (context, state) {

@@ -20,10 +20,14 @@ class AddDriverCubit extends Cubit<AddDriverState> {
     required String number,
   }) async {
     emit(state.copyWith(status: StateStatus.loading));
-    var result = await _addDriverUseCase.call(AddDriverParams(
+    var result = await _addDriverUseCase.call(
+      AddDriverParams(
         DriverPassportInputRequest(
-            birthdate: birth,
-            passport: PassportInputFields(series: series, number: number))));
+          birthdate: birth,
+          passport: PassportInputFields(series: series, number: number),
+        ),
+      ),
+    );
     result.fold(
       (failure) =>
           emit(state.copyWith(failure: failure, status: StateStatus.error)),
