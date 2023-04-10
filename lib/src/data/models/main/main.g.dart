@@ -77,6 +77,10 @@ _$_ProductData _$$_ProductDataFromJson(Map<String, dynamic> json) =>
           ? null
           : Category.fromJson(json['category'] as Map<String, dynamic>),
       description: json['description'] as String?,
+      isDisabled: json['isDisabled'] as bool?,
+      label: json['label'] == null
+          ? null
+          : Label.fromJson(json['label'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_ProductDataToJson(_$_ProductData instance) =>
@@ -86,6 +90,8 @@ Map<String, dynamic> _$$_ProductDataToJson(_$_ProductData instance) =>
       'name': instance.name,
       'category': instance.category,
       'description': instance.description,
+      'isDisabled': instance.isDisabled,
+      'label': instance.label,
     };
 
 _$_Category _$$_CategoryFromJson(Map<String, dynamic> json) => _$_Category(
@@ -97,4 +103,14 @@ Map<String, dynamic> _$$_CategoryToJson(_$_Category instance) =>
     <String, dynamic>{
       'name': instance.name,
       'type': instance.type,
+    };
+
+_$_Label _$$_LabelFromJson(Map<String, dynamic> json) => _$_Label(
+      title: json['title'] as String?,
+      color: json['color'] as String?,
+    );
+
+Map<String, dynamic> _$$_LabelToJson(_$_Label instance) => <String, dynamic>{
+      'title': instance.title,
+      'color': instance.color,
     };

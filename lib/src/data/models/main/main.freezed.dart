@@ -816,6 +816,8 @@ mixin _$ProductData {
   String? get name => throw _privateConstructorUsedError;
   Category? get category => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  bool? get isDisabled => throw _privateConstructorUsedError;
+  Label? get label => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -834,9 +836,12 @@ abstract class $ProductDataCopyWith<$Res> {
       String? photo,
       String? name,
       Category? category,
-      String? description});
+      String? description,
+      bool? isDisabled,
+      Label? label});
 
   $CategoryCopyWith<$Res>? get category;
+  $LabelCopyWith<$Res>? get label;
 }
 
 /// @nodoc
@@ -857,6 +862,8 @@ class _$ProductDataCopyWithImpl<$Res, $Val extends ProductData>
     Object? name = freezed,
     Object? category = freezed,
     Object? description = freezed,
+    Object? isDisabled = freezed,
+    Object? label = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -879,6 +886,14 @@ class _$ProductDataCopyWithImpl<$Res, $Val extends ProductData>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      isDisabled: freezed == isDisabled
+          ? _value.isDisabled
+          : isDisabled // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      label: freezed == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as Label?,
     ) as $Val);
   }
 
@@ -891,6 +906,18 @@ class _$ProductDataCopyWithImpl<$Res, $Val extends ProductData>
 
     return $CategoryCopyWith<$Res>(_value.category!, (value) {
       return _then(_value.copyWith(category: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LabelCopyWith<$Res>? get label {
+    if (_value.label == null) {
+      return null;
+    }
+
+    return $LabelCopyWith<$Res>(_value.label!, (value) {
+      return _then(_value.copyWith(label: value) as $Val);
     });
   }
 }
@@ -908,10 +935,14 @@ abstract class _$$_ProductDataCopyWith<$Res>
       String? photo,
       String? name,
       Category? category,
-      String? description});
+      String? description,
+      bool? isDisabled,
+      Label? label});
 
   @override
   $CategoryCopyWith<$Res>? get category;
+  @override
+  $LabelCopyWith<$Res>? get label;
 }
 
 /// @nodoc
@@ -930,6 +961,8 @@ class __$$_ProductDataCopyWithImpl<$Res>
     Object? name = freezed,
     Object? category = freezed,
     Object? description = freezed,
+    Object? isDisabled = freezed,
+    Object? label = freezed,
   }) {
     return _then(_$_ProductData(
       id: freezed == id
@@ -952,6 +985,14 @@ class __$$_ProductDataCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      isDisabled: freezed == isDisabled
+          ? _value.isDisabled
+          : isDisabled // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      label: freezed == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as Label?,
     ));
   }
 }
@@ -960,7 +1001,13 @@ class __$$_ProductDataCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ProductData with DiagnosticableTreeMixin implements _ProductData {
   const _$_ProductData(
-      {this.id, this.photo, this.name, this.category, this.description});
+      {this.id,
+      this.photo,
+      this.name,
+      this.category,
+      this.description,
+      this.isDisabled,
+      this.label});
 
   factory _$_ProductData.fromJson(Map<String, dynamic> json) =>
       _$$_ProductDataFromJson(json);
@@ -975,10 +1022,14 @@ class _$_ProductData with DiagnosticableTreeMixin implements _ProductData {
   final Category? category;
   @override
   final String? description;
+  @override
+  final bool? isDisabled;
+  @override
+  final Label? label;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProductData(id: $id, photo: $photo, name: $name, category: $category, description: $description)';
+    return 'ProductData(id: $id, photo: $photo, name: $name, category: $category, description: $description, isDisabled: $isDisabled, label: $label)';
   }
 
   @override
@@ -990,7 +1041,9 @@ class _$_ProductData with DiagnosticableTreeMixin implements _ProductData {
       ..add(DiagnosticsProperty('photo', photo))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('category', category))
-      ..add(DiagnosticsProperty('description', description));
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('isDisabled', isDisabled))
+      ..add(DiagnosticsProperty('label', label));
   }
 
   @override
@@ -1004,13 +1057,16 @@ class _$_ProductData with DiagnosticableTreeMixin implements _ProductData {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.isDisabled, isDisabled) ||
+                other.isDisabled == isDisabled) &&
+            (identical(other.label, label) || other.label == label));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, photo, name, category, description);
+  int get hashCode => Object.hash(
+      runtimeType, id, photo, name, category, description, isDisabled, label);
 
   @JsonKey(ignore: true)
   @override
@@ -1032,7 +1088,9 @@ abstract class _ProductData implements ProductData {
       final String? photo,
       final String? name,
       final Category? category,
-      final String? description}) = _$_ProductData;
+      final String? description,
+      final bool? isDisabled,
+      final Label? label}) = _$_ProductData;
 
   factory _ProductData.fromJson(Map<String, dynamic> json) =
       _$_ProductData.fromJson;
@@ -1047,6 +1105,10 @@ abstract class _ProductData implements ProductData {
   Category? get category;
   @override
   String? get description;
+  @override
+  bool? get isDisabled;
+  @override
+  Label? get label;
   @override
   @JsonKey(ignore: true)
   _$$_ProductDataCopyWith<_$_ProductData> get copyWith =>
@@ -1209,5 +1271,159 @@ abstract class _Category implements Category {
   @override
   @JsonKey(ignore: true)
   _$$_CategoryCopyWith<_$_Category> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Label _$LabelFromJson(Map<String, dynamic> json) {
+  return _Label.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Label {
+  String? get title => throw _privateConstructorUsedError;
+  String? get color => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LabelCopyWith<Label> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LabelCopyWith<$Res> {
+  factory $LabelCopyWith(Label value, $Res Function(Label) then) =
+      _$LabelCopyWithImpl<$Res, Label>;
+  @useResult
+  $Res call({String? title, String? color});
+}
+
+/// @nodoc
+class _$LabelCopyWithImpl<$Res, $Val extends Label>
+    implements $LabelCopyWith<$Res> {
+  _$LabelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = freezed,
+    Object? color = freezed,
+  }) {
+    return _then(_value.copyWith(
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      color: freezed == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_LabelCopyWith<$Res> implements $LabelCopyWith<$Res> {
+  factory _$$_LabelCopyWith(_$_Label value, $Res Function(_$_Label) then) =
+      __$$_LabelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? title, String? color});
+}
+
+/// @nodoc
+class __$$_LabelCopyWithImpl<$Res> extends _$LabelCopyWithImpl<$Res, _$_Label>
+    implements _$$_LabelCopyWith<$Res> {
+  __$$_LabelCopyWithImpl(_$_Label _value, $Res Function(_$_Label) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = freezed,
+    Object? color = freezed,
+  }) {
+    return _then(_$_Label(
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      color: freezed == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Label with DiagnosticableTreeMixin implements _Label {
+  const _$_Label({this.title, this.color});
+
+  factory _$_Label.fromJson(Map<String, dynamic> json) =>
+      _$$_LabelFromJson(json);
+
+  @override
+  final String? title;
+  @override
+  final String? color;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Label(title: $title, color: $color)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Label'))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('color', color));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Label &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.color, color) || other.color == color));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, title, color);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LabelCopyWith<_$_Label> get copyWith =>
+      __$$_LabelCopyWithImpl<_$_Label>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_LabelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Label implements Label {
+  const factory _Label({final String? title, final String? color}) = _$_Label;
+
+  factory _Label.fromJson(Map<String, dynamic> json) = _$_Label.fromJson;
+
+  @override
+  String? get title;
+  @override
+  String? get color;
+  @override
+  @JsonKey(ignore: true)
+  _$$_LabelCopyWith<_$_Label> get copyWith =>
       throw _privateConstructorUsedError;
 }

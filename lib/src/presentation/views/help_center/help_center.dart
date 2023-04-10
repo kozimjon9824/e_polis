@@ -10,6 +10,7 @@ import 'package:e_polis/src/presentation/views/help_center/widgets/animated_cont
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../data/models/help_data/help_data.dart';
 
 class HelperCenterPage extends StatelessWidget {
@@ -57,11 +58,23 @@ class HelperCenterPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                      onPressed: () {}, icon: SvgPicture.asset(AppIcons.web)),
+                      onPressed: () {
+                        _launchInBrowser('impex-insurance.uz');
+                      },
+                      iconSize: 44,
+                      icon: SvgPicture.asset(AppIcons.web)),
                   IconButton(
-                      onPressed: () {}, icon: SvgPicture.asset(AppIcons.email)),
+                      onPressed: () {
+                        _goEmail('office@impex-insurance.uz');
+                      },
+                      iconSize: 44,
+                      icon: SvgPicture.asset(AppIcons.email)),
                   IconButton(
-                      onPressed: () {}, icon: SvgPicture.asset(AppIcons.phone))
+                      onPressed: () {
+                        _makePhoneCall('+998946122075');
+                      },
+                      iconSize: 44,
+                      icon: SvgPicture.asset(AppIcons.phone))
                 ],
               ),
             ],
@@ -72,15 +85,44 @@ class HelperCenterPage extends StatelessWidget {
             style: AppTextStyles.styleW700S18Grey9),
         const SizedBox(height: 16),
         ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (_, index) => ExpandableContainer(
-                  title: data[index].question ?? '',
-                  subText: data[index].answer ?? '',
-                ),
-            separatorBuilder: (_, __) => const SizedBox(height: 12),
-            itemCount: data.length),
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (_, index) => ExpandableContainer(
+            title: data[index].question ?? '',
+            subText: data[index].answer ?? '',
+          ),
+          separatorBuilder: (_, __) => const SizedBox(height: 12),
+          itemCount: data.length,
+        ),
       ],
     );
+  }
+
+  Future<void> _launchInBrowser(String url) async {
+    if (!await launchUrl(
+      Uri(
+        scheme: 'http',
+        host: url,
+      ),
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+
+  Future<void> _goEmail(String email) async {
+    final Uri launchUri = Uri(
+      scheme: 'mailto',
+      path: email,
+    );
+    await launchUrl(launchUri);
   }
 }

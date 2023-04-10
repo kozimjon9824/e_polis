@@ -25,7 +25,9 @@ class LimitlessDriverTabBarCubit extends Cubit<LimitlessDriverTabBarState> {
     emit(state.copyWith(
         status: StateStatus.unknown,
         drivers: tabs,
-        currentIndex: state.currentIndex + 1));
+        currentIndex: count >= state.currentIndex + 1
+            ? (state.currentIndex + 1)
+            : state.currentIndex));
   }
 
   void removeTab(int index) {
@@ -44,6 +46,11 @@ class LimitlessDriverTabBarCubit extends Cubit<LimitlessDriverTabBarState> {
 
   void addDriverData({required int index, required IndexedDriverModel model}) {
     var tabs = List.of(state.drivers);
+    IndexedDriverModel newModel = tabs[index];
+    var withRelative =
+        model.driverModel?.copyWith(relative: newModel.relativeKey);
+    model.driverModel = withRelative;
+    model.relativeSelected = newModel.relativeSelected;
     tabs[index] = model;
     emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
   }
@@ -57,13 +64,15 @@ class LimitlessDriverTabBarCubit extends Cubit<LimitlessDriverTabBarState> {
     var withRelative = newModel.driverModel?.copyWith(relative: relativeKey);
     newModel.driverModel = withRelative;
     newModel.relativeSelected = true;
+    newModel.relativeKey = relativeKey;
     tabs[index] = newModel;
     emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
   }
 
   bool isAllCompleted() {
     var tabs = List.of(state.drivers);
-    return !tabs.any((element) =>
-        (element.isSuccess == false || element.relativeSelected == false));
+    return !tabs.any((element) => (element.isSuccess == false ||
+        element.relativeSelected == false ||
+        element.isSuccess == null));
   }
 }

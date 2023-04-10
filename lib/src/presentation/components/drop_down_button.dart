@@ -31,34 +31,35 @@ class DropDownButton<T> extends StatelessWidget {
         Text(label, style: AppTextStyles.styleW600S14Grey9),
         const SizedBox(height: 7),
         DropdownButtonFormField2(
-            decoration: dropDownDecoration(),
-            isExpanded: true,
-            value: value,
-            hint: Text(hint ?? '',
-                style: AppTextStyles.styleW400S14Grey6
-                    .copyWith(color: AppColors.grey400)),
-            icon: const Icon(CupertinoIcons.chevron_down,
-                color: AppColors.grey400),
-            iconOnClick:
-                const Icon(CupertinoIcons.chevron_up, color: AppColors.grey400),
-            iconSize: 16,
-            buttonHeight: 56,
-            dropdownMaxHeight: MediaQuery.of(context).size.height / 2,
-            style: AppTextStyles.styleW500S14Grey9,
-            buttonPadding: const EdgeInsets.only(right: 12),
-            dropdownDecoration:
-                BoxDecoration(borderRadius: BorderRadius.circular(10)),
-            buttonDecoration:
-                BoxDecoration(borderRadius: BorderRadius.circular(10)),
-            items: items,
-            validator: (value) {
-              if (value == null) {
-                return errorText;
-              }
-              return null;
-            },
-            onChanged: onChanged,
-            onSaved: onSaved),
+          decoration: dropDownDecoration(),
+          isExpanded: true,
+          value: value,
+          hint: Text(hint ?? '',
+              style: AppTextStyles.styleW400S14Grey6
+                  .copyWith(color: AppColors.grey400)),
+          icon:
+              const Icon(CupertinoIcons.chevron_down, color: AppColors.grey400),
+          iconOnClick:
+              const Icon(CupertinoIcons.chevron_up, color: AppColors.grey400),
+          iconSize: 16,
+          buttonHeight: 56,
+          dropdownMaxHeight: MediaQuery.of(context).size.height / 2,
+          style: AppTextStyles.styleW500S14Grey9,
+          buttonPadding: const EdgeInsets.only(right: 12),
+          dropdownDecoration:
+              BoxDecoration(borderRadius: BorderRadius.circular(10)),
+          buttonDecoration:
+              BoxDecoration(borderRadius: BorderRadius.circular(10)),
+          items: items,
+          validator: (value) {
+            if (value == null) {
+              return errorText;
+            }
+            return null;
+          },
+          onChanged: onChanged,
+          onSaved: onSaved,
+        ),
       ],
     );
   }
@@ -68,17 +69,25 @@ class DropDownButton<T> extends StatelessWidget {
       isDense: true,
       contentPadding: EdgeInsets.zero,
       border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          borderSide: BorderSide()),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        borderSide: BorderSide(),
+      ),
       enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          borderSide: BorderSide(color: AppColors.grey400)),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        borderSide: BorderSide(color: AppColors.grey400),
+      ),
       focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          borderSide: BorderSide(color: AppColors.primaryColor)),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        borderSide: BorderSide(color: AppColors.primaryColor),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        borderSide: BorderSide(color: AppColors.red),
+      ),
       disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          borderSide: BorderSide(color: AppColors.grey400)),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        borderSide: BorderSide(color: AppColors.grey400),
+      ),
     );
   }
 }

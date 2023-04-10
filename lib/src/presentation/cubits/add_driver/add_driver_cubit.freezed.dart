@@ -20,6 +20,7 @@ mixin _$AddDriverState {
   Failure get failure => throw _privateConstructorUsedError;
   DriverPassportInputResponse? get driverData =>
       throw _privateConstructorUsedError;
+  bool get fillByHand => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddDriverStateCopyWith<AddDriverState> get copyWith =>
@@ -35,7 +36,8 @@ abstract class $AddDriverStateCopyWith<$Res> {
   $Res call(
       {StateStatus status,
       Failure failure,
-      DriverPassportInputResponse? driverData});
+      DriverPassportInputResponse? driverData,
+      bool fillByHand});
 
   $DriverPassportInputResponseCopyWith<$Res>? get driverData;
 }
@@ -56,6 +58,7 @@ class _$AddDriverStateCopyWithImpl<$Res, $Val extends AddDriverState>
     Object? status = null,
     Object? failure = null,
     Object? driverData = freezed,
+    Object? fillByHand = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -70,6 +73,10 @@ class _$AddDriverStateCopyWithImpl<$Res, $Val extends AddDriverState>
           ? _value.driverData
           : driverData // ignore: cast_nullable_to_non_nullable
               as DriverPassportInputResponse?,
+      fillByHand: null == fillByHand
+          ? _value.fillByHand
+          : fillByHand // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -98,7 +105,8 @@ abstract class _$$_AddDriverStateCopyWith<$Res>
   $Res call(
       {StateStatus status,
       Failure failure,
-      DriverPassportInputResponse? driverData});
+      DriverPassportInputResponse? driverData,
+      bool fillByHand});
 
   @override
   $DriverPassportInputResponseCopyWith<$Res>? get driverData;
@@ -118,6 +126,7 @@ class __$$_AddDriverStateCopyWithImpl<$Res>
     Object? status = null,
     Object? failure = null,
     Object? driverData = freezed,
+    Object? fillByHand = null,
   }) {
     return _then(_$_AddDriverState(
       status: null == status
@@ -132,6 +141,10 @@ class __$$_AddDriverStateCopyWithImpl<$Res>
           ? _value.driverData
           : driverData // ignore: cast_nullable_to_non_nullable
               as DriverPassportInputResponse?,
+      fillByHand: null == fillByHand
+          ? _value.fillByHand
+          : fillByHand // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -142,7 +155,8 @@ class _$_AddDriverState implements _AddDriverState {
   const _$_AddDriverState(
       {this.status = StateStatus.unknown,
       this.failure = const UnknownFailure(),
-      this.driverData});
+      this.driverData,
+      this.fillByHand = false});
 
   @override
   @JsonKey()
@@ -152,10 +166,13 @@ class _$_AddDriverState implements _AddDriverState {
   final Failure failure;
   @override
   final DriverPassportInputResponse? driverData;
+  @override
+  @JsonKey()
+  final bool fillByHand;
 
   @override
   String toString() {
-    return 'AddDriverState(status: $status, failure: $failure, driverData: $driverData)';
+    return 'AddDriverState(status: $status, failure: $failure, driverData: $driverData, fillByHand: $fillByHand)';
   }
 
   @override
@@ -166,11 +183,14 @@ class _$_AddDriverState implements _AddDriverState {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.failure, failure) || other.failure == failure) &&
             (identical(other.driverData, driverData) ||
-                other.driverData == driverData));
+                other.driverData == driverData) &&
+            (identical(other.fillByHand, fillByHand) ||
+                other.fillByHand == fillByHand));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, failure, driverData);
+  int get hashCode =>
+      Object.hash(runtimeType, status, failure, driverData, fillByHand);
 
   @JsonKey(ignore: true)
   @override
@@ -183,7 +203,8 @@ abstract class _AddDriverState implements AddDriverState {
   const factory _AddDriverState(
       {final StateStatus status,
       final Failure failure,
-      final DriverPassportInputResponse? driverData}) = _$_AddDriverState;
+      final DriverPassportInputResponse? driverData,
+      final bool fillByHand}) = _$_AddDriverState;
 
   @override
   StateStatus get status;
@@ -191,6 +212,8 @@ abstract class _AddDriverState implements AddDriverState {
   Failure get failure;
   @override
   DriverPassportInputResponse? get driverData;
+  @override
+  bool get fillByHand;
   @override
   @JsonKey(ignore: true)
   _$$_AddDriverStateCopyWith<_$_AddDriverState> get copyWith =>

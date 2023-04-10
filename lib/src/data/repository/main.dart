@@ -21,7 +21,6 @@ import 'package:e_polis/src/data/models/vehicle_information/response/vehicle_inf
 import 'package:e_polis/src/domain/repository/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../core/constants/constants.dart';
 import '../../core/utils/utils.dart';
 
@@ -122,6 +121,9 @@ class MainRepository implements IMainRepository {
       }
       if (e.response?.statusCode == 400) {
         return const Left(InputDataWrongFailure());
+      }
+      if (e.response?.statusCode == 500) {
+        return const Left(NoLicenceFoundFailure());
       }
       return Left(
         (e.response?.statusCode == 401)

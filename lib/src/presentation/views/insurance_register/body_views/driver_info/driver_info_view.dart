@@ -9,33 +9,40 @@ import 'views/limeted_driver.dart';
 import 'views/limetless_drivers.dart';
 
 class DriverInfoView extends StatelessWidget {
-  const DriverInfoView({Key? key}) : super(key: key);
+  DriverInfoView({Key? key}) : super(key: key);
+
+  final listOf = [
+    const LimitedDriverView(),
+    const LimitlessDriverView(),
+  ];
+
+  void clearList() {
+    listOf.clear();
+    listOf.add(const LimitedDriverView());
+    listOf.add(const LimitlessDriverView());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => inject<LimitedDriverTabBarCubit>()),
-        BlocProvider(create: (context) => inject<LimitlessDriverTabBarCubit>()),
-      ],
-      child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 78,
-          automaticallyImplyLeading: false,
-          title: const ContainerSwitch(),
-        ),
-        body: BlocBuilder<InsuranceBasicFilterCubit, InsuranceBasicFilterState>(
-          builder: (context, state) {
-            bool status = state.basicFilterRequest.isVip ?? false;
-            return IndexedStack(
-              index: status ? 1 : 0,
-              children: const [
-                LimitedDriverView(),
-                LimitlessDriverView(),
-              ],
-            );
-          },
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 78,
+        automaticallyImplyLeading: false,
+        title: const ContainerSwitch(),
+      ),
+      body: BlocBuilder<InsuranceBasicFilterCubit, InsuranceBasicFilterState>(
+        builder: (context, state) {
+          if (state.clearList) {
+            print('asaddsf');
+            clearList();
+            context.read<InsuranceBasicFilterCubit>().clearList(false);
+          }
+          bool status = state.basicFilterRequest.isVip ?? false;
+          return IndexedStack(
+            index: status ? 1 : 0,
+            children: listOf,
+          );
+        },
       ),
     );
   }

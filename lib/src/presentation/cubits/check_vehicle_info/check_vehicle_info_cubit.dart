@@ -25,16 +25,23 @@ class CheckVehicleInfoCubit extends Cubit<CheckVehicleInfoState> {
     required String techPasNum,
   }) async {
     emit(state.copyWith(status: StateStatus.loading));
-    var result = await _vehicleInfoUseCase.call(CheckVehicleInfoParam(
+    var result = await _vehicleInfoUseCase.call(
+      CheckVehicleInfoParam(
         VehicleInfoRequest(
             plateNumber: vehicleNum.replaceAll(' ', ''),
             technicalPassport:
-                TechnicalPassport(series: techPasSer, number: techPasNum))));
+                TechnicalPassport(series: techPasSer, number: techPasNum)),
+      ),
+    );
     result.fold(
       (failure) =>
           emit(state.copyWith(failure: failure, status: StateStatus.error)),
       (response) => emit(
-          state.copyWith(status: StateStatus.unknown, vehicleInfo: response)),
+        state.copyWith(
+            status: StateStatus.unknown,
+            vehicleInfo: response,
+            isPassportValidated: response.isPassportOK ?? false),
+      ),
     );
   }
 
@@ -58,6 +65,11 @@ class CheckVehicleInfoCubit extends Cubit<CheckVehicleInfoState> {
   void unValidatePassport() {
     emit(state.copyWith(
         status: StateStatus.unknown, isPassportValidated: false));
+  }
+
+  void validatePassportAutomatically() {
+    emit(
+        state.copyWith(status: StateStatus.unknown, isPassportValidated: true));
   }
 
   void onClearVehicleData() {

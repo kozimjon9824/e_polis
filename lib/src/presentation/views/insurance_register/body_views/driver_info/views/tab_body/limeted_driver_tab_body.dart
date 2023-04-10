@@ -75,7 +75,6 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                     number: numberController.text),
               ),
             );
-
             driverCubit.addDriverData(index: widget.index - 1, model: model);
           }
         },
@@ -102,8 +101,10 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
                   padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
-                  showChildren2: state.driverData != null,
-                  clearText: (state.driverData != null || widget.index != 1)
+                  showChildren2: (state.driverData != null || state.fillByHand),
+                  clearText: (state.driverData != null ||
+                          widget.index != 1 ||
+                          state.fillByHand)
                       ? AppLocalizations.of(context).delete
                       : null,
                   onClear: () {
@@ -114,7 +115,7 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                     licenseNumber.text = '';
                     licenseDate.text = '';
 
-                    if (state.driverData != null) {
+                    if (state.driverData != null || state.fillByHand) {
                       cubit.clearDriverData();
                       driverCubit.addDriverData(
                         index: widget.index - 1,
@@ -201,12 +202,12 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                 isLoading: state.status == StateStatus.loading,
                 onTap: () {
                   if (!formKey.currentState!.validate()) {
-                    return;
+                    return; // check for input
                   }
                   dateFocus.unfocus();
                   seriesFocus.unfocus();
                   numberFocus.unfocus();
-                  if (state.driverData == null) {
+                  if (state.driverData == null && !state.fillByHand) {
                     String date = dateConverter(
                       date: dateController.text,
                       inFormat: 'dd.MM.yyyy',
@@ -217,7 +218,9 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                       series: seriesController.text,
                       number: numberController.text,
                     );
+                    // this is first request for api after completed fields to check passport data has d-license;
                   } else if (driverCubit.isAllCompleted()) {
+                    // this bloc write drivers data to main cubit and change page to next
                     if (!formKey2.currentState!.validate()) {
                       return;
                     }
@@ -231,6 +234,26 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(2);
+                  } else if (state.fillByHand) {
+                    if (!formKey2.currentState!.validate()) {
+                      return;
+                    }
+                    var model = IndexedDriverModel(
+                      isSuccess: true,
+                      driverModel: DriverModel(
+                        birthDate: dateConverter(
+                            date: dateController.text,
+                            inFormat: 'dd.MM.yyyy',
+                            outFormat: 'yyyy-MM-dd'),
+                        passport: DriverPassport(
+                            series: seriesController.text,
+                            number: numberController.text),
+                      ),
+                    );
+                    driverCubit.addDriverData(
+                      index: widget.index - 1,
+                      model: model,
+                    );
                   } else {
                     showErrorMessage(context,
                         AppLocalizations.of(context).enterAllDriversInputs);

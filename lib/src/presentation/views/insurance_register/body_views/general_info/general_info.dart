@@ -6,15 +6,21 @@ import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/check_vehicle_info/check_vehicle_info_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../../../../generated/l10n.dart';
+import '../../../../../data/models/contract_information/request/contract_info_request.dart';
 import '../../../../components/custom_button.dart';
+import '../../../../cubits/contract_information/contract_information_cubit.dart';
+import '../../../../cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import '../../../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
+import '../../../insurcance_details/insurance_details.dart';
 import 'widgets/car_info.dart';
 import 'widgets/driver_info.dart';
 
 class GeneralInfoView extends StatefulWidget {
-  const GeneralInfoView({Key? key}) : super(key: key);
+  const GeneralInfoView({Key? key, required this.arguments}) : super(key: key);
+  final InsurancePageArguments arguments;
 
   @override
   State<GeneralInfoView> createState() => _GeneralInfoViewState();
@@ -68,15 +74,22 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                       series.text = '';
                       number.text = '';
                       cubit.onClearVehicleData();
+                      // for clear bottom fields
+                      phoneController.text = '';
+                      seriesID.text = '';
+                      numberID.text = '';
+                      cubit.unValidatePassport();
+                      context.read<InsuranceBasicFilterCubit>().clearList(true);
                     },
                     onRequest: () {
                       if (formKey.currentState!.validate()) {
                         if (state.vehicleInfo == null) {
                           cubit.checkVehicleData(
-                              vehicleNum:
-                                  vehicleController.text.replaceAll(' ', ''),
-                              techPasSer: series.text,
-                              techPasNum: number.text);
+                            vehicleNum:
+                                vehicleController.text.replaceAll(' ', ''),
+                            techPasSer: series.text,
+                            techPasNum: number.text,
+                          );
                         }
                       }
                     },
@@ -87,6 +100,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                   Form(
                     key: formKey2,
                     child: DriverInformationWidget(
+                      hidePassportFields:
+                          state.vehicleInfo?.isPassportOK ?? false,
                       seriesID: seriesID,
                       numberID: numberID,
                       phoneController: phoneController,
@@ -99,7 +114,12 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                         phoneController.text = '';
                         seriesID.text = '';
                         numberID.text = '';
-                        cubit.unValidatePassport();
+                        context
+                            .read<InsuranceBasicFilterCubit>()
+                            .clearList(true);
+                        if (!(state.vehicleInfo?.isPassportOK ?? false)) {
+                          cubit.unValidatePassport();
+                        }
                       },
                       onRequest: () {
                         if (!state.isPassportValidated &&
@@ -129,15 +149,17 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                   focusNodeTechNumber.unfocus();
                   if (state.vehicleInfo == null) {
                     cubit.checkVehicleData(
-                        vehicleNum: vehicleController.text.replaceAll(' ', ''),
-                        techPasSer: series.text,
-                        techPasNum: number.text);
+                      vehicleNum: vehicleController.text.replaceAll(' ', ''),
+                      techPasSer: series.text,
+                      techPasNum: number.text,
+                    );
                   } else if (!state.isPassportValidated) {
                     if (!formKey2.currentState!.validate()) {
                       return;
                     }
                     cubit.validatePassport(
                         series: seriesID.text, number: numberID.text);
+                    context.read<InsuranceBasicFilterCubit>().clearList(true);
                   } else {
                     if (!formKey2.currentState!.validate()) {
                       return;
@@ -150,9 +172,10 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     ApplicantModel applicant = ApplicantModel(
                       phone: "998$phone",
                       passport: ApplicantPassport(
-                          pinfl: owner?.pinfl,
-                          series: seriesID.text,
-                          number: numberID.text),
+                        pinfl: owner?.pinfl,
+                        series: seriesID.text.isEmpty ? null : seriesID.text,
+                        number: numberID.text.isEmpty ? null : numberID.text,
+                      ),
                     );
                     context.read<BookCubit>().onApplicantData(applicant);
                     context.read<BookCubit>().onVehicleNumberData(
@@ -167,6 +190,21 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(1);
+                    context.read<ContractInformationCubit>().loadContractInfo(
+                          productId: widget.arguments.id,
+                          request: ContractInfoRequest(
+                            region: state.vehicleInfo?.region ??
+                                widget.arguments.request.region,
+                            period: widget.arguments.request.period,
+                            isVip: widget.arguments.request.isVip,
+                            vehicleType: widget.arguments.request.vehicleType,
+                            startDate:
+                                DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                          ),
+                        );
+                    context.read<InsuranceBasicFilterCubit>().selectRegion(
+                        state.vehicleInfo?.region ??
+                            widget.arguments.request.region!);
                   }
                 },
               ),

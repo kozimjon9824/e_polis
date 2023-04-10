@@ -4,7 +4,10 @@ import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import '../../../data/models/contract_information/request/contract_info_request.dart';
+import '../../cubits/contract_information/contract_information_cubit.dart';
 import '../insurcance_details/insurance_details.dart';
 import 'body_views/contact_info/contract_info.dart';
 import 'body_views/driver_info/driver_info_view.dart';
@@ -21,7 +24,6 @@ class InsuranceRegistrationPage extends StatefulWidget {
 }
 
 class _InsuranceRegistrationPageState extends State<InsuranceRegistrationPage> {
-
   @override
   Widget build(BuildContext context) {
     final arguments =
@@ -33,6 +35,19 @@ class _InsuranceRegistrationPageState extends State<InsuranceRegistrationPage> {
           BlocProvider(
               create: (context) => inject<ManageInsuranceStackViewsCubit>()),
           BlocProvider(create: (context) => inject<BookCubit>()),
+          BlocProvider(
+            create: (context) => inject<ContractInformationCubit>()
+              ..loadContractInfo(
+                productId: arguments.id,
+                request: ContractInfoRequest(
+                  region: arguments.request.region,
+                  period: arguments.request.period,
+                  isVip: arguments.request.isVip,
+                  vehicleType: arguments.request.vehicleType,
+                  startDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                ),
+              ),
+          ),
         ],
         child: BlocBuilder<ManageInsuranceStackViewsCubit,
             ManageInsuranceStackViewsState>(
@@ -56,8 +71,8 @@ class _InsuranceRegistrationPageState extends State<InsuranceRegistrationPage> {
                 body: IndexedStack(
                   index: state.index,
                   children: [
-                    const GeneralInfoView(),
-                    const DriverInfoView(),
+                    GeneralInfoView(arguments: arguments),
+                    DriverInfoView(),
                     ContactInfoView(arguments: arguments),
                     PaymentView(arguments: arguments),
                   ],

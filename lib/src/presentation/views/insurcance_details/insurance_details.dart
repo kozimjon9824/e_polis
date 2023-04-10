@@ -54,12 +54,19 @@ class InsurancePageArguments {
   final String id;
   final BasicFilterRequest request;
 
-  InsurancePageArguments({required this.id, required this.request});
+  InsurancePageArguments({
+    required this.id,
+    required this.request,
+  });
 }
 
 class SuccessBody extends StatelessWidget {
-  const SuccessBody({Key? key, this.insuranceDetails, required this.argument})
-      : super(key: key);
+  const SuccessBody({
+    Key? key,
+    this.insuranceDetails,
+    required this.argument,
+  }) : super(key: key);
+
   final InsuranceDetails? insuranceDetails;
   final InsurancePageArguments argument;
 
@@ -78,7 +85,7 @@ class SuccessBody extends StatelessWidget {
                 imageUrl: insuranceDetails?.logo ?? '',
                 height: 44,
                 width: 200,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 errorWidget: (_, __, ___) => const SizedBox.shrink(),
                 placeholder: (_, __) => const CupertinoActivityIndicator(),
               ),

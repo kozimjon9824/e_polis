@@ -18,30 +18,77 @@ class LimitlessDriverView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LimitlessDriverTabBarCubit, LimitlessDriverTabBarState>(
-      builder: (context, state) {
-        var cubit = context.read<LimitlessDriverTabBarCubit>();
-        return Scaffold(
-          body: (state.drivers.isEmpty)
-              ? const SizedBox.shrink()
-              : NestedScrollView(
-                  headerSliverBuilder: (BuildContext context, bool _) {
-                    return [
-                      SliverPadding(
-                        padding: const EdgeInsets.all(16),
-                        sliver: SliverList(
-                          delegate: SliverChildListDelegate(
-                            [
-                              (state.drivers.length > 4)
-                                  ? SizedBox(
-                                      height: 46,
-                                      child: ListView(
-                                        scrollDirection: Axis.horizontal,
+    return BlocProvider(
+      create: (context) => inject<LimitlessDriverTabBarCubit>(),
+      child:
+          BlocBuilder<LimitlessDriverTabBarCubit, LimitlessDriverTabBarState>(
+        builder: (context, state) {
+          var cubit = context.read<LimitlessDriverTabBarCubit>();
+          return Scaffold(
+            body: (state.drivers.isEmpty)
+                ? const SizedBox.shrink()
+                : NestedScrollView(
+                    headerSliverBuilder: (BuildContext context, bool _) {
+                      return [
+                        SliverPadding(
+                          padding: const EdgeInsets.all(16),
+                          sliver: SliverList(
+                            delegate: SliverChildListDelegate(
+                              [
+                                (state.drivers.length > 4)
+                                    ? SizedBox(
+                                        height: 46,
+                                        child: ListView(
+                                          scrollDirection: Axis.horizontal,
+                                          children: [
+                                            for (int i = 1;
+                                                i <= state.drivers.length;
+                                                i++)
+                                              TextBtnWithWidth(
+                                                title: i.toString(),
+                                                onTap: () =>
+                                                    cubit.changeTab(i - 1),
+                                                bgColor: (i - 1 ==
+                                                            state
+                                                                .currentIndex &&
+                                                        (state.drivers[i - 1]
+                                                                    .isSuccess !=
+                                                                true ||
+                                                            !state
+                                                                .drivers[i - 1]
+                                                                .relativeSelected))
+                                                    ? AppColors.green300
+                                                    : (state.drivers[i - 1]
+                                                                    .isSuccess ==
+                                                                true &&
+                                                            state.drivers[i - 1]
+                                                                .relativeSelected)
+                                                        ? AppColors.green
+                                                        : null,
+                                                borderRadius:
+                                                    BorderRadius.horizontal(
+                                                  left: Radius.circular(
+                                                      i == 1 ? 8 : 0),
+                                                  right: Radius.circular(
+                                                      i == 10 ? 8 : 0),
+                                                ),
+                                              ),
+                                            Visibility(
+                                              visible:
+                                                  state.drivers.length != 10,
+                                              child: IconBtnWithWidth(
+                                                onTap: () => cubit.addTab(),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    : Row(
                                         children: [
                                           for (int i = 1;
                                               i <= state.drivers.length;
                                               i++)
-                                            TextBtnWithWidth(
+                                            TextBtn(
                                               title: i.toString(),
                                               onTap: () =>
                                                   cubit.changeTab(i - 1),
@@ -62,95 +109,56 @@ class LimitlessDriverView extends StatelessWidget {
                                                       : null,
                                               borderRadius:
                                                   BorderRadius.horizontal(
-                                                      left:
-                                                          Radius.circular(
-                                                              i == 1 ? 8 : 0),
-                                                      right: Radius.circular(
-                                                          i == 10 ? 8 : 0)),
+                                                left: Radius.circular(
+                                                    i == 1 ? 8 : 0),
+                                                right: Radius.circular(
+                                                    i == 6 ? 8 : 0),
+                                              ),
                                             ),
-                                          Visibility(
-                                            visible: state.drivers.length != 10,
-                                            child: IconBtnWithWidth(
-                                              onTap: () => cubit.addTab(),
-                                            ),
-                                          )
+                                          IconBtn(onTap: () => cubit.addTab())
                                         ],
                                       ),
-                                    )
-                                  : Row(
-                                      children: [
-                                        for (int i = 1;
-                                            i <= state.drivers.length;
-                                            i++)
-                                          TextBtn(
-                                            title: i.toString(),
-                                            onTap: () => cubit.changeTab(i - 1),
-                                            bgColor: (i - 1 ==
-                                                        state.currentIndex &&
-                                                    (state.drivers[i - 1]
-                                                                .isSuccess !=
-                                                            true ||
-                                                        !state.drivers[i - 1]
-                                                            .relativeSelected))
-                                                ? AppColors.green300
-                                                : (state.drivers[i - 1]
-                                                                .isSuccess ==
-                                                            true &&
-                                                        state.drivers[i - 1]
-                                                            .relativeSelected)
-                                                    ? AppColors.green
-                                                    : null,
-                                            borderRadius:
-                                                BorderRadius.horizontal(
-                                              left: Radius.circular(
-                                                  i == 1 ? 8 : 0),
-                                              right: Radius.circular(
-                                                  i == 6 ? 8 : 0),
-                                            ),
-                                          ),
-                                        IconBtn(onTap: () => cubit.addTab())
-                                      ],
-                                    ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ];
-                  },
-                  body: IndexedStack(
-                    index: state.currentIndex,
-                    children: [
-                      for (int i = 1; i <= state.drivers.length; i++)
-                        LimitlessDriverInputs(index: i)
-                    ],
+                      ];
+                    },
+                    body: IndexedStack(
+                      index: state.currentIndex,
+                      children: [
+                        for (int i = 1; i <= state.drivers.length; i++)
+                          LimitlessDriverInputs(index: i)
+                      ],
+                    ),
                   ),
-                ),
-          bottomNavigationBar: (state.drivers.isNotEmpty)
-              ? null
-              : SafeArea(
-                  minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CustomOutlineButton(
-                        text: AppLocalizations.of(context).addDriver,
-                        onTap: () => cubit.addTab(),
-                      ),
-                      const SizedBox(height: 16),
-                      CustomButton(
-                        text: AppLocalizations.of(context).next,
-                        onTap: () {
-                          context.read<BookCubit>().onDriverListData([]);
-                          context
-                              .read<ManageInsuranceStackViewsCubit>()
-                              .changeIndex(2);
-                        },
-                      ),
-                    ],
+            bottomNavigationBar: (state.drivers.isNotEmpty)
+                ? null
+                : SafeArea(
+                    minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CustomOutlineButton(
+                          text: AppLocalizations.of(context).addDriver,
+                          onTap: () => cubit.addTab(),
+                        ),
+                        const SizedBox(height: 16),
+                        CustomButton(
+                          text: AppLocalizations.of(context).next,
+                          onTap: () {
+                            context.read<BookCubit>().onDriverListData([]);
+                            context
+                                .read<ManageInsuranceStackViewsCubit>()
+                                .changeIndex(2);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

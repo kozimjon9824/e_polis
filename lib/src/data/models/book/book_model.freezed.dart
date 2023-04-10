@@ -975,7 +975,7 @@ class __$$_DriverModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_DriverModel implements _DriverModel {
-  const _$_DriverModel({this.birthDate, this.relative, this.passport});
+  const _$_DriverModel({this.birthDate, this.relative = 0, this.passport});
 
   factory _$_DriverModel.fromJson(Map<String, dynamic> json) =>
       _$$_DriverModelFromJson(json);
@@ -983,6 +983,7 @@ class _$_DriverModel implements _DriverModel {
   @override
   final String? birthDate;
   @override
+  @JsonKey()
   final int? relative;
   @override
   final DriverPassport? passport;

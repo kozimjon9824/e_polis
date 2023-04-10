@@ -20,6 +20,8 @@ VehicleInfoResponse _$VehicleInfoResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$VehicleInfoResponse {
+  bool? get isPassportOK => throw _privateConstructorUsedError;
+  int? get region => throw _privateConstructorUsedError;
   VehicleData? get vehicle => throw _privateConstructorUsedError;
   OwnerData? get owner => throw _privateConstructorUsedError;
 
@@ -35,7 +37,11 @@ abstract class $VehicleInfoResponseCopyWith<$Res> {
           VehicleInfoResponse value, $Res Function(VehicleInfoResponse) then) =
       _$VehicleInfoResponseCopyWithImpl<$Res, VehicleInfoResponse>;
   @useResult
-  $Res call({VehicleData? vehicle, OwnerData? owner});
+  $Res call(
+      {bool? isPassportOK,
+      int? region,
+      VehicleData? vehicle,
+      OwnerData? owner});
 
   $VehicleDataCopyWith<$Res>? get vehicle;
   $OwnerDataCopyWith<$Res>? get owner;
@@ -54,10 +60,20 @@ class _$VehicleInfoResponseCopyWithImpl<$Res, $Val extends VehicleInfoResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isPassportOK = freezed,
+    Object? region = freezed,
     Object? vehicle = freezed,
     Object? owner = freezed,
   }) {
     return _then(_value.copyWith(
+      isPassportOK: freezed == isPassportOK
+          ? _value.isPassportOK
+          : isPassportOK // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      region: freezed == region
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as int?,
       vehicle: freezed == vehicle
           ? _value.vehicle
           : vehicle // ignore: cast_nullable_to_non_nullable
@@ -102,7 +118,11 @@ abstract class _$$_VehicleInfoResponseCopyWith<$Res>
       __$$_VehicleInfoResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({VehicleData? vehicle, OwnerData? owner});
+  $Res call(
+      {bool? isPassportOK,
+      int? region,
+      VehicleData? vehicle,
+      OwnerData? owner});
 
   @override
   $VehicleDataCopyWith<$Res>? get vehicle;
@@ -121,10 +141,20 @@ class __$$_VehicleInfoResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isPassportOK = freezed,
+    Object? region = freezed,
     Object? vehicle = freezed,
     Object? owner = freezed,
   }) {
     return _then(_$_VehicleInfoResponse(
+      isPassportOK: freezed == isPassportOK
+          ? _value.isPassportOK
+          : isPassportOK // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      region: freezed == region
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as int?,
       vehicle: freezed == vehicle
           ? _value.vehicle
           : vehicle // ignore: cast_nullable_to_non_nullable
@@ -140,11 +170,16 @@ class __$$_VehicleInfoResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_VehicleInfoResponse implements _VehicleInfoResponse {
-  const _$_VehicleInfoResponse({this.vehicle, this.owner});
+  const _$_VehicleInfoResponse(
+      {this.isPassportOK, this.region, this.vehicle, this.owner});
 
   factory _$_VehicleInfoResponse.fromJson(Map<String, dynamic> json) =>
       _$$_VehicleInfoResponseFromJson(json);
 
+  @override
+  final bool? isPassportOK;
+  @override
+  final int? region;
   @override
   final VehicleData? vehicle;
   @override
@@ -152,7 +187,7 @@ class _$_VehicleInfoResponse implements _VehicleInfoResponse {
 
   @override
   String toString() {
-    return 'VehicleInfoResponse(vehicle: $vehicle, owner: $owner)';
+    return 'VehicleInfoResponse(isPassportOK: $isPassportOK, region: $region, vehicle: $vehicle, owner: $owner)';
   }
 
   @override
@@ -160,13 +195,17 @@ class _$_VehicleInfoResponse implements _VehicleInfoResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_VehicleInfoResponse &&
+            (identical(other.isPassportOK, isPassportOK) ||
+                other.isPassportOK == isPassportOK) &&
+            (identical(other.region, region) || other.region == region) &&
             (identical(other.vehicle, vehicle) || other.vehicle == vehicle) &&
             (identical(other.owner, owner) || other.owner == owner));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, vehicle, owner);
+  int get hashCode =>
+      Object.hash(runtimeType, isPassportOK, region, vehicle, owner);
 
   @JsonKey(ignore: true)
   @override
@@ -185,12 +224,18 @@ class _$_VehicleInfoResponse implements _VehicleInfoResponse {
 
 abstract class _VehicleInfoResponse implements VehicleInfoResponse {
   const factory _VehicleInfoResponse(
-      {final VehicleData? vehicle,
+      {final bool? isPassportOK,
+      final int? region,
+      final VehicleData? vehicle,
       final OwnerData? owner}) = _$_VehicleInfoResponse;
 
   factory _VehicleInfoResponse.fromJson(Map<String, dynamic> json) =
       _$_VehicleInfoResponse.fromJson;
 
+  @override
+  bool? get isPassportOK;
+  @override
+  int? get region;
   @override
   VehicleData? get vehicle;
   @override

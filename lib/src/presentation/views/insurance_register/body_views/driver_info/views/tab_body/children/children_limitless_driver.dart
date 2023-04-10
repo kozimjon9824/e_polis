@@ -137,18 +137,18 @@ class LimitlessDriverChild1Body extends StatelessWidget {
 }
 
 class LimitlessDriverChild2Body extends StatelessWidget {
-  const LimitlessDriverChild2Body(
-      {Key? key,
-      this.data,
-      required this.licenseSeries,
-      required this.licenseNumber,
-      required this.licenseDate,
-      this.dropDownValues = const [],
-      this.onChange,
-      this.licenseSeriesNode,
-      this.licenseNumberNode,
-      this.licenseDateNode})
-      : super(key: key);
+  const LimitlessDriverChild2Body({
+    Key? key,
+    this.data,
+    required this.licenseSeries,
+    required this.licenseNumber,
+    required this.licenseDate,
+    this.dropDownValues = const [],
+    this.onChange,
+    this.licenseSeriesNode,
+    this.licenseNumberNode,
+    this.licenseDateNode,
+  }) : super(key: key);
 
   final DriverPassportInputResponse? data;
   final TextEditingController licenseSeries;
@@ -169,6 +169,7 @@ class LimitlessDriverChild2Body extends StatelessWidget {
         const SizedBox(height: 8),
         DropDownButton<String>(
           label: AppLocalizations.of(context).relationShip,
+          errorText: AppLocalizations.of(context).select,
           items: dropDownValues
               .map(
                 (item) => DropdownMenuItem<String>(

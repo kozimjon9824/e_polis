@@ -85,6 +85,11 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
         status: StateStatus.unknown, basicFilterRequest: newData));
   }
 
+  void clearList(bool c) {
+    emit(state.copyWith(status: StateStatus.loading));
+    emit(state.copyWith(status: StateStatus.unknown, clearList: c));
+  }
+
   bool isValid() {
     var data = state.basicFilterRequest;
     if (data.period == null ||

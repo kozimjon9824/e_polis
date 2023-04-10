@@ -29,14 +29,20 @@ class AddDriverCubit extends Cubit<AddDriverState> {
       ),
     );
     result.fold(
-      (failure) =>
-          emit(state.copyWith(failure: failure, status: StateStatus.error)),
+      (failure) {
+        bool fillBayHand = failure is NoLicenceFoundFailure;
+        emit(state.copyWith(
+            failure: failure,
+            status: fillBayHand ? StateStatus.unknown : StateStatus.error,
+            fillByHand: fillBayHand));
+      },
       (response) => emit(
           state.copyWith(status: StateStatus.success, driverData: response)),
     );
   }
 
   void clearDriverData() {
-    emit(state.copyWith(status: StateStatus.unknown, driverData: null));
+    emit(state.copyWith(
+        status: StateStatus.unknown, driverData: null, fillByHand: false));
   }
 }

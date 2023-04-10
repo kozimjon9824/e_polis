@@ -9,17 +9,17 @@ import '../../../../../../../components/drop_down_button.dart';
 import '../../../../../widgets/widgets.dart';
 
 class Child1Body extends StatelessWidget {
-  const Child1Body(
-      {Key? key,
-      required this.seriesController,
-      required this.numberController,
-      required this.dateController,
-      this.seriesFocus,
-      this.numberFocus,
-      this.dateFocus,
-      required this.onRequest,
-      required this.readOnly})
-      : super(key: key);
+  const Child1Body({
+    Key? key,
+    required this.seriesController,
+    required this.numberController,
+    required this.dateController,
+    this.seriesFocus,
+    this.numberFocus,
+    this.dateFocus,
+    required this.onRequest,
+    required this.readOnly,
+  }) : super(key: key);
 
   final TextEditingController seriesController;
   final TextEditingController numberController;

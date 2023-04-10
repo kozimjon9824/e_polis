@@ -19,27 +19,31 @@ class ContainerSwitch extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8),
-            Text(AppLocalizations.of(context).numberOfDrivers,
-                style: AppTextStyles.styleW600S14Grey9),
+            Text(
+              AppLocalizations.of(context).numberOfDrivers,
+              style: AppTextStyles.styleW600S14Grey9,
+            ),
             const SizedBox(height: 7),
             Row(
               children: [
                 SwitchBtn(
-                    title: AppLocalizations.of(context).upTo5Human,
-                    onTap: () {
-                      cubit.selectDriversCount(false);
-                    },
-                    bgColor: status == false ? AppColors.green : null,
-                    borderRadius: const BorderRadius.horizontal(
-                        left: Radius.circular(8))),
+                  title: AppLocalizations.of(context).upTo5Human,
+                  onTap: () {
+                    cubit.selectDriversCount(false);
+                  },
+                  bgColor: status == false ? AppColors.green : null,
+                  borderRadius:
+                      const BorderRadius.horizontal(left: Radius.circular(8)),
+                ),
                 SwitchBtn(
-                    title: AppLocalizations.of(context).limitless,
-                    onTap: () {
-                      cubit.selectDriversCount(true);
-                    },
-                    bgColor: status == true ? AppColors.green : null,
-                    borderRadius: const BorderRadius.horizontal(
-                        right: Radius.circular(8))),
+                  title: AppLocalizations.of(context).limitless,
+                  onTap: () {
+                    cubit.selectDriversCount(true);
+                  },
+                  bgColor: status == true ? AppColors.green : null,
+                  borderRadius:
+                      const BorderRadius.horizontal(right: Radius.circular(8)),
+                ),
               ],
             ),
           ],

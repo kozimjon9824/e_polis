@@ -26,6 +26,8 @@ class InsuranceBasicFilterPage extends StatefulWidget {
 }
 
 class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
+  final formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -65,58 +67,68 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
                   if (dropDownState.status == StateStatus.loading) {
                     return const LoadingWidget();
                   }
-                  return ListView(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 16),
-                    children: [
-                      const Description(),
-                      const SizedBox(height: 22),
-                      DropDownButton<String>(
-                        label: AppLocalizations.of(context)
-                            .vehicleRegistrationRegion,
-                        hint: AppLocalizations.of(context).selectRegion,
-                        items: dropDownState.regionsList
-                            .map(
-                              (item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: AppTextStyles.styleW400S14Grey6,
+                  return Form(
+                    key: formKey,
+                    child: ListView(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 16),
+                      children: [
+                        const Description(),
+                        const SizedBox(height: 22),
+                        DropDownButton<String>(
+                          label: AppLocalizations.of(context)
+                              .vehicleRegistrationRegion,
+                          hint: AppLocalizations.of(context).selectRegion,
+                          errorText: state.basicFilterRequest.region == null
+                              ? AppLocalizations.of(context).selectRegion
+                              : null,
+                          items: dropDownState.regionsList
+                              .map(
+                                (item) => DropdownMenuItem<String>(
+                                  value: item,
+                                  child: Text(
+                                    item,
+                                    style: AppTextStyles.styleW400S14Grey6,
+                                  ),
                                 ),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (value) {
-                          int key = dropDownCubit.getRegionKey(value ?? '');
-                          cubit.selectRegion(key);
-                        },
-                      ),
-                      const SizedBox(height: 22),
-                      DropDownButton<String>(
-                        label: AppLocalizations.of(context).typeVehicle,
-                        hint: AppLocalizations.of(context).selectTypeVehicle,
-                        items: dropDownState.vehiclesList
-                            .map(
-                              (item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: AppTextStyles.styleW400S14Grey6,
+                              )
+                              .toList(),
+                          onChanged: (value) {
+                            int key = dropDownCubit.getRegionKey(value ?? '');
+                            cubit.selectRegion(key);
+                          },
+                        ),
+                        const SizedBox(height: 22),
+                        DropDownButton<String>(
+                          label: AppLocalizations.of(context).typeVehicle,
+                          hint: AppLocalizations.of(context).selectTypeVehicle,
+                          errorText: state.basicFilterRequest.vehicleType ==
+                                  null
+                              ? AppLocalizations.of(context).selectTypeVehicle
+                              : null,
+                          items: dropDownState.vehiclesList
+                              .map(
+                                (item) => DropdownMenuItem<String>(
+                                  value: item,
+                                  child: Text(
+                                    item,
+                                    style: AppTextStyles.styleW400S14Grey6,
+                                  ),
                                 ),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (value) {
-                          int key =
-                              dropDownCubit.getVehicleTypeKey(value ?? '');
-                          cubit.selectVehicleType(key);
-                        },
-                      ),
-                      const SizedBox(height: 22),
-                      const ContainerSwitch(),
-                      const SizedBox(height: 22),
-                      const ThreeButton()
-                    ],
+                              )
+                              .toList(),
+                          onChanged: (value) {
+                            int key =
+                                dropDownCubit.getVehicleTypeKey(value ?? '');
+                            cubit.selectVehicleType(key);
+                          },
+                        ),
+                        const SizedBox(height: 22),
+                        const ContainerSwitch(),
+                        const SizedBox(height: 22),
+                        const ThreeButton()
+                      ],
+                    ),
                   );
                 },
               ),
@@ -126,6 +138,9 @@ class _InsuranceBasicFilterPageState extends State<InsuranceBasicFilterPage> {
                 child: CustomButton(
                   text: AppLocalizations.of(context).priceCalculation,
                   onTap: () {
+                    if (!formKey.currentState!.validate()) {
+                      return;
+                    }
                     if (cubit.isValid()) {
                       Navigator.pushNamed(context, AppRoutes.basicFilterResult);
                     } else {

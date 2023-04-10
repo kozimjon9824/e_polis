@@ -11,20 +11,22 @@ import '../../../widgets/animated_container.dart';
 import '../../../widgets/widgets.dart';
 
 class DriverInformationWidget extends StatelessWidget {
-  const DriverInformationWidget(
-      {Key? key,
-      this.ownerData,
-      required this.seriesID,
-      required this.numberID,
-      required this.phoneController,
-      this.onClear,
-      this.isValidated,
-      this.focusNodeSeriesID,
-      this.focusNodeNumberID,
-      this.focusNodePhone,
-      required this.onRequest})
-      : super(key: key);
+  const DriverInformationWidget({
+    Key? key,
+    this.ownerData,
+    required this.seriesID,
+    required this.numberID,
+    required this.phoneController,
+    this.onClear,
+    this.isValidated,
+    this.focusNodeSeriesID,
+    this.focusNodeNumberID,
+    this.focusNodePhone,
+    required this.onRequest,
+    this.hidePassportFields = false,
+  }) : super(key: key);
   final OwnerData? ownerData;
+  final bool hidePassportFields;
   final TextEditingController seriesID;
   final TextEditingController numberID;
   final TextEditingController phoneController;
@@ -57,69 +59,73 @@ class DriverInformationWidget extends StatelessWidget {
             subtitle: ownerData?.pinfl ?? ''),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
         const SizedBox(height: 8),
-        Text(AppLocalizations.of(context).passport,
-            style: AppTextStyles.styleW600S14Grey9),
-        const SizedBox(height: 6),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-                flex: 1,
+        if (!hidePassportFields)
+          Text(
+            AppLocalizations.of(context).passport,
+            style: AppTextStyles.styleW600S14Grey9,
+          ),
+        if (!hidePassportFields) const SizedBox(height: 6),
+        if (!hidePassportFields)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                  flex: 1,
+                  child: CustomTextField(
+                    hintText: 'AA',
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                    textEditingController: seriesID,
+                    textCapitalization: TextCapitalization.characters,
+                    focusNode: focusNodeSeriesID,
+                    readOnly: isValidated,
+                    validator: (value) => value!.length < 2
+                        ? AppLocalizations.of(context).invalidLength
+                        : null,
+                    onFieldSubmitted: (_) => focusNodeNumberID!.requestFocus(),
+                    inputFormatters: [
+                      MaskTextInputFormatter(
+                        mask: '##',
+                        initialText: seriesID.text,
+                        filter: {"#": RegExp(r'[A-Z]')},
+                      )
+                    ],
+                    onChange: (value) {
+                      if (value.length == 2) {
+                        focusNodeNumberID!.requestFocus();
+                      }
+                    },
+                  )),
+              const SizedBox(width: 10),
+              Expanded(
+                flex: 2,
                 child: CustomTextField(
-                  hintText: 'AA',
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  textEditingController: seriesID,
-                  textCapitalization: TextCapitalization.characters,
-                  focusNode: focusNodeSeriesID,
+                  hintText: '1234567',
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.done,
+                  textEditingController: numberID,
+                  focusNode: focusNodeNumberID,
                   readOnly: isValidated,
-                  validator: (value) => value!.length < 2
+                  validator: (value) => value!.length < 6
                       ? AppLocalizations.of(context).invalidLength
                       : null,
-                  onFieldSubmitted: (_) => focusNodeNumberID!.requestFocus(),
                   inputFormatters: [
                     MaskTextInputFormatter(
-                      mask: '##',
-                      initialText: seriesID.text,
-                      filter: {"#": RegExp(r'[A-Z]')},
+                      mask: '#######',
+                      initialText: numberID.text,
+                      filter: {"#": RegExp(r'\d')},
                     )
                   ],
                   onChange: (value) {
-                    if (value.length == 2) {
-                      focusNodeNumberID!.requestFocus();
+                    if (value.length == 7) {
+                      focusNodeNumberID!.unfocus();
+                      onRequest();
                     }
                   },
-                )),
-            const SizedBox(width: 10),
-            Expanded(
-              flex: 2,
-              child: CustomTextField(
-                hintText: '1234567',
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.done,
-                textEditingController: numberID,
-                focusNode: focusNodeNumberID,
-                readOnly: isValidated,
-                validator: (value) => value!.length < 6
-                    ? AppLocalizations.of(context).invalidLength
-                    : null,
-                inputFormatters: [
-                  MaskTextInputFormatter(
-                    mask: '#######',
-                    initialText: numberID.text,
-                    filter: {"#": RegExp(r'\d')},
-                  )
-                ],
-                onChange: (value) {
-                  if (value.length == 7) {
-                    focusNodeNumberID!.unfocus();
-                    onRequest();
-                  }
-                },
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
       ],
     );
   }

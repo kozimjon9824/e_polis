@@ -6,8 +6,12 @@ part 'vehicle_info_response.g.dart';
 
 @freezed
 class VehicleInfoResponse with _$VehicleInfoResponse {
-  const factory VehicleInfoResponse({VehicleData? vehicle, OwnerData? owner}) =
-      _VehicleInfoResponse;
+  const factory VehicleInfoResponse({
+    bool? isPassportOK,
+    int? region,
+    VehicleData? vehicle,
+    OwnerData? owner,
+  }) = _VehicleInfoResponse;
 
   factory VehicleInfoResponse.fromJson(Map<String, dynamic> json) =>
       _$VehicleInfoResponseFromJson(json);
@@ -15,11 +19,12 @@ class VehicleInfoResponse with _$VehicleInfoResponse {
 
 @freezed
 class VehicleData with _$VehicleData {
-  const factory VehicleData(
-      {String? model,
-      String? address,
-      int? issueYear,
-      dynamic type}) = _VehicleData;
+  const factory VehicleData({
+    String? model,
+    String? address,
+    int? issueYear,
+    dynamic type,
+  }) = _VehicleData;
 
   factory VehicleData.fromJson(Map<String, dynamic> json) =>
       _$VehicleDataFromJson(json);
@@ -27,7 +32,10 @@ class VehicleData with _$VehicleData {
 
 @freezed
 class OwnerData with _$OwnerData {
-  const factory OwnerData({String? fullName, String? pinfl}) = _OwnerData;
+  const factory OwnerData({
+    String? fullName,
+    String? pinfl,
+  }) = _OwnerData;
 
   factory OwnerData.fromJson(Map<String, dynamic> json) =>
       _$OwnerDataFromJson(json);

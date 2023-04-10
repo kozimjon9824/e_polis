@@ -82,11 +82,11 @@ class NetworkClient {
         return handler.next(error);
       },
     ));
-    api.interceptors.add(LogInterceptor(
-        requestBody: true,
-        responseBody: true,
-        requestHeader: true,
-        request: true));
+    // api.interceptors.add(LogInterceptor(
+    //     requestBody: true,
+    //     responseBody: true,
+    //     requestHeader: true,
+    //     request: true));
     return api;
   }
 

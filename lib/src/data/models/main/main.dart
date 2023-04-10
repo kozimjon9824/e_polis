@@ -61,6 +61,8 @@ class ProductData with _$ProductData {
     String? name,
     Category? category,
     String? description,
+    bool? isDisabled,
+    Label? label,
   }) = _ProductData;
 
   factory ProductData.fromJson(Map<String, dynamic> json) =>
@@ -76,4 +78,14 @@ class Category with _$Category {
 
   factory Category.fromJson(Map<String, dynamic> json) =>
       _$CategoryFromJson(json);
+}
+
+@freezed
+class Label with _$Label {
+  const factory Label({
+    String? title,
+    String? color,
+  }) = _Label;
+
+  factory Label.fromJson(Map<String, dynamic> json) => _$LabelFromJson(json);
 }

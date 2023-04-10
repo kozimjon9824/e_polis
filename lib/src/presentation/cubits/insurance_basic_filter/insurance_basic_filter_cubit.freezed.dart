@@ -21,6 +21,7 @@ mixin _$InsuranceBasicFilterState {
   List<BasicFilterData>? get data => throw _privateConstructorUsedError;
   List<BasicFilterData>? get searchResult => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
+  bool get clearList => throw _privateConstructorUsedError;
   BasicFilterRequest get basicFilterRequest =>
       throw _privateConstructorUsedError;
 
@@ -41,6 +42,7 @@ abstract class $InsuranceBasicFilterStateCopyWith<$Res> {
       List<BasicFilterData>? data,
       List<BasicFilterData>? searchResult,
       String? id,
+      bool clearList,
       BasicFilterRequest basicFilterRequest});
 
   $BasicFilterRequestCopyWith<$Res> get basicFilterRequest;
@@ -65,6 +67,7 @@ class _$InsuranceBasicFilterStateCopyWithImpl<$Res,
     Object? data = freezed,
     Object? searchResult = freezed,
     Object? id = freezed,
+    Object? clearList = null,
     Object? basicFilterRequest = null,
   }) {
     return _then(_value.copyWith(
@@ -88,6 +91,10 @@ class _$InsuranceBasicFilterStateCopyWithImpl<$Res,
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      clearList: null == clearList
+          ? _value.clearList
+          : clearList // ignore: cast_nullable_to_non_nullable
+              as bool,
       basicFilterRequest: null == basicFilterRequest
           ? _value.basicFilterRequest
           : basicFilterRequest // ignore: cast_nullable_to_non_nullable
@@ -120,6 +127,7 @@ abstract class _$$_InsuranceBasicFilterStateCopyWith<$Res>
       List<BasicFilterData>? data,
       List<BasicFilterData>? searchResult,
       String? id,
+      bool clearList,
       BasicFilterRequest basicFilterRequest});
 
   @override
@@ -144,6 +152,7 @@ class __$$_InsuranceBasicFilterStateCopyWithImpl<$Res>
     Object? data = freezed,
     Object? searchResult = freezed,
     Object? id = freezed,
+    Object? clearList = null,
     Object? basicFilterRequest = null,
   }) {
     return _then(_$_InsuranceBasicFilterState(
@@ -167,6 +176,10 @@ class __$$_InsuranceBasicFilterStateCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      clearList: null == clearList
+          ? _value.clearList
+          : clearList // ignore: cast_nullable_to_non_nullable
+              as bool,
       basicFilterRequest: null == basicFilterRequest
           ? _value.basicFilterRequest
           : basicFilterRequest // ignore: cast_nullable_to_non_nullable
@@ -184,6 +197,7 @@ class _$_InsuranceBasicFilterState implements _InsuranceBasicFilterState {
       final List<BasicFilterData>? data,
       final List<BasicFilterData>? searchResult,
       this.id,
+      this.clearList = false,
       this.basicFilterRequest = const BasicFilterRequest()})
       : _data = data,
         _searchResult = searchResult;
@@ -218,11 +232,14 @@ class _$_InsuranceBasicFilterState implements _InsuranceBasicFilterState {
   final String? id;
   @override
   @JsonKey()
+  final bool clearList;
+  @override
+  @JsonKey()
   final BasicFilterRequest basicFilterRequest;
 
   @override
   String toString() {
-    return 'InsuranceBasicFilterState(status: $status, failure: $failure, data: $data, searchResult: $searchResult, id: $id, basicFilterRequest: $basicFilterRequest)';
+    return 'InsuranceBasicFilterState(status: $status, failure: $failure, data: $data, searchResult: $searchResult, id: $id, clearList: $clearList, basicFilterRequest: $basicFilterRequest)';
   }
 
   @override
@@ -236,6 +253,8 @@ class _$_InsuranceBasicFilterState implements _InsuranceBasicFilterState {
             const DeepCollectionEquality()
                 .equals(other._searchResult, _searchResult) &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.clearList, clearList) ||
+                other.clearList == clearList) &&
             (identical(other.basicFilterRequest, basicFilterRequest) ||
                 other.basicFilterRequest == basicFilterRequest));
   }
@@ -248,6 +267,7 @@ class _$_InsuranceBasicFilterState implements _InsuranceBasicFilterState {
       const DeepCollectionEquality().hash(_data),
       const DeepCollectionEquality().hash(_searchResult),
       id,
+      clearList,
       basicFilterRequest);
 
   @JsonKey(ignore: true)
@@ -265,6 +285,7 @@ abstract class _InsuranceBasicFilterState implements InsuranceBasicFilterState {
           final List<BasicFilterData>? data,
           final List<BasicFilterData>? searchResult,
           final String? id,
+          final bool clearList,
           final BasicFilterRequest basicFilterRequest}) =
       _$_InsuranceBasicFilterState;
 
@@ -278,6 +299,8 @@ abstract class _InsuranceBasicFilterState implements InsuranceBasicFilterState {
   List<BasicFilterData>? get searchResult;
   @override
   String? get id;
+  @override
+  bool get clearList;
   @override
   BasicFilterRequest get basicFilterRequest;
   @override

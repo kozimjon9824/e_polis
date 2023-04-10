@@ -101,18 +101,18 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
                   padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
-                  showChildren2: state.driverData != null,
+                  showChildren2: state.driverData != null || state.fillByHand,
                   clearText: state.driverData == null
                       ? AppLocalizations.of(context).delete
                       : AppLocalizations.of(context).clearData,
                   onClear: () {
-                    if (state.driverData != null) {
-                      seriesController.text = '';
-                      numberController.text = '';
-                      dateController.text = '';
-                      licenseSeries.text = '';
-                      licenseNumber.text = '';
-                      licenseDate.text = '';
+                    seriesController.text = '';
+                    numberController.text = '';
+                    dateController.text = '';
+                    licenseSeries.text = '';
+                    licenseNumber.text = '';
+                    licenseDate.text = '';
+                    if (state.driverData != null || state.fillByHand) {
                       cubit.clearDriverData();
                       driverCubit.addDriverData(
                         index: widget.index - 1,
@@ -183,8 +183,9 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                   ],
                 ),
                 Visibility(
-                    visible: driverCubit.isAllCompleted(),
-                    child: const SizedBox(height: 20)),
+                  visible: driverCubit.isAllCompleted(),
+                  child: const SizedBox(height: 20),
+                ),
                 Visibility(
                   visible: driverCubit.isAllCompleted(),
                   child: CustomOutlineButton(
@@ -207,7 +208,7 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                   dateFocus.unfocus();
                   seriesFocus.unfocus();
                   numberFocus.unfocus();
-                  if (state.driverData == null) {
+                  if (state.driverData == null && !state.fillByHand) {
                     String date = dateConverter(
                       date: dateController.text,
                       inFormat: 'dd.MM.yyyy',
@@ -231,6 +232,26 @@ class _LimitlessDriverInputsState extends State<LimitlessDriverInputs> {
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(2);
+                  } else if (state.fillByHand) {
+                    if (!formKey2.currentState!.validate()) {
+                      return;
+                    }
+                    var model = IndexedDriverModel(
+                      isSuccess: true,
+                      driverModel: DriverModel(
+                        birthDate: dateConverter(
+                            date: dateController.text,
+                            inFormat: 'dd.MM.yyyy',
+                            outFormat: 'yyyy-MM-dd'),
+                        passport: DriverPassport(
+                            series: seriesController.text,
+                            number: numberController.text),
+                      ),
+                    );
+                    driverCubit.addDriverData(
+                      index: widget.index - 1,
+                      model: model,
+                    );
                   } else {
                     showErrorMessage(context,
                         AppLocalizations.of(context).enterAllDriversInputs);

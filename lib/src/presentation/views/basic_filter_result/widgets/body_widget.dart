@@ -28,9 +28,10 @@ class InsurancesResults extends StatelessWidget {
           return const NothingFound();
         }
         return BodyWidget(
-            list: state.data ?? [],
-            request: state.basicFilterRequest,
-            text: AppLocalizations.of(context).weFoundSeveralOffers);
+          list: state.data ?? [],
+          request: state.basicFilterRequest,
+          text: AppLocalizations.of(context).weFoundSeveralOffers,
+        );
       },
     );
   }
@@ -50,10 +51,11 @@ class SearchResults extends StatelessWidget {
           return const NothingFound();
         }
         return BodyWidget(
-            list: state.searchResult ?? [],
-            request: state.basicFilterRequest,
-            text:
-                '${AppLocalizations.of(context).foundQuantity} ${state.searchResult?.length ?? 0}');
+          list: state.searchResult ?? [],
+          request: state.basicFilterRequest,
+          text:
+              '${AppLocalizations.of(context).foundQuantity} ${state.searchResult?.length ?? 0}',
+        );
       },
     );
   }
@@ -66,6 +68,7 @@ class BodyWidget extends StatelessWidget {
     required this.text,
     required this.request,
   }) : super(key: key);
+
   final List<BasicFilterData> list;
   final BasicFilterRequest request;
   final String text;
@@ -90,21 +93,32 @@ class BodyWidget extends StatelessWidget {
                   .inputProductId(list[index].id ?? '');
               if (context.read<AuthCubit>().state is UnAuthenticatedState) {
                 showDialog(
-                    context: context,
-                    builder: (_) => DialogBody(onSubmit: () {
-                          Navigator.pop(context);
-                          Navigator.pushNamed(context, AppRoutes.login);
-                        }));
+                  context: context,
+                  builder: (_) => DialogBody(onSubmit: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, AppRoutes.login);
+                  }),
+                );
               } else {
-                Navigator.pushNamed(context, AppRoutes.insuranceRegistration,
-                    arguments: InsurancePageArguments(
-                        id: list[index].id ?? '', request: request));
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.insuranceRegistration,
+                  arguments: InsurancePageArguments(
+                    id: list[index].id ?? '',
+                    request: request,
+                  ),
+                );
               }
             },
             onDetailTap: () {
-              Navigator.pushNamed(context, AppRoutes.insuranceDetails,
-                  arguments: InsurancePageArguments(
-                      id: list[index].id ?? '', request: request));
+              Navigator.pushNamed(
+                context,
+                AppRoutes.insuranceDetails,
+                arguments: InsurancePageArguments(
+                  id: list[index].id ?? '',
+                  request: request,
+                ),
+              );
             },
           ),
           separatorBuilder: (_, __) => const SizedBox(height: 16),

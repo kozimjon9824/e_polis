@@ -19,7 +19,7 @@ class CustomStepper extends StatelessWidget implements PreferredSizeWidget {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 14),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(

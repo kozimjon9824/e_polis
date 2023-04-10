@@ -59,7 +59,7 @@ class CalculationModel with _$CalculationModel {
 class DriverModel with _$DriverModel {
   const factory DriverModel({
     String? birthDate,
-    int? relative,
+    @Default(0) int? relative,
     DriverPassport? passport,
   }) = _DriverModel;
 

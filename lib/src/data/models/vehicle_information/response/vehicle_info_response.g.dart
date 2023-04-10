@@ -9,6 +9,8 @@ part of 'vehicle_info_response.dart';
 _$_VehicleInfoResponse _$$_VehicleInfoResponseFromJson(
         Map<String, dynamic> json) =>
     _$_VehicleInfoResponse(
+      isPassportOK: json['isPassportOK'] as bool?,
+      region: json['region'] as int?,
       vehicle: json['vehicle'] == null
           ? null
           : VehicleData.fromJson(json['vehicle'] as Map<String, dynamic>),
@@ -20,6 +22,8 @@ _$_VehicleInfoResponse _$$_VehicleInfoResponseFromJson(
 Map<String, dynamic> _$$_VehicleInfoResponseToJson(
         _$_VehicleInfoResponse instance) =>
     <String, dynamic>{
+      'isPassportOK': instance.isPassportOK,
+      'region': instance.region,
       'vehicle': instance.vehicle,
       'owner': instance.owner,
     };

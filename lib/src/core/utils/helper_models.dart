@@ -34,10 +34,12 @@ class IndexedDriverModel {
   DriverModel? driverModel;
   final bool? isSuccess;
   bool relativeSelected;
+  int relativeKey;
 
   IndexedDriverModel({
     this.driverModel,
     this.isSuccess,
     this.relativeSelected = false,
+    this.relativeKey = 0,
   });
 }

@@ -58,6 +58,14 @@ class InputDataWrongFailure extends Failure {
       AppLocalizations.of(context).enteredWrongData;
 }
 
+class NoLicenceFoundFailure extends Failure {
+  const NoLicenceFoundFailure() : super();
+
+  @override
+  String getLocalizedMessage(BuildContext context) =>
+      AppLocalizations.of(context).enteredWrongData;
+}
+
 class EmptyFieldFailure extends Failure {
   const EmptyFieldFailure() : super();
 
