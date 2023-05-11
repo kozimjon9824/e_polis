@@ -7,13 +7,14 @@ class SpecialMaskTextInputFormatter extends MaskTextInputFormatter {
 
   SpecialMaskTextInputFormatter({String? initialText})
       : super(
-            mask: maskA,
-            filter: {
-              "#": RegExp('[0-9]'),
-              "&": RegExp('[A-Za-z]'),
-              '£': RegExp(r'[\dA-Za-z]')
-            },
-            initialText: initialText);
+          mask: maskA,
+          filter: {
+            "#": RegExp('[0-9]'),
+            "&": RegExp('[A-Za-z]'),
+            '£': RegExp(r'[\dA-Za-z]')
+          },
+          initialText: initialText,
+        );
 
   @override
   TextEditingValue formatEditUpdate(

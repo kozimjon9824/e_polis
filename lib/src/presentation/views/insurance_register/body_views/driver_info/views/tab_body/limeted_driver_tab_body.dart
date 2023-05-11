@@ -67,12 +67,14 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
               isSuccess: true,
               driverModel: DriverModel(
                 birthDate: dateConverter(
-                    date: dateController.text,
-                    inFormat: 'dd.MM.yyyy',
-                    outFormat: 'yyyy-MM-dd'),
+                  date: dateController.text,
+                  inFormat: 'dd.MM.yyyy',
+                  outFormat: 'yyyy-MM-dd',
+                ),
                 passport: DriverPassport(
-                    series: seriesController.text,
-                    number: numberController.text),
+                  series: seriesController.text,
+                  number: numberController.text,
+                ),
               ),
             );
             driverCubit.addDriverData(index: widget.index - 1, model: model);

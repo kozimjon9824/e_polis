@@ -84,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "doYouWantExit": MessageLookupByLibrary.simpleMessage(
             "Вы хотите выйти из приложения"),
+        "download": MessageLookupByLibrary.simpleMessage("Download"),
         "downloadPayDoc":
             MessageLookupByLibrary.simpleMessage("Скачать квитацию"),
         "driver": MessageLookupByLibrary.simpleMessage("Водитель"),
@@ -104,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Вы ввели неверные данные!"),
         "exit": MessageLookupByLibrary.simpleMessage("Выйти"),
         "expend": MessageLookupByLibrary.simpleMessage("Продлить"),
+        "expired": MessageLookupByLibrary.simpleMessage("Expired"),
         "fio": MessageLookupByLibrary.simpleMessage("Ф.И.О"),
         "firstName": MessageLookupByLibrary.simpleMessage("Имя"),
         "foundQuantity": MessageLookupByLibrary.simpleMessage("Мы нашли"),

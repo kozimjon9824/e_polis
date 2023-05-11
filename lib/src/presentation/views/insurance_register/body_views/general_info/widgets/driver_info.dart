@@ -6,6 +6,7 @@ import '../../../../../../core/themes/app_colors.dart';
 import '../../../../../../core/themes/app_icons.dart';
 import '../../../../../../core/themes/app_text_styles.dart';
 import '../../../../../../data/models/vehicle_information/response/vehicle_info_response.dart';
+import '../../../../../components/custom_mask.dart';
 import '../../../../../components/custom_text_field.dart';
 import '../../../widgets/animated_container.dart';
 import '../../../widgets/widgets.dart';
@@ -25,6 +26,7 @@ class DriverInformationWidget extends StatelessWidget {
     required this.onRequest,
     this.hidePassportFields = false,
   }) : super(key: key);
+
   final OwnerData? ownerData;
   final bool hidePassportFields;
   final TextEditingController seriesID;
@@ -52,11 +54,13 @@ class DriverInformationWidget extends StatelessWidget {
       ],
       children: [
         TitleSubtitle(
-            title: AppLocalizations.of(context).fio,
-            subtitle: ownerData?.fullName ?? ''),
+          title: AppLocalizations.of(context).fio,
+          subtitle: ownerData?.fullName ?? '',
+        ),
         TitleSubtitle(
-            title: AppLocalizations.of(context).pinFl,
-            subtitle: ownerData?.pinfl ?? ''),
+          title: AppLocalizations.of(context).pinFl,
+          subtitle: ownerData?.pinfl ?? '',
+        ),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
         const SizedBox(height: 8),
         if (!hidePassportFields)
@@ -87,8 +91,9 @@ class DriverInformationWidget extends StatelessWidget {
                       MaskTextInputFormatter(
                         mask: '##',
                         initialText: seriesID.text,
-                        filter: {"#": RegExp(r'[A-Z]')},
-                      )
+                        filter: {"#": RegExp(r'[a-zA-Z]')},
+                      ),
+                      UpperCaseTextFormatter(),
                     ],
                     onChange: (value) {
                       if (value.length == 2) {

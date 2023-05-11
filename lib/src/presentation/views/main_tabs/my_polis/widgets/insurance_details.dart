@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_polis/generated/l10n.dart';
+import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/app_icons.dart';
 import '../../../../../core/themes/app_text_styles.dart';
@@ -35,18 +39,19 @@ class CurrentSingleProduct extends StatelessWidget {
                 ? AppColors.orange
                 : AppColors.red;
         return InsuranceDetails(
-            statusIcon: LinearPercentIndicator(
-              width: 180.0,
-              lineHeight: 8.0,
-              percent: percent,
-              barRadius: const Radius.circular(8),
-              backgroundColor: Colors.white,
-              padding: EdgeInsets.zero,
-              progressColor: color,
-            ),
-            product: data,
-            preDateText: AppLocalizations.of(context).toDate,
-            statusText: AppLocalizations.of(context).expend);
+          statusIcon: LinearPercentIndicator(
+            width: 180.0,
+            lineHeight: 8.0,
+            percent: percent,
+            barRadius: const Radius.circular(8),
+            backgroundColor: Colors.white,
+            padding: EdgeInsets.zero,
+            progressColor: color,
+          ),
+          product: data,
+          preDateText: AppLocalizations.of(context).toDate,
+          statusText: AppLocalizations.of(context).expend,
+        );
       },
       separatorBuilder: (_, __) => const SizedBox(height: 16),
     );
@@ -79,18 +84,19 @@ class ProgressSingleProduct extends StatelessWidget {
         //         ? AppColors.orange
         //         : AppColors.red;
         return InsuranceDetails(
-            statusIcon: LinearPercentIndicator(
-              width: 180.0,
-              lineHeight: 8.0,
-              percent: percent,
-              barRadius: const Radius.circular(8),
-              backgroundColor: Colors.white,
-              padding: EdgeInsets.zero,
-              progressColor: color,
-            ),
-            product: data,
-            preDateText: AppLocalizations.of(context).from,
-            statusText: AppLocalizations.of(context).update);
+          statusIcon: LinearPercentIndicator(
+            width: MediaQuery.of(context).size.width - 76,
+            lineHeight: 8.0,
+            percent: percent,
+            barRadius: const Radius.circular(8),
+            backgroundColor: Colors.white,
+            padding: EdgeInsets.zero,
+            progressColor: color,
+          ),
+          product: data,
+          preDateText: AppLocalizations.of(context).from,
+          statusText: AppLocalizations.of(context).update,
+        );
       },
       separatorBuilder: (_, __) => const SizedBox(height: 16),
     );
@@ -113,12 +119,51 @@ class ArchivedSingleProduct extends StatelessWidget {
     return ListView.separated(
       itemCount: productList.length,
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-      itemBuilder: (_, index) => InsuranceDetails(
-          product: productList[index],
-          statusIcon:
-              SvgPicture.asset(AppIcons.archiveLiner, width: 180, height: 8),
-          statusText: AppLocalizations.of(context).buyNow),
+      itemBuilder: (_, index) => ArchivedInsuranceDetails(
+        product: productList[index],
+        statusIcon:
+            SvgPicture.asset(AppIcons.archiveLiner, width: 180, height: 8),
+        statusText: AppLocalizations.of(context).buyNow,
+        preDateText: AppLocalizations.of(context).expired,
+      ),
       separatorBuilder: (_, __) => const SizedBox(height: 16),
+    );
+  }
+}
+
+class PDFViewerFromUrl extends StatelessWidget {
+  const PDFViewerFromUrl({Key? key, required this.url}) : super(key: key);
+
+  final String url;
+
+  Future<void> launchUrlStart({required String url}) async {
+    if (!await launchUrl(Uri.parse(url),
+        mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('PDF'),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                launchUrlStart(
+                  url:
+                      'https://polis.e-osgo.uz/site/export-to-pdf?id=11A11054-544D-4172-8435-1453C5610B6A',
+                );
+              },
+              icon: const Icon(Icons.download))
+        ],
+      ),
+      body: const PDF().fromUrl(
+        url,
+        placeholder: (double progress) => Center(child: Text('$progress %')),
+        errorWidget: (dynamic error) => Center(child: Text(error.toString())),
+      ),
     );
   }
 }
@@ -130,7 +175,98 @@ class InsuranceDetails extends StatelessWidget {
     required this.statusText,
     required this.statusIcon,
     this.preDateText = '',
+    this.toDateText = '',
   }) : super(key: key);
+
+  final ProductModel? product;
+  final String statusText;
+  final Widget statusIcon;
+  final String? preDateText;
+  final String? toDateText;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute<dynamic>(
+            builder: (_) => const PDFViewerFromUrl(
+              url:
+                  'https://polis.e-osgo.uz/site/export-to-pdf?id=11A11054-544D-4172-8435-1453C5610B6A',
+            ),
+          ),
+        );
+      },
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: AppColors.grey50,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CachedNetworkImage(
+                  imageUrl: product?.logo ?? '',
+                  height: 30,
+                  width: 130,
+                  errorWidget: (_, __, ___) => const SizedBox.shrink(),
+                ),
+                const Spacer(),
+                InkWell(
+                  onTap: () async {},
+                  child: Text(
+                    statusText,
+                    style: AppTextStyles.styleW600S14Primary,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 18),
+            Text(product?.name ?? '', style: AppTextStyles.styleW700S16Grey9),
+            const SizedBox(height: 5),
+            Text(
+              '№ ${product?.number ?? ''}',
+              style: AppTextStyles.styleW500S14Grey5,
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Text(
+                  '$preDateText ${dateConverter(date: product?.expireAt ?? '', inFormat: 'yyyy-MM-dd', outFormat: 'd MMM yyyy')}',
+                  style: AppTextStyles.styleW500S14Grey5
+                      .copyWith(color: AppColors.grey600),
+                ),
+                const Spacer(),
+                Text(
+                  '$toDateText ${dateConverter(date: product?.expireAt ?? '', inFormat: 'yyyy-MM-dd', outFormat: 'd MMM yyyy')}',
+                  style: AppTextStyles.styleW500S14Grey5
+                      .copyWith(color: AppColors.grey600),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            statusIcon,
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ArchivedInsuranceDetails extends StatelessWidget {
+  const ArchivedInsuranceDetails({
+    Key? key,
+    this.product,
+    required this.statusText,
+    required this.statusIcon,
+    this.preDateText = '',
+  }) : super(key: key);
+
   final ProductModel? product;
   final String statusText;
   final Widget statusIcon;
@@ -147,30 +283,39 @@ class InsuranceDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CachedNetworkImage(
-            imageUrl: product?.logo ?? '',
-            height: 30,
-            width: 130,
-            errorWidget: (_, __, ___) => const SizedBox.shrink(),
+          Row(
+            children: [
+              CachedNetworkImage(
+                imageUrl: product?.logo ?? '',
+                height: 30,
+                width: 130,
+                errorWidget: (_, __, ___) => const SizedBox.shrink(),
+              ),
+              const Spacer(),
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  statusText,
+                  style: AppTextStyles.styleW600S14Primary,
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 18),
           Text(product?.name ?? '', style: AppTextStyles.styleW700S16Grey9),
           const SizedBox(height: 5),
-          Text('№ ${product?.number ?? ''}',
-              style: AppTextStyles.styleW500S14Grey5),
+          Text(
+            '№ ${product?.number ?? ''}',
+            style: AppTextStyles.styleW500S14Grey5,
+          ),
           const SizedBox(height: 12),
           Text(
-              '$preDateText ${dateConverter(date: product?.expireAt ?? '', inFormat: 'yyyy-MM-dd', outFormat: 'd MMMM yyyy')}',
-              style: AppTextStyles.styleW500S14Grey5
-                  .copyWith(color: AppColors.grey600)),
+            '$preDateText: ${dateConverter(date: product?.expireAt ?? '', inFormat: 'yyyy-MM-dd', outFormat: 'd MMM yyyy')}',
+            style: AppTextStyles.styleW500S14Grey5
+                .copyWith(color: AppColors.grey600),
+          ),
           const SizedBox(height: 5),
-          Row(
-            children: [
-              statusIcon,
-              const Spacer(),
-              Text(statusText, style: AppTextStyles.styleW600S14Primary),
-            ],
-          )
+          statusIcon,
         ],
       ),
     );

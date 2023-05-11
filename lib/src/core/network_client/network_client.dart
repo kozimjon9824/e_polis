@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +21,12 @@ class NetworkClient {
 
   Future<Dio> init(SharedPreferences preferences) async {
     api = Dio();
+    (api.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
     // api.interceptors.add(alice.getDioInterceptor());
     api.interceptors.add(InterceptorsWrapper(
       /// onRequest
@@ -82,11 +89,11 @@ class NetworkClient {
         return handler.next(error);
       },
     ));
-    // api.interceptors.add(LogInterceptor(
-    //     requestBody: true,
-    //     responseBody: true,
-    //     requestHeader: true,
-    //     request: true));
+    api.interceptors.add(LogInterceptor(
+        requestBody: true,
+        responseBody: true,
+        requestHeader: true,
+        request: true));
     return api;
   }
 

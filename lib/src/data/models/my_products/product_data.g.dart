@@ -26,6 +26,9 @@ _$_ProductModel _$$_ProductModelFromJson(Map<String, dynamic> json) =>
       number: json['number'] as String?,
       expireAt: json['expireAt'] as String?,
       expirePercent: json['expirePercent'] as int?,
+      menuItems: (json['menuItems'] as List<dynamic>?)
+          ?.map((e) => ClickAction.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_ProductModelToJson(_$_ProductModel instance) =>
@@ -36,4 +39,19 @@ Map<String, dynamic> _$$_ProductModelToJson(_$_ProductModel instance) =>
       'number': instance.number,
       'expireAt': instance.expireAt,
       'expirePercent': instance.expirePercent,
+      'menuItems': instance.menuItems,
+    };
+
+_$_ClickAction _$$_ClickActionFromJson(Map<String, dynamic> json) =>
+    _$_ClickAction(
+      title: json['title'] as String?,
+      type: json['type'] as String?,
+      value: json['value'] as String?,
+    );
+
+Map<String, dynamic> _$$_ClickActionToJson(_$_ClickAction instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'type': instance.type,
+      'value': instance.value,
     };

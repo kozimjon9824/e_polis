@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Табриклаймиз, ТВЭФЖМС полиси учун тўлов муваффақиятли амалга оширилди"),
         "WrongCode":
             MessageLookupByLibrary.simpleMessage("Код нотўғри киритилди"),
-        "about": MessageLookupByLibrary.simpleMessage("О Нас"),
+        "about": MessageLookupByLibrary.simpleMessage("Биз ҳақимизда"),
         "aboutUs": MessageLookupByLibrary.simpleMessage(
             "Epolis платформаси суғурта полисларини ахборот технологияларини қўллаган ҳолда кундалик вазифаларни енгиллаштиришга интилмоқда. Epolis мобил иловаси орқали ТВЭФЖМС (ОСАГО) ҳамда саёхатчиларни суғурталаш учун суғурта мукофоти ва суғурта полиси учун тўловни бир зумда амалга ошириш мумкин.\nХеч қандай навбатларсиз суғурта полисини тез ва осон сотиб олинг! Epolis платформасида рўйхатдан ўтинг ва суғурта ҳизматларидан фойдаланинг."),
         "accountVerified":
@@ -85,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete": MessageLookupByLibrary.simpleMessage("Ўчириш"),
         "doYouWantExit":
             MessageLookupByLibrary.simpleMessage("Сиз иловадан чиқмоқчимисиз?"),
+        "download": MessageLookupByLibrary.simpleMessage("Кўчириш"),
         "downloadPayDoc":
             MessageLookupByLibrary.simpleMessage("Квитанцияни юклаб олиш"),
         "driver": MessageLookupByLibrary.simpleMessage("Хайдовчи"),
@@ -105,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Сиз нотўғри маълумот киритдингиз!"),
         "exit": MessageLookupByLibrary.simpleMessage("Чиқиш"),
         "expend": MessageLookupByLibrary.simpleMessage("Узайтириш"),
+        "expired": MessageLookupByLibrary.simpleMessage("Муддати тугаган"),
         "fio": MessageLookupByLibrary.simpleMessage("Ф.И.Ш"),
         "firstName": MessageLookupByLibrary.simpleMessage("Исм"),
         "foundQuantity": MessageLookupByLibrary.simpleMessage("Биз топдик"),
@@ -187,7 +189,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Жонли ва дўстона 24/7 техник ёрдам"),
         "oneYear": MessageLookupByLibrary.simpleMessage("1 йил"),
         "operating": MessageLookupByLibrary.simpleMessage("Амалда"),
-        "ourMission": MessageLookupByLibrary.simpleMessage("Наш миссия"),
+        "ourMission": MessageLookupByLibrary.simpleMessage("Бизнинг вазифамиз"),
         "passport": MessageLookupByLibrary.simpleMessage("Паспорт/ID карта"),
         "pay": MessageLookupByLibrary.simpleMessage("Тўлаш"),
         "payType": MessageLookupByLibrary.simpleMessage("Тўлов тури"),
@@ -202,7 +204,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinFl": MessageLookupByLibrary.simpleMessage("ЖШШИР"),
         "polisPrice": MessageLookupByLibrary.simpleMessage("Полис нархи"),
         "popularQuestions": MessageLookupByLibrary.simpleMessage(
-            "Тез-тез сщраладиган саволлар"),
+            "Тез-тез сўраладиган саволлар"),
         "priceCalculation": MessageLookupByLibrary.simpleMessage("Ҳисоблаш"),
         "profile": MessageLookupByLibrary.simpleMessage("Профиль"),
         "profileInfo":
@@ -223,7 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveChanges":
             MessageLookupByLibrary.simpleMessage("Ўзгаришларни сақлаш"),
         "search": MessageLookupByLibrary.simpleMessage("Излаш"),
-        "select": MessageLookupByLibrary.simpleMessage("Танлаш"),
+        "select": MessageLookupByLibrary.simpleMessage("Танланг"),
         "selectBasicFields": MessageLookupByLibrary.simpleMessage(
             "Асосий майдонларни белгиланг!"),
         "selectDate": MessageLookupByLibrary.simpleMessage("Санани танланг"),

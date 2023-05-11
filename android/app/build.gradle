@@ -48,7 +48,7 @@ android {
         multiDexEnabled true
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 6
+        versionCode 8
         versionName "1.0.0"
         archivesBaseName = "epolis-v${versionName}"
 

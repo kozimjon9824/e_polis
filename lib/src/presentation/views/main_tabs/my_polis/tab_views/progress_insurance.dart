@@ -15,18 +15,19 @@ class ProgressInsuranceView extends StatelessWidget {
     return BlocBuilder<ProgressProductsCubit, ProgressProductsState>(
       builder: (context, state) {
         return state.when(
-            initial: () => const UnAuthPolis(),
-            loading: () => const LoadingWidget(),
-            loaded: (data) => RefreshIndicator(
-                onRefresh: () async {
-                  await context.read<ProgressProductsCubit>().loadData(true);
-                },
-                child: ProgressSingleProduct(productList: data)),
-            error: (failure) => ErrorView(
-                errorText: failure.getLocalizedMessage(context),
-                onTap: () {
-                  context.read<ProgressProductsCubit>().loadData();
-                }));
+          initial: () => const UnAuthPolis(),
+          loading: () => const LoadingWidget(),
+          loaded: (data) => RefreshIndicator(
+              onRefresh: () async {
+                await context.read<ProgressProductsCubit>().loadData(true);
+              },
+              child: ProgressSingleProduct(productList: data)),
+          error: (failure) => ErrorView(
+              errorText: failure.getLocalizedMessage(context),
+              onTap: () {
+                context.read<ProgressProductsCubit>().loadData();
+              }),
+        );
       },
     );
   }

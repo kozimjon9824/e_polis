@@ -171,6 +171,7 @@ mixin _$ProductModel {
   String? get number => throw _privateConstructorUsedError;
   String? get expireAt => throw _privateConstructorUsedError;
   int? get expirePercent => throw _privateConstructorUsedError;
+  List<ClickAction>? get menuItems => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -190,7 +191,8 @@ abstract class $ProductModelCopyWith<$Res> {
       String? name,
       String? number,
       String? expireAt,
-      int? expirePercent});
+      int? expirePercent,
+      List<ClickAction>? menuItems});
 }
 
 /// @nodoc
@@ -212,6 +214,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? number = freezed,
     Object? expireAt = freezed,
     Object? expirePercent = freezed,
+    Object? menuItems = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -238,6 +241,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.expirePercent
           : expirePercent // ignore: cast_nullable_to_non_nullable
               as int?,
+      menuItems: freezed == menuItems
+          ? _value.menuItems
+          : menuItems // ignore: cast_nullable_to_non_nullable
+              as List<ClickAction>?,
     ) as $Val);
   }
 }
@@ -256,7 +263,8 @@ abstract class _$$_ProductModelCopyWith<$Res>
       String? name,
       String? number,
       String? expireAt,
-      int? expirePercent});
+      int? expirePercent,
+      List<ClickAction>? menuItems});
 }
 
 /// @nodoc
@@ -276,6 +284,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
     Object? number = freezed,
     Object? expireAt = freezed,
     Object? expirePercent = freezed,
+    Object? menuItems = freezed,
   }) {
     return _then(_$_ProductModel(
       id: freezed == id
@@ -302,6 +311,10 @@ class __$$_ProductModelCopyWithImpl<$Res>
           ? _value.expirePercent
           : expirePercent // ignore: cast_nullable_to_non_nullable
               as int?,
+      menuItems: freezed == menuItems
+          ? _value._menuItems
+          : menuItems // ignore: cast_nullable_to_non_nullable
+              as List<ClickAction>?,
     ));
   }
 }
@@ -315,7 +328,9 @@ class _$_ProductModel implements _ProductModel {
       this.name,
       this.number,
       this.expireAt,
-      this.expirePercent});
+      this.expirePercent,
+      final List<ClickAction>? menuItems})
+      : _menuItems = menuItems;
 
   factory _$_ProductModel.fromJson(Map<String, dynamic> json) =>
       _$$_ProductModelFromJson(json);
@@ -332,10 +347,19 @@ class _$_ProductModel implements _ProductModel {
   final String? expireAt;
   @override
   final int? expirePercent;
+  final List<ClickAction>? _menuItems;
+  @override
+  List<ClickAction>? get menuItems {
+    final value = _menuItems;
+    if (value == null) return null;
+    if (_menuItems is EqualUnmodifiableListView) return _menuItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, logo: $logo, name: $name, number: $number, expireAt: $expireAt, expirePercent: $expirePercent)';
+    return 'ProductModel(id: $id, logo: $logo, name: $name, number: $number, expireAt: $expireAt, expirePercent: $expirePercent, menuItems: $menuItems)';
   }
 
   @override
@@ -350,13 +374,15 @@ class _$_ProductModel implements _ProductModel {
             (identical(other.expireAt, expireAt) ||
                 other.expireAt == expireAt) &&
             (identical(other.expirePercent, expirePercent) ||
-                other.expirePercent == expirePercent));
+                other.expirePercent == expirePercent) &&
+            const DeepCollectionEquality()
+                .equals(other._menuItems, _menuItems));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, logo, name, number, expireAt, expirePercent);
+  int get hashCode => Object.hash(runtimeType, id, logo, name, number, expireAt,
+      expirePercent, const DeepCollectionEquality().hash(_menuItems));
 
   @JsonKey(ignore: true)
   @override
@@ -379,7 +405,8 @@ abstract class _ProductModel implements ProductModel {
       final String? name,
       final String? number,
       final String? expireAt,
-      final int? expirePercent}) = _$_ProductModel;
+      final int? expirePercent,
+      final List<ClickAction>? menuItems}) = _$_ProductModel;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$_ProductModel.fromJson;
@@ -397,7 +424,180 @@ abstract class _ProductModel implements ProductModel {
   @override
   int? get expirePercent;
   @override
+  List<ClickAction>? get menuItems;
+  @override
   @JsonKey(ignore: true)
   _$$_ProductModelCopyWith<_$_ProductModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ClickAction _$ClickActionFromJson(Map<String, dynamic> json) {
+  return _ClickAction.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ClickAction {
+  String? get title => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
+  String? get value => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ClickActionCopyWith<ClickAction> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClickActionCopyWith<$Res> {
+  factory $ClickActionCopyWith(
+          ClickAction value, $Res Function(ClickAction) then) =
+      _$ClickActionCopyWithImpl<$Res, ClickAction>;
+  @useResult
+  $Res call({String? title, String? type, String? value});
+}
+
+/// @nodoc
+class _$ClickActionCopyWithImpl<$Res, $Val extends ClickAction>
+    implements $ClickActionCopyWith<$Res> {
+  _$ClickActionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = freezed,
+    Object? type = freezed,
+    Object? value = freezed,
+  }) {
+    return _then(_value.copyWith(
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ClickActionCopyWith<$Res>
+    implements $ClickActionCopyWith<$Res> {
+  factory _$$_ClickActionCopyWith(
+          _$_ClickAction value, $Res Function(_$_ClickAction) then) =
+      __$$_ClickActionCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? title, String? type, String? value});
+}
+
+/// @nodoc
+class __$$_ClickActionCopyWithImpl<$Res>
+    extends _$ClickActionCopyWithImpl<$Res, _$_ClickAction>
+    implements _$$_ClickActionCopyWith<$Res> {
+  __$$_ClickActionCopyWithImpl(
+      _$_ClickAction _value, $Res Function(_$_ClickAction) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = freezed,
+    Object? type = freezed,
+    Object? value = freezed,
+  }) {
+    return _then(_$_ClickAction(
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ClickAction implements _ClickAction {
+  const _$_ClickAction({this.title, this.type, this.value});
+
+  factory _$_ClickAction.fromJson(Map<String, dynamic> json) =>
+      _$$_ClickActionFromJson(json);
+
+  @override
+  final String? title;
+  @override
+  final String? type;
+  @override
+  final String? value;
+
+  @override
+  String toString() {
+    return 'ClickAction(title: $title, type: $type, value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ClickAction &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, title, type, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ClickActionCopyWith<_$_ClickAction> get copyWith =>
+      __$$_ClickActionCopyWithImpl<_$_ClickAction>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ClickActionToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ClickAction implements ClickAction {
+  const factory _ClickAction(
+      {final String? title,
+      final String? type,
+      final String? value}) = _$_ClickAction;
+
+  factory _ClickAction.fromJson(Map<String, dynamic> json) =
+      _$_ClickAction.fromJson;
+
+  @override
+  String? get title;
+  @override
+  String? get type;
+  @override
+  String? get value;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ClickActionCopyWith<_$_ClickAction> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -17,15 +17,17 @@ class ArchivedInsuranceView extends StatelessWidget {
           initial: () => const UnAuthPolis(),
           loading: () => const LoadingWidget(),
           loaded: (data) => RefreshIndicator(
-              onRefresh: () async {
-                await context.read<ArchivedProductsCubit>().loadData(true);
-              },
-              child: ArchivedSingleProduct(productList: data)),
+            onRefresh: () async {
+              await context.read<ArchivedProductsCubit>().loadData(true);
+            },
+            child: ArchivedSingleProduct(productList: data),
+          ),
           error: (failure) => ErrorView(
-              errorText: failure.getLocalizedMessage(context),
-              onTap: () {
-                context.read<ArchivedProductsCubit>().loadData();
-              }),
+            errorText: failure.getLocalizedMessage(context),
+            onTap: () {
+              context.read<ArchivedProductsCubit>().loadData();
+            },
+          ),
         );
       },
     );

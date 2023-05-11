@@ -1,3 +1,4 @@
+import 'package:e_polis/src/core/constants/constants.dart';
 import 'package:e_polis/src/domain/usecases/auth/logout.dart';
 import 'package:e_polis/src/domain/usecases/setting/get_app_lang.dart';
 import 'package:equatable/equatable.dart';
@@ -18,20 +19,28 @@ class AuthCubit extends Cubit<AuthState> {
 
   void checkUserToAuth() async {
     var result = await _checkUserToAuthUseCase.call(NoParams());
-    result.fold((failure) => emit(UnAuthenticatedState('')), (response) async {
-      var lang = await getAppLang();
-      emit(response ? AuthenticatedState() : UnAuthenticatedState(lang));
-    });
+    result.fold(
+      (failure) => emit(UnAuthenticatedState('')),
+      (response) async {
+        var lang = await getAppLang();
+        emit(response ? AuthenticatedState() : UnAuthenticatedState(lang));
+      },
+    );
   }
 
   Future<String> getAppLang() async {
     var result = await _appLangUseCase.call(NoParams());
-    return result.fold((err) => '', (lang) => lang);
+    return result.fold(
+      (err) => '',
+      (lang) => lang,
+    );
   }
 
   Future<void> logout() async {
     var result = await _logoutUseCase.call(NoParams());
-    result.fold((failure) => emit(UnAuthenticatedState('uz')),
-        (response) => emit(UnAuthenticatedState('uz')));
+    result.fold(
+      (failure) => emit(UnAuthenticatedState(RU)),
+      (response) => emit(UnAuthenticatedState(RU)),
+    );
   }
 }

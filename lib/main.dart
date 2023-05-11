@@ -21,6 +21,7 @@ import 'src/presentation/cubits/my_product_tab_controller/product_tab_manager_cu
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await initDi();
   runApp(const MyApp());
 }

@@ -34,9 +34,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
   final formKey = GlobalKey<FormState>();
 
   final phoneMask = MaskTextInputFormatter(
-      mask: '(##) ### ## ##',
-      filter: {"#": RegExp(r'\d')},
-      type: MaskAutoCompletionType.eager);
+    mask: '(##) ### ## ##',
+    filter: {"#": RegExp(r'\d')},
+    type: MaskAutoCompletionType.eager,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -61,19 +62,23 @@ class _ProfileInfoState extends State<ProfileInfo> {
     );
   }
 
-  Widget profileBodyWidget(
-      {File? file, UserProfileResponse? data, required BuildContext context}) {
+  Widget profileBodyWidget({
+    File? file,
+    UserProfileResponse? data,
+    required BuildContext context,
+  }) {
     return Form(
       key: formKey,
       child: ListView(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         children: [
           ProfileImage(
-              file: file,
-              image: data?.photo,
-              onTap: () {
-                context.read<UpdateProfileCubit>().selectFile(data);
-              }),
+            file: file,
+            image: data?.photo,
+            onTap: () {
+              context.read<UpdateProfileCubit>().selectFile(data);
+            },
+          ),
           const SizedBox(height: 40),
           CustomTextField(
             label: AppLocalizations.of(context).firstName,
@@ -129,7 +134,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
       builder: (context, state) {
         var data = state.user;
         return SafeArea(
-          minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          minimum: EdgeInsets.fromLTRB(
+              20, 16, 20, MediaQuery.of(context).viewInsets.bottom + 20),
           child: CustomButton(
             text: AppLocalizations.of(context).saveChanges,
             isLoading: state.status == StateStatus.loading,
@@ -172,10 +178,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
       focusNode: phoneFocus,
       inputFormatters: [
         MaskTextInputFormatter(
-            mask: '(##) ### ## ##',
-            initialText: phoneMask.unmaskText(phoneController.text),
-            filter: {"#": RegExp(r'\d')},
-            type: MaskAutoCompletionType.eager)
+          mask: '(##) ### ## ##',
+          initialText: phoneMask.unmaskText(phoneController.text),
+          filter: {"#": RegExp(r'\d')},
+          type: MaskAutoCompletionType.eager,
+        )
       ],
       onChange: (value) {
         if (value.length == 14) {

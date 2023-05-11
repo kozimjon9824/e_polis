@@ -12,26 +12,39 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).about)),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        padding: const EdgeInsets.fromLTRB(16, 32, 16, 24),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12), color: AppColors.grey50),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-                child: SvgPicture.asset(AppIcons.appLogo,
-                    color: AppColors.primaryColor)),
-            const SizedBox(height: 20),
-            Text(AppLocalizations.of(context).ourMission,
-                style: AppTextStyles.styleW700S18Grey9),
-            const SizedBox(height: 10),
-            Text(AppLocalizations.of(context).aboutUs,
-                style: AppTextStyles.styleW500S14Grey7.copyWith(height: 1.6)),
-          ],
-        ),
+      body: ListView(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.fromLTRB(16, 32, 16, 24),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: AppColors.grey50,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: SvgPicture.asset(
+                    AppIcons.appLogo,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  AppLocalizations.of(context).ourMission,
+                  style: AppTextStyles.styleW700S18Grey9,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  AppLocalizations.of(context).aboutUs,
+                  style: AppTextStyles.styleW500S14Grey7.copyWith(height: 1.6),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

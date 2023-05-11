@@ -106,8 +106,9 @@ class CarInformationWidget extends StatelessWidget {
                   MaskTextInputFormatter(
                     mask: '###',
                     initialText: seriesController.text,
-                    filter: {"#": RegExp(r'[A-Z]')},
-                  )
+                    filter: {"#": RegExp(r'[A-Za-z]')},
+                  ),
+                  UpperCaseTextFormatter(),
                 ],
                 validator: (value) => value!.length < 3
                     ? AppLocalizations.of(context).invalidLength

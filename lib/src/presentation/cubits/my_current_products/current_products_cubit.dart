@@ -21,8 +21,8 @@ class CurrentProductsCubit extends Cubit<CurrentProductsState> {
     }
     var result = await _useCase.call(NoParams());
     result.fold(
-        (failure) => emit(CurrentProductsState.error(failure)),
-        (data) =>
-            emit(CurrentProductsState.loaded(productList: data.data ?? [])));
+      (failure) => emit(CurrentProductsState.error(failure)),
+      (data) => emit(CurrentProductsState.loaded(productList: data.data ?? [])),
+    );
   }
 }

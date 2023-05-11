@@ -169,6 +169,8 @@
   "totalAmount": "Общая сумма",
   "downloadPayDoc": "Скачать квитанцию",
   "enterAllDriversInputs": "Заполнить все входные данные водителей",
-  "paymentInstruction": "Вам выставлен счет на оплату"
+  "paymentInstruction": "Вам выставлен счет на оплату",
+  "download": "Скачать",
+  "expired": "Срок истек"
 
 }

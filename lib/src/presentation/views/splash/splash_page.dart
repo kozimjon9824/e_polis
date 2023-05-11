@@ -34,13 +34,24 @@ class _SplashPageState extends State<SplashPage> {
           if (language == '') {
             Navigator.pushReplacementNamed(context, AppRoutes.language);
           } else {
-            Navigator.pushReplacementNamed(context, AppRoutes.onBoarding);
+            Navigator.pushReplacementNamed(context, AppRoutes.main);
           }
         }
       },
       child: Scaffold(
         backgroundColor: AppColors.primaryColor,
-        body: Center(child: SvgPicture.asset(AppIcons.appLogo)),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(children: const [SizedBox(height: 40)]),
+            SvgPicture.asset(AppIcons.appLogo),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: SvgPicture.asset(AppIcons.impex),
+            ),
+          ],
+        ),
       ),
     );
   }

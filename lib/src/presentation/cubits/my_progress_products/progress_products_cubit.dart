@@ -21,8 +21,9 @@ class ProgressProductsCubit extends Cubit<ProgressProductsState> {
     }
     var result = await _useCase.call(NoParams());
     result.fold(
-        (failure) => emit(ProgressProductsState.error(failure)),
-        (data) =>
-            emit(ProgressProductsState.loaded(productList: data.data ?? [])));
+      (failure) => emit(ProgressProductsState.error(failure)),
+      (data) =>
+          emit(ProgressProductsState.loaded(productList: data.data ?? [])),
+    );
   }
 }

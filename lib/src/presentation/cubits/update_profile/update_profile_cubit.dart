@@ -27,45 +27,53 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     emit(state.copyWith(status: StateStatus.loading));
     var result = await _getUserProfileUseCase.call(NoParams());
     result.fold(
-        (failure) =>
-            emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) => emit(state.copyWith(
-            status: StateStatus.unknown,
-            user: response,
-            isPhoneVerify: false)));
+      (failure) =>
+          emit(state.copyWith(failure: failure, status: StateStatus.error)),
+      (response) => emit(state.copyWith(
+          status: StateStatus.unknown, user: response, isPhoneVerify: false)),
+    );
   }
 
   void updateProfile(String fName, String lName) async {
     var id = await uploadPhoto();
     if (id == '') return;
     emit(state.copyWith(status: StateStatus.loading));
-    var request =
-        ProfileUpdateRequest(firstName: fName, lastName: lName, photo: id);
+    var request = ProfileUpdateRequest(
+      firstName: fName.trim(),
+      lastName: lName.trim(),
+      photo: id,
+    );
     var result = await _profileUseCase.call(ProfileParams(request));
     result.fold(
-        (failure) =>
-            emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) => emit(
-            state.copyWith(status: StateStatus.success, isPhoneVerify: false)));
+      (failure) =>
+          emit(state.copyWith(failure: failure, status: StateStatus.error)),
+      (response) => emit(
+          state.copyWith(status: StateStatus.success, isPhoneVerify: false)),
+    );
   }
 
   void updateProfileAndSendOptCode(
-      String fName, String lName, String phone) async {
+    String fName,
+    String lName,
+    String phone,
+  ) async {
     var id = await uploadPhoto();
     if (id == '') return;
     emit(state.copyWith(status: StateStatus.loading));
     var request = ProfileUpdateRequest(
-        firstName: fName,
-        lastName: lName,
-        photo: id,
-        phone: '998$phone',
-        otpCode: null);
+      firstName: fName,
+      lastName: lName,
+      photo: id,
+      phone: '998$phone',
+      otpCode: null,
+    );
     var result = await _profileUseCase.call(ProfileParams(request));
     result.fold(
-        (failure) =>
-            emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) => emit(
-            state.copyWith(status: StateStatus.success, isPhoneVerify: true)));
+      (failure) =>
+          emit(state.copyWith(failure: failure, status: StateStatus.error)),
+      (response) => emit(
+          state.copyWith(status: StateStatus.success, isPhoneVerify: true)),
+    );
   }
 
   Future<String?> uploadPhoto() async {

@@ -4,6 +4,7 @@ import '../../../../../../../../../generated/l10n.dart';
 import '../../../../../../../../core/themes/app_colors.dart';
 import '../../../../../../../../core/themes/app_text_styles.dart';
 import '../../../../../../../../data/models/input_driver/response/driver_passport_response.dart';
+import '../../../../../../../components/custom_mask.dart';
 import '../../../../../../../components/custom_text_field.dart';
 import '../../../../../../../components/drop_down_button.dart';
 import '../../../../../widgets/widgets.dart';
@@ -61,8 +62,9 @@ class Child1Body extends StatelessWidget {
                   MaskTextInputFormatter(
                     mask: '##',
                     initialText: seriesController.text,
-                    filter: {"#": RegExp(r'[A-Z]')},
-                  )
+                    filter: {"#": RegExp(r'[a-zA-Z]')},
+                  ),
+                  UpperCaseTextFormatter(),
                 ],
                 onChange: (value) {
                   if (value.length == 2) {
@@ -211,8 +213,9 @@ class Child2Body extends StatelessWidget {
                   MaskTextInputFormatter(
                     mask: '##',
                     initialText: licenseSeries.text,
-                    filter: {"#": RegExp(r'[A-Z]')},
-                  )
+                    filter: {"#": RegExp(r'[a-zA-Z]')},
+                  ),
+                  UpperCaseTextFormatter(),
                 ],
                 onChange: (value) {
                   if (value.length == 2) {

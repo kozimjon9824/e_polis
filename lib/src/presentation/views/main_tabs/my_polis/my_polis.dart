@@ -93,11 +93,11 @@ class _MyPolisState extends State<MyPolis> with TickerProviderStateMixin {
               Navigator.pushNamed(context, AppRoutes.addPolis);
             },
           ),
-          const SizedBox(height: 16),
-          CustomButton(
-            text: AppLocalizations.of(context).buyPolis,
-            onTap: () {},
-          ),
+          // const SizedBox(height: 16),
+          // CustomButton(
+          //   text: AppLocalizations.of(context).buyPolis,
+          //   onTap: () {},
+          // ),
         ],
       ),
     );

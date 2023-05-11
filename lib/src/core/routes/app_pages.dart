@@ -29,8 +29,9 @@ class RouteGenerateKit {
     switch (settings.name) {
       case AppRoutes.splash:
         return MaterialPageRoute(
-            builder: (context) => const SplashPage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const SplashPage(),
+          settings: RouteSettings(arguments: args),
+        );
       case AppRoutes.language:
         return simpleRoute(const LanguagePage());
       case AppRoutes.changeLanguage:
@@ -39,16 +40,19 @@ class RouteGenerateKit {
         return simpleRoute(const LoginPage());
       case AppRoutes.verify:
         return MaterialPageRoute(
-            builder: (context) => const VerifyPage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const VerifyPage(),
+          settings: RouteSettings(arguments: args),
+        );
       case AppRoutes.onBoarding:
         return MaterialPageRoute(
-            builder: (context) => const OnBoardingPage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const OnBoardingPage(),
+          settings: RouteSettings(arguments: args),
+        );
       case AppRoutes.main:
         return MaterialPageRoute(
-            builder: (context) => const MainPage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const MainPage(),
+          settings: RouteSettings(arguments: args),
+        );
       case AppRoutes.profileInfo:
         return simpleRoute(const ProfileInfo());
       case AppRoutes.notificationSetting:
@@ -59,42 +63,50 @@ class RouteGenerateKit {
         return simpleRoute(const AddPolisPage());
       case AppRoutes.insuranceBasicFilter:
         return MaterialPageRoute(
-            builder: (context) => const InsuranceBasicFilterPage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const InsuranceBasicFilterPage(),
+          settings: RouteSettings(arguments: args),
+        );
       case AppRoutes.basicFilterResult:
         return MaterialPageRoute(
-            builder: (context) => const BasicFilterResultPage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const BasicFilterResultPage(),
+          settings: RouteSettings(arguments: args),
+        );
       case AppRoutes.insuranceDetails:
         return MaterialPageRoute(
-            builder: (context) => const InsuranceDetailsPage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const InsuranceDetailsPage(),
+          settings: RouteSettings(arguments: args),
+        );
       case AppRoutes.verificationSuccess:
         return simpleRoute(const VerificationSuccessPage());
       case AppRoutes.licenseAgreement:
         return simpleRoute(const LicenseAgreementPage());
       case AppRoutes.insuranceRegistration:
         return MaterialPageRoute(
-            builder: (context) => const InsuranceRegistrationPage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const InsuranceRegistrationPage(),
+          settings: RouteSettings(arguments: args),
+        );
       case AppRoutes.cardInput:
         return MaterialPageRoute(
-            builder: (context) => const CardInputsPage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const CardInputsPage(),
+          settings: RouteSettings(arguments: args),
+        );
       case AppRoutes.helperCenter:
         return MaterialPageRoute(
-            builder: (context) => const HelperCenterPage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const HelperCenterPage(),
+          settings: RouteSettings(arguments: args),
+        );
       case AppRoutes.notification:
         return simpleRoute(const NotificationPage());
       case AppRoutes.verifyPhone:
         return MaterialPageRoute(
-            builder: (context) => const VerifyChangePhonePage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const VerifyChangePhonePage(),
+          settings: RouteSettings(arguments: args),
+        );
       case AppRoutes.paymentSuccess:
         return MaterialPageRoute(
-            builder: (context) => const PaymentSuccessPage(),
-            settings: RouteSettings(arguments: args));
+          builder: (context) => const PaymentSuccessPage(),
+          settings: RouteSettings(arguments: args),
+        );
     }
     return null;
   }
