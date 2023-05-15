@@ -46,5 +46,11 @@
     <array>
       <string>tel</string>
     </array>
+    <key>io.flutter.embedded_views_preview</key>
+    <YES/>
+    <key>LSSupportsOpeningDocumentsInPlace</key>
+    <true/>
+    <key>UIFileSharingEnabled</key>
+    <true/>
 </dict>
 </plist>

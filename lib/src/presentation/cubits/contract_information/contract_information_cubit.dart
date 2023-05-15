@@ -18,14 +18,23 @@ class ContractInformationCubit extends Cubit<ContractInformationState> {
 
   void loadContractInfo(
       {required String productId, required ContractInfoRequest request}) async {
+    var data = request;
+    if (data.vehicleType == null ||
+        data.region == null ||
+        data.startDate == null ||
+        data.isVip == null ||
+        data.period == null) {
+      return;
+    }
     emit(state.copyWith(status: StateStatus.loading));
     var result =
         await _contractInfoUseCase.call(ContractInfoParams(productId, request));
     result.fold(
-        (failure) =>
-            emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) => emit(
-            state.copyWith(status: StateStatus.unknown, contract: response)));
+      (failure) =>
+          emit(state.copyWith(failure: failure, status: StateStatus.error)),
+      (response) =>
+          emit(state.copyWith(status: StateStatus.unknown, contract: response)),
+    );
   }
 
   void onClear() {

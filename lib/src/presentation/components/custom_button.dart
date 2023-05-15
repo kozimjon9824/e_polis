@@ -62,11 +62,16 @@ class CustomOutlineButton extends StatelessWidget {
     required this.onTap,
     this.bgColor,
     this.padding,
+    this.primaryColor,
+    this.isLoading = false,
   }) : super(key: key);
+
   final String text;
   final Function() onTap;
   final Color? bgColor;
+  final Color? primaryColor;
   final double? padding;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -79,17 +84,21 @@ class CustomOutlineButton extends StatelessWidget {
         child: Ink(
           padding: EdgeInsets.symmetric(vertical: padding ?? 14),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.primaryColor, width: 2)),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+                color: primaryColor ?? AppColors.primaryColor, width: 2),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                text,
-                style: AppTextStyles.styleW700S16White
-                    .copyWith(color: AppColors.primaryColor),
-              ),
+              isLoading
+                  ? (Platform.isAndroid
+                      ? const CircularProgressIndicator(color: AppColors.white)
+                      : const CupertinoActivityIndicator())
+                  : Text(text,
+                      style: AppTextStyles.styleW700S16White.copyWith(
+                          color: primaryColor ?? AppColors.primaryColor)),
             ],
           ),
         ),

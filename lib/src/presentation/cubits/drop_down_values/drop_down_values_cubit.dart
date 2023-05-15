@@ -18,28 +18,29 @@ class DropDownValuesCubit extends Cubit<DropDownValuesState> {
     emit(state.copyWith(status: StateStatus.loading));
     var result = await _useCase.call(NoParams());
     result.fold(
-        (failure) =>
-            emit(state.copyWith(status: StateStatus.error, failure: failure)),
-        (response) {
-      List<KeyValue> regions = response.regions ?? [];
-      List<String> regionsList =
-          regions.map((region) => region.value ?? '').toList();
-      List<KeyValue> vehicleTypes = response.vehicleTypes ?? [];
-      List<String> vehicleTypesList =
-          vehicleTypes.map((vehicle) => vehicle.value ?? '').toList();
-      List<KeyValue> relatives = response.relative ?? [];
-      List<String> relativesList =
-          relatives.map((relative) => relative.value ?? '').toList();
-      emit(state.copyWith(
-        status: StateStatus.success,
-        regions: regions,
-        regionsList: regionsList,
-        vehicles: vehicleTypes,
-        vehiclesList: vehicleTypesList,
-        relative: relatives,
-        relativeList: relativesList,
-      ));
-    });
+      (failure) =>
+          emit(state.copyWith(status: StateStatus.error, failure: failure)),
+      (response) {
+        List<KeyValue> regions = response.regions ?? [];
+        List<String> regionsList =
+            regions.map((region) => region.value ?? '').toList();
+        List<KeyValue> vehicleTypes = response.vehicleTypes ?? [];
+        List<String> vehicleTypesList =
+            vehicleTypes.map((vehicle) => vehicle.value ?? '').toList();
+        List<KeyValue> relatives = response.relative ?? [];
+        List<String> relativesList =
+            relatives.map((relative) => relative.value ?? '').toList();
+        emit(state.copyWith(
+          status: StateStatus.success,
+          regions: regions,
+          regionsList: regionsList,
+          vehicles: vehicleTypes,
+          vehiclesList: vehicleTypesList,
+          relative: relatives,
+          relativeList: relativesList,
+        ));
+      },
+    );
   }
 
   int getRegionKey(String value) {

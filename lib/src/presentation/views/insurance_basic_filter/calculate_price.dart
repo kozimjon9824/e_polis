@@ -9,7 +9,6 @@ import 'package:e_polis/src/presentation/cubits/drop_down_values/drop_down_value
 import 'package:e_polis/src/presentation/cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../data/models/main/main.dart';
 import '../../components/custom_button.dart';
 import '../../components/drop_down_button.dart';
 import '../../cubits/product_details/product_details_cubit.dart';

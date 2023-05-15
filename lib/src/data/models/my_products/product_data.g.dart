@@ -24,6 +24,7 @@ _$_ProductModel _$$_ProductModelFromJson(Map<String, dynamic> json) =>
       logo: json['logo'] as String?,
       name: json['name'] as String?,
       number: json['number'] as String?,
+      startAt: json['startAt'] as String?,
       expireAt: json['expireAt'] as String?,
       expirePercent: json['expirePercent'] as int?,
       menuItems: (json['menuItems'] as List<dynamic>?)
@@ -37,6 +38,7 @@ Map<String, dynamic> _$$_ProductModelToJson(_$_ProductModel instance) =>
       'logo': instance.logo,
       'name': instance.name,
       'number': instance.number,
+      'startAt': instance.startAt,
       'expireAt': instance.expireAt,
       'expirePercent': instance.expirePercent,
       'menuItems': instance.menuItems,

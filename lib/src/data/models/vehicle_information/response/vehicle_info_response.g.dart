@@ -33,7 +33,9 @@ _$_VehicleData _$$_VehicleDataFromJson(Map<String, dynamic> json) =>
       model: json['model'] as String?,
       address: json['address'] as String?,
       issueYear: json['issueYear'] as int?,
-      type: json['type'],
+      type: json['type'] == null
+          ? null
+          : VehicleType.fromJson(json['type'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_VehicleDataToJson(_$_VehicleData instance) =>
@@ -53,4 +55,16 @@ Map<String, dynamic> _$$_OwnerDataToJson(_$_OwnerData instance) =>
     <String, dynamic>{
       'fullName': instance.fullName,
       'pinfl': instance.pinfl,
+    };
+
+_$_VehicleType _$$_VehicleTypeFromJson(Map<String, dynamic> json) =>
+    _$_VehicleType(
+      name: json['name'] as String?,
+      value: json['value'] as int?,
+    );
+
+Map<String, dynamic> _$$_VehicleTypeToJson(_$_VehicleType instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'value': instance.value,
     };

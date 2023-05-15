@@ -20,19 +20,24 @@ class VerificationSuccessPage extends StatelessWidget {
           children: [
             SvgPicture.asset(AppIcons.successDoc),
             const SizedBox(height: 24),
-            Text(AppLocalizations.of(context).accountVerified,
-                textAlign: TextAlign.center,
-                style: AppTextStyles.styleW700S24Grey9),
+            Text(
+              AppLocalizations.of(context).accountVerified,
+              textAlign: TextAlign.center,
+              style: AppTextStyles.styleW700S24Grey9,
+            ),
             const SizedBox(height: 12),
-            Text(AppLocalizations.of(context).accountVerifiedDescription,
-                textAlign: TextAlign.center,
-                style: AppTextStyles.styleW500S14Grey6),
+            Text(
+              AppLocalizations.of(context).accountVerifiedDescription,
+              textAlign: TextAlign.center,
+              style: AppTextStyles.styleW500S14Grey6,
+            ),
             const SizedBox(height: 40),
             CustomButton(
-                text: AppLocalizations.of(context).confirm,
-                onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.licenseAgreement);
-                }),
+              text: AppLocalizations.of(context).confirm,
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.licenseAgreement);
+              },
+            ),
             const SizedBox(height: 50),
           ],
         ),

@@ -68,8 +68,9 @@ class _LicenseAgreementPageState extends State<LicenseAgreementPage> {
         body: BlocConsumer<LicenseAgreementCubit, LicenseAgreementState>(
           listener: (context, state) {
             state.whenOrNull(
-                error: (failure) => showErrorMessage(
-                    context, failure.getLocalizedMessage(context)));
+              error: (failure) => showErrorMessage(
+                  context, failure.getLocalizedMessage(context)),
+            );
           },
           builder: (context, state) {
             return state.maybeWhen(
@@ -102,11 +103,13 @@ class _LicenseAgreementPageState extends State<LicenseAgreementPage> {
                         ..pop()
                         ..pop()
                         ..pop()
-                        ..pushNamed(AppRoutes.insuranceRegistration,
-                            arguments: InsurancePageArguments(
-                              id: id,
-                              request: cubit.basicFilterRequest,
-                            ));
+                        ..pushNamed(
+                          AppRoutes.insuranceRegistration,
+                          arguments: InsurancePageArguments(
+                            id: id,
+                            request: cubit.basicFilterRequest,
+                          ),
+                        );
                     }
                   }
                 },
@@ -156,17 +159,20 @@ class BodyWidget extends StatelessWidget {
         controller: _controller,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         children: [
-          Text(AppLocalizations.of(context).licenseAgreementMain,
-              style: AppTextStyles.styleW700S16Grey9),
+          Text(
+            AppLocalizations.of(context).licenseAgreementMain,
+            style: AppTextStyles.styleW700S16Grey9,
+          ),
           const SizedBox(height: 8),
           Html(data: text),
           const SizedBox(height: 32),
           AgreeCheckWidget(onChange: onCheck, value: check),
           const SizedBox(height: 24),
           CustomButton(
-              text: AppLocalizations.of(context).next,
-              bgColor: check ? null : AppColors.primaryColor.withOpacity(0.3),
-              onTap: onTap),
+            text: AppLocalizations.of(context).next,
+            bgColor: check ? null : AppColors.primaryColor.withOpacity(0.3),
+            onTap: onTap,
+          ),
           const SizedBox(height: 80),
         ],
       ),

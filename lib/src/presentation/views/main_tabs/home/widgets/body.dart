@@ -2,9 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/themes/app_text_styles.dart';
+import 'package:e_polis/src/data/models/basic_filter/request/basic_filter_request.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/utils.dart';
 import '../../../../../data/models/main/main.dart';
+import '../../../../cubits/auth/auth_cubit.dart';
+import '../../../../cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
+import '../../../insurcance_details/insurance_details.dart';
+import '../../../insurcance_details/widgets/dialog_body.dart';
+import 'label_container.dart';
 
 class InsuranceTypesBody extends StatelessWidget {
   const InsuranceTypesBody({
@@ -34,11 +41,31 @@ class InsuranceTypesBody extends StatelessWidget {
           label: data.label,
           onTap: () {
             if (!(data.isDisabled ?? false)) {
-              Navigator.pushNamed(
-                context,
-                AppRoutes.insuranceBasicFilter,
-                arguments: data.id ?? '',
-              );
+              context
+                  .read<InsuranceBasicFilterCubit>()
+                  .inputProductId(data.id ?? '');
+              if (context.read<AuthCubit>().state is UnAuthenticatedState) {
+                showDialog(
+                  context: context,
+                  builder: (_) => DialogBody(
+                    onSubmit: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(context, AppRoutes.login);
+                    },
+                  ),
+                );
+              } else {
+                Navigator.pushNamed(context, AppRoutes.insuranceRegistration,
+                    arguments: InsurancePageArguments(
+                        id: data.id ?? '',
+                        request: const BasicFilterRequest()));
+              }
+
+              // Navigator.pushNamed(
+              //   context,
+              //   AppRoutes.insuranceBasicFilter,
+              //   arguments: data.id ?? '',
+              // );
             }
           },
         );
@@ -108,32 +135,6 @@ class InsuranceItem extends StatelessWidget {
               ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class LabelContainer extends StatelessWidget {
-  const LabelContainer({
-    super.key,
-    required this.label,
-  });
-
-  final Label label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(3),
-        color: HexColor(label.color ?? '#ffffff'),
-      ),
-      child: Text(
-        label.title ?? '',
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: AppTextStyles.styleW500S12Grey4.copyWith(color: AppColors.white),
       ),
     );
   }

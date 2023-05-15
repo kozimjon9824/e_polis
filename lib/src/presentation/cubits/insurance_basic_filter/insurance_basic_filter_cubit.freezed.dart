@@ -198,7 +198,8 @@ class _$_InsuranceBasicFilterState implements _InsuranceBasicFilterState {
       final List<BasicFilterData>? searchResult,
       this.id,
       this.clearList = false,
-      this.basicFilterRequest = const BasicFilterRequest()})
+      this.basicFilterRequest =
+          const BasicFilterRequest(isVip: false, period: PERIOD_MONTHS)})
       : _data = data,
         _searchResult = searchResult;
 

@@ -43,7 +43,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => inject<MainScreenDataCubit>()..loadData()),
         BlocProvider(create: (context) => inject<InsuranceBasicFilterCubit>()),
-        BlocProvider(create: (context) => inject<DropDownValuesCubit>()),
+        BlocProvider(
+            create: (context) => inject<DropDownValuesCubit>()..loadValues(),
+            lazy: false),
         BlocProvider(create: (context) => inject<ProductTabManagerCubit>()),
       ],
       child: BlocBuilder<LanguageCubit, LanguageState>(

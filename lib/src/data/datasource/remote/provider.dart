@@ -12,6 +12,7 @@ import 'package:e_polis/src/data/models/login/login.dart';
 import 'package:e_polis/src/data/models/product/product_details.dart';
 import 'package:e_polis/src/data/models/profile_update/profile_update.dart';
 import 'package:e_polis/src/data/models/select_values/select_values.dart';
+import 'package:e_polis/src/data/models/user_product/user_product.dart';
 import 'package:e_polis/src/data/models/user_profile/user_profile.dart';
 import 'package:e_polis/src/data/models/vehicle_information/request/vehicle_info_request.dart';
 import 'package:e_polis/src/data/models/vehicle_information/response/vehicle_info_response.dart';
@@ -49,7 +50,9 @@ abstract class ApiClient {
 
   @PATCH('users/{id}')
   Future<dynamic> updateProfile(
-      @Path('id') String id, @Body() ProfileUpdateRequest request);
+    @Path('id') String id,
+    @Body() ProfileUpdateRequest request,
+  );
 
   @GET('users/{userId}/products/current')
   Future<MyProductData> getMyCurrentProduct(@Path('userId') String id);
@@ -71,39 +74,60 @@ abstract class ApiClient {
 
   @POST('users/{userId}/products')
   Future<dynamic> addProduct(
-      @Path('userId') String userId, @Body() AddProductRequest request);
+    @Path('userId') String userId,
+    @Body() AddProductRequest request,
+  );
 
   @POST('insurance/vehicle-information')
   Future<VehicleInfoResponse> checkVehicleInfo(
-      @Body() VehicleInfoRequest request);
+    @Body() VehicleInfoRequest request,
+  );
 
   @POST('insurance/driver-passport-validation')
   Future<dynamic> validateDriverPassport(
-      @Body() DriverPassportValidation request);
+    @Body() DriverPassportValidation request,
+  );
 
   @POST('insurance/passport-information')
   Future<DriverPassportInputResponse> addDriver(
-      @Body() DriverPassportInputRequest request);
+    @Body() DriverPassportInputRequest request,
+  );
 
   @POST('products/osago/calculation')
-  Future<BasicFilterResponse> getInsurances(@Body() BasicFilterRequest request);
+  Future<BasicFilterResponse> getInsurances(
+    @Body() BasicFilterRequest request,
+  );
 
   @POST('products/osago/{productId}/calculation')
   Future<InsuranceDetails> getInsuranceDetails(
-      @Path('productId') String id, @Body() BasicFilterRequest request);
+    @Path('productId') String id,
+    @Body() BasicFilterRequest request,
+  );
 
   @POST('products/osago/{id}')
   Future<dynamic> bookInsurance(
-      @Path('id') String id, @Body() BookModel request);
+    @Path('id') String id,
+    @Body() BookModel request,
+  );
 
   @GET('products/osago/dictionary')
   Future<SelectValues> getDropDownValues();
 
   @GET('notifications')
   Future<NotificationResponse> getNotifications(
-      @Query('page') int page, @Query('limit') int limit);
+    @Query('page') int page,
+    @Query('limit') int limit,
+  );
 
   @POST('products/osago/{id}/information')
   Future<ContractInfoResponse> getContractInformation(
-      @Path('id') String id, @Body() ContractInfoRequest request);
+    @Path('id') String id,
+    @Body() ContractInfoRequest request,
+  );
+
+  @GET('users/{userId}/products/{id}')
+  Future<UserProduct> getUserProductDetails(
+    @Path('userId') String userId,
+    @Path('id') String id,
+  );
 }

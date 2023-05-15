@@ -5,6 +5,7 @@ import 'package:e_polis/src/core/error/error.dart';
 import 'package:e_polis/src/data/datasource/remote/provider.dart';
 import 'package:e_polis/src/data/models/add_product/add_product.dart';
 import 'package:e_polis/src/data/models/my_products/product_data.dart';
+import 'package:e_polis/src/data/models/user_product/user_product.dart';
 import 'package:e_polis/src/domain/repository/product.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -104,6 +105,31 @@ class ProductRepository extends IProductRepository {
   Future<Either<Failure, dynamic>> addProduct(AddProductRequest request) async {
     try {
       final response = await _apiClient.addProduct(_getUserId(), request);
+      return Right(response);
+    } on DioError catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      if (e.error is SocketException) {
+        return const Left(ConnectionFailure());
+      }
+      return Left(
+        (e.response?.statusCode == 401)
+            ? const UnAuthorizationFailure()
+            : const UnknownFailure(),
+      );
+    } on Object catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserProduct>> getUserProductDetails(String id) async {
+    try {
+      final response = await _apiClient.getUserProductDetails(_getUserId(), id);
       return Right(response);
     } on DioError catch (e) {
       if (kDebugMode) {

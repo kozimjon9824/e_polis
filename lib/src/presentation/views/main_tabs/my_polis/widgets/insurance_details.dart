@@ -2,11 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/app_icons.dart';
 import '../../../../../core/themes/app_text_styles.dart';
@@ -131,43 +128,6 @@ class ArchivedSingleProduct extends StatelessWidget {
   }
 }
 
-class PDFViewerFromUrl extends StatelessWidget {
-  const PDFViewerFromUrl({Key? key, required this.url}) : super(key: key);
-
-  final String url;
-
-  Future<void> launchUrlStart({required String url}) async {
-    if (!await launchUrl(Uri.parse(url),
-        mode: LaunchMode.externalApplication)) {
-      throw 'Could not launch $url';
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('PDF'),
-        actions: [
-          IconButton(
-              onPressed: () async {
-                launchUrlStart(
-                  url:
-                      'https://polis.e-osgo.uz/site/export-to-pdf?id=11A11054-544D-4172-8435-1453C5610B6A',
-                );
-              },
-              icon: const Icon(Icons.download))
-        ],
-      ),
-      body: const PDF().fromUrl(
-        url,
-        placeholder: (double progress) => Center(child: Text('$progress %')),
-        errorWidget: (dynamic error) => Center(child: Text(error.toString())),
-      ),
-    );
-  }
-}
-
 class InsuranceDetails extends StatelessWidget {
   const InsuranceDetails({
     Key? key,
@@ -188,15 +148,8 @@ class InsuranceDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute<dynamic>(
-            builder: (_) => const PDFViewerFromUrl(
-              url:
-                  'https://polis.e-osgo.uz/site/export-to-pdf?id=11A11054-544D-4172-8435-1453C5610B6A',
-            ),
-          ),
-        );
+        Navigator.pushNamed(context, AppRoutes.polisDetails,
+            arguments: product);
       },
       borderRadius: BorderRadius.circular(12),
       child: Container(
@@ -237,7 +190,7 @@ class InsuranceDetails extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '$preDateText ${dateConverter(date: product?.expireAt ?? '', inFormat: 'yyyy-MM-dd', outFormat: 'd MMM yyyy')}',
+                  '$preDateText ${dateConverter(date: product?.startAt ?? '', inFormat: 'yyyy-MM-dd', outFormat: 'd MMM yyyy')}',
                   style: AppTextStyles.styleW500S14Grey5
                       .copyWith(color: AppColors.grey600),
                 ),

@@ -21,6 +21,7 @@ class ProductModel with _$ProductModel {
     String? logo,
     String? name,
     String? number,
+    String? startAt,
     String? expireAt,
     int? expirePercent,
     List<ClickAction>? menuItems,

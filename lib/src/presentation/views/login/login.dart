@@ -40,11 +40,15 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(AppLocalizations.of(context).phoneNumber,
-                        style: AppTextStyles.styleW700S24Grey9),
+                    Text(
+                      AppLocalizations.of(context).phoneNumber,
+                      style: AppTextStyles.styleW700S24Grey9,
+                    ),
                     const SizedBox(height: 12),
-                    Text(AppLocalizations.of(context).loginMainText,
-                        style: AppTextStyles.styleW500S14Grey7),
+                    Text(
+                      AppLocalizations.of(context).loginMainText,
+                      style: AppTextStyles.styleW500S14Grey7,
+                    ),
                     const SizedBox(height: 32),
                     phoneCustomPrefixTextField(),
                   ],
@@ -53,10 +57,12 @@ class _LoginPageState extends State<LoginPage> {
               BlocConsumer<LoginCubit, LoginState>(
                 listener: (context, state) {
                   state.whenOrNull(
-                      success: (phone) => Navigator.pushNamed(
-                          context, AppRoutes.verify, arguments: phone),
-                      error: (failure) => showErrorMessage(
-                          context, failure.getLocalizedMessage(context)));
+                    success: (phone) => Navigator.pushNamed(
+                        context, AppRoutes.verify,
+                        arguments: phone),
+                    error: (failure) => showErrorMessage(
+                        context, failure.getLocalizedMessage(context)),
+                  );
                 },
                 builder: (context, state) {
                   return nextButton(

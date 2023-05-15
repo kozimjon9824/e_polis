@@ -22,4 +22,5 @@ class AppRoutes {
   static const notification = '/notification';
   static const verifyPhone = '/verifyPhone';
   static const paymentSuccess = '/paymentSuccess';
+  static const polisDetails = '/polisDetails';
 }

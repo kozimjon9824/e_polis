@@ -17,7 +17,10 @@ import '../../../insurcance_details/insurance_details.dart';
 import 'widgets/contract_detail.dart';
 
 class ContactInfoView extends StatefulWidget {
-  const ContactInfoView({Key? key, required this.arguments}) : super(key: key);
+  const ContactInfoView({
+    Key? key,
+    required this.arguments,
+  }) : super(key: key);
   final InsurancePageArguments arguments;
 
   @override
@@ -47,7 +50,11 @@ class _ContactInfoViewState extends State<ContactInfoView> {
           listenWhen: (pre, curr) =>
               (pre.basicFilterRequest.period !=
                   curr.basicFilterRequest.period) ||
-              (pre.basicFilterRequest.isVip != curr.basicFilterRequest.isVip),
+              (pre.basicFilterRequest.isVip != curr.basicFilterRequest.isVip) ||
+              (pre.basicFilterRequest.region !=
+                  curr.basicFilterRequest.region) ||
+              (pre.basicFilterRequest.vehicleType !=
+                  curr.basicFilterRequest.vehicleType),
           listener: (context, filterState) {
             var filterData = filterState.basicFilterRequest;
             if (formKey.currentState!.validate()) {

@@ -19,7 +19,9 @@ class InsuranceDetailsCubit extends Cubit<InsuranceDetailsState> {
     emit(const InsuranceDetailsState.loading());
     var result =
         await _insuranceDetailsUseCase.call(InsuranceDetailsParam(request, id));
-    result.fold((failure) => emit(InsuranceDetailsState.error(failure)),
-        (res) => emit(InsuranceDetailsState.loaded(res)));
+    result.fold(
+      (failure) => emit(InsuranceDetailsState.error(failure)),
+      (res) => emit(InsuranceDetailsState.loaded(res)),
+    );
   }
 }

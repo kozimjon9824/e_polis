@@ -2,6 +2,7 @@ import 'package:e_polis/src/core/error/error.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../../core/constants/constants.dart';
 import '../../../data/models/basic_filter/request/basic_filter_request.dart';
 import '../../../data/models/basic_filter/response/basic_filter_response.dart';
 import '../../../domain/usecases/main/get_insurances.dart';
@@ -12,7 +13,9 @@ part 'insurance_basic_filter_cubit.freezed.dart';
 
 class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
   InsuranceBasicFilterCubit(this._insurancesUseCase)
-      : super(const InsuranceBasicFilterState());
+      : super(const InsuranceBasicFilterState(
+            basicFilterRequest:
+                BasicFilterRequest(isVip: false, period: PERIOD_MONTHS)));
   final GetInsurancesUseCase _insurancesUseCase;
 
   void loadData() async {
@@ -27,6 +30,7 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
     );
   }
 
+  /// no use
   void searchData(String text) async {
     if (text.length < 2) {
       return;
@@ -39,9 +43,12 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
             (element.policyAmount?.toString().contains(text) ?? false))
         .toList();
     emit(state.copyWith(
-        status: StateStatus.unknown, searchResult: searchResult));
+      status: StateStatus.unknown,
+      searchResult: searchResult,
+    ));
   }
 
+  /// no use
   void clearSearch() =>
       emit(state.copyWith(status: StateStatus.unknown, searchResult: null));
 
@@ -61,28 +68,36 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
     BasicFilterRequest data = state.basicFilterRequest;
     var newData = data.copyWith(isVip: isVip);
     emit(state.copyWith(
-        status: StateStatus.unknown, basicFilterRequest: newData));
+      status: StateStatus.unknown,
+      basicFilterRequest: newData,
+    ));
   }
 
   void selectPeriod(String period) {
     BasicFilterRequest data = state.basicFilterRequest;
     var newData = data.copyWith(period: period);
     emit(state.copyWith(
-        status: StateStatus.unknown, basicFilterRequest: newData));
+      status: StateStatus.unknown,
+      basicFilterRequest: newData,
+    ));
   }
 
-  void selectRegion(int region) {
+  void selectRegion(int? region) {
     BasicFilterRequest data = state.basicFilterRequest;
     var newData = data.copyWith(region: region);
     emit(state.copyWith(
-        status: StateStatus.unknown, basicFilterRequest: newData));
+      status: StateStatus.unknown,
+      basicFilterRequest: newData,
+    ));
   }
 
   void selectVehicleType(int type) {
     BasicFilterRequest data = state.basicFilterRequest;
     var newData = data.copyWith(vehicleType: type);
     emit(state.copyWith(
-        status: StateStatus.unknown, basicFilterRequest: newData));
+      status: StateStatus.unknown,
+      basicFilterRequest: newData,
+    ));
   }
 
   void clearList(bool c) {

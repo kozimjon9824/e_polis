@@ -125,7 +125,9 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                         if (!state.isPassportValidated &&
                             formKey2.currentState!.validate()) {
                           cubit.validatePassport(
-                              series: seriesID.text, number: numberID.text);
+                            series: seriesID.text,
+                            number: numberID.text,
+                          );
                         }
                       },
                     ),
@@ -158,7 +160,9 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                       return;
                     }
                     cubit.validatePassport(
-                        series: seriesID.text, number: numberID.text);
+                      series: seriesID.text,
+                      number: numberID.text,
+                    );
                     context.read<InsuranceBasicFilterCubit>().clearList(true);
                   } else {
                     if (!formKey2.currentState!.validate()) {
@@ -190,21 +194,23 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(1);
-                    context.read<ContractInformationCubit>().loadContractInfo(
-                          productId: widget.arguments.id,
-                          request: ContractInfoRequest(
-                            region: state.vehicleInfo?.region ??
-                                widget.arguments.request.region,
-                            period: widget.arguments.request.period,
-                            isVip: widget.arguments.request.isVip,
-                            vehicleType: widget.arguments.request.vehicleType,
-                            startDate:
-                                DateFormat('yyyy-MM-dd').format(DateTime.now()),
-                          ),
-                        );
-                    context.read<InsuranceBasicFilterCubit>().selectRegion(
-                        state.vehicleInfo?.region ??
-                            widget.arguments.request.region!);
+                    // context.read<ContractInformationCubit>().loadContractInfo(
+                    //       productId: widget.arguments.id,
+                    //       request: ContractInfoRequest(
+                    //         region: state.vehicleInfo?.region ??
+                    //             widget.arguments.request.region,
+                    //         period: widget.arguments.request.period,
+                    //         isVip: widget.arguments.request.isVip,
+                    //         vehicleType: widget.arguments.request.vehicleType,
+                    //         startDate:
+                    //             DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                    //       ),
+                    //     );
+                    context
+                        .read<InsuranceBasicFilterCubit>()
+                        .selectRegion(state.vehicleInfo?.region);
+                    context.read<InsuranceBasicFilterCubit>().selectVehicleType(
+                        state.vehicleInfo?.vehicle?.type?.value ?? 0);
                   }
                 },
               ),

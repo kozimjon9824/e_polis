@@ -255,7 +255,7 @@ mixin _$VehicleData {
   String? get model => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   int? get issueYear => throw _privateConstructorUsedError;
-  dynamic get type => throw _privateConstructorUsedError;
+  VehicleType? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -269,7 +269,10 @@ abstract class $VehicleDataCopyWith<$Res> {
           VehicleData value, $Res Function(VehicleData) then) =
       _$VehicleDataCopyWithImpl<$Res, VehicleData>;
   @useResult
-  $Res call({String? model, String? address, int? issueYear, dynamic type});
+  $Res call(
+      {String? model, String? address, int? issueYear, VehicleType? type});
+
+  $VehicleTypeCopyWith<$Res>? get type;
 }
 
 /// @nodoc
@@ -306,8 +309,20 @@ class _$VehicleDataCopyWithImpl<$Res, $Val extends VehicleData>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as VehicleType?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $VehicleTypeCopyWith<$Res>? get type {
+    if (_value.type == null) {
+      return null;
+    }
+
+    return $VehicleTypeCopyWith<$Res>(_value.type!, (value) {
+      return _then(_value.copyWith(type: value) as $Val);
+    });
   }
 }
 
@@ -319,7 +334,11 @@ abstract class _$$_VehicleDataCopyWith<$Res>
       __$$_VehicleDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? model, String? address, int? issueYear, dynamic type});
+  $Res call(
+      {String? model, String? address, int? issueYear, VehicleType? type});
+
+  @override
+  $VehicleTypeCopyWith<$Res>? get type;
 }
 
 /// @nodoc
@@ -354,7 +373,7 @@ class __$$_VehicleDataCopyWithImpl<$Res>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as VehicleType?,
     ));
   }
 }
@@ -374,7 +393,7 @@ class _$_VehicleData implements _VehicleData {
   @override
   final int? issueYear;
   @override
-  final dynamic type;
+  final VehicleType? type;
 
   @override
   String toString() {
@@ -390,13 +409,12 @@ class _$_VehicleData implements _VehicleData {
             (identical(other.address, address) || other.address == address) &&
             (identical(other.issueYear, issueYear) ||
                 other.issueYear == issueYear) &&
-            const DeepCollectionEquality().equals(other.type, type));
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, model, address, issueYear,
-      const DeepCollectionEquality().hash(type));
+  int get hashCode => Object.hash(runtimeType, model, address, issueYear, type);
 
   @JsonKey(ignore: true)
   @override
@@ -417,7 +435,7 @@ abstract class _VehicleData implements VehicleData {
       {final String? model,
       final String? address,
       final int? issueYear,
-      final dynamic type}) = _$_VehicleData;
+      final VehicleType? type}) = _$_VehicleData;
 
   factory _VehicleData.fromJson(Map<String, dynamic> json) =
       _$_VehicleData.fromJson;
@@ -429,7 +447,7 @@ abstract class _VehicleData implements VehicleData {
   @override
   int? get issueYear;
   @override
-  dynamic get type;
+  VehicleType? get type;
   @override
   @JsonKey(ignore: true)
   _$$_VehicleDataCopyWith<_$_VehicleData> get copyWith =>
@@ -585,5 +603,158 @@ abstract class _OwnerData implements OwnerData {
   @override
   @JsonKey(ignore: true)
   _$$_OwnerDataCopyWith<_$_OwnerData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+VehicleType _$VehicleTypeFromJson(Map<String, dynamic> json) {
+  return _VehicleType.fromJson(json);
+}
+
+/// @nodoc
+mixin _$VehicleType {
+  String? get name => throw _privateConstructorUsedError;
+  int? get value => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $VehicleTypeCopyWith<VehicleType> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $VehicleTypeCopyWith<$Res> {
+  factory $VehicleTypeCopyWith(
+          VehicleType value, $Res Function(VehicleType) then) =
+      _$VehicleTypeCopyWithImpl<$Res, VehicleType>;
+  @useResult
+  $Res call({String? name, int? value});
+}
+
+/// @nodoc
+class _$VehicleTypeCopyWithImpl<$Res, $Val extends VehicleType>
+    implements $VehicleTypeCopyWith<$Res> {
+  _$VehicleTypeCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? value = freezed,
+  }) {
+    return _then(_value.copyWith(
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_VehicleTypeCopyWith<$Res>
+    implements $VehicleTypeCopyWith<$Res> {
+  factory _$$_VehicleTypeCopyWith(
+          _$_VehicleType value, $Res Function(_$_VehicleType) then) =
+      __$$_VehicleTypeCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? name, int? value});
+}
+
+/// @nodoc
+class __$$_VehicleTypeCopyWithImpl<$Res>
+    extends _$VehicleTypeCopyWithImpl<$Res, _$_VehicleType>
+    implements _$$_VehicleTypeCopyWith<$Res> {
+  __$$_VehicleTypeCopyWithImpl(
+      _$_VehicleType _value, $Res Function(_$_VehicleType) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? value = freezed,
+  }) {
+    return _then(_$_VehicleType(
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_VehicleType implements _VehicleType {
+  const _$_VehicleType({this.name, this.value});
+
+  factory _$_VehicleType.fromJson(Map<String, dynamic> json) =>
+      _$$_VehicleTypeFromJson(json);
+
+  @override
+  final String? name;
+  @override
+  final int? value;
+
+  @override
+  String toString() {
+    return 'VehicleType(name: $name, value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_VehicleType &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, name, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_VehicleTypeCopyWith<_$_VehicleType> get copyWith =>
+      __$$_VehicleTypeCopyWithImpl<_$_VehicleType>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_VehicleTypeToJson(
+      this,
+    );
+  }
+}
+
+abstract class _VehicleType implements VehicleType {
+  const factory _VehicleType({final String? name, final int? value}) =
+      _$_VehicleType;
+
+  factory _VehicleType.fromJson(Map<String, dynamic> json) =
+      _$_VehicleType.fromJson;
+
+  @override
+  String? get name;
+  @override
+  int? get value;
+  @override
+  @JsonKey(ignore: true)
+  _$$_VehicleTypeCopyWith<_$_VehicleType> get copyWith =>
       throw _privateConstructorUsedError;
 }

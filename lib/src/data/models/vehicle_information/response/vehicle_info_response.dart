@@ -23,7 +23,7 @@ class VehicleData with _$VehicleData {
     String? model,
     String? address,
     int? issueYear,
-    dynamic type,
+    VehicleType? type,
   }) = _VehicleData;
 
   factory VehicleData.fromJson(Map<String, dynamic> json) =>
@@ -39,4 +39,15 @@ class OwnerData with _$OwnerData {
 
   factory OwnerData.fromJson(Map<String, dynamic> json) =>
       _$OwnerDataFromJson(json);
+}
+
+@freezed
+class VehicleType with _$VehicleType {
+  const factory VehicleType({
+    String? name,
+    int? value,
+  }) = _VehicleType;
+
+  factory VehicleType.fromJson(Map<String, dynamic> json) =>
+      _$VehicleTypeFromJson(json);
 }

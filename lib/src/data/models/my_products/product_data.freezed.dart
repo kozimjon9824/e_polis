@@ -169,6 +169,7 @@ mixin _$ProductModel {
   String? get logo => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get number => throw _privateConstructorUsedError;
+  String? get startAt => throw _privateConstructorUsedError;
   String? get expireAt => throw _privateConstructorUsedError;
   int? get expirePercent => throw _privateConstructorUsedError;
   List<ClickAction>? get menuItems => throw _privateConstructorUsedError;
@@ -190,6 +191,7 @@ abstract class $ProductModelCopyWith<$Res> {
       String? logo,
       String? name,
       String? number,
+      String? startAt,
       String? expireAt,
       int? expirePercent,
       List<ClickAction>? menuItems});
@@ -212,6 +214,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? logo = freezed,
     Object? name = freezed,
     Object? number = freezed,
+    Object? startAt = freezed,
     Object? expireAt = freezed,
     Object? expirePercent = freezed,
     Object? menuItems = freezed,
@@ -232,6 +235,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
       number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startAt: freezed == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
               as String?,
       expireAt: freezed == expireAt
           ? _value.expireAt
@@ -262,6 +269,7 @@ abstract class _$$_ProductModelCopyWith<$Res>
       String? logo,
       String? name,
       String? number,
+      String? startAt,
       String? expireAt,
       int? expirePercent,
       List<ClickAction>? menuItems});
@@ -282,6 +290,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
     Object? logo = freezed,
     Object? name = freezed,
     Object? number = freezed,
+    Object? startAt = freezed,
     Object? expireAt = freezed,
     Object? expirePercent = freezed,
     Object? menuItems = freezed,
@@ -302,6 +311,10 @@ class __$$_ProductModelCopyWithImpl<$Res>
       number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startAt: freezed == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
               as String?,
       expireAt: freezed == expireAt
           ? _value.expireAt
@@ -327,6 +340,7 @@ class _$_ProductModel implements _ProductModel {
       this.logo,
       this.name,
       this.number,
+      this.startAt,
       this.expireAt,
       this.expirePercent,
       final List<ClickAction>? menuItems})
@@ -344,6 +358,8 @@ class _$_ProductModel implements _ProductModel {
   @override
   final String? number;
   @override
+  final String? startAt;
+  @override
   final String? expireAt;
   @override
   final int? expirePercent;
@@ -359,7 +375,7 @@ class _$_ProductModel implements _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, logo: $logo, name: $name, number: $number, expireAt: $expireAt, expirePercent: $expirePercent, menuItems: $menuItems)';
+    return 'ProductModel(id: $id, logo: $logo, name: $name, number: $number, startAt: $startAt, expireAt: $expireAt, expirePercent: $expirePercent, menuItems: $menuItems)';
   }
 
   @override
@@ -371,6 +387,7 @@ class _$_ProductModel implements _ProductModel {
             (identical(other.logo, logo) || other.logo == logo) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.number, number) || other.number == number) &&
+            (identical(other.startAt, startAt) || other.startAt == startAt) &&
             (identical(other.expireAt, expireAt) ||
                 other.expireAt == expireAt) &&
             (identical(other.expirePercent, expirePercent) ||
@@ -381,8 +398,8 @@ class _$_ProductModel implements _ProductModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, logo, name, number, expireAt,
-      expirePercent, const DeepCollectionEquality().hash(_menuItems));
+  int get hashCode => Object.hash(runtimeType, id, logo, name, number, startAt,
+      expireAt, expirePercent, const DeepCollectionEquality().hash(_menuItems));
 
   @JsonKey(ignore: true)
   @override
@@ -404,6 +421,7 @@ abstract class _ProductModel implements ProductModel {
       final String? logo,
       final String? name,
       final String? number,
+      final String? startAt,
       final String? expireAt,
       final int? expirePercent,
       final List<ClickAction>? menuItems}) = _$_ProductModel;
@@ -419,6 +437,8 @@ abstract class _ProductModel implements ProductModel {
   String? get name;
   @override
   String? get number;
+  @override
+  String? get startAt;
   @override
   String? get expireAt;
   @override

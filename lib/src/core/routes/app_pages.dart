@@ -21,6 +21,7 @@ import 'package:e_polis/src/presentation/views/verification_success/verification
 import 'package:e_polis/src/presentation/views/verify_change_phone/verify_phone.dart';
 import 'package:flutter/material.dart';
 import '../../presentation/views/about/about.dart';
+import '../../presentation/views/my_polis_details/polis_details.dart';
 import 'app_routes.dart';
 
 class RouteGenerateKit {
@@ -105,6 +106,11 @@ class RouteGenerateKit {
       case AppRoutes.paymentSuccess:
         return MaterialPageRoute(
           builder: (context) => const PaymentSuccessPage(),
+          settings: RouteSettings(arguments: args),
+        );
+      case AppRoutes.polisDetails:
+        return MaterialPageRoute(
+          builder: (context) => const PolisDetailsPage(),
           settings: RouteSettings(arguments: args),
         );
     }

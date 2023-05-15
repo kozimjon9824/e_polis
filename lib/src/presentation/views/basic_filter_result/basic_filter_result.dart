@@ -62,7 +62,8 @@ class _BasicFilterResultPageState extends State<BasicFilterResultPage> {
             ),
             body: (state.status == StateStatus.loading)
                 ? const LoadingWidget()
-                : (state.searchResult != null && keyboardController.isVisible)
+                : (state.searchResult != null &&
+                        KeyboardVisibilityProvider.isKeyboardVisible(context))
                     ? const SearchResults()
                     : const InsurancesResults(),
           );

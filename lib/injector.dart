@@ -23,6 +23,7 @@ import 'package:e_polis/src/domain/usecases/main/validate_passport.dart';
 import 'package:e_polis/src/domain/usecases/product/add_product.dart';
 import 'package:e_polis/src/domain/usecases/product/archived_product.dart';
 import 'package:e_polis/src/domain/usecases/product/current_product.dart';
+import 'package:e_polis/src/domain/usecases/product/get_product_details.dart';
 import 'package:e_polis/src/domain/usecases/product/progress_product.dart';
 import 'package:e_polis/src/domain/usecases/profile/profile_update.dart';
 import 'package:e_polis/src/domain/usecases/profile/user_profile.dart';
@@ -48,6 +49,7 @@ import 'package:e_polis/src/presentation/cubits/notifications/notifications_cubi
 import 'package:e_polis/src/presentation/cubits/product_details/product_details_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/timer/timer_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/update_profile/update_profile_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/user_product_details/user_product_details_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/verify/verify_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -89,6 +91,7 @@ Future<void> initDi() async {
   inject.registerFactory(() => ProgressProductsCubit(inject()));
   inject.registerFactory(() => ArchivedProductsCubit(inject()));
   inject.registerFactory(() => AddProductCubit(inject()));
+  inject.registerFactory(() => UserProductDetailsCubit(inject()));
 
   // main cubits
   inject.registerFactory(() => MainScreenDataCubit(inject()));
@@ -143,6 +146,7 @@ Future<void> initDi() async {
   inject.registerLazySingleton(() => MyInProgressProductsUseCase(inject()));
   inject.registerLazySingleton(() => MyArchivedProductsUseCase(inject()));
   inject.registerLazySingleton(() => AddProductUseCase(inject()));
+  inject.registerLazySingleton(() => UserProductDetailsUseCase(inject()));
 
   // auth
   inject.registerLazySingleton(() => CheckUserAuthUseCase(inject()));

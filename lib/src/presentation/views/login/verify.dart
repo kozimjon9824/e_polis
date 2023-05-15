@@ -37,22 +37,26 @@ class _VerifyPageState extends State<VerifyPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(AppLocalizations.of(context).confirmCode,
-                        style: AppTextStyles.styleW700S24Grey9),
+                    Text(
+                      AppLocalizations.of(context).confirmCode,
+                      style: AppTextStyles.styleW700S24Grey9,
+                    ),
                     const SizedBox(height: 12),
                     Text(
-                        '${AppLocalizations.of(context).verifyPageMainText} +998$arguments',
-                        style: AppTextStyles.styleW500S14Grey7),
+                      '${AppLocalizations.of(context).verifyPageMainText} +998$arguments',
+                      style: AppTextStyles.styleW500S14Grey7,
+                    ),
                     const SizedBox(height: 32),
                     BlocBuilder<VerifyCubit, VerifyState>(
                       builder: (context, state) {
                         return CustomPinPut(
-                            textController: textController,
-                            onChange: (_) {
-                              context.read<VerifyCubit>().loadInitial();
-                            },
-                            forceErrorState: state ==
-                                const VerifyState.error(WrongCodeFailure()));
+                          textController: textController,
+                          onChange: (_) {
+                            context.read<VerifyCubit>().loadInitial();
+                          },
+                          forceErrorState: state ==
+                              const VerifyState.error(WrongCodeFailure()),
+                        );
                       },
                     ),
                     const SizedBox(height: 24),
@@ -81,10 +85,11 @@ class _VerifyPageState extends State<VerifyPage> {
         child: BlocConsumer<VerifyCubit, VerifyState>(
           listener: (context, state) {
             state.whenOrNull(
-                success: () =>
-                    Navigator.pushNamed(context, AppRoutes.verificationSuccess),
-                error: (failure) => showErrorMessage(
-                    context, failure.getLocalizedMessage(context)));
+              success: () =>
+                  Navigator.pushNamed(context, AppRoutes.verificationSuccess),
+              error: (failure) => showErrorMessage(
+                  context, failure.getLocalizedMessage(context)),
+            );
           },
           builder: (context, state) {
             return CustomButton(

@@ -177,7 +177,7 @@ class VehicleInfoWidget extends StatelessWidget {
         ),
         TitleSubtitle(
           title: AppLocalizations.of(context).typeVehicle,
-          subtitle: data?.type.toString() ?? '',
+          subtitle: data?.type?.name ?? '',
         ),
         TitleSubtitle(
           title: AppLocalizations.of(context).vehicleRegistrationRegion,
