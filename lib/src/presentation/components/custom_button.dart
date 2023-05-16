@@ -45,7 +45,7 @@ class CustomButton extends StatelessWidget {
               isLoading
                   ? (Platform.isAndroid
                       ? const CircularProgressIndicator(color: AppColors.white)
-                      : const CupertinoActivityIndicator())
+                      : const CupertinoActivityIndicator(radius: 16))
                   : Text(text, style: AppTextStyles.styleW700S16White),
             ],
           ),
@@ -82,7 +82,9 @@ class CustomOutlineButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         onTap: onTap,
         child: Ink(
-          padding: EdgeInsets.symmetric(vertical: padding ?? 14),
+          padding: EdgeInsets.symmetric(
+              vertical:
+                  isLoading ? (Platform.isAndroid ? 4 : 8) : (padding ?? 13)),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
@@ -94,11 +96,15 @@ class CustomOutlineButton extends StatelessWidget {
             children: [
               isLoading
                   ? (Platform.isAndroid
-                      ? const CircularProgressIndicator(color: AppColors.white)
-                      : const CupertinoActivityIndicator())
-                  : Text(text,
+                      ? const CircularProgressIndicator(
+                          color: AppColors.primaryColor)
+                      : const CupertinoActivityIndicator(
+                          color: AppColors.primaryColor, radius: 16))
+                  : Text(
+                      text,
                       style: AppTextStyles.styleW700S16White.copyWith(
-                          color: primaryColor ?? AppColors.primaryColor)),
+                          color: primaryColor ?? AppColors.primaryColor),
+                    ),
             ],
           ),
         ),

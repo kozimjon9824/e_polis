@@ -47,7 +47,7 @@ class UserProductDetailsCubit extends Cubit<UserProductDetailsState> {
         const downloadsFolderPath = '/storage/emulated/0/Download/';
         Directory dir = Directory(downloadsFolderPath);
         String fn = url.split('/').last;
-        file = File('${dir.path}/$fn');
+        file = File('${dir.path}/$fn.pdf');
       }
     }
 

@@ -30,16 +30,19 @@ class PaymentSuccessPage extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(20, 2, 20, 20),
               margin: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: AppColors.grey50),
+                borderRadius: BorderRadius.circular(12),
+                color: AppColors.grey50,
+              ),
               child: Column(
                 children: [
                   SvgPicture.asset(AppIcons.paymentSuccess),
                   const SizedBox(height: 10),
-                  Text(local.paymentInstruction,
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.styleW700S18Green
-                          .copyWith(color: AppColors.primaryColor)),
+                  Text(
+                    local.paymentInstruction,
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.styleW700S18Green
+                        .copyWith(color: AppColors.primaryColor),
+                  ),
                   const SizedBox(height: 8),
                   // Text(local.SuccessDes,
                   //     textAlign: TextAlign.center,

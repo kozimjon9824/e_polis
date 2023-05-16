@@ -21,8 +21,14 @@ class RowTitleWidget extends StatelessWidget {
       child: Row(
         children: [
           Text(title, style: AppTextStyles.styleW500S14Grey7),
-          const Spacer(),
-          Text(value, style: AppTextStyles.styleW700S14Grey9),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(value,
+                    textAlign: TextAlign.end,
+                    style: AppTextStyles.styleW700S14Grey9)),
+          ),
         ],
       ),
     );
