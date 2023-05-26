@@ -1779,6 +1779,46 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Ширкат номи`
+  String get company {
+    return Intl.message(
+      'Ширкат номи',
+      name: 'company',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ИНН`
+  String get inn {
+    return Intl.message(
+      'ИНН',
+      name: 'inn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See`
+  String get show {
+    return Intl.message(
+      'See',
+      name: 'show',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open`
+  String get open {
+    return Intl.message(
+      'Open',
+      name: 'open',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

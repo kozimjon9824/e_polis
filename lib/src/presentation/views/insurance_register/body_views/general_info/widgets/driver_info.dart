@@ -41,12 +41,12 @@ class DriverInformationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context);
     return AnimatedRoundContainer(
-      title: AppLocalizations.of(context).driverInfo,
+      title: local.driverInfo,
       padding: const EdgeInsets.fromLTRB(10, 8, 10, 16),
       padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
-      clearText:
-          isValidated == true ? AppLocalizations.of(context).clearData : null,
+      clearText: isValidated == true ? local.clearData : null,
       showChildren2: isValidated == true,
       onClear: onClear,
       children2: [
@@ -54,18 +54,20 @@ class DriverInformationWidget extends StatelessWidget {
       ],
       children: [
         TitleSubtitle(
-          title: AppLocalizations.of(context).fio,
+          title: ownerData?.inn != null ? local.company : local.fio,
           subtitle: ownerData?.fullName ?? '',
         ),
         TitleSubtitle(
-          title: AppLocalizations.of(context).pinFl,
-          subtitle: ownerData?.pinfl ?? '',
+          title: ownerData?.inn != null ? local.inn : local.pinFl,
+          subtitle: ownerData?.inn != null
+              ? ownerData?.inn ?? ''
+              : ownerData?.pinfl ?? '',
         ),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
         const SizedBox(height: 8),
         if (!hidePassportFields)
           Text(
-            AppLocalizations.of(context).passport,
+            local.passport,
             style: AppTextStyles.styleW600S14Grey9,
           ),
         if (!hidePassportFields) const SizedBox(height: 6),
@@ -74,33 +76,33 @@ class DriverInformationWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                  flex: 1,
-                  child: CustomTextField(
-                    hintText: 'AA',
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    textEditingController: seriesID,
-                    textCapitalization: TextCapitalization.characters,
-                    focusNode: focusNodeSeriesID,
-                    readOnly: isValidated,
-                    validator: (value) => value!.length < 2
-                        ? AppLocalizations.of(context).invalidLength
-                        : null,
-                    onFieldSubmitted: (_) => focusNodeNumberID!.requestFocus(),
-                    inputFormatters: [
-                      MaskTextInputFormatter(
-                        mask: '##',
-                        initialText: seriesID.text,
-                        filter: {"#": RegExp(r'[a-zA-Z]')},
-                      ),
-                      UpperCaseTextFormatter(),
-                    ],
-                    onChange: (value) {
-                      if (value.length == 2) {
-                        focusNodeNumberID!.requestFocus();
-                      }
-                    },
-                  )),
+                flex: 1,
+                child: CustomTextField(
+                  hintText: 'AA',
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  textEditingController: seriesID,
+                  textCapitalization: TextCapitalization.characters,
+                  focusNode: focusNodeSeriesID,
+                  readOnly: isValidated,
+                  validator: (value) =>
+                      value!.length < 2 ? local.invalidLength : null,
+                  onFieldSubmitted: (_) => focusNodeNumberID!.requestFocus(),
+                  inputFormatters: [
+                    MaskTextInputFormatter(
+                      mask: '##',
+                      initialText: seriesID.text,
+                      filter: {"#": RegExp(r'[a-zA-Z]')},
+                    ),
+                    UpperCaseTextFormatter(),
+                  ],
+                  onChange: (value) {
+                    if (value.length == 2) {
+                      focusNodeNumberID!.requestFocus();
+                    }
+                  },
+                ),
+              ),
               const SizedBox(width: 10),
               Expanded(
                 flex: 2,
@@ -111,9 +113,8 @@ class DriverInformationWidget extends StatelessWidget {
                   textEditingController: numberID,
                   focusNode: focusNodeNumberID,
                   readOnly: isValidated,
-                  validator: (value) => value!.length < 6
-                      ? AppLocalizations.of(context).invalidLength
-                      : null,
+                  validator: (value) =>
+                      value!.length < 6 ? local.invalidLength : null,
                   inputFormatters: [
                     MaskTextInputFormatter(
                       mask: '#######',

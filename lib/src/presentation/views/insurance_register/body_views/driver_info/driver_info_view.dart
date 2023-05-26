@@ -33,7 +33,6 @@ class DriverInfoView extends StatelessWidget {
       body: BlocBuilder<InsuranceBasicFilterCubit, InsuranceBasicFilterState>(
         builder: (context, state) {
           if (state.clearList) {
-            print('asaddsf');
             clearList();
             context.read<InsuranceBasicFilterCubit>().clearList(false);
           }

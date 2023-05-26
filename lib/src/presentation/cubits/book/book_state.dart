@@ -8,5 +8,6 @@ class BookState with _$BookState {
     ContractInfoResponse? contract,
     @Default(BookModel()) BookModel requestModel,
     String? paymentHolder,
+    String? inn,
   }) = _BookState;
 }

@@ -49,12 +49,14 @@ Map<String, dynamic> _$$_VehicleDataToJson(_$_VehicleData instance) =>
 _$_OwnerData _$$_OwnerDataFromJson(Map<String, dynamic> json) => _$_OwnerData(
       fullName: json['fullName'] as String?,
       pinfl: json['pinfl'] as String?,
+      inn: json['inn'] as String?,
     );
 
 Map<String, dynamic> _$$_OwnerDataToJson(_$_OwnerData instance) =>
     <String, dynamic>{
       'fullName': instance.fullName,
       'pinfl': instance.pinfl,
+      'inn': instance.inn,
     };
 
 _$_VehicleType _$$_VehicleTypeFromJson(Map<String, dynamic> json) =>

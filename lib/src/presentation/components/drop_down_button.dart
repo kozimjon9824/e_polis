@@ -34,9 +34,11 @@ class DropDownButton<T> extends StatelessWidget {
           decoration: dropDownDecoration(),
           isExpanded: true,
           value: value,
-          hint: Text(hint ?? '',
-              style: AppTextStyles.styleW400S14Grey6
-                  .copyWith(color: AppColors.grey400)),
+          hint: Text(
+            hint ?? '',
+            style: AppTextStyles.styleW400S14Grey6
+                .copyWith(color: AppColors.grey400),
+          ),
           icon:
               const Icon(CupertinoIcons.chevron_down, color: AppColors.grey400),
           iconOnClick:

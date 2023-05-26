@@ -55,10 +55,12 @@ class InsuranceTypesBody extends StatelessWidget {
                   ),
                 );
               } else {
-                Navigator.pushNamed(context, AppRoutes.insuranceRegistration,
-                    arguments: InsurancePageArguments(
-                        id: data.id ?? '',
-                        request: const BasicFilterRequest()));
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.insuranceRegistration,
+                  arguments: InsurancePageArguments(
+                      id: data.id ?? '', request: const BasicFilterRequest()),
+                );
               }
 
               // Navigator.pushNamed(
@@ -66,6 +68,12 @@ class InsuranceTypesBody extends StatelessWidget {
               //   AppRoutes.insuranceBasicFilter,
               //   arguments: data.id ?? '',
               // );
+            } else {
+              Navigator.pushNamed(
+                context,
+                AppRoutes.travelBasic,
+                arguments: data.id ?? '',
+              );
             }
           },
         );

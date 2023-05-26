@@ -23,4 +23,7 @@ class AppRoutes {
   static const verifyPhone = '/verifyPhone';
   static const paymentSuccess = '/paymentSuccess';
   static const polisDetails = '/polisDetails';
+
+  ///
+  static const travelBasic = '/travelBasic';
 }

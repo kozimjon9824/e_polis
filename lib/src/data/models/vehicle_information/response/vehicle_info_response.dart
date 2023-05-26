@@ -35,6 +35,7 @@ class OwnerData with _$OwnerData {
   const factory OwnerData({
     String? fullName,
     String? pinfl,
+    String? inn,
   }) = _OwnerData;
 
   factory OwnerData.fromJson(Map<String, dynamic> json) =>

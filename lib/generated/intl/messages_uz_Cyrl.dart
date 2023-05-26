@@ -67,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Маълумотларни тозалаш"),
         "close": MessageLookupByLibrary.simpleMessage("Ёпиш"),
         "commission": MessageLookupByLibrary.simpleMessage("Коммисия"),
+        "company": MessageLookupByLibrary.simpleMessage("Ширкат номи"),
         "compensationPriceTitle": MessageLookupByLibrary.simpleMessage(
             "Жавбрланувчининг мол-мулкига етказилган зарарни қоплаш"),
         "confirm": MessageLookupByLibrary.simpleMessage("Тасдиқлаш"),
@@ -129,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "inDetail": MessageLookupByLibrary.simpleMessage("Батафсил"),
         "infoAboutCar": MessageLookupByLibrary.simpleMessage(
             "Автотранспорт ҳақида маълумот"),
+        "inn": MessageLookupByLibrary.simpleMessage("ИНН"),
         "insuranceDamagePriceTitle": MessageLookupByLibrary.simpleMessage(
             "Жабрланувчининг ҳаёти ва соғлиғига етказилган зарарни қоплаш"),
         "insurancePrice":
@@ -188,6 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onBoardingTitle3": MessageLookupByLibrary.simpleMessage(
             "Жонли ва дўстона 24/7 техник ёрдам"),
         "oneYear": MessageLookupByLibrary.simpleMessage("1 йил"),
+        "open": MessageLookupByLibrary.simpleMessage("Очиш"),
         "operating": MessageLookupByLibrary.simpleMessage("Амалда"),
         "ourMission": MessageLookupByLibrary.simpleMessage("Бизнинг вазифамиз"),
         "passport": MessageLookupByLibrary.simpleMessage("Паспорт/ID карта"),
@@ -238,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "seriesNumberPolis":
             MessageLookupByLibrary.simpleMessage("Полис серия ва рақами"),
         "serverError": MessageLookupByLibrary.simpleMessage("Сервер хатолиги"),
+        "show": MessageLookupByLibrary.simpleMessage("Кўриш"),
         "sixMonth": MessageLookupByLibrary.simpleMessage("6 ой"),
         "skip": MessageLookupByLibrary.simpleMessage("Ўтказиб юбориш"),
         "startUsing":

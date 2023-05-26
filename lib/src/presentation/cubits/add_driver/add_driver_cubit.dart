@@ -31,10 +31,13 @@ class AddDriverCubit extends Cubit<AddDriverState> {
     result.fold(
       (failure) {
         bool fillBayHand = failure is NoLicenceFoundFailure;
-        emit(state.copyWith(
+        emit(
+          state.copyWith(
             failure: failure,
             status: fillBayHand ? StateStatus.unknown : StateStatus.error,
-            fillByHand: fillBayHand));
+            fillByHand: fillBayHand,
+          ),
+        );
       },
       (response) => emit(
           state.copyWith(status: StateStatus.success, driverData: response)),
@@ -42,7 +45,9 @@ class AddDriverCubit extends Cubit<AddDriverState> {
   }
 
   void clearDriverData() {
-    emit(state.copyWith(
-        status: StateStatus.unknown, driverData: null, fillByHand: false));
+    emit(
+      state.copyWith(
+          status: StateStatus.unknown, driverData: null, fillByHand: false),
+    );
   }
 }

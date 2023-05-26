@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
@@ -6,6 +8,7 @@ import 'package:e_polis/src/presentation/components/loading.dart';
 import 'package:e_polis/src/presentation/components/snackbars.dart';
 import 'package:e_polis/src/presentation/cubits/user_product_details/user_product_details_cubit.dart';
 import 'package:e_polis/src/presentation/views/my_polis_details/widgets/widgets.dart';
+import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,7 +63,7 @@ class _PolisDetailsPageState extends State<PolisDetailsPage> {
                       ),
                     );
                   },
-                  child: Text(local.expend),
+                  child: Text(local.show),
                 )
               ],
             ),
@@ -116,16 +119,27 @@ class _PolisDetailsPageState extends State<PolisDetailsPage> {
                   // const SizedBox(width: 20),
                   Expanded(
                     child: CustomOutlineButton(
-                      text: state.filePath != null
-                          ? local.expend
-                          : local.download,
+                      text:
+                          state.filePath != null ? local.open : local.download,
                       isLoading: state.fileDownloading,
                       onTap: () async {
                         if (state.filePath == null) {
                           context.read<UserProductDetailsCubit>().downloadFile(
                               url: state.userProduct?.downloadUrl ?? '');
                         } else {
-                          OpenFile.open(state.filePath!);
+                          if (Platform.isAndroid) {
+                            LaunchApp.openApp(
+                              androidPackageName: state.filePath!,
+                              openStore: false,
+                            );
+                            OpenFile.open(state.filePath!);
+                          } else {
+                            LaunchApp.openApp(
+                              iosUrlScheme:
+                                  'shareddocuments://${state.filePath!}',
+                              openStore: false,
+                            );
+                          }
                         }
                       },
                     ),
@@ -141,7 +155,10 @@ class _PolisDetailsPageState extends State<PolisDetailsPage> {
 }
 
 class PDFViewerFromUrl extends StatelessWidget {
-  const PDFViewerFromUrl({Key? key, required this.url}) : super(key: key);
+  const PDFViewerFromUrl({
+    Key? key,
+    required this.url,
+  }) : super(key: key);
 
   final String url;
 
@@ -157,18 +174,10 @@ class PDFViewerFromUrl extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('PDF'),
-        // actions: [
-        //   IconButton(
-        //     onPressed: () async {
-        //       launchUrlStart(url: url);
-        //     },
-        //     icon: const Icon(Icons.download),
-        //   )
-        // ],
       ),
       body: const PDF().fromUrl(
         url,
-        placeholder: (double progress) => const Center(
+        placeholder: (_) => const Center(
             child: CupertinoActivityIndicator(color: AppColors.primaryColor)),
         errorWidget: (dynamic error) => Center(child: Text(error.toString())),
       ),

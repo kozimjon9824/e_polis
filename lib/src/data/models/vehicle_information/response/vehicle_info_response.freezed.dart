@@ -462,6 +462,7 @@ OwnerData _$OwnerDataFromJson(Map<String, dynamic> json) {
 mixin _$OwnerData {
   String? get fullName => throw _privateConstructorUsedError;
   String? get pinfl => throw _privateConstructorUsedError;
+  String? get inn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -474,7 +475,7 @@ abstract class $OwnerDataCopyWith<$Res> {
   factory $OwnerDataCopyWith(OwnerData value, $Res Function(OwnerData) then) =
       _$OwnerDataCopyWithImpl<$Res, OwnerData>;
   @useResult
-  $Res call({String? fullName, String? pinfl});
+  $Res call({String? fullName, String? pinfl, String? inn});
 }
 
 /// @nodoc
@@ -492,6 +493,7 @@ class _$OwnerDataCopyWithImpl<$Res, $Val extends OwnerData>
   $Res call({
     Object? fullName = freezed,
     Object? pinfl = freezed,
+    Object? inn = freezed,
   }) {
     return _then(_value.copyWith(
       fullName: freezed == fullName
@@ -501,6 +503,10 @@ class _$OwnerDataCopyWithImpl<$Res, $Val extends OwnerData>
       pinfl: freezed == pinfl
           ? _value.pinfl
           : pinfl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      inn: freezed == inn
+          ? _value.inn
+          : inn // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -513,7 +519,7 @@ abstract class _$$_OwnerDataCopyWith<$Res> implements $OwnerDataCopyWith<$Res> {
       __$$_OwnerDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? fullName, String? pinfl});
+  $Res call({String? fullName, String? pinfl, String? inn});
 }
 
 /// @nodoc
@@ -529,6 +535,7 @@ class __$$_OwnerDataCopyWithImpl<$Res>
   $Res call({
     Object? fullName = freezed,
     Object? pinfl = freezed,
+    Object? inn = freezed,
   }) {
     return _then(_$_OwnerData(
       fullName: freezed == fullName
@@ -539,6 +546,10 @@ class __$$_OwnerDataCopyWithImpl<$Res>
           ? _value.pinfl
           : pinfl // ignore: cast_nullable_to_non_nullable
               as String?,
+      inn: freezed == inn
+          ? _value.inn
+          : inn // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -546,7 +557,7 @@ class __$$_OwnerDataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_OwnerData implements _OwnerData {
-  const _$_OwnerData({this.fullName, this.pinfl});
+  const _$_OwnerData({this.fullName, this.pinfl, this.inn});
 
   factory _$_OwnerData.fromJson(Map<String, dynamic> json) =>
       _$$_OwnerDataFromJson(json);
@@ -555,10 +566,12 @@ class _$_OwnerData implements _OwnerData {
   final String? fullName;
   @override
   final String? pinfl;
+  @override
+  final String? inn;
 
   @override
   String toString() {
-    return 'OwnerData(fullName: $fullName, pinfl: $pinfl)';
+    return 'OwnerData(fullName: $fullName, pinfl: $pinfl, inn: $inn)';
   }
 
   @override
@@ -568,12 +581,13 @@ class _$_OwnerData implements _OwnerData {
             other is _$_OwnerData &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
-            (identical(other.pinfl, pinfl) || other.pinfl == pinfl));
+            (identical(other.pinfl, pinfl) || other.pinfl == pinfl) &&
+            (identical(other.inn, inn) || other.inn == inn));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, fullName, pinfl);
+  int get hashCode => Object.hash(runtimeType, fullName, pinfl, inn);
 
   @JsonKey(ignore: true)
   @override
@@ -590,8 +604,10 @@ class _$_OwnerData implements _OwnerData {
 }
 
 abstract class _OwnerData implements OwnerData {
-  const factory _OwnerData({final String? fullName, final String? pinfl}) =
-      _$_OwnerData;
+  const factory _OwnerData(
+      {final String? fullName,
+      final String? pinfl,
+      final String? inn}) = _$_OwnerData;
 
   factory _OwnerData.fromJson(Map<String, dynamic> json) =
       _$_OwnerData.fromJson;
@@ -600,6 +616,8 @@ abstract class _OwnerData implements OwnerData {
   String? get fullName;
   @override
   String? get pinfl;
+  @override
+  String? get inn;
   @override
   @JsonKey(ignore: true)
   _$$_OwnerDataCopyWith<_$_OwnerData> get copyWith =>

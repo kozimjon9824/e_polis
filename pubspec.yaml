@@ -67,6 +67,7 @@ dependencies:
   permission_handler: ^10.2.0
   path_provider: ^2.0.15
   open_file: ^3.3.1
+  external_app_launcher: ^3.1.0
 
 
 dev_dependencies:
@@ -119,6 +120,6 @@ flutter:
         - asset: assets/fonts/SFPro.ttf
 
 
-flutter_intl:
+#flutter_intl:
 #  enabled: true
 #  class_name: AppLocalizations

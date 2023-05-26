@@ -21,9 +21,10 @@ class BookCubit extends Cubit<BookState> {
     var result =
         await _bookInsuranceUseCase.call(BookParams(id, state.requestModel));
     result.fold(
-        (failure) =>
-            emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (response) => emit(state.copyWith(status: StateStatus.success)));
+      (failure) =>
+          emit(state.copyWith(failure: failure, status: StateStatus.error)),
+      (response) => emit(state.copyWith(status: StateStatus.success)),
+    );
   }
 
   void onApplicantData(ApplicantModel model) {
@@ -46,8 +47,9 @@ class BookCubit extends Cubit<BookState> {
     BookModel bookModel = state.requestModel;
     var newModel = bookModel.copyWith(
       vehicle: VehicleNumber(
-          plateNumber: vehicleNumber,
-          technicalPassport: DriverPassport(series: series, number: number)),
+        plateNumber: vehicleNumber,
+        technicalPassport: DriverPassport(series: series, number: number),
+      ),
     );
     emit(state.copyWith(status: StateStatus.unknown, requestModel: newModel));
   }
@@ -74,7 +76,11 @@ class BookCubit extends Cubit<BookState> {
     emit(state.copyWith(status: StateStatus.unknown, contract: contract));
   }
 
-  void onPaymentHolder(String name) {
+  void onPaymentHolder(String? name) {
     emit(state.copyWith(status: StateStatus.unknown, paymentHolder: name));
+  }
+
+  void onInn(String? inn) {
+    emit(state.copyWith(status: StateStatus.unknown, inn: inn));
   }
 }

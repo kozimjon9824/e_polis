@@ -171,6 +171,10 @@
   "enterAllDriversInputs": "Заполнить все входные данные водителей",
   "paymentInstruction": "Вам выставлен счет на оплату",
   "download": "Download",
-  "expired": "Expired"
+  "expired": "Expired",
+  "company": "Ширкат номи",
+  "inn": "ИНН",
+  "show": "See",
+  "open": "Open"
 
 }

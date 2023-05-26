@@ -32,11 +32,13 @@ class UserProductDetailsCubit extends Cubit<UserProductDetailsState> {
 
   Future<void> downloadFile({required String url}) async {
     var file = File('');
+    String filePath = '';
     if (Platform.isIOS) {
       final dir = await getApplicationDocumentsDirectory();
-      final Directory? downloadsDir = await getDownloadsDirectory();
+      // final Directory? downloadsDir = await getDownloadsDirectory();
       String fn = url.split('/').last;
-      file = File('${downloadsDir?.path ?? dir.path}/$fn');
+      file = File('${dir.path}/$fn.pdf');
+      filePath = dir.path;
     }
     if (Platform.isAndroid) {
       var status = await Permission.storage.status;
@@ -48,6 +50,7 @@ class UserProductDetailsCubit extends Cubit<UserProductDetailsState> {
         Directory dir = Directory(downloadsFolderPath);
         String fn = url.split('/').last;
         file = File('${dir.path}/$fn.pdf');
+        filePath = dir.path;
       }
     }
 
@@ -60,6 +63,6 @@ class UserProductDetailsCubit extends Cubit<UserProductDetailsState> {
         debugPrint('---Download----Rec: $count, Total: $total');
       },
     );
-    emit(state.copyWith(fileDownloading: false, filePath: file.path));
+    emit(state.copyWith(fileDownloading: false, filePath: filePath));
   }
 }

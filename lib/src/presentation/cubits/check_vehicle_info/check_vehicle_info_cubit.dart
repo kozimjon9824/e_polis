@@ -28,9 +28,10 @@ class CheckVehicleInfoCubit extends Cubit<CheckVehicleInfoState> {
     var result = await _vehicleInfoUseCase.call(
       CheckVehicleInfoParam(
         VehicleInfoRequest(
-            plateNumber: vehicleNum.replaceAll(' ', ''),
-            technicalPassport:
-                TechnicalPassport(series: techPasSer, number: techPasNum)),
+          plateNumber: vehicleNum.replaceAll(' ', ''),
+          technicalPassport:
+              TechnicalPassport(series: techPasSer, number: techPasNum),
+        ),
       ),
     );
     result.fold(
@@ -38,9 +39,10 @@ class CheckVehicleInfoCubit extends Cubit<CheckVehicleInfoState> {
           emit(state.copyWith(failure: failure, status: StateStatus.error)),
       (response) => emit(
         state.copyWith(
-            status: StateStatus.unknown,
-            vehicleInfo: response,
-            isPassportValidated: response.isPassportOK ?? false),
+          status: StateStatus.unknown,
+          vehicleInfo: response,
+          isPassportValidated: response.isPassportOK ?? false,
+        ),
       ),
     );
   }
@@ -50,10 +52,14 @@ class CheckVehicleInfoCubit extends Cubit<CheckVehicleInfoState> {
     required String number,
   }) async {
     emit(state.copyWith(status: StateStatus.loading));
-    var result = await _validatePassportUseCase.call(ValidatePassportParams(
+    var result = await _validatePassportUseCase.call(
+      ValidatePassportParams(
         DriverPassportValidation(
-            pinfl: state.vehicleInfo?.owner?.pinfl ?? '',
-            passport: PassportData(series: series, number: number))));
+          pinfl: state.vehicleInfo?.owner?.pinfl ?? '',
+          passport: PassportData(series: series, number: number),
+        ),
+      ),
+    );
     result.fold(
       (failure) =>
           emit(state.copyWith(failure: failure, status: StateStatus.error)),

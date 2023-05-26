@@ -75,7 +75,7 @@ final inject = GetIt.instance;
 
 Future<void> initDi() async {
   /// cubit initialization : auth
-  inject.registerFactory(() => AuthCubit(inject(), inject(), inject()));
+  inject.registerLazySingleton(() => AuthCubit(inject(), inject(), inject()));
   inject.registerFactory(() => LoginCubit(inject()));
   inject.registerFactory(() => VerifyCubit(inject()));
 

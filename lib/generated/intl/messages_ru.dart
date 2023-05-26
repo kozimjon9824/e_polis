@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Очистить информацию"),
         "close": MessageLookupByLibrary.simpleMessage("Закрыть"),
         "commission": MessageLookupByLibrary.simpleMessage("Коммисия"),
+        "company": MessageLookupByLibrary.simpleMessage("Название компании"),
         "compensationPriceTitle": MessageLookupByLibrary.simpleMessage(
             "Возмещение ущерба имуществу потерпевшего"),
         "confirm": MessageLookupByLibrary.simpleMessage("Подтвердить"),
@@ -127,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "inDetail": MessageLookupByLibrary.simpleMessage("Подробно"),
         "infoAboutCar":
             MessageLookupByLibrary.simpleMessage("Информация об автомобиле"),
+        "inn": MessageLookupByLibrary.simpleMessage("ИНН"),
         "insuranceDamagePriceTitle": MessageLookupByLibrary.simpleMessage(
             "Страхование вреда, причиненного жизни и здоровью пострадавшей стороны"),
         "insurancePrice":
@@ -188,6 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onBoardingTitle3": MessageLookupByLibrary.simpleMessage(
             "Живая и дружелюбная 24/7 техническая поддержка"),
         "oneYear": MessageLookupByLibrary.simpleMessage("1 год"),
+        "open": MessageLookupByLibrary.simpleMessage("Открыть"),
         "operating": MessageLookupByLibrary.simpleMessage("Действующие"),
         "ourMission": MessageLookupByLibrary.simpleMessage("Наша миссия"),
         "passport": MessageLookupByLibrary.simpleMessage("Паспорта/ID карта"),
@@ -237,6 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "seriesNumberPolis":
             MessageLookupByLibrary.simpleMessage("Серия и номер полиса"),
         "serverError": MessageLookupByLibrary.simpleMessage("Ошибка сервера"),
+        "show": MessageLookupByLibrary.simpleMessage("Видеть"),
         "sixMonth": MessageLookupByLibrary.simpleMessage("6 месяцев"),
         "skip": MessageLookupByLibrary.simpleMessage("Пропустить"),
         "startUsing":

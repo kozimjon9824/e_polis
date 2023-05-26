@@ -17,6 +17,7 @@ import 'package:e_polis/src/presentation/views/onboarding/onboarding_page.dart';
 import 'package:e_polis/src/presentation/views/payment_success/payment_success.dart';
 import 'package:e_polis/src/presentation/views/profile_info/profile_info.dart';
 import 'package:e_polis/src/presentation/views/splash/splash_page.dart';
+import 'package:e_polis/src/presentation/views/travel_basic_selections/travel_basic_selections_page.dart';
 import 'package:e_polis/src/presentation/views/verification_success/verification_success.dart';
 import 'package:e_polis/src/presentation/views/verify_change_phone/verify_phone.dart';
 import 'package:flutter/material.dart';
@@ -111,6 +112,12 @@ class RouteGenerateKit {
       case AppRoutes.polisDetails:
         return MaterialPageRoute(
           builder: (context) => const PolisDetailsPage(),
+          settings: RouteSettings(arguments: args),
+        );
+
+      case AppRoutes.travelBasic:
+        return MaterialPageRoute(
+          builder: (context) => const TravelBasicSelectionPage(),
           settings: RouteSettings(arguments: args),
         );
     }

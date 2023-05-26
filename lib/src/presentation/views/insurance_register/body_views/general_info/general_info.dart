@@ -191,6 +191,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     context
                         .read<BookCubit>()
                         .onPaymentHolder(owner?.fullName ?? '');
+                    context.read<BookCubit>().onPaymentHolder(owner?.inn);
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(1);
