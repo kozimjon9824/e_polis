@@ -54,7 +54,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
             phoneController.text =
                 phoneMask.maskText(data?.phone?.substring(3) ?? '');
             return profileBodyWidget(
-                file: state.selectedFile, data: data, context: context);
+              file: state.selectedFile,
+              data: data,
+              context: context,
+            );
           },
         ),
         bottomNavigationBar: saveButton(),

@@ -22,12 +22,11 @@ class LimitedDriverTabBarCubit extends Cubit<LimitedDriverTabBarState> {
       return;
     }
     tabs.add(IndexedDriverModel());
-    emit(
-      state.copyWith(
-          status: StateStatus.unknown,
-          drivers: tabs,
-          currentIndex: state.currentIndex + 1),
-    );
+    emit(state.copyWith(
+      status: StateStatus.unknown,
+      drivers: tabs,
+      currentIndex: state.currentIndex + 1,
+    ));
   }
 
   void removeTab(int index) {
@@ -65,6 +64,7 @@ class LimitedDriverTabBarCubit extends Cubit<LimitedDriverTabBarState> {
     var withRelative = newModel.driverModel?.copyWith(relative: relativeKey);
     newModel.driverModel = withRelative;
     newModel.relativeKey = relativeKey;
+    newModel.isSuccess = true;
     tabs[index] = newModel;
     emit(state.copyWith(status: StateStatus.unknown, drivers: tabs));
   }

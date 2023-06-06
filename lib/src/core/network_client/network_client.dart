@@ -51,8 +51,9 @@ class NetworkClient {
             // Navigator.pushNamed(
             //     navigatorKey.currentContext!, AppRoutes.nooInternet);
             DioConnectivityRequestRetrier(
-                    dio: api, connectivity: Connectivity())
-                .scheduleRequestRetry(error.requestOptions);
+              dio: api,
+              connectivity: Connectivity(),
+            ).scheduleRequestRetry(error.requestOptions);
           } catch (er) {
             return handler.next(error);
           }
@@ -90,10 +91,11 @@ class NetworkClient {
       },
     ));
     api.interceptors.add(LogInterceptor(
-        requestBody: true,
-        responseBody: true,
-        requestHeader: true,
-        request: true));
+      requestBody: true,
+      responseBody: true,
+      requestHeader: true,
+      request: true,
+    ));
     return api;
   }
 
@@ -143,8 +145,11 @@ class NetworkClient {
   Future<void> _goToLoginScreen() async {
     await inject<AuthCubit>().logout();
 
+    if (navigatorKey.currentContext!.mounted) {
+      Navigator.pushNamedAndRemoveUntil(
+          navigatorKey.currentContext!, AppRoutes.main, (route) => false);
+    }
+
     /// Navigate to Sign in Screen
-    Navigator.pushNamedAndRemoveUntil(
-        navigatorKey.currentContext!, AppRoutes.splash, (route) => false);
   }
 }

@@ -2,6 +2,7 @@ import 'package:e_polis/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:pinput/pinput.dart';
 import '../../../../../../core/themes/app_colors.dart';
 import '../../../../../../core/themes/app_icons.dart';
 import '../../../../../../core/themes/app_text_styles.dart';
@@ -99,6 +100,9 @@ class DriverInformationWidget extends StatelessWidget {
                   onChange: (value) {
                     if (value.length == 2) {
                       focusNodeNumberID!.requestFocus();
+                      if (numberID.text.length == 7) {
+                        onRequest();
+                      }
                     }
                   },
                 ),

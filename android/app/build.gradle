@@ -45,13 +45,12 @@ android {
 
     defaultConfig {
         applicationId "com.impex.epolis.uz.e_polis"
-        multiDexEnabled true
         minSdkVersion 21
         targetSdkVersion 33
+        multiDexEnabled true
         versionCode 8
         versionName "1.0.0"
         archivesBaseName = "epolis-v${versionName}"
-
     }
 
     signingConfigs {
@@ -81,4 +80,6 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:multidex:1.0.3'
+//    implementation("androidx.multidex:multidex:2.0.1")
+
 }

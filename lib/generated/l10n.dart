@@ -1750,13 +1750,13 @@ class AppLocalizations {
     );
   }
 
-  /// `Вам выставлен счет на оплату`
-  String get paymentInstruction {
+  /// `Счет для оплаты был отправлен на Ваш номер {phone} через СLICK.`
+  String paymentInstruction(Object phone) {
     return Intl.message(
-      'Вам выставлен счет на оплату',
+      'Счет для оплаты был отправлен на Ваш номер $phone через СLICK.',
       name: 'paymentInstruction',
       desc: '',
-      args: [],
+      args: [phone],
     );
   }
 

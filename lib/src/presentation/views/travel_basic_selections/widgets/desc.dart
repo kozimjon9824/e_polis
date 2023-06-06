@@ -5,7 +5,10 @@ import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/app_text_styles.dart';
 
 class Desc extends StatelessWidget {
-  const Desc({Key? key, required this.desc}) : super(key: key);
+  const Desc({
+    Key? key,
+    required this.desc,
+  }) : super(key: key);
   final String desc;
 
   @override

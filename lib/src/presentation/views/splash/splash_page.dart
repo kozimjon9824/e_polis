@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    if (context.mounted) {
+    if (mounted) {
       Future.delayed(const Duration(seconds: 2)).then((value) {
         context.read<AuthCubit>().checkUserToAuth();
       });

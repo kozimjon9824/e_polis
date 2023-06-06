@@ -169,7 +169,7 @@
   "totalAmount": "Умумий сумма",
   "downloadPayDoc": "Квитанцияни юклаб олиш",
   "enterAllDriversInputs": "Ҳайдовчи ҳақидаги барча маълумотларни тўлдиринг",
-  "paymentInstruction": "Сиздан тўлов учун ҳисоб-китоб қилинган",
+  "paymentInstruction": "Сизнинг {phone} рақамингизга тўлов учун хисоб СLICK орқали юборилди.",
   "download": "Кўчириш",
   "expired": "Муддати тугаган",
   "company": "Ширкат номи",

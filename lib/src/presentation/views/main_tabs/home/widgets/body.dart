@@ -69,6 +69,7 @@ class InsuranceTypesBody extends StatelessWidget {
               //   arguments: data.id ?? '',
               // );
             } else {
+              /// travel page
               Navigator.pushNamed(
                 context,
                 AppRoutes.travelBasic,

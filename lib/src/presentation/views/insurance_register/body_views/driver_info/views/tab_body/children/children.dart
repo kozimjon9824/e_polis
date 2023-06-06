@@ -69,6 +69,10 @@ class Child1Body extends StatelessWidget {
                 onChange: (value) {
                   if (value.length == 2) {
                     numberFocus?.requestFocus();
+                    if (dateController.text.length == 10 &&
+                        numberController.text.length == 2) {
+                      onRequest();
+                    }
                   }
                 },
               ),
@@ -97,6 +101,10 @@ class Child1Body extends StatelessWidget {
                 onChange: (value) {
                   if (value.length == 7) {
                     dateFocus?.requestFocus();
+                    if (dateController.text.length == 10 &&
+                        seriesController.text.length == 2) {
+                      onRequest();
+                    }
                   }
                 },
               ),
@@ -173,11 +181,11 @@ class Child2Body extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
-        if (!hideDropDown)
-          TitleSubtitle(
-            title: AppLocalizations.of(context).fio,
-            subtitle: data?.fullName ?? '',
-          ),
+        // if (!hideDropDown)
+        TitleSubtitle(
+          title: AppLocalizations.of(context).fio,
+          subtitle: data?.fullName ?? '',
+        ),
         if (!hideDropDown) const SizedBox(height: 8),
         if (!hideDropDown)
           DropDownButton<String>(

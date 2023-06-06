@@ -2,11 +2,17 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/themes/app_colors.dart';
+import '../../../../../data/models/basic_filter/request/basic_filter_request.dart';
 import '../../../../../data/models/main/main.dart';
+import '../../../../cubits/auth/auth_cubit.dart';
+import '../../../../cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
+import '../../../insurcance_details/insurance_details.dart';
+import '../../../insurcance_details/widgets/dialog_body.dart';
 
 class CarouselPromoWidget extends StatefulWidget {
   const CarouselPromoWidget({
@@ -35,11 +41,30 @@ class _CarouselPromoWidgetState extends State<CarouselPromoWidget> {
                   image: banner.photo ?? '',
                   onTap: () {
                     if (banner.action == 'deepLink') {
-                      Navigator.pushNamed(
-                        context,
-                        AppRoutes.insuranceBasicFilter,
-                        arguments: banner.meta?.id ?? '',
-                      );
+                      context
+                          .read<InsuranceBasicFilterCubit>()
+                          .inputProductId(banner.meta?.id ?? '');
+                      if (context.read<AuthCubit>().state
+                          is UnAuthenticatedState) {
+                        showDialog(
+                          context: context,
+                          builder: (_) => DialogBody(
+                            onSubmit: () {
+                              Navigator.pop(context);
+                              Navigator.pushNamed(context, AppRoutes.login);
+                            },
+                          ),
+                        );
+                      } else {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.insuranceRegistration,
+                          arguments: InsurancePageArguments(
+                            id: banner.meta?.id ?? '',
+                            request: const BasicFilterRequest(),
+                          ),
+                        );
+                      }
                     }
                   },
                 ),

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
@@ -128,10 +127,11 @@ class _PolisDetailsPageState extends State<PolisDetailsPage> {
                               url: state.userProduct?.downloadUrl ?? '');
                         } else {
                           if (Platform.isAndroid) {
-                            LaunchApp.openApp(
-                              androidPackageName: state.filePath!,
-                              openStore: false,
-                            );
+                            // LaunchApp.openApp(
+                            //   androidPackageName: state.filePath!,
+                            //   openStore: false,
+                            // );
+
                             OpenFile.open(state.filePath!);
                           } else {
                             LaunchApp.openApp(

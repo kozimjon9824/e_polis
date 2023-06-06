@@ -20,6 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'uz_Cyrl';
 
+  static String m0(phone) =>
+      "Сизнинг ${phone} рақамингизга тўлов учун хисоб СLICK орқали юборилди.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "SuccessDes": MessageLookupByLibrary.simpleMessage(
@@ -199,8 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payed": MessageLookupByLibrary.simpleMessage("Тўланган"),
         "payment": MessageLookupByLibrary.simpleMessage("Тўлов"),
         "paymentAmount": MessageLookupByLibrary.simpleMessage("Тўлов суммаси"),
-        "paymentInstruction": MessageLookupByLibrary.simpleMessage(
-            "Сиздан тўлов учун ҳисоб-китоб қилинган"),
+        "paymentInstruction": m0,
         "paymentType": MessageLookupByLibrary.simpleMessage("Тўлов тури"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Телефон рақам"),
         "pickImage": MessageLookupByLibrary.simpleMessage("Расм қўшиш"),

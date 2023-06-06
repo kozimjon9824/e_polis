@@ -20,13 +20,14 @@ class ProfileDetailsWidget extends StatelessWidget {
     return BlocBuilder<MainScreenDataCubit, MainScreenDataState>(
       builder: (context, state) {
         return state.maybeWhen(
-            orElse: () => const Profile(hasUser: false),
-            loaded: (data) => Profile(
-                  hasUser: data?.user != null,
-                  fullName: data?.user?.fullName,
-                  image: data?.user?.photo,
-                  phone: data?.user?.phone,
-                ));
+          orElse: () => const Profile(hasUser: false),
+          loaded: (data) => Profile(
+            hasUser: data?.user != null,
+            fullName: data?.user?.fullName,
+            image: data?.user?.photo,
+            phone: data?.user?.phone,
+          ),
+        );
       },
     );
   }
@@ -40,6 +41,7 @@ class Profile extends StatelessWidget {
     this.phone,
     required this.hasUser,
   }) : super(key: key);
+
   final String? fullName;
   final String? image;
   final String? phone;
@@ -70,19 +72,26 @@ class Profile extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, AppRoutes.login);
                   },
-                  child: Text(AppLocalizations.of(context).registration,
-                      style: AppTextStyles.styleW700S16Grey9
-                          .copyWith(color: AppColors.primaryColor)),
+                  child: Text(
+                    AppLocalizations.of(context).registration,
+                    style: AppTextStyles.styleW700S16Grey9
+                        .copyWith(color: AppColors.primaryColor),
+                  ),
                 )
               : Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(fullName ?? AppLocalizations.of(context).nameSurname,
-                          style: AppTextStyles.styleW700S16Grey9),
+                      Text(
+                        fullName ?? AppLocalizations.of(context).nameSurname,
+                        style: AppTextStyles.styleW700S16Grey9,
+                      ),
                       const SizedBox(height: 6),
-                      Text(getMaskedPhone(phone) ?? '+998 90 123 45 67',
-                          maxLines: 1, style: AppTextStyles.styleW500S16Grey4),
+                      Text(
+                        getMaskedPhone(phone) ?? '+998 90 123 45 67',
+                        maxLines: 1,
+                        style: AppTextStyles.styleW500S16Grey4,
+                      ),
                     ],
                   ),
                 )

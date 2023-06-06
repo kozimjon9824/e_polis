@@ -169,7 +169,7 @@
   "totalAmount": "Общая сумма",
   "downloadPayDoc": "Скачать квитацию",
   "enterAllDriversInputs": "Заполнить все входные данные водителей",
-  "paymentInstruction": "Вам выставлен счет на оплату",
+  "paymentInstruction": "Счет для оплаты был отправлен на Ваш номер {phone} через СLICK.",
   "download": "Download",
   "expired": "Expired",
   "company": "Ширкат номи",

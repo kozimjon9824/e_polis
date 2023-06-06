@@ -60,7 +60,8 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
               if (state.status == StateStatus.error) {
                 driverCubit.addDriverData(
                   index: widget.index - 1,
-                  model: IndexedDriverModel(isSuccess: isCompany?true:false),
+                  model:
+                      IndexedDriverModel(isSuccess: isCompany ? true : false),
                 );
                 showErrorMessage(
                     context, state.failure.getLocalizedMessage(context));
@@ -81,7 +82,9 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                   ),
                 );
                 driverCubit.addDriverData(
-                    index: widget.index - 1, model: model);
+                  index: widget.index - 1,
+                  model: model,
+                );
               }
             },
             builder: (context, state) {
@@ -105,7 +108,9 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                       title:
                           '${widget.index}-${AppLocalizations.of(context).driver}',
                       padding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 10),
+                        vertical: 16,
+                        horizontal: 10,
+                      ),
                       padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
                       showChildren2:
                           (state.driverData != null || state.fillByHand),

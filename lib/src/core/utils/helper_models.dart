@@ -32,7 +32,7 @@ final paymentTypeList = [
 
 class IndexedDriverModel {
   DriverModel? driverModel;
-  final bool? isSuccess;
+  bool? isSuccess;
   bool relativeSelected;
   int relativeKey;
 

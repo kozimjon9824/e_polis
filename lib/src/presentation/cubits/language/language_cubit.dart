@@ -19,18 +19,20 @@ class LanguageCubit extends Cubit<LanguageState> {
   void loadAppLang() async {
     var result = await _getAppLangUseCase.call(NoParams());
     result.fold(
-        (failure) =>
-            emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (language) => emit(
-            state.copyWith(status: StateStatus.unknown, language: language)));
+      (failure) =>
+          emit(state.copyWith(failure: failure, status: StateStatus.error)),
+      (language) =>
+          emit(state.copyWith(status: StateStatus.unknown, language: language)),
+    );
   }
 
   void saveAppLang(String lang) async {
     var result = await _setAppLangUseCase.call(AppLangParam(lang));
     result.fold(
-        (failure) =>
-            emit(state.copyWith(failure: failure, status: StateStatus.error)),
-        (language) => emit(
-            state.copyWith(status: StateStatus.unknown, language: language)));
+      (failure) =>
+          emit(state.copyWith(failure: failure, status: StateStatus.error)),
+      (language) =>
+          emit(state.copyWith(status: StateStatus.unknown, language: language)),
+    );
   }
 }

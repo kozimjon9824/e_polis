@@ -28,7 +28,7 @@ class LimitlessDriverView extends StatelessWidget {
             body: (state.drivers.isEmpty)
                 ? const SizedBox.shrink()
                 : NestedScrollView(
-                    headerSliverBuilder: (BuildContext context, bool _) {
+                    headerSliverBuilder: (BuildContext context, _) {
                       return [
                         SliverPadding(
                           padding: const EdgeInsets.all(16),
@@ -134,27 +134,33 @@ class LimitlessDriverView extends StatelessWidget {
                   ),
             bottomNavigationBar: (state.drivers.isNotEmpty)
                 ? null
-                : SafeArea(
-                    minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CustomOutlineButton(
-                          text: AppLocalizations.of(context).addDriver,
-                          onTap: () => cubit.addTab(),
+                : BlocBuilder<BookCubit, BookState>(
+                    builder: (context, state) {
+                      bool isCompany = state.inn != null;
+                      return SafeArea(
+                        minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (!isCompany)
+                              CustomOutlineButton(
+                                text: AppLocalizations.of(context).addDriver,
+                                onTap: () => cubit.addTab(),
+                              ),
+                            const SizedBox(height: 16),
+                            CustomButton(
+                              text: AppLocalizations.of(context).next,
+                              onTap: () {
+                                context.read<BookCubit>().onDriverListData([]);
+                                context
+                                    .read<ManageInsuranceStackViewsCubit>()
+                                    .changeIndex(2);
+                              },
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 16),
-                        CustomButton(
-                          text: AppLocalizations.of(context).next,
-                          onTap: () {
-                            context.read<BookCubit>().onDriverListData([]);
-                            context
-                                .read<ManageInsuranceStackViewsCubit>()
-                                .changeIndex(2);
-                          },
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
           );
         },

@@ -97,3 +97,11 @@ class CacheFailure extends Failure {
   String getLocalizedMessage(BuildContext context) =>
       AppLocalizations.of(context).cacheError;
 }
+
+class GeneralFailure extends Failure {
+  const GeneralFailure(this.message) : super();
+  final String message;
+
+  @override
+  String getLocalizedMessage(BuildContext context) => message;
+}

@@ -116,6 +116,9 @@ class CarInformationWidget extends StatelessWidget {
                 onChange: (value) {
                   if (value.length == 3) {
                     focusNodeTechNumber!.requestFocus();
+                    if (numberController.text.length == 7) {
+                      onRequest();
+                    }
                   }
                 },
               ),

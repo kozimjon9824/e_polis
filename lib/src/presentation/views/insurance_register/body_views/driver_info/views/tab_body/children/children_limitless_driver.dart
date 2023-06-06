@@ -21,6 +21,7 @@ class LimitlessDriverChild1Body extends StatelessWidget {
     required this.onRequest,
     required this.readOnly,
   }) : super(key: key);
+
   final TextEditingController seriesController;
   final TextEditingController numberController;
   final TextEditingController dateController;
@@ -61,13 +62,17 @@ class LimitlessDriverChild1Body extends StatelessWidget {
                   MaskTextInputFormatter(
                     mask: '##',
                     initialText: seriesController.text,
-                    filter: {"#": RegExp(r'[a-zA-Z]')},
+                    filter: {"#": RegExp(r"[a-zA-Z]")},
                   ),
                   UpperCaseTextFormatter(),
                 ],
                 onChange: (value) {
                   if (value.length == 2) {
                     numberFocus!.requestFocus();
+                    if (dateController.text.length == 10 &&
+                        numberController.text.length == 2) {
+                      onRequest();
+                    }
                   }
                 },
               ),
@@ -96,6 +101,10 @@ class LimitlessDriverChild1Body extends StatelessWidget {
                 onChange: (value) {
                   if (value.length == 7) {
                     dateFocus!.requestFocus();
+                    if (dateController.text.length == 10 &&
+                        seriesController.text.length == 2) {
+                      onRequest();
+                    }
                   }
                 },
               ),
@@ -150,6 +159,7 @@ class LimitlessDriverChild2Body extends StatelessWidget {
     this.licenseSeriesNode,
     this.licenseNumberNode,
     this.licenseDateNode,
+    required this.hideDropDown,
   }) : super(key: key);
 
   final DriverPassportInputResponse? data;
@@ -161,6 +171,7 @@ class LimitlessDriverChild2Body extends StatelessWidget {
   final FocusNode? licenseSeriesNode;
   final FocusNode? licenseNumberNode;
   final FocusNode? licenseDateNode;
+  final bool hideDropDown;
 
   @override
   Widget build(BuildContext context) {
@@ -168,19 +179,21 @@ class LimitlessDriverChild2Body extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
-        const SizedBox(height: 8),
-        DropDownButton<String>(
-          label: AppLocalizations.of(context).relationShip,
-          errorText: AppLocalizations.of(context).select,
-          items: dropDownValues
-              .map(
-                (item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(item, style: AppTextStyles.styleW400S14Grey6)),
-              )
-              .toList(),
-          onChanged: onChange,
-        ),
+        if (!hideDropDown) const SizedBox(height: 8),
+        if (!hideDropDown)
+          DropDownButton<String>(
+            label: AppLocalizations.of(context).relationShip,
+            errorText: AppLocalizations.of(context).select,
+            items: dropDownValues
+                .map(
+                  (item) => DropdownMenuItem<String>(
+                      value: item,
+                      child:
+                          Text(item, style: AppTextStyles.styleW400S14Grey6)),
+                )
+                .toList(),
+            onChanged: onChange,
+          ),
         const SizedBox(height: 16),
         Text(
           AppLocalizations.of(context).driverLicense,
@@ -208,7 +221,7 @@ class LimitlessDriverChild2Body extends StatelessWidget {
                   MaskTextInputFormatter(
                     mask: '##',
                     initialText: licenseSeries.text,
-                    filter: {"#": RegExp(r'[a-zA-Z]')},
+                    filter: {"#": RegExp(r"[a-zA-Z]")},
                   ),
                   UpperCaseTextFormatter(),
                 ],

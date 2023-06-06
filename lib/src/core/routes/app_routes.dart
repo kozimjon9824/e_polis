@@ -24,6 +24,7 @@ class AppRoutes {
   static const paymentSuccess = '/paymentSuccess';
   static const polisDetails = '/polisDetails';
 
-  ///
+  /// travel part
   static const travelBasic = '/travelBasic';
+  static const travelInsDetails = '/travelInsDetails';
 }

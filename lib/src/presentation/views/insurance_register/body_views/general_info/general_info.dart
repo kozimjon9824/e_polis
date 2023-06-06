@@ -100,13 +100,16 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                   Form(
                     key: formKey2,
                     child: DriverInformationWidget(
-                      hidePassportFields:
-                          state.vehicleInfo?.isPassportOK ?? false,
+                      hidePassportFields: state.vehicleInfo?.owner?.inn != null
+                          ? true
+                          : state.vehicleInfo?.isPassportOK ?? false,
                       seriesID: seriesID,
                       numberID: numberID,
                       phoneController: phoneController,
                       ownerData: state.vehicleInfo?.owner,
-                      isValidated: state.isPassportValidated,
+                      isValidated: state.vehicleInfo?.owner?.inn != null
+                          ? true
+                          : state.isPassportValidated,
                       focusNodeNumberID: focusNodeNumberID,
                       focusNodeSeriesID: focusNodeSeriesID,
                       focusNodePhone: focusNodePhone,
@@ -155,7 +158,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                       techPasSer: series.text,
                       techPasNum: number.text,
                     );
-                  } else if (!state.isPassportValidated) {
+                  } else if (!state.isPassportValidated &&
+                      (state.vehicleInfo?.owner?.inn == null)) {
                     if (!formKey2.currentState!.validate()) {
                       return;
                     }
@@ -191,7 +195,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     context
                         .read<BookCubit>()
                         .onPaymentHolder(owner?.fullName ?? '');
-                    context.read<BookCubit>().onPaymentHolder(owner?.inn);
+                    context.read<BookCubit>().onInn(owner?.inn);
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(1);

@@ -16,6 +16,7 @@ class PaymentView extends StatelessWidget {
     Key? key,
     required this.arguments,
   }) : super(key: key);
+
   final InsurancePageArguments arguments;
 
   @override

@@ -120,7 +120,7 @@ class MainRepository implements IMainRepository {
         return const Left(ConnectionFailure());
       }
       if (e.response?.statusCode == 400) {
-        return const Left(InputDataWrongFailure());
+        return Left(GeneralFailure(e.response?.data?['message'] ?? ''));
       }
       if (e.response?.statusCode == 500) {
         return const Left(NoLicenceFoundFailure());
@@ -152,7 +152,7 @@ class MainRepository implements IMainRepository {
         return const Left(ConnectionFailure());
       }
       if (e.response?.statusCode == 400) {
-        return const Left(InputDataWrongFailure());
+        return Left(GeneralFailure(e.response?.data?['message'] ?? ''));
       }
       return Left(
         (e.response?.statusCode == 401)
@@ -181,7 +181,7 @@ class MainRepository implements IMainRepository {
         return const Left(ConnectionFailure());
       }
       if (e.response?.statusCode == 400) {
-        return const Left(PassportValidationFailure());
+        return Left(GeneralFailure(e.response?.data?['message'] ?? ''));
       }
       return Left(
         (e.response?.statusCode == 401)
@@ -264,7 +264,7 @@ class MainRepository implements IMainRepository {
       return Left(
         (e.response?.statusCode == 401)
             ? const UnAuthorizationFailure()
-            : const UnknownFailure(),
+            : GeneralFailure(e.response?.data?['message'] ?? ''),
       );
     } on Object catch (e) {
       if (kDebugMode) {

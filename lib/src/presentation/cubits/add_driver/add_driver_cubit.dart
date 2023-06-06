@@ -45,9 +45,10 @@ class AddDriverCubit extends Cubit<AddDriverState> {
   }
 
   void clearDriverData() {
-    emit(
-      state.copyWith(
-          status: StateStatus.unknown, driverData: null, fillByHand: false),
-    );
+    emit(state.copyWith(
+      status: StateStatus.unknown,
+      driverData: null,
+      fillByHand: false,
+    ));
   }
 }
