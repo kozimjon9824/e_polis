@@ -20,6 +20,8 @@ import 'src/presentation/cubits/language/language_cubit.dart';
 import 'src/presentation/cubits/my_current_products/current_products_cubit.dart';
 import 'src/presentation/cubits/my_product_tab_controller/product_tab_manager_cubit.dart';
 
+/// developer: Kozimjon kh
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -56,7 +58,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           String language = state.language ?? RU;
           return MaterialApp(
-            title: 'E-Polis',
+            title: 'E-polis',
             debugShowCheckedModeBanner: false,
             theme: appThemeData,
             onGenerateRoute: RouteGenerateKit().generateKit,
