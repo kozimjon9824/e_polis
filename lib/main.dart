@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           String language = state.language ?? RU;
           return MaterialApp(
-            title: 'E-polis',
+            title: 'E-Polis',
             debugShowCheckedModeBanner: false,
             theme: appThemeData,
             onGenerateRoute: RouteGenerateKit().generateKit,
