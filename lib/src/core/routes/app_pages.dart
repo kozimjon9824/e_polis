@@ -23,6 +23,7 @@ import 'package:e_polis/src/presentation/views/verify_change_phone/verify_phone.
 import 'package:flutter/material.dart';
 import '../../presentation/views/about/about.dart';
 import '../../presentation/views/my_polis_details/polis_details.dart';
+import '../../presentation/views/travel_booking/travel_book.dart';
 import '../../presentation/views/travel_insurance_details/travel_insurance_details.dart';
 import 'app_routes.dart';
 
@@ -125,6 +126,11 @@ class RouteGenerateKit {
       case AppRoutes.travelInsDetails:
         return MaterialPageRoute(
           builder: (context) => const TravelInsuranceDetailsPage(),
+          settings: RouteSettings(arguments: args),
+        );
+      case AppRoutes.travelBooking:
+        return MaterialPageRoute(
+          builder: (context) => const TravelBookingPage(),
           settings: RouteSettings(arguments: args),
         );
     }

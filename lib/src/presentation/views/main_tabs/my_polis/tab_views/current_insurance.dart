@@ -18,15 +18,17 @@ class CurrentInsuranceView extends StatelessWidget {
           initial: () => const UnAuthPolis(),
           loading: () => const LoadingWidget(),
           loaded: (data) => RefreshIndicator(
-              onRefresh: () async {
-                await context.read<CurrentProductsCubit>().loadData(true);
-              },
-              child: CurrentSingleProduct(productList: data)),
+            onRefresh: () async {
+              await context.read<CurrentProductsCubit>().loadData(true);
+            },
+            child: CurrentSingleProduct(productList: data),
+          ),
           error: (failure) => ErrorView(
-              errorText: failure.getLocalizedMessage(context),
-              onTap: () {
-                context.read<CurrentProductsCubit>().loadData();
-              }),
+            errorText: failure.getLocalizedMessage(context),
+            onTap: () {
+              context.read<CurrentProductsCubit>().loadData();
+            },
+          ),
         );
       },
     );

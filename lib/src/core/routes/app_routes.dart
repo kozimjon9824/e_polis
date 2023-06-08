@@ -27,4 +27,5 @@ class AppRoutes {
   /// travel part
   static const travelBasic = '/travelBasic';
   static const travelInsDetails = '/travelInsDetails';
+  static const travelBooking = '/travelBooking';
 }

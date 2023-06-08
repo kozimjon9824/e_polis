@@ -115,6 +115,7 @@ class CarouselPic extends StatelessWidget {
     required this.image,
     required this.onTap,
   }) : super(key: key);
+
   final String image;
   final Function() onTap;
 

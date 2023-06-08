@@ -114,7 +114,9 @@ class TravelInsuranceDetailsPage extends StatelessWidget {
                   },
                 ),
               );
-            } else {}
+            } else {
+              Navigator.pushNamed(context, AppRoutes.travelBooking);
+            }
           },
         ),
       ),

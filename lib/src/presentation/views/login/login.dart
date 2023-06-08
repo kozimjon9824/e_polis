@@ -22,9 +22,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final controller = TextEditingController();
   final mask = MaskTextInputFormatter(
-      mask: '(##) ### ## ##',
-      filter: {"#": RegExp(r'\d')},
-      type: MaskAutoCompletionType.eager);
+    mask: '(##) ### ## ##',
+    filter: {"#": RegExp(r'\d')},
+    type: MaskAutoCompletionType.eager,
+  );
 
   @override
   Widget build(BuildContext context) {

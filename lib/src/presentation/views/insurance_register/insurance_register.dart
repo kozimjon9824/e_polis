@@ -13,15 +13,9 @@ import 'body_views/general_info/general_info.dart';
 import 'body_views/payment/payment_view.dart';
 import 'widgets/stepper_widget.dart';
 
-class InsuranceRegistrationPage extends StatefulWidget {
+class InsuranceRegistrationPage extends StatelessWidget {
   const InsuranceRegistrationPage({Key? key}) : super(key: key);
 
-  @override
-  State<InsuranceRegistrationPage> createState() =>
-      _InsuranceRegistrationPageState();
-}
-
-class _InsuranceRegistrationPageState extends State<InsuranceRegistrationPage> {
   @override
   Widget build(BuildContext context) {
     final arguments =

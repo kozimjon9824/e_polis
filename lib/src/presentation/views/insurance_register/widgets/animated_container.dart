@@ -49,26 +49,32 @@ class AnimatedRoundContainer extends StatelessWidget {
           collapsedIconColor: AppColors.white,
           children: <Widget>[
             Container(
-                padding: padding,
-                decoration: const BoxDecoration(color: AppColors.grey50),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: children)),
+              padding: padding,
+              decoration: const BoxDecoration(color: AppColors.grey50),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: children,
+              ),
+            ),
             if (children2 != null && showChildren2)
               Container(
-                  padding: padding2,
-                  decoration: const BoxDecoration(color: AppColors.grey50),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: children2!)),
+                padding: padding2,
+                decoration: const BoxDecoration(color: AppColors.grey50),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: children2!,
+                ),
+              ),
             if (clearText != null)
               Container(
                 color: AppColors.white,
                 child: ListTile(
                   onTap: onClear,
-                  title: Text(clearText ?? '',
-                      style: AppTextStyles.styleW700S16White
-                          .copyWith(color: AppColors.red)),
+                  title: Text(
+                    clearText ?? '',
+                    style: AppTextStyles.styleW700S16White
+                        .copyWith(color: AppColors.red),
+                  ),
                   trailing: SvgPicture.asset(AppIcons.delete),
                 ),
               )

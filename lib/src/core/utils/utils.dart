@@ -56,15 +56,16 @@ String getDateTime(String? date) {
   return DateFormat('MMMM d').format(d);
 }
 
-String dateConverter(
-    {required String date,
-    required String inFormat,
-    required String outFormat}) {
+String dateConverter({
+  required String date,
+  required String inFormat,
+  required String outFormat,
+}) {
   try {
     if (date.isEmpty) return '';
     final format = DateFormat(inFormat);
     DateTime gettingDate = format.parse(date);
-    final DateFormat formatter = DateFormat(outFormat);
+    final DateFormat formatter = DateFormat(outFormat, 'ru');
     final String formatted = formatter.format(gettingDate);
     return formatted;
   } catch (e) {
@@ -82,7 +83,9 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
 
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     // Short-circuit if the new value is empty
     if (newValue.text.isEmpty) {
       return newValue.copyWith(text: '');
@@ -118,7 +121,6 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
         ),
       );
     }
-
     return newValue;
   }
 }
@@ -126,9 +128,10 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
 String? getMaskedPhone(String? phone) {
   if (phone == null) return null;
   final phoneMask = MaskTextInputFormatter(
-      mask: '### ## ### ## ##',
-      filter: {"#": RegExp(r'\d')},
-      type: MaskAutoCompletionType.eager);
+    mask: '### ## ### ## ##',
+    filter: {"#": RegExp(r'\d')},
+    type: MaskAutoCompletionType.eager,
+  );
   return '+${phoneMask.maskText(phone)}';
 }
 

@@ -17,6 +17,7 @@ class CurrentSingleProduct extends StatelessWidget {
     Key? key,
     required this.productList,
   }) : super(key: key);
+
   final List<ProductModel> productList;
 
   @override
@@ -61,6 +62,7 @@ class ProgressSingleProduct extends StatelessWidget {
     Key? key,
     required this.productList,
   }) : super(key: key);
+
   final List<ProductModel> productList;
 
   @override
@@ -106,6 +108,7 @@ class ArchivedSingleProduct extends StatelessWidget {
     Key? key,
     required this.productList,
   }) : super(key: key);
+
   final List<ProductModel> productList;
 
   @override
@@ -148,8 +151,11 @@ class InsuranceDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, AppRoutes.polisDetails,
-            arguments: product);
+        Navigator.pushNamed(
+          context,
+          AppRoutes.polisDetails,
+          arguments: product,
+        );
       },
       borderRadius: BorderRadius.circular(12),
       child: Container(
@@ -190,13 +196,19 @@ class InsuranceDetails extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '$preDateText ${dateConverter(date: product?.startAt ?? '', inFormat: 'yyyy-MM-dd', outFormat: 'd MMM yyyy')}',
+                  dateConverter(
+                      date: product?.startAt ?? '',
+                      inFormat: 'yyyy-MM-dd',
+                      outFormat: 'd MMM yyyy'),
                   style: AppTextStyles.styleW500S14Grey5
                       .copyWith(color: AppColors.grey600),
                 ),
                 const Spacer(),
                 Text(
-                  '$toDateText ${dateConverter(date: product?.expireAt ?? '', inFormat: 'yyyy-MM-dd', outFormat: 'd MMM yyyy')}',
+                  dateConverter(
+                      date: product?.expireAt ?? '',
+                      inFormat: 'yyyy-MM-dd',
+                      outFormat: 'd MMM yyyy'),
                   style: AppTextStyles.styleW500S14Grey5
                       .copyWith(color: AppColors.grey600),
                 ),

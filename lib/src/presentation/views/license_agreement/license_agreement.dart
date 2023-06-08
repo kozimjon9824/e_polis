@@ -69,7 +69,9 @@ class _LicenseAgreementPageState extends State<LicenseAgreementPage> {
           listener: (context, state) {
             state.whenOrNull(
               error: (failure) => showErrorMessage(
-                  context, failure.getLocalizedMessage(context)),
+                context,
+                failure.getLocalizedMessage(context),
+              ),
             );
           },
           builder: (context, state) {
@@ -124,14 +126,15 @@ class _LicenseAgreementPageState extends State<LicenseAgreementPage> {
 
   RoundButton upDownBtn() {
     return RoundButton(
-        onTap: () {
-          if (isBottom) {
-            _scrollUp();
-          } else {
-            _scrollDown();
-          }
-        },
-        icon: isBottom ? Icons.arrow_upward : Icons.arrow_downward_rounded);
+      onTap: () {
+        if (isBottom) {
+          _scrollUp();
+        } else {
+          _scrollDown();
+        }
+      },
+      icon: isBottom ? Icons.arrow_upward : Icons.arrow_downward_rounded,
+    );
   }
 }
 
