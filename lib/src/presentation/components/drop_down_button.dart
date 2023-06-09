@@ -49,8 +49,8 @@ class DropDownButton<T> extends StatelessWidget {
           dropdownMaxHeight: MediaQuery.of(context).size.height / 2,
           style: AppTextStyles.styleW500S14Grey9,
           buttonPadding: const EdgeInsets.only(right: 12),
-          dropdownDecoration:
-              BoxDecoration(borderRadius: BorderRadius.circular(10)),
+          dropdownDecoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: Colors.white),
           buttonDecoration:
               BoxDecoration(borderRadius: BorderRadius.circular(10)),
           items: items,

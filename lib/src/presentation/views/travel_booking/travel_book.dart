@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../injector.dart';
 import '../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
+import 'views/payment/payment_view.dart';
+import 'views/travellers_input_view/applicant_input.dart';
+import 'views/travellers_input_view/contract_info.dart';
 import 'views/travellers_input_view/travellers_input.dart';
 
 class TravelBookingPage extends StatelessWidget {
@@ -38,14 +41,11 @@ class TravelBookingPage extends StatelessWidget {
               ),
               body: IndexedStack(
                 index: state.index,
-                children: [
+                children: const [
                   TravellersInputView(),
-                  TravellersInputView(),
-                  TravellersInputView(),
-                  TravellersInputView(),
-                  // Text('data1'),
-                  // Text('data2'),
-                  // Text('data3'),
+                  ApplicantInputsView(),
+                  ContractInfoView(),
+                  TravellerPaymentView(),
                 ],
               ),
             ),

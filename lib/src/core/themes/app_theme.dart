@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'app_colors.dart';
 
 final appThemeData = ThemeData(
+  useMaterial3: true,
   colorScheme:
       ColorScheme.fromSwatch().copyWith(primary: AppColors.primaryColor),
   appBarTheme: const AppBarTheme(
@@ -27,6 +28,10 @@ final appThemeData = ThemeData(
   cupertinoOverrideTheme: const CupertinoThemeData(brightness: Brightness.dark),
   visualDensity: VisualDensity.adaptivePlatformDensity,
   primaryColor: AppColors.primaryColor,
+  dropdownMenuTheme: const DropdownMenuThemeData(
+    menuStyle:
+        MenuStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
+  ),
   pageTransitionsTheme: const PageTransitionsTheme(
     builders: {
       TargetPlatform.android: CupertinoPageTransitionsBuilder(),

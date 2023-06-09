@@ -1,13 +1,11 @@
 import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:flutter/material.dart';
-import '../../../../../../data/models/contract_information/response/contract_info_response.dart';
-import '../../../widgets/animated_container.dart';
-import '../../../widgets/widgets.dart';
+import '../../../../insurance_register/widgets/animated_container.dart';
+import '../../../../insurance_register/widgets/widgets.dart';
 
-class ContractPrice extends StatelessWidget {
-  const ContractPrice({Key? key, this.contract}) : super(key: key);
-  final ContractInfoResponse? contract;
+class TravelContractPrice extends StatelessWidget {
+  const TravelContractPrice({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +15,11 @@ class ContractPrice extends StatelessWidget {
       children: [
         TitleSubtitle(
           title: AppLocalizations.of(context).polisPrice,
-          subtitle:
-              '${numberFormat(contract?.policyAmount ?? 0)} ${AppLocalizations.of(context).sum}',
+          subtitle: '${numberFormat(0)} ${AppLocalizations.of(context).sum}',
         ),
         TitleSubtitle(
           title: AppLocalizations.of(context).insurancePrice,
-          subtitle:
-              '${numberFormat(contract?.insuranceAmount ?? 0)} ${AppLocalizations.of(context).sum}',
+          subtitle: '${numberFormat(0)} ${AppLocalizations.of(context).sum}',
         ),
       ],
     );

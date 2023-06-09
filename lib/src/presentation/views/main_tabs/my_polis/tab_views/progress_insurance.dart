@@ -21,6 +21,8 @@ class ProgressInsuranceView extends StatelessWidget {
             onRefresh: () async {
               await context.read<ProgressProductsCubit>().loadData(true);
             },
+            color: AppColors.primaryColor,
+            backgroundColor: AppColors.white,
             child: ProgressSingleProduct(productList: data),
           ),
           error: (failure) => ErrorView(

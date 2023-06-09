@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../../../../../../../generated/l10n.dart';
 import '../../../../../../core/themes/app_text_styles.dart';
@@ -19,7 +20,6 @@ class TravellerInputs extends StatelessWidget {
     this.innFocus,
     this.fioFocus,
     required this.onRequest,
-    required this.readOnly,
   }) : super(key: key);
 
   final TextEditingController seriesController;
@@ -34,7 +34,6 @@ class TravellerInputs extends StatelessWidget {
   final FocusNode? fioFocus;
 
   final Function() onRequest;
-  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +48,6 @@ class TravellerInputs extends StatelessWidget {
           textInputAction: TextInputAction.done,
           focusNode: dateFocus,
           onFieldSubmitted: (_) => seriesFocus?.requestFocus(),
-          readOnly: readOnly,
           validator: (value) => value!.isEmpty
               ? AppLocalizations.of(context).invalidLength
               : null,
@@ -92,7 +90,6 @@ class TravellerInputs extends StatelessWidget {
                 textEditingController: seriesController,
                 focusNode: seriesFocus,
                 onFieldSubmitted: (_) => numberFocus?.requestFocus(),
-                readOnly: readOnly,
                 validator: (value) => value!.length < 2
                     ? AppLocalizations.of(context).invalidLength
                     : null,
@@ -125,7 +122,6 @@ class TravellerInputs extends StatelessWidget {
                 textEditingController: numberController,
                 focusNode: numberFocus,
                 onFieldSubmitted: (_) => dateFocus?.requestFocus(),
-                readOnly: readOnly,
                 validator: (value) => value!.length < 6
                     ? AppLocalizations.of(context).invalidLength
                     : null,
@@ -158,7 +154,6 @@ class TravellerInputs extends StatelessWidget {
           textEditingController: innController,
           focusNode: innFocus,
           onFieldSubmitted: (_) => fioFocus?.requestFocus(),
-          readOnly: readOnly,
           validator: (value) => value!.length < 13
               ? AppLocalizations.of(context).invalidLength
               : null,
@@ -182,31 +177,31 @@ class TravellerInputs extends StatelessWidget {
         const SizedBox(height: 16),
         CustomTextField(
           hintText: 'Ф.И.О',
-          keyboardType: TextInputType.number,
+          keyboardType: TextInputType.name,
           label: 'Ф.И.О',
-          textInputAction: TextInputAction.next,
+          textInputAction: TextInputAction.done,
           textEditingController: fioController,
           focusNode: fioFocus,
           onFieldSubmitted: (_) => fioFocus?.unfocus(),
-          readOnly: readOnly,
-          validator: (value) => value!.length < 6
+          validator: (value) => value!.isEmpty
               ? AppLocalizations.of(context).invalidLength
               : null,
           inputFormatters: [
-            MaskTextInputFormatter(
-              mask: '#############',
-              initialText: numberController.text,
-              filter: {"#": RegExp(r'\d')},
-            )
+            FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z ]')),
+            // MaskTextInputFormatter(
+            //   mask: '#############',
+            //   initialText: numberController.text,
+            //   filter: {"#": RegExp(r'\d')},
+            // )
           ],
           onChange: (value) {
-            if (value.length == 13) {
-              fioFocus?.unfocus();
-              if (dateController.text.length == 10 &&
-                  seriesController.text.length == 2) {
-                onRequest();
-              }
-            }
+            // if (value.length == 13) {
+            //   fioFocus?.unfocus();
+            //   if (dateController.text.length == 10 &&
+            //       seriesController.text.length == 2) {
+            //     onRequest();
+            //   }
+            // }
           },
         ),
       ],

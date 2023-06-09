@@ -86,8 +86,8 @@ class TravelCustomStepper extends StatelessWidget
   }
 
   List<String> getTitles(BuildContext context) => [
-        AppLocalizations.of(context).generalInfo,
-        AppLocalizations.of(context).driverDetails,
+        'Путешественники',
+        'Заявителе',
         AppLocalizations.of(context).contractDetails,
         AppLocalizations.of(context).payment,
       ];

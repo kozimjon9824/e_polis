@@ -21,6 +21,8 @@ class CurrentInsuranceView extends StatelessWidget {
             onRefresh: () async {
               await context.read<CurrentProductsCubit>().loadData(true);
             },
+            color: AppColors.primaryColor,
+            backgroundColor: AppColors.white,
             child: CurrentSingleProduct(productList: data),
           ),
           error: (failure) => ErrorView(

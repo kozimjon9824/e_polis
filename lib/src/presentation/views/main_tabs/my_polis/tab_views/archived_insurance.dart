@@ -1,6 +1,7 @@
 import 'package:e_polis/src/presentation/cubits/my_archived_product/archived_products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/themes/app_colors.dart';
 import '../../../../components/error_view.dart';
 import '../../../../components/loading.dart';
 import '../widgets/insurance_details.dart';
@@ -20,6 +21,8 @@ class ArchivedInsuranceView extends StatelessWidget {
             onRefresh: () async {
               await context.read<ArchivedProductsCubit>().loadData(true);
             },
+            color: AppColors.primaryColor,
+            backgroundColor: AppColors.white,
             child: ArchivedSingleProduct(productList: data),
           ),
           error: (failure) => ErrorView(

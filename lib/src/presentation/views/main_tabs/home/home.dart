@@ -1,5 +1,6 @@
 import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/injector.dart';
+import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/core/themes/app_icons.dart';
 import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,8 @@ class HomePage extends StatelessWidget {
                 builder: (context, state) {
                   var tabCubit = context.read<FilterTabManagerCubit>();
                   return RefreshIndicator(
+                    color: AppColors.primaryColor,
+                    backgroundColor: AppColors.white,
                     onRefresh: () async {
                       await context.read<MainScreenDataCubit>().loadData(true);
                     },

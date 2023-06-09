@@ -8,29 +8,29 @@ import '../../core/themes/app_colors.dart';
 import '../../core/themes/app_text_styles.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {Key? key,
-      this.textEditingController,
-      this.onChange,
-      this.hintText,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.obscure,
-      this.textInputAction,
-      this.fillColor,
-      this.preIconColor,
-      this.validator,
-      this.autoFocus,
-      this.focusNode,
-      this.initialValue,
-      this.label,
-      this.inputFormatters,
-      this.keyboardType,
-      this.textCapitalization,
-      this.onFieldSubmitted,
-      this.onEditingCompleted,
-      this.readOnly})
-      : super(key: key);
+  const CustomTextField({
+    Key? key,
+    this.textEditingController,
+    this.onChange,
+    this.hintText,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.obscure,
+    this.textInputAction,
+    this.fillColor,
+    this.preIconColor,
+    this.validator,
+    this.autoFocus,
+    this.focusNode,
+    this.initialValue,
+    this.label,
+    this.inputFormatters,
+    this.keyboardType,
+    this.textCapitalization,
+    this.onFieldSubmitted,
+    this.onEditingCompleted,
+    this.readOnly,
+  }) : super(key: key);
 
   final TextEditingController? textEditingController;
   final Function(String value)? onChange;
@@ -236,22 +236,22 @@ class CustomDatePickTextField extends StatelessWidget {
 /// textfield with prefix widget
 
 class CustomPrefixTextField extends StatelessWidget {
-  const CustomPrefixTextField(
-      {Key? key,
-      this.textEditingController,
-      this.onChange,
-      this.hintText,
-      this.prefixIcon,
-      this.validator,
-      this.suffixIcon,
-      this.obscure,
-      this.textInputAction,
-      this.textInputType,
-      required this.label,
-      this.autoFocus,
-      this.inputFormatters,
-      this.focusNode})
-      : super(key: key);
+  const CustomPrefixTextField({
+    Key? key,
+    this.textEditingController,
+    this.onChange,
+    this.hintText,
+    this.prefixIcon,
+    this.validator,
+    this.suffixIcon,
+    this.obscure,
+    this.textInputAction,
+    this.textInputType,
+    required this.label,
+    this.autoFocus,
+    this.inputFormatters,
+    this.focusNode,
+  }) : super(key: key);
 
   final TextEditingController? textEditingController;
   final Function(String value)? onChange;
