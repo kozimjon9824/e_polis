@@ -20,15 +20,19 @@ class ChangePhoneVerifyCubit extends Cubit<ChangePhoneVerifyState> {
     emit(const ChangePhoneVerifyState.loading());
     var requestModel = request.copyWith(otpCode: code);
     var result = await _profileUseCase.call(ProfileParams(requestModel));
-    result.fold((failure) => emit(ChangePhoneVerifyState.error(failure)),
-        (response) => emit(const ChangePhoneVerifyState.success()));
+    result.fold(
+      (failure) => emit(ChangePhoneVerifyState.error(failure)),
+      (response) => emit(const ChangePhoneVerifyState.success()),
+    );
   }
 
   void resendCode(ProfileUpdateRequest request) async {
     emit(const ChangePhoneVerifyState.loading());
     var requestModel = request;
     var result = await _profileUseCase.call(ProfileParams(requestModel));
-    result.fold((failure) => emit(ChangePhoneVerifyState.error(failure)),
-        (response) => emit(const ChangePhoneVerifyState.initial()));
+    result.fold(
+      (failure) => emit(ChangePhoneVerifyState.error(failure)),
+      (response) => emit(const ChangePhoneVerifyState.initial()),
+    );
   }
 }

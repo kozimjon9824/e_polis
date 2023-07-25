@@ -53,7 +53,7 @@ class SwitchBtn extends StatelessWidget {
     return Expanded(
       child: Material(
         borderRadius: borderRadius,
-        color: bgColor,
+        color: bgColor ?? Colors.white,
         child: InkWell(
           onTap: onTap,
           borderRadius: borderRadius,

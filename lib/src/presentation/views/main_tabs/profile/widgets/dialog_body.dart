@@ -24,27 +24,34 @@ class ExitDialogBody extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(AppLocalizations.of(context).exit,
-                style: AppTextStyles.styleW700S18Grey9),
+            Text(
+              AppLocalizations.of(context).exit,
+              style: AppTextStyles.styleW700S18Grey9,
+            ),
             const SizedBox(height: 12),
-            Text(AppLocalizations.of(context).doYouWantExit,
-                style: AppTextStyles.styleW500S14Grey7),
+            Text(
+              AppLocalizations.of(context).doYouWantExit,
+              style: AppTextStyles.styleW500S14Grey7,
+            ),
             const SizedBox(height: 40),
             Row(
               children: [
                 Expanded(
-                    child: CustomOutlineButton(
-                        text: AppLocalizations.of(context).no,
-                        padding: 10,
-                        onTap: () {
-                          Navigator.pop(context);
-                        })),
+                  child: CustomOutlineButton(
+                    text: AppLocalizations.of(context).no,
+                    padding: 10,
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: CustomButton(
-                      text: AppLocalizations.of(context).yes,
-                      padding: 12,
-                      onTap: onTap),
+                    text: AppLocalizations.of(context).yes,
+                    padding: 12,
+                    onTap: onTap,
+                  ),
                 ),
               ],
             )

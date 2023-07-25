@@ -76,6 +76,9 @@ class ProgressSingleProduct extends StatelessWidget {
       itemBuilder: (_, index) {
         var data = productList[index];
         double percent = (data.expirePercent ?? 0.1) / 100;
+        if (percent < 0) {
+          percent = 0;
+        }
         const color = AppColors.orange;
         // (percent > 50)
         //     ? AppColors.primaryColor

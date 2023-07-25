@@ -12,6 +12,7 @@ class ProfileItemWidget extends StatelessWidget {
       this.onTap,
       this.subTitle})
       : super(key: key);
+
   final String icon;
   final String title;
   final String? subTitle;

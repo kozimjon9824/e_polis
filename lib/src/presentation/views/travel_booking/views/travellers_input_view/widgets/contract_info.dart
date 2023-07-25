@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../../../../../generated/l10n.dart';
 import '../../../../../../core/themes/app_colors.dart';
+import '../../../../../../core/utils/helper_models.dart';
+import '../../../../../../core/utils/utils.dart';
 import '../../../../insurance_register/widgets/animated_container.dart';
 import '../../../../insurance_register/widgets/widgets.dart';
 
@@ -8,8 +10,10 @@ class ContractInfo extends StatelessWidget {
   const ContractInfo({
     Key? key,
     this.onClear,
+    required this.travelAttModel,
   }) : super(key: key);
   final Function()? onClear;
+  final TravelAttModel travelAttModel;
 
   @override
   Widget build(BuildContext context) {
@@ -19,27 +23,29 @@ class ContractInfo extends StatelessWidget {
       clearText: AppLocalizations.of(context).clearData,
       showChildren2: false,
       onClear: onClear,
-      children: const [
+      children: [
         TitleSubtitle(
-          title: 'Дата начало контракта',
-          subtitle: '02.12.2022',
+          title: AppLocalizations.of(context).contractStartDate,
+          subtitle: travelAttModel.startDate ?? '',
         ),
         TitleSubtitle(
-          title: 'Дата окончания срока действия контракта',
-          subtitle: '02.12.2022',
+          title: AppLocalizations.of(context).contractExpirationDate,
+          subtitle: travelAttModel.endDate ?? '',
         ),
-        Divider(height: 16, color: AppColors.divider, thickness: 1),
+        const Divider(height: 16, color: AppColors.divider, thickness: 1),
         TitleSubtitle(
-          title: 'Цена полиса на USD',
-          subtitle: '\$ 14,61',
-        ),
-        TitleSubtitle(
-          title: 'Цена полиса',
-          subtitle: '168 000 сум',
+          title: AppLocalizations.of(context).priceInUsd,
+          subtitle: '\$ ${travelAttModel.calResponse?.premiumUsd ?? 0}',
         ),
         TitleSubtitle(
-          title: 'Страховая сумма',
-          subtitle: '40 000 000 сум',
+          title: AppLocalizations.of(context).polisPrice,
+          subtitle:
+              '${numberFormat(travelAttModel.calResponse?.insurancePremium ?? 0)} ${AppLocalizations.of(context).sum}',
+        ),
+        TitleSubtitle(
+          title: AppLocalizations.of(context).insurancePrice,
+          subtitle:
+              '${numberFormat(travelAttModel.calResponse?.insuranceLiability ?? 0)} ${AppLocalizations.of(context).sum}',
         ),
       ],
     );

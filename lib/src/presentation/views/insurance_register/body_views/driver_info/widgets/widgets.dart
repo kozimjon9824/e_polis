@@ -20,7 +20,7 @@ class IconBtn extends StatelessWidget {
     return Expanded(
       child: Material(
         borderRadius: borderRadius,
-        color: bgColor,
+        color: bgColor ?? AppColors.white,
         child: InkWell(
           onTap: onTap,
           borderRadius:
@@ -29,11 +29,11 @@ class IconBtn extends StatelessWidget {
             height: 44,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.horizontal(right: Radius.circular(8)),
-                border: Border.all(
-                    color:
-                        bgColor != null ? AppColors.green : AppColors.grey400)),
+              borderRadius:
+                  const BorderRadius.horizontal(right: Radius.circular(8)),
+              border: Border.all(
+                  color: bgColor != null ? AppColors.green : AppColors.grey400),
+            ),
             child: Center(
               child: SvgPicture.asset(AppIcons.add),
             ),
@@ -75,10 +75,11 @@ class TextBtn extends StatelessWidget {
                     color:
                         bgColor != null ? AppColors.green : AppColors.grey400)),
             child: Center(
-              child: Text(title,
-                  style: AppTextStyles.styleW600S16White.copyWith(
-                      color:
-                          bgColor == null ? AppColors.black : AppColors.white)),
+              child: Text(
+                title,
+                style: AppTextStyles.styleW600S16White.copyWith(
+                    color: bgColor == null ? AppColors.black : AppColors.white),
+              ),
             ),
           ),
         ),
@@ -102,7 +103,7 @@ class IconBtnWithWidth extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       borderRadius: borderRadius,
-      color: bgColor,
+      color: bgColor ?? AppColors.white,
       child: InkWell(
         onTap: onTap,
         borderRadius: const BorderRadius.horizontal(right: Radius.circular(8)),
@@ -111,11 +112,11 @@ class IconBtnWithWidth extends StatelessWidget {
           width: 80,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
-              borderRadius:
-                  const BorderRadius.horizontal(right: Radius.circular(8)),
-              border: Border.all(
-                  color:
-                      bgColor != null ? AppColors.green : AppColors.grey400)),
+            borderRadius:
+                const BorderRadius.horizontal(right: Radius.circular(8)),
+            border: Border.all(
+                color: bgColor != null ? AppColors.green : AppColors.grey400),
+          ),
           child: Center(
             child: SvgPicture.asset(AppIcons.add),
           ),
@@ -142,7 +143,7 @@ class TextBtnWithWidth extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       borderRadius: borderRadius,
-      color: bgColor,
+      color: bgColor ?? Colors.white,
       child: InkWell(
         onTap: onTap,
         borderRadius: borderRadius,
@@ -156,10 +157,12 @@ class TextBtnWithWidth extends StatelessWidget {
                   color:
                       bgColor != null ? AppColors.green : AppColors.grey400)),
           child: Center(
-            child: Text(title,
-                style: AppTextStyles.styleW600S16White.copyWith(
-                    color:
-                        bgColor == null ? AppColors.black : AppColors.white)),
+            child: Text(
+              title,
+              style: AppTextStyles.styleW600S16White.copyWith(
+                color: bgColor == null ? AppColors.black : AppColors.white,
+              ),
+            ),
           ),
         ),
       ),

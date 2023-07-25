@@ -1,7 +1,6 @@
 import 'package:e_polis/src/presentation/components/custom_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../generated/l10n.dart';
 import '../../core/themes/app_colors.dart';
 import '../../core/themes/app_text_styles.dart';
@@ -9,17 +8,22 @@ import '../../core/themes/app_text_styles.dart';
 void selectDate({
   required BuildContext context,
   required Function(DateTime dateTime) onSave,
+  DateTime? initialDate,
 }) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
     isDismissible: false,
     shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(12), topLeft: Radius.circular(12))),
+      borderRadius: BorderRadius.only(
+        topRight: Radius.circular(12),
+        topLeft: Radius.circular(12),
+      ),
+    ),
     builder: (_) {
       return DateBottomSheetBody(
         onSave: onSave,
+        initialDate: initialDate,
       );
     },
   );
@@ -34,6 +38,7 @@ class DateBottomSheetBody extends StatefulWidget {
     this.use24hFormat = false,
     this.initialDate,
   }) : super(key: key);
+
   final Function(DateTime dateTime) onSave;
   final int? minimumYear;
   final int? maximumYear;
@@ -45,26 +50,32 @@ class DateBottomSheetBody extends StatefulWidget {
 }
 
 class _DateBottomSheetBodyState extends State<DateBottomSheetBody> {
-  DateTime _selectedDate = DateTime.now().add(const Duration(minutes: 30));
+  DateTime? _selectedDate;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(12), topLeft: Radius.circular(12))),
+        color: AppColors.white,
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(12),
+          topLeft: Radius.circular(12),
+        ),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(children: [
-            Text(AppLocalizations.of(context).selectDate,
-                style: AppTextStyles.styleW500S16Black),
+            Text(
+              AppLocalizations.of(context).selectDate,
+              style: AppTextStyles.styleW500S16Black,
+            ),
             const Spacer(),
             InkWell(
-                onTap: () => Navigator.pop(context),
-                child: const Icon(Icons.close, size: 20))
+              onTap: () => Navigator.pop(context),
+              child: const Icon(Icons.close, size: 20),
+            )
           ]),
           const SizedBox(height: 16),
           const Divider(height: 0),
@@ -73,9 +84,10 @@ class _DateBottomSheetBodyState extends State<DateBottomSheetBody> {
             height: 220,
             child: CupertinoTheme(
               data: const CupertinoThemeData(
-                  textTheme: CupertinoTextThemeData(
-                      dateTimePickerTextStyle:
-                          AppTextStyles.styleW500S16Black)),
+                textTheme: CupertinoTextThemeData(
+                  dateTimePickerTextStyle: AppTextStyles.styleW500S16Black,
+                ),
+              ),
               child: CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.date,
                 initialDateTime: widget.initialDate ??
@@ -96,7 +108,9 @@ class _DateBottomSheetBodyState extends State<DateBottomSheetBody> {
             text: AppLocalizations.of(context).select,
             onTap: () {
               Navigator.pop(context);
-              widget.onSave(_selectedDate);
+              widget.onSave(_selectedDate ??
+                  widget.initialDate ??
+                  DateTime.now().add(const Duration(minutes: 30)));
             },
           ),
           const SizedBox(height: 16),

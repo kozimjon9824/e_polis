@@ -139,7 +139,7 @@ class Child1Body extends StatelessWidget {
               onRequest();
             }
           },
-          onDate: () {
+          onDate: (date) {
             dateFocus?.unfocus();
             onRequest();
           },
@@ -292,7 +292,7 @@ class Child2Body extends StatelessWidget {
               licenseDateNode!.unfocus();
             }
           },
-          onDate: () {},
+          onDate: (date) {},
         ),
       ],
     );

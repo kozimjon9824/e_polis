@@ -17,7 +17,9 @@ class FaqCubit extends Cubit<FaqState> {
   void loadData() async {
     emit(const FaqState.loading());
     var result = await _faqUseCase.call(NoParams());
-    result.fold((failure) => emit(FaqState.error(failure)),
-        (data) => emit(FaqState.loaded(data.data ?? [])));
+    result.fold(
+      (failure) => emit(FaqState.error(failure)),
+      (data) => emit(FaqState.loaded(data)),
+    );
   }
 }

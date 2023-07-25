@@ -31,13 +31,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Код нотўғри киритилди"),
         "about": MessageLookupByLibrary.simpleMessage("Биз ҳақимизда"),
         "aboutUs": MessageLookupByLibrary.simpleMessage(
-            "Epolis платформаси суғурта полисларини ахборот технологияларини қўллаган ҳолда кундалик вазифаларни енгиллаштиришга интилмоқда. Epolis мобил иловаси орқали ТВЭФЖМС (ОСАГО) ҳамда саёхатчиларни суғурталаш учун суғурта мукофоти ва суғурта полиси учун тўловни бир зумда амалга ошириш мумкин.\nХеч қандай навбатларсиз суғурта полисини тез ва осон сотиб олинг! Epolis платформасида рўйхатдан ўтинг ва суғурта ҳизматларидан фойдаланинг."),
+            "Биз ҳақимизда!\nEpolis - бу “Impex Insurance” AЖ суғурта компанияси томонидан ишлаб чиқарилган платформа бўлиб, унинг асосий мақсади суғурта соҳасида ахборот технологияларини қўллаган ҳолда електрон суғурта полисларни сотиб олишни йенгиллаштиришга қаратилган.\nУшбу Еполис мобил иловаси орқали Сиз, ТВЕФЖМСҚ (ОСАГО), ҳамда саёҳатчиларни суғурталаш учун тўловни бир зумда амалга ошириб електрон суғурта полисини сотиб олишингиз мумкин.\nХеч қандай навбатларсиз суғурта полисини тез ва осон сотиб олинг. Платформадан рўйхатдан ўтинг ва суғурта хизматларидан фойдаланинг.\nТез кунда бошқа ихтиёрий суғурта турлари бўйича електрон суғурта полиси сотиб олиш имкониятларини яратамиз."),
         "accountVerified":
             MessageLookupByLibrary.simpleMessage("Қайд ёзуви тасдиқланди"),
         "accountVerifiedDescription": MessageLookupByLibrary.simpleMessage(
             "Сизнинг қайд ёзувингиз муваффақиятли тасдиқланди, энди Epolis хизматларидан фойдаланишингиз мумкин"),
         "addDriver": MessageLookupByLibrary.simpleMessage("Хайдовчи қўшиш"),
         "addPolis": MessageLookupByLibrary.simpleMessage("Полис қўшиш"),
+        "addTraveller": MessageLookupByLibrary.simpleMessage("Саёҳатчи қўшинг"),
+        "address": MessageLookupByLibrary.simpleMessage("Манзил"),
+        "addressHint":
+            MessageLookupByLibrary.simpleMessage("Ул. Амира темура, Ташкент"),
         "alertAndTips":
             MessageLookupByLibrary.simpleMessage("Огоҳлантириш ва маслаҳатлар"),
         "all": MessageLookupByLibrary.simpleMessage("Хаммаси"),
@@ -87,6 +91,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Туғилган йил"),
         "ddMMYY": MessageLookupByLibrary.simpleMessage("КК/ОО/ЙЙЙЙ"),
         "delete": MessageLookupByLibrary.simpleMessage("Ўчириш"),
+        "delete_account":
+            MessageLookupByLibrary.simpleMessage("Профилни ўчириш"),
+        "delete_account_des": MessageLookupByLibrary.simpleMessage(
+            "Профилени ўчиришни хохлайсизми? Сизнинг ҳамма малумотларингиз ўчиб кетади!"),
         "doYouWantExit":
             MessageLookupByLibrary.simpleMessage("Сиз иловадан чиқмоқчимисиз?"),
         "download": MessageLookupByLibrary.simpleMessage("Кўчириш"),
@@ -141,6 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidDriverPassport":
             MessageLookupByLibrary.simpleMessage("Хайдовчи паспорти нотўғри"),
         "invalidLength": MessageLookupByLibrary.simpleMessage("Матнда хатолик"),
+        "jshshr": MessageLookupByLibrary.simpleMessage("ЖШШИР"),
         "languagePageMainText": MessageLookupByLibrary.simpleMessage(
             "Epolis га хуш келибсиз, тилни танланг"),
         "lastName": MessageLookupByLibrary.simpleMessage("Фамилия"),
@@ -193,6 +202,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "onBoardingTitle3": MessageLookupByLibrary.simpleMessage(
             "Жонли ва дўстона 24/7 техник ёрдам"),
         "oneYear": MessageLookupByLibrary.simpleMessage("1 йил"),
+        "onlineInsuranceTravel":
+            MessageLookupByLibrary.simpleMessage("Онлайн саёҳат суғуртаси"),
         "open": MessageLookupByLibrary.simpleMessage("Очиш"),
         "operating": MessageLookupByLibrary.simpleMessage("Амалда"),
         "ourMission": MessageLookupByLibrary.simpleMessage("Бизнинг вазифамиз"),
@@ -211,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "popularQuestions": MessageLookupByLibrary.simpleMessage(
             "Тез-тез сўраладиган саволлар"),
         "priceCalculation": MessageLookupByLibrary.simpleMessage("Ҳисоблаш"),
+        "priceInUsd":
+            MessageLookupByLibrary.simpleMessage("Суғурта нархи (USD)"),
         "profile": MessageLookupByLibrary.simpleMessage("Профиль"),
         "profileInfo":
             MessageLookupByLibrary.simpleMessage("Профил ҳақида маълумот"),
@@ -244,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Полис серия ва рақами"),
         "serverError": MessageLookupByLibrary.simpleMessage("Сервер хатолиги"),
         "show": MessageLookupByLibrary.simpleMessage("Кўриш"),
+        "singleTraveller": MessageLookupByLibrary.simpleMessage("Саёҳатчи"),
         "sixMonth": MessageLookupByLibrary.simpleMessage("6 ой"),
         "skip": MessageLookupByLibrary.simpleMessage("Ўтказиб юбориш"),
         "startUsing":
@@ -259,6 +273,24 @@ class MessageLookup extends MessageLookupByLibrary {
             "Суғурта полисининг амал қилиш муддати"),
         "toDate": MessageLookupByLibrary.simpleMessage("гача"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("Умумий сумма"),
+        "travelApplicant":
+            MessageLookupByLibrary.simpleMessage("Aриза берувчи"),
+        "travelCountFailure": MessageLookupByLibrary.simpleMessage(
+            "Оилавий саёҳат турида саҳоҳатчилар сони 3 тадан 6 та оралиғида булиши шарт."),
+        "travelCountries": MessageLookupByLibrary.simpleMessage("Давлат"),
+        "travelCountry": MessageLookupByLibrary.simpleMessage(
+            "Қайерга саёҳат қилишни хоҳлайсиз?"),
+        "travelDays":
+            MessageLookupByLibrary.simpleMessage("Саёҳатда бўлиш кунлари"),
+        "travelEndDate":
+            MessageLookupByLibrary.simpleMessage("Саёҳатнинг тугаш санаси"),
+        "travelInsDesc": MessageLookupByLibrary.simpleMessage(
+            "Перед использованием Решения (см. определение ниже) внимательно ознакомьтесь с условиями данного Лицензионного соглашения с конечным пользователем (далее — «Соглашение»). Данный текст является юридически обязывающим договором. Давая согласие в электронной форме, устанавливая Решение или используя Решение, вы принимаете все условия настоящего Соглашения от своего лица и любой организации и физического лица, которое вы представляете или для чьего Устройства вы приобретаете Решение (в совокупности «вы»)."),
+        "travelProgram": MessageLookupByLibrary.simpleMessage("Дастур"),
+        "travelPurpose": MessageLookupByLibrary.simpleMessage("Сафар мақсади"),
+        "travelStartDate":
+            MessageLookupByLibrary.simpleMessage("Саёҳатнинг бошланиш санаси"),
+        "traveller": MessageLookupByLibrary.simpleMessage("Саёҳатчилар"),
         "twentyDays": MessageLookupByLibrary.simpleMessage("20 кун"),
         "typePolis": MessageLookupByLibrary.simpleMessage("Полис тури"),
         "typeVehicle":
@@ -279,6 +311,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Биз суғурта компанияларидан бир нечта таклифларни топдик"),
         "weFoundZero": MessageLookupByLibrary.simpleMessage(
             "Биз 0 та суғурта компаниясини топдик"),
+        "worldPassport":
+            MessageLookupByLibrary.simpleMessage("Халқаро паспорт"),
         "yes": MessageLookupByLibrary.simpleMessage("Ҳа"),
         "youCanAddPolis":
             MessageLookupByLibrary.simpleMessage("Сиз полис қўшишингиз мумкин ")

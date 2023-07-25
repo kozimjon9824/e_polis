@@ -137,7 +137,7 @@ class LimitlessDriverChild1Body extends StatelessWidget {
               onRequest();
             }
           },
-          onDate: () {
+          onDate: (date) {
             dateFocus!.unfocus();
             onRequest();
           },
@@ -187,9 +187,9 @@ class LimitlessDriverChild2Body extends StatelessWidget {
             items: dropDownValues
                 .map(
                   (item) => DropdownMenuItem<String>(
-                      value: item,
-                      child:
-                          Text(item, style: AppTextStyles.styleW400S14Grey6)),
+                    value: item,
+                    child: Text(item, style: AppTextStyles.styleW400S14Grey6),
+                  ),
                 )
                 .toList(),
             onChanged: onChange,
@@ -288,7 +288,7 @@ class LimitlessDriverChild2Body extends StatelessWidget {
             }
           },
           textInputAction: TextInputAction.done,
-          onDate: () {},
+          onDate: (date) {},
         ),
         const SizedBox(height: 8),
         TitleSubtitle(

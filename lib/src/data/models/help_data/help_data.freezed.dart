@@ -21,6 +21,10 @@ HelpData _$HelpDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$HelpData {
   List<QuestionAnswer>? get data => throw _privateConstructorUsedError;
+  String? get websiteUrl => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  String? get phoneNumber => throw _privateConstructorUsedError;
+  String? get telegramUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +37,12 @@ abstract class $HelpDataCopyWith<$Res> {
   factory $HelpDataCopyWith(HelpData value, $Res Function(HelpData) then) =
       _$HelpDataCopyWithImpl<$Res, HelpData>;
   @useResult
-  $Res call({List<QuestionAnswer>? data});
+  $Res call(
+      {List<QuestionAnswer>? data,
+      String? websiteUrl,
+      String? email,
+      String? phoneNumber,
+      String? telegramUrl});
 }
 
 /// @nodoc
@@ -50,12 +59,32 @@ class _$HelpDataCopyWithImpl<$Res, $Val extends HelpData>
   @override
   $Res call({
     Object? data = freezed,
+    Object? websiteUrl = freezed,
+    Object? email = freezed,
+    Object? phoneNumber = freezed,
+    Object? telegramUrl = freezed,
   }) {
     return _then(_value.copyWith(
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<QuestionAnswer>?,
+      websiteUrl: freezed == websiteUrl
+          ? _value.websiteUrl
+          : websiteUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      telegramUrl: freezed == telegramUrl
+          ? _value.telegramUrl
+          : telegramUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -67,7 +96,12 @@ abstract class _$$_HelpDataCopyWith<$Res> implements $HelpDataCopyWith<$Res> {
       __$$_HelpDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<QuestionAnswer>? data});
+  $Res call(
+      {List<QuestionAnswer>? data,
+      String? websiteUrl,
+      String? email,
+      String? phoneNumber,
+      String? telegramUrl});
 }
 
 /// @nodoc
@@ -82,12 +116,32 @@ class __$$_HelpDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? data = freezed,
+    Object? websiteUrl = freezed,
+    Object? email = freezed,
+    Object? phoneNumber = freezed,
+    Object? telegramUrl = freezed,
   }) {
     return _then(_$_HelpData(
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<QuestionAnswer>?,
+      websiteUrl: freezed == websiteUrl
+          ? _value.websiteUrl
+          : websiteUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      telegramUrl: freezed == telegramUrl
+          ? _value.telegramUrl
+          : telegramUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -95,7 +149,13 @@ class __$$_HelpDataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_HelpData implements _HelpData {
-  const _$_HelpData({final List<QuestionAnswer>? data}) : _data = data;
+  const _$_HelpData(
+      {final List<QuestionAnswer>? data,
+      this.websiteUrl,
+      this.email,
+      this.phoneNumber,
+      this.telegramUrl})
+      : _data = data;
 
   factory _$_HelpData.fromJson(Map<String, dynamic> json) =>
       _$$_HelpDataFromJson(json);
@@ -111,8 +171,17 @@ class _$_HelpData implements _HelpData {
   }
 
   @override
+  final String? websiteUrl;
+  @override
+  final String? email;
+  @override
+  final String? phoneNumber;
+  @override
+  final String? telegramUrl;
+
+  @override
   String toString() {
-    return 'HelpData(data: $data)';
+    return 'HelpData(data: $data, websiteUrl: $websiteUrl, email: $email, phoneNumber: $phoneNumber, telegramUrl: $telegramUrl)';
   }
 
   @override
@@ -120,13 +189,25 @@ class _$_HelpData implements _HelpData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_HelpData &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.websiteUrl, websiteUrl) ||
+                other.websiteUrl == websiteUrl) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.telegramUrl, telegramUrl) ||
+                other.telegramUrl == telegramUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_data),
+      websiteUrl,
+      email,
+      phoneNumber,
+      telegramUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -143,12 +224,25 @@ class _$_HelpData implements _HelpData {
 }
 
 abstract class _HelpData implements HelpData {
-  const factory _HelpData({final List<QuestionAnswer>? data}) = _$_HelpData;
+  const factory _HelpData(
+      {final List<QuestionAnswer>? data,
+      final String? websiteUrl,
+      final String? email,
+      final String? phoneNumber,
+      final String? telegramUrl}) = _$_HelpData;
 
   factory _HelpData.fromJson(Map<String, dynamic> json) = _$_HelpData.fromJson;
 
   @override
   List<QuestionAnswer>? get data;
+  @override
+  String? get websiteUrl;
+  @override
+  String? get email;
+  @override
+  String? get phoneNumber;
+  @override
+  String? get telegramUrl;
   @override
   @JsonKey(ignore: true)
   _$$_HelpDataCopyWith<_$_HelpData> get copyWith =>

@@ -28,40 +28,44 @@ class TravelCustomStepper extends StatelessWidget
                 children: [
                   const Expanded(flex: 1, child: SizedBox()),
                   StepperStep(
-                      currentIndex: currentIndex,
-                      index: 0,
-                      onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(0);
-                      }),
+                    currentIndex: currentIndex,
+                    index: 0,
+                    onTap: () {
+                      context
+                          .read<ManageInsuranceStackViewsCubit>()
+                          .changeIndex(0);
+                    },
+                  ),
                   liner(currentIndex >= 1),
                   StepperStep(
-                      currentIndex: currentIndex,
-                      index: 1,
-                      onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(1);
-                      }),
+                    currentIndex: currentIndex,
+                    index: 1,
+                    onTap: () {
+                      context
+                          .read<ManageInsuranceStackViewsCubit>()
+                          .changeIndex(1);
+                    },
+                  ),
                   liner(currentIndex >= 2),
                   StepperStep(
-                      currentIndex: currentIndex,
-                      index: 2,
-                      onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(2);
-                      }),
+                    currentIndex: currentIndex,
+                    index: 2,
+                    onTap: () {
+                      context
+                          .read<ManageInsuranceStackViewsCubit>()
+                          .changeIndex(2);
+                    },
+                  ),
                   liner(currentIndex >= 3),
                   StepperStep(
-                      currentIndex: currentIndex,
-                      index: 3,
-                      onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(3);
-                      }),
+                    currentIndex: currentIndex,
+                    index: 3,
+                    onTap: () {
+                      context
+                          .read<ManageInsuranceStackViewsCubit>()
+                          .changeIndex(3);
+                    },
+                  ),
                   const Expanded(flex: 1, child: SizedBox()),
                 ],
               ),
@@ -86,8 +90,8 @@ class TravelCustomStepper extends StatelessWidget
   }
 
   List<String> getTitles(BuildContext context) => [
-        'Путешественники',
-        'Заявителе',
+        AppLocalizations.of(context).traveller,
+        AppLocalizations.of(context).travelApplicant,
         AppLocalizations.of(context).contractDetails,
         AppLocalizations.of(context).payment,
       ];

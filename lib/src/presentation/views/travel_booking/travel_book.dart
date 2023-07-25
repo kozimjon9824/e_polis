@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../injector.dart';
+import '../../../core/utils/helper_models.dart';
 import '../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
+import '../../cubits/travel_booking/travel_booking_cubit.dart';
 import 'views/payment/payment_view.dart';
 import 'views/travellers_input_view/applicant_input.dart';
 import 'views/travellers_input_view/contract_info.dart';
@@ -14,10 +16,16 @@ class TravelBookingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final travelAtt =
+        ModalRoute.of(context)!.settings.arguments as TravelAttModel;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => inject<ManageInsuranceStackViewsCubit>(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              inject<TravelBookingCubit>()..loadTravellers(travelAtt),
         ),
       ],
       child: BlocBuilder<ManageInsuranceStackViewsCubit,
@@ -41,11 +49,11 @@ class TravelBookingPage extends StatelessWidget {
               ),
               body: IndexedStack(
                 index: state.index,
-                children: const [
-                  TravellersInputView(),
-                  ApplicantInputsView(),
-                  ContractInfoView(),
-                  TravellerPaymentView(),
+                children: [
+                  const TravellersInputView(),
+                  const ApplicantInputsView(),
+                  ContractInfoView(travelAttModel: travelAtt),
+                  TravellerPaymentView(travelAttModel: travelAtt),
                 ],
               ),
             ),

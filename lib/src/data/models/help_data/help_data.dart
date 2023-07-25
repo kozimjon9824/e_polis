@@ -6,7 +6,13 @@ part 'help_data.g.dart';
 
 @freezed
 class HelpData with _$HelpData {
-  const factory HelpData({List<QuestionAnswer>? data}) = _HelpData;
+  const factory HelpData({
+    List<QuestionAnswer>? data,
+    String? websiteUrl,
+    String? email,
+    String? phoneNumber,
+    String? telegramUrl,
+  }) = _HelpData;
 
   factory HelpData.fromJson(Map<String, dynamic> json) =>
       _$HelpDataFromJson(json);
@@ -14,8 +20,10 @@ class HelpData with _$HelpData {
 
 @freezed
 class QuestionAnswer with _$QuestionAnswer {
-  const factory QuestionAnswer({String? question, String? answer}) =
-      _QuestionAnswer;
+  const factory QuestionAnswer({
+    String? question,
+    String? answer,
+  }) = _QuestionAnswer;
 
   factory QuestionAnswer.fromJson(Map<String, dynamic> json) =>
       _$QuestionAnswerFromJson(json);

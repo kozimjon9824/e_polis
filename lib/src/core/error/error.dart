@@ -105,3 +105,11 @@ class GeneralFailure extends Failure {
   @override
   String getLocalizedMessage(BuildContext context) => message;
 }
+
+class TravelerCountFailure extends Failure {
+  const TravelerCountFailure() : super();
+
+  @override
+  String getLocalizedMessage(BuildContext context) =>
+      AppLocalizations.of(context).travelCountFailure;
+}

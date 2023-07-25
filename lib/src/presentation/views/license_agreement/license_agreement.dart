@@ -76,9 +76,11 @@ class _LicenseAgreementPageState extends State<LicenseAgreementPage> {
           },
           builder: (context, state) {
             return state.maybeWhen(
-              orElse: () => ErrorView(onTap: () {
-                context.read<LicenseAgreementCubit>().loadData();
-              }),
+              orElse: () => ErrorView(
+                onTap: () {
+                  context.read<LicenseAgreementCubit>().loadData();
+                },
+              ),
               loading: () => const LoadingWidget(),
               loaded: (text, check) => BodyWidget(
                 controller: _controller,

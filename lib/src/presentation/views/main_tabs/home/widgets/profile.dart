@@ -32,9 +32,11 @@ class ProfileWidget extends StatelessWidget {
           onPressed: () {
             Navigator.pushNamed(context, AppRoutes.login);
           },
-          child: Text(AppLocalizations.of(context).registration,
-              style: AppTextStyles.styleW700S16Grey9
-                  .copyWith(color: AppColors.primaryColor)),
+          child: Text(
+            AppLocalizations.of(context).registration,
+            style: AppTextStyles.styleW700S16Grey9
+                .copyWith(color: AppColors.primaryColor),
+          ),
         ),
       );
     }
@@ -63,9 +65,11 @@ class ProfileWidget extends StatelessWidget {
                 Text(fullName ?? AppLocalizations.of(context).nameSurname,
                     style: AppTextStyles.styleW700S16Grey9),
                 const SizedBox(height: 5),
-                Text(getMaskedPhone(phone) ?? '+998 90 123 45 67',
-                    style: AppTextStyles.styleW600S14Grey9
-                        .copyWith(color: AppColors.grey700)),
+                Text(
+                  getMaskedPhone(phone) ?? '+998 90 123 45 67',
+                  style: AppTextStyles.styleW600S14Grey9
+                      .copyWith(color: AppColors.grey700),
+                ),
               ],
             ),
           )

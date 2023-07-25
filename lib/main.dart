@@ -1,4 +1,3 @@
-// import 'package:alice/alice.dart';
 import 'package:e_polis/src/presentation/cubits/drop_down_values/drop_down_values_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:upgrader/upgrader.dart';
 import 'generated/l10n.dart';
 import 'injector.dart';
 import 'src/core/constants/constants.dart';
@@ -78,9 +78,17 @@ class MyApp extends StatelessWidget {
             builder: (context, child) {
               final mediaQueryData = MediaQuery.of(context);
               final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.3);
-              return MediaQuery(
-                data: mediaQueryData.copyWith(textScaleFactor: scale),
-                child: child!,
+              return UpgradeAlert(
+                upgrader: Upgrader(
+                  dialogStyle: UpgradeDialogStyle.cupertino,
+                  languageCode: language,
+                  durationUntilAlertAgain: const Duration(days: 1),
+                ),
+                navigatorKey: navigatorKey,
+                child: MediaQuery(
+                  data: mediaQueryData.copyWith(textScaleFactor: scale),
+                  child: child!,
+                ),
               );
             },
             locale: Locale.fromSubtags(

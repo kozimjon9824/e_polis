@@ -38,25 +38,29 @@ class _VerifyChangePhonePageState extends State<VerifyChangePhonePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(AppLocalizations.of(context).confirmCode,
-                        style: AppTextStyles.styleW700S24Grey9),
+                    Text(
+                      AppLocalizations.of(context).confirmCode,
+                      style: AppTextStyles.styleW700S24Grey9,
+                    ),
                     const SizedBox(height: 12),
                     Text(
-                        '${AppLocalizations.of(context).verifyPageMainText}  ${arguments.phone}',
-                        style: AppTextStyles.styleW500S14Grey7),
+                      '${AppLocalizations.of(context).verifyPageMainText}  ${arguments.phone}',
+                      style: AppTextStyles.styleW500S14Grey7,
+                    ),
                     const SizedBox(height: 32),
                     BlocBuilder<ChangePhoneVerifyCubit, ChangePhoneVerifyState>(
                       builder: (context, state) {
                         return CustomPinPut(
-                            textController: textController,
-                            onChange: (_) {
-                              context
-                                  .read<ChangePhoneVerifyCubit>()
-                                  .loadInitial();
-                            },
-                            forceErrorState: state ==
-                                const ChangePhoneVerifyState.error(
-                                    WrongCodeFailure()));
+                          textController: textController,
+                          onChange: (_) {
+                            context
+                                .read<ChangePhoneVerifyCubit>()
+                                .loadInitial();
+                          },
+                          forceErrorState: state ==
+                              const ChangePhoneVerifyState.error(
+                                  WrongCodeFailure()),
+                        );
                       },
                     ),
                     const SizedBox(height: 24),
@@ -85,15 +89,16 @@ class _VerifyChangePhonePageState extends State<VerifyChangePhonePage> {
         child: BlocConsumer<ChangePhoneVerifyCubit, ChangePhoneVerifyState>(
           listener: (context, state) {
             state.whenOrNull(
-                success: () {
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  context.read<MainScreenDataCubit>().loadData();
-                  showSuccessMessage(
-                      context, AppLocalizations.of(context).profileUpdated);
-                },
-                error: (failure) => showErrorMessage(
-                    context, failure.getLocalizedMessage(context)));
+              success: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+                context.read<MainScreenDataCubit>().loadData();
+                showSuccessMessage(
+                    context, AppLocalizations.of(context).profileUpdated);
+              },
+              error: (failure) => showErrorMessage(
+                  context, failure.getLocalizedMessage(context)),
+            );
           },
           builder: (context, state) {
             return CustomButton(

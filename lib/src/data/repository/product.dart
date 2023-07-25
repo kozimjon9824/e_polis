@@ -96,6 +96,7 @@ class ProductRepository extends IProductRepository {
 
   /// get user id
   String _getUserId() {
+    if (_preferences.getString(ACCESS_TOKEN)?.isEmpty ?? false) return '';
     String id = parseJwt(_preferences.getString(ACCESS_TOKEN).toString())['id']
         .toString();
     return id;

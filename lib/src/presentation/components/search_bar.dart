@@ -7,19 +7,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/themes/app_text_styles.dart';
 
-class SearchBar extends StatelessWidget implements PreferredSizeWidget {
-  const SearchBar(
-      {Key? key,
-      this.onTap,
-      this.focus,
-      this.onCancel,
-      this.onChange,
-      this.controller,
-      this.onClear,
-      this.autoFocus,
-      this.hasWord = false,
-      this.readOnly})
-      : super(key: key);
+class CustomSearchBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomSearchBar({
+    Key? key,
+    this.onTap,
+    this.focus,
+    this.onCancel,
+    this.onChange,
+    this.controller,
+    this.onClear,
+    this.autoFocus,
+    this.hasWord = false,
+    this.readOnly,
+  }) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(68);
@@ -35,14 +35,16 @@ class SearchBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? hasWord;
 
   OutlineInputBorder inputBorder() => OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: const BorderSide(color: Colors.white, width: 0));
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(color: Colors.white, width: 0),
+      );
 
   TextStyle cancelTextStyle() => const TextStyle(
-      fontWeight: FontWeight.w500,
-      fontStyle: FontStyle.normal,
-      color: Color(0xFF297AFF),
-      fontSize: 12);
+        fontWeight: FontWeight.w500,
+        fontStyle: FontStyle.normal,
+        color: Color(0xFF297AFF),
+        fontSize: 12,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class SearchBar extends StatelessWidget implements PreferredSizeWidget {
     return Material(
       type: MaterialType.transparency,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+        padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
         child: Row(
           children: [
             Expanded(
@@ -70,11 +72,12 @@ class SearchBar extends StatelessWidget implements PreferredSizeWidget {
                 decoration: InputDecoration(
                   hintText: AppLocalizations.of(context).search,
                   hintStyle: AppTextStyles.styleW500S14Grey6,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 18),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
                   prefixIcon: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: SvgPicture.asset(AppIcons.search,
-                          height: 19, width: 19)),
+                    padding: const EdgeInsets.all(14.0),
+                    child: SvgPicture.asset(AppIcons.search,
+                        height: 18, width: 18),
+                  ),
                   suffixIcon: (isKeyboardVisible && (hasWord ?? false))
                       ? InkWell(
                           onTap: onClear,

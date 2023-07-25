@@ -25,18 +25,21 @@ class HelperCenterPage extends StatelessWidget {
         body: BlocBuilder<FaqCubit, FaqState>(
           builder: (context, state) {
             return state.when(
-                loading: () => const LoadingWidget(),
-                error: (failure) => ErrorView(onTap: () {
-                      context.read<FaqCubit>().loadData();
-                    }),
-                loaded: (data) => faqData(context, data));
+              loading: () => const LoadingWidget(),
+              error: (failure) => ErrorView(
+                onTap: () {
+                  context.read<FaqCubit>().loadData();
+                },
+              ),
+              loaded: (data) => faqData(context, data),
+            );
           },
         ),
       ),
     );
   }
 
-  ListView faqData(BuildContext context, List<QuestionAnswer> data) {
+  ListView faqData(BuildContext context, HelpData? data) {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       children: [
@@ -46,53 +49,71 @@ class HelperCenterPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(12), color: AppColors.grey50),
           child: Column(
             children: [
-              Text(AppLocalizations.of(context).howCanWeHelp,
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.styleW700S18Grey9),
+              Text(
+                AppLocalizations.of(context).howCanWeHelp,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.styleW700S18Grey9,
+              ),
               const SizedBox(height: 8),
-              Text(AppLocalizations.of(context).helpMainText,
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.styleW500S14Grey7),
+              Text(
+                AppLocalizations.of(context).helpMainText,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.styleW500S14Grey7,
+              ),
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                      onPressed: () {
-                        _launchInBrowser('impex-insurance.uz');
-                      },
-                      iconSize: 44,
-                      icon: SvgPicture.asset(AppIcons.web)),
+                    onPressed: () {
+                      _launchInBrowser(
+                          data?.websiteUrl?.replaceAll('https://', '') ?? '');
+                    },
+                    iconSize: 44,
+                    icon: SvgPicture.asset(AppIcons.web),
+                  ),
                   IconButton(
-                      onPressed: () {
-                        _goEmail('office@impex-insurance.uz');
-                      },
-                      iconSize: 44,
-                      icon: SvgPicture.asset(AppIcons.email)),
+                    onPressed: () {
+                      _goEmail(data?.email ?? '');
+                    },
+                    iconSize: 44,
+                    icon: SvgPicture.asset(AppIcons.email),
+                  ),
                   IconButton(
-                      onPressed: () {
-                        _makePhoneCall('+998946122075');
-                      },
-                      iconSize: 44,
-                      icon: SvgPicture.asset(AppIcons.phone))
+                    onPressed: () {
+                      _makePhoneCall(data?.phoneNumber ?? '+998946122075');
+                    },
+                    iconSize: 44,
+                    icon: SvgPicture.asset(AppIcons.phone),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      _launchInTG(data?.telegramUrl ??
+                          'https://t.me/+jN0Waa2aFdc3YzEy');
+                    },
+                    iconSize: 44,
+                    icon: SvgPicture.asset(AppIcons.tg),
+                  )
                 ],
               ),
             ],
           ),
         ),
         const SizedBox(height: 24),
-        Text(AppLocalizations.of(context).popularQuestions,
-            style: AppTextStyles.styleW700S18Grey9),
+        Text(
+          AppLocalizations.of(context).popularQuestions,
+          style: AppTextStyles.styleW700S18Grey9,
+        ),
         const SizedBox(height: 16),
         ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (_, index) => ExpandableContainer(
-            title: data[index].question ?? '',
-            subText: data[index].answer ?? '',
+            title: data?.data?[index].question ?? '',
+            subText: data?.data?[index].answer ?? '',
           ),
           separatorBuilder: (_, __) => const SizedBox(height: 12),
-          itemCount: data.length,
+          itemCount: data?.data?.length ?? 0,
         ),
       ],
     );
@@ -104,6 +125,15 @@ class HelperCenterPage extends StatelessWidget {
         scheme: 'http',
         host: url,
       ),
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  Future<void> _launchInTG(String url) async {
+    if (!await launchUrl(
+      Uri.parse(url),
       mode: LaunchMode.externalApplication,
     )) {
       throw Exception('Could not launch $url');

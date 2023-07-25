@@ -4,6 +4,8 @@ import 'package:e_polis/src/data/models/basic_filter/request/basic_filter_reques
 import 'package:e_polis/src/data/models/book/book_model.dart';
 import 'package:e_polis/src/data/models/contract_information/request/contract_info_request.dart';
 import 'package:e_polis/src/data/models/contract_information/response/contract_info_response.dart';
+import 'package:e_polis/src/data/models/delete_account/delete_account_request.dart';
+import 'package:e_polis/src/data/models/delete_account_response/delete_account_response.dart';
 import 'package:e_polis/src/data/models/help_data/help_data.dart';
 import 'package:e_polis/src/data/models/input_driver/request/driver_passport_input.dart';
 import 'package:e_polis/src/data/models/input_driver/response/driver_passport_response.dart';
@@ -12,6 +14,7 @@ import 'package:e_polis/src/data/models/login/login.dart';
 import 'package:e_polis/src/data/models/product/product_details.dart';
 import 'package:e_polis/src/data/models/profile_update/profile_update.dart';
 import 'package:e_polis/src/data/models/select_values/select_values.dart';
+import 'package:e_polis/src/data/models/travel_booking/travel_booking_request.dart';
 import 'package:e_polis/src/data/models/user_product/user_product.dart';
 import 'package:e_polis/src/data/models/user_profile/user_profile.dart';
 import 'package:e_polis/src/data/models/vehicle_information/request/vehicle_info_request.dart';
@@ -32,7 +35,10 @@ part 'provider.g.dart';
 @RestApi(baseUrl: BASE_URL)
 abstract class ApiClient {
   factory ApiClient(Dio dio, String baseUrl) {
-    dio.options = BaseOptions(receiveTimeout: 30000, connectTimeout: 30000);
+    dio.options = BaseOptions(
+      receiveTimeout: const Duration(seconds: 20),
+      connectTimeout: const Duration(seconds: 20),
+    );
     return _ApiClient(dio, baseUrl: baseUrl);
   }
 
@@ -63,8 +69,8 @@ abstract class ApiClient {
   @GET('users/{userId}/products/archived')
   Future<MyProductData> getMyArchivedProduct(@Path('userId') String id);
 
-  @GET('license-agreement.html')
-  Future<dynamic> getLicenseAgreement();
+  @GET('{url}')
+  Future<dynamic> getLicenseAgreement(@Path('url') String url);
 
   @GET('faq')
   Future<HelpData> getFaq();
@@ -129,5 +135,22 @@ abstract class ApiClient {
   Future<UserProduct> getUserProductDetails(
     @Path('userId') String userId,
     @Path('id') String id,
+  );
+
+  @DELETE('users/{id}')
+  Future<DeleteAccountResponse> deleteAccount(
+    @Path('id') String id,
+    @Body() DeleteAccountRequest request,
+  );
+
+  @DELETE('users/{id}')
+  Future<DeleteAccountResponse> sendOtpForDeletion(
+    @Path('id') String id,
+  );
+
+  @POST('products/travel/{productId}')
+  Future<dynamic> travelBooking(
+    @Path('productId') String id,
+    @Body() TravelBookingRequest request,
   );
 }

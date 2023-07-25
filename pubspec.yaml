@@ -21,13 +21,13 @@ dependencies:
   # Flutter library to load and cache network images. Can also be used with placeholder and error widgets.
   keyboard_dismisser: ^3.0.0
   # A simple Flutter package to hide the keyboard when performing a gesture outside of it.
-  dio: ^4.0.0
+  dio: ^5.0.0
   # A powerful Http client for Dart, which supports Interceptors, FormData, Request Cancellation, File Downloading, Timeout etc.
   flutter_bloc: ^7.2.0
   # Flutter Widgets that make it easy to implement the BLoC (Business Logic Component) design pattern. Built to be used with the bloc state management package.
   dartz: ^0.10.1
   # for network request , api call
-  retrofit: ^3.0.1
+  retrofit: ^4.0.1
   # for di getIt
   get_it: ^7.2.0
   # for compare objects
@@ -47,8 +47,8 @@ dependencies:
   # animation dots for page index
   smooth_page_indicator: ^1.0.0+2
   # language and data formatter
-  intl: ^0.17.0
-#  alice: ^0.3.2
+  intl: ^0.18.0
+#  alice: ^0.3.3
   # input formatter for phone number
   mask_text_input_formatter: ^2.4.0
   # drop down button
@@ -68,6 +68,7 @@ dependencies:
   path_provider: ^2.0.15
   open_file: ^3.3.1
   external_app_launcher: ^3.1.0
+  upgrader: ^7.1.0
 
 
 dev_dependencies:
@@ -75,7 +76,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.1
-  retrofit_generator: ^4.0.1
+  retrofit_generator: ^7.0.8
   build_runner: ^2.1.7
   freezed: ^2.3.2
   json_serializable: ^6.5.4
@@ -84,7 +85,7 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
-#  generate: true
+  generate: true
 
   assets:
     - assets/fonts/
@@ -120,6 +121,6 @@ flutter:
         - asset: assets/fonts/SFPro.ttf
 
 
-#flutter_intl:
-#  enabled: true
-#  class_name: AppLocalizations
+flutter_intl:
+  enabled: true
+  class_name: AppLocalizations

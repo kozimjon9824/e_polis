@@ -23,7 +23,7 @@ class PriceTile extends StatelessWidget {
           Text(title, style: AppTextStyles.styleW400S12Grey7),
           const SizedBox(height: 4),
           Text(
-            '$price ${AppLocalizations.of(context).sum}',
+            price,
             style: textStyle ??
                 AppTextStyles.styleW600S16White
                     .copyWith(color: AppColors.grey900),

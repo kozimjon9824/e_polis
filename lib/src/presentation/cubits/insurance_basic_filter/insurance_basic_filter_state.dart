@@ -9,7 +9,8 @@ class InsuranceBasicFilterState with _$InsuranceBasicFilterState {
     List<BasicFilterData>? searchResult,
     String? id,
     @Default(false) bool clearList,
-    @Default(BasicFilterRequest(isVip: false, period: PERIOD_MONTHS))
-        BasicFilterRequest basicFilterRequest,
+    @Default(BasicFilterRequest(isVip: false, period: PERIOD_YEAR))
+    BasicFilterRequest basicFilterRequest,
+    @Default(false) bool restriction,
   }) = _InsuranceBasicFilterState;
 }

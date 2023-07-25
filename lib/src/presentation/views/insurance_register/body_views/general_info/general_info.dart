@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../../../../generated/l10n.dart';
+import '../../../../../core/constants/constants.dart';
 import '../../../../../data/models/contract_information/request/contract_info_request.dart';
 import '../../../../components/custom_button.dart';
 import '../../../../cubits/contract_information/contract_information_cubit.dart';
@@ -196,6 +197,25 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                         .read<BookCubit>()
                         .onPaymentHolder(owner?.fullName ?? '');
                     context.read<BookCubit>().onInn(owner?.inn);
+                    if (vehicleController.text.substring(0, 2) == '01') {
+                      context
+                          .read<InsuranceBasicFilterCubit>()
+                          .selectPeriod(PERIOD_YEAR);
+                      context
+                          .read<InsuranceBasicFilterCubit>()
+                          .selectDriversCount(true);
+                      context
+                          .read<InsuranceBasicFilterCubit>()
+                          .setRestrictionValue(true);
+                    } else {
+                      context
+                          .read<InsuranceBasicFilterCubit>()
+                          .selectDriversCount(false);
+                      context
+                          .read<InsuranceBasicFilterCubit>()
+                          .setRestrictionValue(false);
+                    }
+
                     context
                         .read<ManageInsuranceStackViewsCubit>()
                         .changeIndex(1);
@@ -211,6 +231,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     //             DateFormat('yyyy-MM-dd').format(DateTime.now()),
                     //       ),
                     //     );
+
                     context
                         .read<InsuranceBasicFilterCubit>()
                         .selectRegion(state.vehicleInfo?.region);

@@ -20,21 +20,21 @@ mixin _$FaqState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
-    required TResult Function(List<QuestionAnswer> data) loaded,
+    required TResult Function(HelpData? helpData) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
-    TResult? Function(List<QuestionAnswer> data)? loaded,
+    TResult? Function(HelpData? helpData)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
-    TResult Function(List<QuestionAnswer> data)? loaded,
+    TResult Function(HelpData? helpData)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -118,7 +118,7 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
-    required TResult Function(List<QuestionAnswer> data) loaded,
+    required TResult Function(HelpData? helpData) loaded,
   }) {
     return loading();
   }
@@ -128,7 +128,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
-    TResult? Function(List<QuestionAnswer> data)? loaded,
+    TResult? Function(HelpData? helpData)? loaded,
   }) {
     return loading?.call();
   }
@@ -138,7 +138,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
-    TResult Function(List<QuestionAnswer> data)? loaded,
+    TResult Function(HelpData? helpData)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -250,7 +250,7 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
-    required TResult Function(List<QuestionAnswer> data) loaded,
+    required TResult Function(HelpData? helpData) loaded,
   }) {
     return error(failure);
   }
@@ -260,7 +260,7 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
-    TResult? Function(List<QuestionAnswer> data)? loaded,
+    TResult? Function(HelpData? helpData)? loaded,
   }) {
     return error?.call(failure);
   }
@@ -270,7 +270,7 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
-    TResult Function(List<QuestionAnswer> data)? loaded,
+    TResult Function(HelpData? helpData)? loaded,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -328,7 +328,9 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<QuestionAnswer> data});
+  $Res call({HelpData? helpData});
+
+  $HelpDataCopyWith<$Res>? get helpData;
 }
 
 /// @nodoc
@@ -341,33 +343,40 @@ class __$$_LoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = null,
+    Object? helpData = freezed,
   }) {
     return _then(_$_Loaded(
-      null == data
-          ? _value._data
-          : data // ignore: cast_nullable_to_non_nullable
-              as List<QuestionAnswer>,
+      freezed == helpData
+          ? _value.helpData
+          : helpData // ignore: cast_nullable_to_non_nullable
+              as HelpData?,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HelpDataCopyWith<$Res>? get helpData {
+    if (_value.helpData == null) {
+      return null;
+    }
+
+    return $HelpDataCopyWith<$Res>(_value.helpData!, (value) {
+      return _then(_value.copyWith(helpData: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded(final List<QuestionAnswer> data) : _data = data;
+  const _$_Loaded(this.helpData);
 
-  final List<QuestionAnswer> _data;
   @override
-  List<QuestionAnswer> get data {
-    if (_data is EqualUnmodifiableListView) return _data;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_data);
-  }
+  final HelpData? helpData;
 
   @override
   String toString() {
-    return 'FaqState.loaded(data: $data)';
+    return 'FaqState.loaded(helpData: $helpData)';
   }
 
   @override
@@ -375,12 +384,12 @@ class _$_Loaded implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            (identical(other.helpData, helpData) ||
+                other.helpData == helpData));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+  int get hashCode => Object.hash(runtimeType, helpData);
 
   @JsonKey(ignore: true)
   @override
@@ -393,9 +402,9 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(Failure failure) error,
-    required TResult Function(List<QuestionAnswer> data) loaded,
+    required TResult Function(HelpData? helpData) loaded,
   }) {
-    return loaded(data);
+    return loaded(helpData);
   }
 
   @override
@@ -403,9 +412,9 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(Failure failure)? error,
-    TResult? Function(List<QuestionAnswer> data)? loaded,
+    TResult? Function(HelpData? helpData)? loaded,
   }) {
-    return loaded?.call(data);
+    return loaded?.call(helpData);
   }
 
   @override
@@ -413,11 +422,11 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(Failure failure)? error,
-    TResult Function(List<QuestionAnswer> data)? loaded,
+    TResult Function(HelpData? helpData)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(data);
+      return loaded(helpData);
     }
     return orElse();
   }
@@ -458,9 +467,9 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements FaqState {
-  const factory _Loaded(final List<QuestionAnswer> data) = _$_Loaded;
+  const factory _Loaded(final HelpData? helpData) = _$_Loaded;
 
-  List<QuestionAnswer> get data;
+  HelpData? get helpData;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;

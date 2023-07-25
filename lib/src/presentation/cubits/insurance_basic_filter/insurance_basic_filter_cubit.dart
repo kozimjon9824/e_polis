@@ -65,6 +65,7 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
   }
 
   void selectDriversCount(bool isVip) {
+    if (state.restriction) return;
     BasicFilterRequest data = state.basicFilterRequest;
     var newData = data.copyWith(isVip: isVip);
     emit(state.copyWith(
@@ -73,7 +74,12 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
     ));
   }
 
+  void setRestrictionValue(bool restriction) {
+    emit(state.copyWith(status: StateStatus.unknown, restriction: restriction));
+  }
+
   void selectPeriod(String period) {
+    if (state.restriction) return;
     BasicFilterRequest data = state.basicFilterRequest;
     var newData = data.copyWith(period: period);
     emit(state.copyWith(

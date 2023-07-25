@@ -9,30 +9,55 @@ import '../../../../../components/custom_text_field.dart';
 class TravellerInputs extends StatelessWidget {
   const TravellerInputs({
     Key? key,
-    required this.seriesController,
-    required this.numberController,
-    required this.dateController,
-    required this.innController,
-    required this.fioController,
-    this.seriesFocus,
-    this.numberFocus,
-    this.dateFocus,
-    this.innFocus,
-    this.fioFocus,
+    // required this.seriesController,
+    // required this.numberController,
+    // required this.dateController,
+    // required this.innController,
+    // required this.fioController,
+    // this.seriesFocus,
+    // this.numberFocus,
+    // this.dateFocus,
+    // this.innFocus,
+    // this.fioFocus,
     required this.onRequest,
+    required this.initialValueBD,
+    required this.initialValueIDSeries,
+    required this.initialValueIDNumber,
+    required this.initialValueINN,
+    required this.initialValueFirstName,
+    required this.initialValueLastName,
+    required this.onChange1,
+    required this.onChange2,
+    required this.onChange3,
+    required this.onChange4,
+    required this.onChange5,
+    required this.onChange6,
   }) : super(key: key);
 
-  final TextEditingController seriesController;
-  final TextEditingController numberController;
-  final TextEditingController dateController;
-  final TextEditingController innController;
-  final TextEditingController fioController;
-  final FocusNode? seriesFocus;
-  final FocusNode? numberFocus;
-  final FocusNode? dateFocus;
-  final FocusNode? innFocus;
-  final FocusNode? fioFocus;
+  // final TextEditingController seriesController;
+  // final TextEditingController numberController;
+  // final TextEditingController dateController;
+  // final TextEditingController innController;
+  // final TextEditingController fioController;
+  // final FocusNode? seriesFocus;
+  // final FocusNode? numberFocus;
+  // final FocusNode? dateFocus;
+  // final FocusNode? innFocus;
+  // final FocusNode? fioFocus;
 
+  final String? initialValueBD;
+  final String? initialValueIDSeries;
+  final String? initialValueIDNumber;
+  final String? initialValueINN;
+  final String? initialValueFirstName;
+  final String? initialValueLastName;
+
+  final Function(String value) onChange1;
+  final Function(String value) onChange2;
+  final Function(String value) onChange3;
+  final Function(String value) onChange4;
+  final Function(String value) onChange5;
+  final Function(String value) onChange6;
   final Function() onRequest;
 
   @override
@@ -43,37 +68,42 @@ class TravellerInputs extends StatelessWidget {
         CustomDatePickTextField(
           label: AppLocalizations.of(context).dateOfBirth,
           hintText: AppLocalizations.of(context).ddMMYY,
+          hideCalendar: true,
           keyboardType: TextInputType.datetime,
-          textEditingController: dateController,
-          textInputAction: TextInputAction.done,
-          focusNode: dateFocus,
-          onFieldSubmitted: (_) => seriesFocus?.requestFocus(),
+          // textEditingController: dateController,
+          textInputAction: TextInputAction.next,
+          // focusNode: dateFocus,
+          // onFieldSubmitted: (_) => seriesFocus?.requestFocus(),
+
           validator: (value) => value!.isEmpty
               ? AppLocalizations.of(context).invalidLength
               : null,
           dateFormat: 'dd.MM.yyyy',
+          initialValue: initialValueBD,
           inputFormatters: [
             MaskTextInputFormatter(
               mask: '##.##.####',
-              initialText: dateController.text.replaceAll('', ''),
+              initialText: initialValueBD?.replaceAll('', ''),
               type: MaskAutoCompletionType.eager,
               filter: {"#": RegExp(r'\d')},
             )
           ],
           onChange: (value) {
             if (value.length == 10) {
-              seriesFocus?.requestFocus();
+              // seriesFocus?.requestFocus();
               // onRequest();
             }
+            onChange1(value);
           },
-          onDate: () {
-            seriesFocus?.requestFocus();
+          onDate: (value) {
+            onChange1(value);
+            // seriesFocus?.requestFocus();
             // onRequest();
           },
         ),
         const SizedBox(height: 16),
         Text(
-          AppLocalizations.of(context).passport,
+          AppLocalizations.of(context).worldPassport,
           style: AppTextStyles.styleW600S14Grey9,
         ),
         const SizedBox(height: 6),
@@ -87,27 +117,29 @@ class TravellerInputs extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
                 textCapitalization: TextCapitalization.characters,
-                textEditingController: seriesController,
-                focusNode: seriesFocus,
-                onFieldSubmitted: (_) => numberFocus?.requestFocus(),
+                // textEditingController: seriesController,
+                // focusNode: seriesFocus,
+                // onFieldSubmitted: (_) => numberFocus?.requestFocus(),
                 validator: (value) => value!.length < 2
                     ? AppLocalizations.of(context).invalidLength
                     : null,
+                initialValue: initialValueIDSeries,
                 inputFormatters: [
                   MaskTextInputFormatter(
                     mask: '##',
-                    initialText: seriesController.text,
+                    initialText: initialValueIDSeries,
                     filter: {"#": RegExp(r'[a-zA-Z]')},
                   ),
                   UpperCaseTextFormatter(),
                 ],
                 onChange: (value) {
+                  onChange2(value);
                   if (value.length == 2) {
-                    numberFocus?.requestFocus();
-                    if (dateController.text.length == 10 &&
-                        numberController.text.length == 2) {
-                      onRequest();
-                    }
+                    // numberFocus?.requestFocus();
+                    // if (dateController.text.length == 10 &&
+                    //     numberController.text.length == 2) {
+                    //   onRequest();
+                    // }
                   }
                 },
               ),
@@ -119,27 +151,29 @@ class TravellerInputs extends StatelessWidget {
                 hintText: AppLocalizations.of(context).number,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
-                textEditingController: numberController,
-                focusNode: numberFocus,
-                onFieldSubmitted: (_) => dateFocus?.requestFocus(),
+                // textEditingController: numberController,
+                // focusNode: numberFocus,
+                // onFieldSubmitted: (_) => dateFocus?.requestFocus(),
+                initialValue: initialValueIDNumber,
                 validator: (value) => value!.length < 6
                     ? AppLocalizations.of(context).invalidLength
                     : null,
                 inputFormatters: [
                   MaskTextInputFormatter(
                     mask: '#######',
-                    initialText: numberController.text,
+                    initialText: initialValueIDNumber,
                     filter: {"#": RegExp(r'\d')},
-                  )
+                  ),
                 ],
                 onChange: (value) {
-                  if (value.length == 7) {
-                    dateFocus?.requestFocus();
-                    if (dateController.text.length == 10 &&
-                        seriesController.text.length == 2) {
-                      onRequest();
-                    }
-                  }
+                  onChange3(value);
+                  // if (value.length == 7) {
+                  //   dateFocus?.requestFocus();
+                  //   if (dateController.text.length == 10 &&
+                  //       seriesController.text.length == 2) {
+                  //     onRequest();
+                  //   }
+                  // }
                 },
               ),
             ),
@@ -147,47 +181,52 @@ class TravellerInputs extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         CustomTextField(
-          hintText: 'ЖШШИР',
+          hintText: '12345678901234',
           keyboardType: TextInputType.number,
-          label: 'ЖШШИР',
+          label: AppLocalizations.of(context).jshshr,
           textInputAction: TextInputAction.next,
-          textEditingController: innController,
-          focusNode: innFocus,
-          onFieldSubmitted: (_) => fioFocus?.requestFocus(),
-          validator: (value) => value!.length < 13
+          // textEditingController: innController,
+          // focusNode: innFocus,
+          // onFieldSubmitted: (_) => fioFocus?.requestFocus(),
+          initialValue: initialValueINN,
+          validator: (value) => value!.length < 14
               ? AppLocalizations.of(context).invalidLength
               : null,
           inputFormatters: [
             MaskTextInputFormatter(
-              mask: '#############',
-              initialText: numberController.text,
+              mask: '##############',
+              // initialText: numberController.text,
+              initialText: initialValueINN,
               filter: {"#": RegExp(r'\d')},
             )
           ],
           onChange: (value) {
-            if (value.length == 13) {
-              fioFocus?.requestFocus();
-              if (dateController.text.length == 10 &&
-                  seriesController.text.length == 2) {
-                // onRequest();
-              }
-            }
+            onChange4(value);
+            // if (value.length == 13) {
+            //   fioFocus?.requestFocus();
+            //   if (dateController.text.length == 10 &&
+            //       seriesController.text.length == 2) {
+            //     // onRequest();
+            //   }
+            // }
           },
         ),
         const SizedBox(height: 16),
         CustomTextField(
-          hintText: 'Ф.И.О',
+          hintText: AppLocalizations.of(context).firstName,
           keyboardType: TextInputType.name,
-          label: 'Ф.И.О',
-          textInputAction: TextInputAction.done,
-          textEditingController: fioController,
-          focusNode: fioFocus,
-          onFieldSubmitted: (_) => fioFocus?.unfocus(),
+          label: AppLocalizations.of(context).firstName,
+          textInputAction: TextInputAction.next,
+          initialValue: initialValueFirstName,
+          // textEditingController: fioController,
+          // focusNode: fioFocus,
+          // onFieldSubmitted: (_) => fioFocus?.unfocus(),
           validator: (value) => value!.isEmpty
               ? AppLocalizations.of(context).invalidLength
               : null,
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z ]')),
+            UpperCaseTextFormatter(),
             // MaskTextInputFormatter(
             //   mask: '#############',
             //   initialText: numberController.text,
@@ -195,6 +234,41 @@ class TravellerInputs extends StatelessWidget {
             // )
           ],
           onChange: (value) {
+            onChange5(value);
+            // if (value.length == 13) {
+            //   fioFocus?.unfocus();
+            //   if (dateController.text.length == 10 &&
+            //       seriesController.text.length == 2) {
+            //     onRequest();
+            //   }
+            // }
+          },
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
+          hintText: AppLocalizations.of(context).lastName,
+          keyboardType: TextInputType.name,
+          label: AppLocalizations.of(context).lastName,
+          textInputAction: TextInputAction.done,
+          initialValue: initialValueLastName,
+          // textEditingController: fioController,
+          // focusNode: fioFocus,
+          // onFieldSubmitted: (_) => fioFocus?.unfocus(),
+          validator: (value) => value!.isEmpty
+              ? AppLocalizations.of(context).invalidLength
+              : null,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z ]')),
+            UpperCaseTextFormatter(),
+
+            // MaskTextInputFormatter(
+            //   mask: '#############',
+            //   initialText: numberController.text,
+            //   filter: {"#": RegExp(r'\d')},
+            // )
+          ],
+          onChange: (value) {
+            onChange6(value);
             // if (value.length == 13) {
             //   fioFocus?.unfocus();
             //   if (dateController.text.length == 10 &&

@@ -42,7 +42,7 @@ class _BasicFilterResultPageState extends State<BasicFilterResultPage> {
           return Scaffold(
             appBar: AppBar(
               title: Text(AppLocalizations.of(context).calculationResults),
-              bottom: SearchBar(
+              bottom: CustomSearchBar(
                   onCancel: () {
                     controller.text = '';
                     _focusNode.unfocus();

@@ -40,9 +40,11 @@ class AppIcons {
   static final web = getPath('ic_web');
   static final email = getPath('ic_email');
   static final phone = getPath('ic_phone');
+  static final tg = getPath('ic_tg');
   static final archiveLiner = getPath('ic_archive');
   static final calendar = getPath('ic_calendar');
   static final impex = getPath('ic_impax');
+  static final deleteAccount = getPath('ic_delete_account');
 
   // images
   static final appLogo = getImagePath('app_logo');

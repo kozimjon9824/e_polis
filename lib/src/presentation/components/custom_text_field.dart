@@ -135,6 +135,7 @@ class CustomDatePickTextField extends StatelessWidget {
     this.dateFormat,
     required this.onDate,
     this.readOnly,
+    this.hideCalendar = false,
   }) : super(key: key);
 
   final TextEditingController? textEditingController;
@@ -155,8 +156,9 @@ class CustomDatePickTextField extends StatelessWidget {
   final TextCapitalization? textCapitalization;
   final ValueChanged<String>? onFieldSubmitted;
   final String? dateFormat;
-  final Function() onDate;
+  final Function(String date) onDate;
   final bool? readOnly;
+  final bool hideCalendar;
 
   @override
   Widget build(BuildContext context) {
@@ -183,25 +185,34 @@ class CustomDatePickTextField extends StatelessWidget {
           onFieldSubmitted: onFieldSubmitted,
           readOnly: readOnly ?? false,
           decoration: InputDecoration(
-            suffixIcon: InkWell(
-              onTap: () {
-                selectDate(
-                    context: context,
-                    onSave: (DateTime date) {
-                      textEditingController?.text =
-                          DateFormat(dateFormat).format(date);
-                      onDate();
-                    });
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SvgPicture.asset(
-                  AppIcons.calendar,
-                  height: 16,
-                  width: 16,
-                ),
-              ),
-            ),
+            suffixIcon: hideCalendar
+                ? null
+                : InkWell(
+                    onTap: () {
+                      selectDate(
+                        context: context,
+                        onSave: (DateTime date) {
+                          textEditingController?.text =
+                              DateFormat(dateFormat).format(date);
+                          onDate(DateFormat(dateFormat).format(date));
+                          onChange!(DateFormat(dateFormat).format(date));
+                        },
+                        initialDate:
+                            (textEditingController?.text.isEmpty ?? true)
+                                ? null
+                                : DateFormat(dateFormat)
+                                    .parse(textEditingController!.text),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: SvgPicture.asset(
+                        AppIcons.calendar,
+                        height: 16,
+                        width: 16,
+                      ),
+                    ),
+                  ),
             hintStyle: AppTextStyles.styleW500S14Grey3,
             hintText: hintText,
             filled: true,

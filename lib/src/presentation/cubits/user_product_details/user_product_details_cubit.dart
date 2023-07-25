@@ -31,7 +31,7 @@ class UserProductDetailsCubit extends Cubit<UserProductDetailsState> {
   }
 
   Future<void> downloadFile({required String url}) async {
-    var file = File('');
+    dynamic file;
     String filePath = '';
     if (Platform.isIOS) {
       final dir = await getApplicationDocumentsDirectory();
@@ -53,16 +53,27 @@ class UserProductDetailsCubit extends Cubit<UserProductDetailsState> {
         filePath = dir.path;
       }
     }
-
+    if (file == null) return;
     Dio dio = Dio();
     emit(state.copyWith(fileDownloading: true));
-    await dio.download(
-      url,
-      file.path,
-      onReceiveProgress: (count, total) {
-        debugPrint('---Download----Rec: $count, Total: $total');
-      },
-    );
-    emit(state.copyWith(fileDownloading: false, filePath: filePath));
+    try {
+      await dio.download(
+        url,
+        file.path,
+        onReceiveProgress: (count, total) {
+          debugPrint('---Download----Rec: $count, Total: $total');
+        },
+      );
+      emit(state.copyWith(
+        fileDownloading: false,
+        filePath: filePath,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: StateStatus.error,
+        failure: const UnknownFailure(),
+        fileDownloading: false,
+      ));
+    }
   }
 }

@@ -84,7 +84,9 @@ class MainRepository implements IMainRepository {
   @override
   Future<Either<Failure, dynamic>> getLicenseAgreement() async {
     try {
-      final response = await _apiClient.getLicenseAgreement();
+      final lang = _preferences.getString(APP_LANGUAGE);
+      String url = 'license-agreement_${lang ?? 'ru'}.html';
+      final response = await _apiClient.getLicenseAgreement(url);
       return Right(response);
     } on DioError catch (e) {
       if (kDebugMode) {

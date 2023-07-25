@@ -29,7 +29,8 @@ class ContactInfoView extends StatefulWidget {
 
 class _ContactInfoViewState extends State<ContactInfoView> {
   final dateController = TextEditingController(
-      text: DateFormat('dd.MM.yyyy').format(DateTime.now()));
+    text: DateFormat('dd.MM.yyyy').format(DateTime.now()),
+  );
   final formKey = GlobalKey<FormState>();
   final focusNode = FocusNode();
 

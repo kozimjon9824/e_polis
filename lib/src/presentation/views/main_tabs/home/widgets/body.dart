@@ -18,6 +18,7 @@ class InsuranceTypesBody extends StatelessWidget {
     Key? key,
     required this.products,
   }) : super(key: key);
+
   final List<ProductData> products;
 
   @override
@@ -55,12 +56,14 @@ class InsuranceTypesBody extends StatelessWidget {
                   ),
                 );
               } else {
-                Navigator.pushNamed(
-                  context,
-                  AppRoutes.insuranceRegistration,
-                  arguments: InsurancePageArguments(
-                      id: data.id ?? '', request: const BasicFilterRequest()),
-                );
+                if (data.category?.type == 'osago') {
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.insuranceRegistration,
+                    arguments: InsurancePageArguments(
+                        id: data.id ?? '', request: const BasicFilterRequest()),
+                  );
+                }
               }
 
               // Navigator.pushNamed(
@@ -70,11 +73,13 @@ class InsuranceTypesBody extends StatelessWidget {
               // );
             } else {
               /// travel page
-              Navigator.pushNamed(
-                context,
-                AppRoutes.travelBasic,
-                arguments: data.id ?? '',
-              );
+              if (data.category?.type == 'travel') {
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.travelBasic,
+                  arguments: data.id ?? '',
+                );
+              }
             }
           },
         );

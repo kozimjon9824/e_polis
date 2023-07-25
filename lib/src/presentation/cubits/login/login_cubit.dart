@@ -14,8 +14,9 @@ class LoginCubit extends Cubit<LoginState> {
 
   void login(String phone) async {
     emit(const LoginState.loading());
-    var result =
-        await _loginUseCase.call(LoginParams(LoginRequest(phone: '998$phone')));
+    var result = await _loginUseCase.call(
+      LoginParams(LoginRequest(phone: '998$phone')),
+    );
     result.fold(
       (failure) => emit(LoginState.error(failure)),
       (r) => emit(LoginState.success(phone)),

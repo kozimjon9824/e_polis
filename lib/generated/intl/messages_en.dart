@@ -38,6 +38,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ваша учетная запись успешно подтверждена, теперь давайте наслаждаться функциями Epolis"),
         "addDriver": MessageLookupByLibrary.simpleMessage("Добавить водителя"),
         "addPolis": MessageLookupByLibrary.simpleMessage("Добавить полис"),
+        "addTraveller":
+            MessageLookupByLibrary.simpleMessage("Добавить путешественника"),
+        "address": MessageLookupByLibrary.simpleMessage("Адрес"),
+        "addressHint":
+            MessageLookupByLibrary.simpleMessage("Ул. Амира темура, Ташкент"),
         "alertAndTips":
             MessageLookupByLibrary.simpleMessage("Оповещение  и советы "),
         "all": MessageLookupByLibrary.simpleMessage("Все"),
@@ -86,6 +91,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Дата рождения"),
         "ddMMYY": MessageLookupByLibrary.simpleMessage("ДД/ММ/ГГГГ"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "delete_account":
+            MessageLookupByLibrary.simpleMessage("Delete account"),
+        "delete_account_des": MessageLookupByLibrary.simpleMessage(
+            "Do you want to delete account?"),
         "doYouWantExit": MessageLookupByLibrary.simpleMessage(
             "Вы хотите выйти из приложения"),
         "download": MessageLookupByLibrary.simpleMessage("Download"),
@@ -140,6 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Недействительный паспорт водителя"),
         "invalidLength":
             MessageLookupByLibrary.simpleMessage("Текст недействителен"),
+        "jshshr": MessageLookupByLibrary.simpleMessage("ЖШШИР"),
         "languagePageMainText": MessageLookupByLibrary.simpleMessage(
             "Добро пожаловать в epolis Выберите язык приложения"),
         "lastName": MessageLookupByLibrary.simpleMessage("Фамилия"),
@@ -193,6 +203,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "onBoardingTitle3": MessageLookupByLibrary.simpleMessage(
             "Живая и дружелюбная 24/7 техническая поддержка"),
         "oneYear": MessageLookupByLibrary.simpleMessage("1 год"),
+        "onlineInsuranceTravel":
+            MessageLookupByLibrary.simpleMessage("Онлайн саёҳат суғуртаси"),
         "open": MessageLookupByLibrary.simpleMessage("Open"),
         "operating": MessageLookupByLibrary.simpleMessage("Действующие"),
         "ourMission": MessageLookupByLibrary.simpleMessage("Наш миссия"),
@@ -212,6 +224,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "popularQuestions":
             MessageLookupByLibrary.simpleMessage("Популярные вопросы"),
         "priceCalculation": MessageLookupByLibrary.simpleMessage("Расчет цены"),
+        "priceInUsd":
+            MessageLookupByLibrary.simpleMessage("Цена полиса на USD"),
         "profile": MessageLookupByLibrary.simpleMessage("Профиль"),
         "profileInfo":
             MessageLookupByLibrary.simpleMessage("Информация профиля"),
@@ -243,6 +257,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Серия и номер полиса"),
         "serverError": MessageLookupByLibrary.simpleMessage("Ошибка сервера"),
         "show": MessageLookupByLibrary.simpleMessage("See"),
+        "singleTraveller":
+            MessageLookupByLibrary.simpleMessage("Путешественник"),
         "sixMonth": MessageLookupByLibrary.simpleMessage("6 месяцев"),
         "skip": MessageLookupByLibrary.simpleMessage("Пропустить"),
         "startUsing":
@@ -257,6 +273,22 @@ class MessageLookup extends MessageLookupByLibrary {
             "Срок действия страхового полиса"),
         "toDate": MessageLookupByLibrary.simpleMessage("До"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("Общая сумма"),
+        "travelApplicant": MessageLookupByLibrary.simpleMessage("Заявителе"),
+        "travelCountFailure": MessageLookupByLibrary.simpleMessage(
+            "В семейной поездке количество путешественников должно быть от 3 до 6."),
+        "travelCountries": MessageLookupByLibrary.simpleMessage("Страна"),
+        "travelCountry": MessageLookupByLibrary.simpleMessage(
+            "Где вы хотите путешествовать?"),
+        "travelDays": MessageLookupByLibrary.simpleMessage("Дни прибытия"),
+        "travelEndDate":
+            MessageLookupByLibrary.simpleMessage("Дата окончания путешествия"),
+        "travelInsDesc": MessageLookupByLibrary.simpleMessage(
+            "Перед использованием Решения (см. определение ниже) внимательно ознакомьтесь с условиями данного Лицензионного соглашения с конечным пользователем (далее — «Соглашение»). Данный текст является юридически обязывающим договором. Давая согласие в электронной форме, устанавливая Решение или используя Решение, вы принимаете все условия настоящего Соглашения от своего лица и любой организации и физического лица, которое вы представляете или для чьего Устройства вы приобретаете Решение (в совокупности «вы»)."),
+        "travelProgram": MessageLookupByLibrary.simpleMessage("Программа"),
+        "travelPurpose": MessageLookupByLibrary.simpleMessage("Цель поездки"),
+        "travelStartDate":
+            MessageLookupByLibrary.simpleMessage("Дата начала путешествия"),
+        "traveller": MessageLookupByLibrary.simpleMessage("Путешественники"),
         "twentyDays": MessageLookupByLibrary.simpleMessage("20 дней"),
         "typePolis": MessageLookupByLibrary.simpleMessage("Тип полиса"),
         "typeVehicle": MessageLookupByLibrary.simpleMessage("Тип автомобиля"),
@@ -277,6 +309,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Мы нашли несколько предложений от страховых компаний"),
         "weFoundZero": MessageLookupByLibrary.simpleMessage(
             "Мы нашли 0 страховых компаний"),
+        "worldPassport": MessageLookupByLibrary.simpleMessage("Загранпаспорт"),
         "yes": MessageLookupByLibrary.simpleMessage("Да"),
         "youCanAddPolis":
             MessageLookupByLibrary.simpleMessage("Вы можете добавить полис ")

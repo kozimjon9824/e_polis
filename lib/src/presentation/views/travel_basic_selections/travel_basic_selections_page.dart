@@ -1,15 +1,23 @@
+import 'package:e_polis/injector.dart';
+import 'package:e_polis/src/core/utils/utils.dart';
+import 'package:e_polis/src/presentation/cubits/travel_attributes/travel_attributes_cubit.dart';
+import 'package:e_polis/src/presentation/views/travel_basic_selections/widgets/country_select_widget.dart';
 import 'package:e_polis/src/presentation/views/travel_basic_selections/widgets/traveller_input.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../../generated/l10n.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/themes/app_text_styles.dart';
+import '../../../data/models/multi_days/multi_days.dart';
+import '../../../data/models/policy_type/policy_type.dart';
+import '../../../data/models/programms/programms.dart';
+import '../../../data/models/travelers_type/travelers_type.dart';
+import '../../../data/models/trip_purpose/trip_purpose.dart';
 import '../../components/custom_button.dart';
 import '../../components/custom_text_field.dart';
 import '../../components/drop_down_button.dart';
-import '../../components/snackbars.dart';
-import '../insurance_register/body_views/general_info/widgets/driver_info.dart';
+import '../../components/loading.dart';
 import 'widgets/desc.dart';
 
 class TravelBasicSelectionPage extends StatefulWidget {
@@ -22,189 +30,277 @@ class TravelBasicSelectionPage extends StatefulWidget {
 
 class _TravelBasicSelectionPageState extends State<TravelBasicSelectionPage> {
   final formKey = GlobalKey<FormState>();
-  final dateController = TextEditingController(
-      text: DateFormat('dd.MM.yyyy').format(DateTime.now()));
-  final focusNodeDate = FocusNode();
+
+  final dateController1 = TextEditingController();
+  final dateController2 = TextEditingController();
+
+  final focusNodeDate1 = FocusNode();
+  final focusNodeDate2 = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     final productId = ModalRoute.of(context)!.settings.arguments as String;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Онлайн туристическая страховка'),
-      ),
-      body: SafeArea(
-        child: Form(
-          key: formKey,
-          child: ListView(
-            padding: const EdgeInsets.all(16),
-            children: [
-              const Desc(
-                desc:
-                    'Перед использованием Решения (см. определение ниже) внимательно ознакомьтесь с условиями данного Лицензионного соглашения с конечным пользователем (далее — «Соглашение»). Данный текст является юридически обязывающим договором. Давая согласие в электронной форме, устанавливая Решение или используя Решение, вы принимаете все условия настоящего Соглашения от своего лица и любой организации и физического лица, которое вы представляете или для чьего Устройства вы приобретаете Решение (в совокупности «вы»). ',
+    final local = AppLocalizations.of(context);
+    return BlocProvider(
+      create: (context) => inject<TravelAttributesCubit>()..loadAtt(),
+      child: BlocConsumer<TravelAttributesCubit, TravelAttributesState>(
+        listener: (context, state) {
+          if (state.status == StateStatus.success) {
+            var travelAtt = state.travelAttModel;
+            var newTravelAtt = travelAtt?.copyWith(productId: productId);
+            Navigator.pushNamed(
+              context,
+              AppRoutes.travelInsDetails,
+              arguments: newTravelAtt,
+            );
+          }
+        },
+        builder: (context, state) {
+          final cubit = context.read<TravelAttributesCubit>();
+          if (state.status == StateStatus.loading) {
+            return const LoadingWidget();
+          }
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(AppLocalizations.of(context).onlineInsuranceTravel),
+            ),
+            body: SafeArea(
+              child: Form(
+                key: formKey,
+                child: ListView(
+                  padding: const EdgeInsets.all(16),
+                  children: [
+                    //  Desc(
+                    //   desc:AppLocalizations.of(context).travelInsDesc
+                    // ),
+                    // const SizedBox(height: 20),
+                    DropDownButton<PolicyTypeModel>(
+                      label: AppLocalizations.of(context).typePolis,
+                      value: state.travelAttModel?.policyType,
+                      items: (state.policyType?.items ?? [])
+                          .map((item) => DropdownMenuItem<PolicyTypeModel>(
+                              value: item,
+                              child: Text(
+                                item.name ?? '',
+                                style: AppTextStyles.styleW400S14Grey6,
+                              )))
+                          .toList(),
+                      onChanged: (value) {
+                        cubit.selectPolicyType(value!);
+                      },
+                      errorText: local.mustNotEmptyFailure,
+                    ),
+                    const SizedBox(height: 20),
+                    DropDownButton<MultiDayModel>(
+                      value: state.travelAttModel?.multiDays,
+                      label: AppLocalizations.of(context).travelDays,
+                      items: (state.multiDays?.items ?? [])
+                          .map((item) => DropdownMenuItem<MultiDayModel>(
+                              value: item,
+                              child: Text(
+                                item.name ?? '',
+                                style: AppTextStyles.styleW400S14Grey6,
+                              )))
+                          .toList(),
+                      onChanged: (value) {
+                        cubit.selectMultiDays(value!);
+                      },
+                      errorText: local.mustNotEmptyFailure,
+                    ),
+                    const SizedBox(height: 20),
+                    CustomDatePickTextField(
+                      label: AppLocalizations.of(context).travelStartDate,
+                      hintText: '30.12.2022',
+                      keyboardType: TextInputType.datetime,
+                      textEditingController: dateController1,
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (_) => focusNodeDate2.requestFocus(),
+                      focusNode: focusNodeDate1,
+                      validator: (value) => (value!.length < 10)
+                          ? AppLocalizations.of(context).enterDate
+                          : null,
+                      dateFormat: 'dd.MM.yyyy',
+                      onChange: (value) {
+                        if (value.length == 10) {
+                          cubit.selectStartDate(value);
+                          focusNodeDate1.unfocus();
+                        }
+                      },
+                      inputFormatters: [
+                        MaskTextInputFormatter(
+                          mask: '##.##.####',
+                          initialText: dateController1.text.replaceAll('.', ''),
+                          type: MaskAutoCompletionType.eager,
+                          filter: {"#": RegExp(r'\d')},
+                        )
+                      ],
+                      onDate: (v) {
+                        cubit.selectStartDate(dateController1.text);
+                        focusNodeDate1.unfocus();
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    CustomDatePickTextField(
+                      label: AppLocalizations.of(context).travelEndDate,
+                      hintText: '30.12.2022',
+                      keyboardType: TextInputType.datetime,
+                      textEditingController: dateController2,
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (_) => focusNodeDate2.unfocus(),
+                      focusNode: focusNodeDate2,
+                      validator: (value) => (value!.length < 10)
+                          ? AppLocalizations.of(context).enterDate
+                          : null,
+                      dateFormat: 'dd.MM.yyyy',
+                      onChange: (value) {
+                        if (value.length == 10) {
+                          cubit.selectEndDate(value);
+                          focusNodeDate2.unfocus();
+                        }
+                      },
+                      inputFormatters: [
+                        MaskTextInputFormatter(
+                          mask: '##.##.####',
+                          initialText: dateController2.text.replaceAll('.', ''),
+                          type: MaskAutoCompletionType.eager,
+                          filter: {"#": RegExp(r'\d')},
+                        )
+                      ],
+                      onDate: (v) {
+                        focusNodeDate2.unfocus();
+                        cubit.selectEndDate(dateController2.text);
+                      },
+                    ),
+
+                    // const SizedBox(height: 20),
+                    // DropDownButton<CountryModel>(
+                    //   value: state.travelAttModel?.countries?.first,
+                    //   label: 'Где вы хотите путешествовать?',
+                    //   items: (state.countries?.items ?? [])
+                    //       .map((item) => DropdownMenuItem<CountryModel>(
+                    //           value: item,
+                    //           child: Text(
+                    //             item.name2 ?? '',
+                    //             style: AppTextStyles.styleW400S14Grey6,
+                    //           )))
+                    //       .toList(),
+                    //   onChanged: (value) {
+                    //     cubit.addCountry(value!);
+                    //   },
+                    //   errorText: local.mustNotEmptyFailure,
+                    // ),
+
+                    const SizedBox(height: 20),
+                    Text(
+                      AppLocalizations.of(context).travelCountry,
+                      style: AppTextStyles.styleW600S14Grey9,
+                    ),
+                    const SizedBox(height: 6),
+                    const CountrySelectWidget(),
+                    const SizedBox(height: 20),
+                    DropDownButton<ProgramModel>(
+                      value: state.travelAttModel?.programs,
+                      label: AppLocalizations.of(context).travelProgram,
+                      items: (state.programs?.items ?? [])
+                          .map((item) => DropdownMenuItem<ProgramModel>(
+                              value: item,
+                              child: Text(
+                                item.name ?? '',
+                                style: AppTextStyles.styleW400S14Grey6,
+                              )))
+                          .toList(),
+                      onChanged: (value) {
+                        cubit.selectProgram(value!);
+                      },
+                      errorText: local.mustNotEmptyFailure,
+                    ),
+                    const SizedBox(height: 20),
+                    DropDownButton<TripModel>(
+                      value: state.travelAttModel?.tripPurpose,
+                      label: AppLocalizations.of(context).travelPurpose,
+                      items: (state.tripPurpose?.items ?? [])
+                          .map((item) => DropdownMenuItem<TripModel>(
+                              value: item,
+                              child: Text(
+                                item.name ?? '',
+                                style: AppTextStyles.styleW400S14Grey6,
+                              )))
+                          .toList(),
+                      onChanged: (value) {
+                        cubit.selectTripPurpose(value!);
+                      },
+                      errorText: local.mustNotEmptyFailure,
+                    ),
+                    const SizedBox(height: 20),
+                    DropDownButton<TravelTypeModel>(
+                      value: state.travelAttModel?.travelersType,
+                      label: AppLocalizations.of(context).traveller,
+                      items: (state.travelersType?.items ?? [])
+                          .map((item) => DropdownMenuItem<TravelTypeModel>(
+                              value: item,
+                              child: Text(
+                                item.name ?? '',
+                                style: AppTextStyles.styleW400S14Grey6,
+                              )))
+                          .toList(),
+                      onChanged: (value) {
+                        cubit.selectTravellersType(value!);
+                      },
+                      errorText: local.mustNotEmptyFailure,
+                    ),
+                    const SizedBox(height: 20),
+                    for (int index = 0;
+                        index < (state.travelAttModel?.travellers.length ?? 0);
+                        index++)
+                      TravellerInput(
+                        index: index + 1,
+                        value: state.travelAttModel?.travellers[index],
+                        onClear: () {
+                          cubit.removeTravellers(index);
+                        },
+                        dateController:
+                            state.travelAttModel?.textControllers?[index],
+                        onChange: (value) {
+                          cubit.onBirthDateTraveller(
+                              index: index, text: value!);
+                        },
+                      ),
+                    const SizedBox(height: 20),
+                    CustomOutlineButton(
+                      text: AppLocalizations.of(context).addTraveller,
+                      onTap: () {
+                        cubit.addTravellers();
+                      },
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 20),
-              DropDownButton<String>(
-                hint: '',
-                label: 'Тип полиса',
-                items: ['Однократное путешествие', 'value2']
-                    .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child:
-                            Text(item, style: AppTextStyles.styleW400S14Grey6)))
-                    .toList(),
-                onChanged: (value) {},
-              ),
-              const SizedBox(height: 20),
-              DropDownButton<String>(
-                hint: '',
-                label: 'Дни прибытия',
-                items: [
-                  '30 дней пребывания в течении 92 дней',
-                  'WORKER',
-                  'STUDENT',
-                ]
-                    .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child:
-                            Text(item, style: AppTextStyles.styleW400S14Grey6)))
-                    .toList(),
-                onChanged: (value) {},
-              ),
-              const SizedBox(height: 20),
-              CustomDatePickTextField(
-                label: 'Дата начала путешествия',
-                hintText: '30.12.2022',
-                keyboardType: TextInputType.datetime,
-                textEditingController: dateController,
-                textInputAction: TextInputAction.done,
-                onFieldSubmitted: (_) => focusNodeDate.unfocus(),
-                focusNode: focusNodeDate,
-                validator: (value) => (value!.length < 10)
-                    ? AppLocalizations.of(context).enterDate
-                    : null,
-                dateFormat: 'dd.MM.yyyy',
-                onChange: (value) {
-                  if (value.length == 10) {
-                    focusNodeDate.unfocus();
+            ),
+            bottomNavigationBar: SafeArea(
+              minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: CustomButton(
+                text: AppLocalizations.of(context).priceCalculation,
+                onTap: () {
+                  if (!formKey.currentState!.validate()) {
+                    return;
+                  } else {
+                    cubit.validSelection();
                   }
                 },
-                inputFormatters: [
-                  MaskTextInputFormatter(
-                    mask: '##.##.####',
-                    initialText: dateController.text.replaceAll('.', ''),
-                    type: MaskAutoCompletionType.eager,
-                    filter: {"#": RegExp(r'\d')},
-                  )
-                ],
-                onDate: () {
-                  focusNodeDate.unfocus();
-                },
               ),
-              const SizedBox(height: 20),
-              CustomDatePickTextField(
-                label: 'Дата окончания путешествия',
-                hintText: '30.12.2022',
-                keyboardType: TextInputType.datetime,
-                textEditingController: dateController,
-                textInputAction: TextInputAction.done,
-                onFieldSubmitted: (_) => focusNodeDate.unfocus(),
-                focusNode: focusNodeDate,
-                validator: (value) => (value!.length < 10)
-                    ? AppLocalizations.of(context).enterDate
-                    : null,
-                dateFormat: 'dd.MM.yyyy',
-                onChange: (value) {
-                  if (value.length == 10) {
-                    focusNodeDate.unfocus();
-                  }
-                },
-                inputFormatters: [
-                  MaskTextInputFormatter(
-                    mask: '##.##.####',
-                    initialText: dateController.text.replaceAll('.', ''),
-                    type: MaskAutoCompletionType.eager,
-                    filter: {"#": RegExp(r'\d')},
-                  )
-                ],
-                onDate: () {
-                  focusNodeDate.unfocus();
-                },
-              ),
-              const SizedBox(height: 20),
-              DropDownButton<String>(
-                hint: '',
-                label: 'Где вы хотите путешествовать?',
-                items: ['США', 'UK']
-                    .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child:
-                            Text(item, style: AppTextStyles.styleW400S14Grey6)))
-                    .toList(),
-                onChanged: (value) {},
-              ),
-              const SizedBox(height: 20),
-              DropDownButton<String>(
-                hint: '',
-                label: 'Программа',
-                items: ['STANDART']
-                    .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child:
-                            Text(item, style: AppTextStyles.styleW400S14Grey6)))
-                    .toList(),
-                onChanged: (value) {},
-              ),
-              const SizedBox(height: 20),
-              DropDownButton<String>(
-                hint: '',
-                label: 'Цель поездки',
-                items: ['Туризм/Служебная командировка']
-                    .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child:
-                            Text(item, style: AppTextStyles.styleW400S14Grey6)))
-                    .toList(),
-                onChanged: (value) {},
-              ),
-              const SizedBox(height: 20),
-              DropDownButton<String>(
-                hint: '',
-                label: 'Путешественники',
-                items: ['Индивидуальный']
-                    .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child:
-                            Text(item, style: AppTextStyles.styleW400S14Grey6)))
-                    .toList(),
-                onChanged: (value) {},
-              ),
-              const SizedBox(height: 20),
-              TravellerInput(dateController: TextEditingController()),
-              const SizedBox(height: 20),
-              CustomOutlineButton(
-                  text: 'Добавить путешественника', onTap: () {}),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: SafeArea(
-        minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: CustomButton(
-          text: AppLocalizations.of(context).priceCalculation,
-          onTap: () {
-            if (!formKey.currentState!.validate()) {
-              return;
-            }
-            if (true) {
-              Navigator.pushNamed(context, AppRoutes.travelInsDetails);
-            } else {
-              showErrorMessage(
-                  context, AppLocalizations.of(context).selectBasicFields);
-            }
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    dateController1.dispose();
+    dateController2.dispose();
+    focusNodeDate1.dispose();
+    focusNodeDate2.dispose();
   }
 }

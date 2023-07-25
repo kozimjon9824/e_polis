@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,12 +20,12 @@ class NetworkClient {
 
   Future<Dio> init(SharedPreferences preferences) async {
     api = Dio();
-    (api.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (HttpClient client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-      return client;
-    };
+    // (api.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+    //     (HttpClient client) {
+    //   client.badCertificateCallback =
+    //       (X509Certificate cert, String host, int port) => true;
+    //   return client;
+    // };
     // api.interceptors.add(alice.getDioInterceptor());
     api.interceptors.add(InterceptorsWrapper(
       /// onRequest
@@ -37,6 +36,7 @@ class NetworkClient {
         if (_token != '') {
           options.headers['Authorization'] = 'Bearer $_token';
           options.headers['Accept-Language'] = _lang;
+          options.headers['Content-Type'] = 'application/json';
         }
         return handler.next(options);
       },
@@ -69,7 +69,8 @@ class NetworkClient {
             method: requestOptions.method,
             headers: {
               'Authorization': 'Bearer $_token',
-              'Accept-Language': _lang
+              'Accept-Language': _lang,
+              'Content-Type': 'application/json',
             },
           );
           late Response cloneReq;
@@ -77,10 +78,12 @@ class NetworkClient {
             String url = requestOptions.path.contains(BASE_URL)
                 ? requestOptions.path
                 : '$BASE_URL${requestOptions.path}';
-            cloneReq = await api.request(url,
-                data: requestOptions.data,
-                queryParameters: requestOptions.queryParameters,
-                options: options);
+            cloneReq = await api.request(
+              url,
+              data: requestOptions.data,
+              queryParameters: requestOptions.queryParameters,
+              options: options,
+            );
             debugPrint('PATHHH : ${cloneReq.realUri.path} KKK$cloneReq');
           } catch (e) {
             debugPrint('EE:$e');
@@ -90,12 +93,12 @@ class NetworkClient {
         return handler.next(error);
       },
     ));
-    // api.interceptors.add(LogInterceptor(
-    //   requestBody: true,
-    //   responseBody: true,
-    //   requestHeader: true,
-    //   request: true,
-    // ));
+    api.interceptors.add(LogInterceptor(
+      requestBody: true,
+      responseBody: true,
+      requestHeader: true,
+      request: true,
+    ));
     return api;
   }
 
@@ -107,7 +110,9 @@ class NetworkClient {
     }
     try {
       debugPrint('AA: $refreshToken');
-      final options = Options(headers: {"Content-Type": "application/json"});
+      final options = Options(
+        headers: {"Content-Type": "application/json"},
+      );
       final response = await Dio(BaseOptions(baseUrl: BASE_URL)).post(
           'auth/refresh-token',
           data: {'refreshToken': refreshToken},
@@ -136,10 +141,8 @@ class NetworkClient {
     }
   }
 
-  bool _shouldRetry(DioError err) {
-    return err.type == DioErrorType.other &&
-        err.error != null &&
-        err.error is SocketException;
+  bool _shouldRetry(DioException err) {
+    return err.error != null && err.error is SocketException;
   }
 
   Future<void> _goToLoginScreen() async {
@@ -147,7 +150,10 @@ class NetworkClient {
 
     if (navigatorKey.currentContext!.mounted) {
       Navigator.pushNamedAndRemoveUntil(
-          navigatorKey.currentContext!, AppRoutes.main, (route) => false);
+        navigatorKey.currentContext!,
+        AppRoutes.main,
+        (route) => false,
+      );
     }
 
     /// Navigate to Sign in Screen

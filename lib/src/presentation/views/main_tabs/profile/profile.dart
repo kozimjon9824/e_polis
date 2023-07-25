@@ -1,14 +1,17 @@
 import 'package:e_polis/generated/l10n.dart';
+import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/constants/constants.dart';
 import 'package:e_polis/src/core/routes/app_routes.dart';
 import 'package:e_polis/src/presentation/cubits/auth/auth_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/language/language_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/main_screen_data/main_screen_data_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/send_otp/send_otp_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/app_icons.dart';
 import '../../../components/custom_button.dart';
+import 'widgets/delete_account.dart';
 import 'widgets/dialog_body.dart';
 import 'widgets/profile_details.dart';
 import 'widgets/profile_item_widget.dart';
@@ -85,7 +88,35 @@ class _ProfilePageState extends State<ProfilePage> {
             onTap: () {
               Navigator.pushNamed(context, AppRoutes.helperCenter);
             },
-          )
+          ),
+          Visibility(
+            visible: (context.read<AuthCubit>().state is AuthenticatedState),
+            child: ProfileItemWidget(
+              title: AppLocalizations.of(context).delete_account,
+              icon: AppIcons.deleteAccount,
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (_) => BlocProvider(
+                    create: (context) => inject<SendOtpCubit>(),
+                    child: BlocBuilder<SendOtpCubit, SendOtpState>(
+                      builder: (context, state) {
+                        return DeleteAccountDialogBody(
+                          onTap: () {
+                            context.read<SendOtpCubit>().sendOtpRequest();
+                            Navigator.pop(context);
+                            Navigator.pushNamed(
+                                context, AppRoutes.verifyDAccount);
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 8),
         ],
       ),
       bottomNavigationBar:
@@ -111,9 +142,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   }
                 },
                 builder: (context, state) {
-                  return ExitDialogBody(onTap: () {
-                    context.read<AuthCubit>().logout();
-                  });
+                  return ExitDialogBody(
+                    onTap: () {
+                      context.read<AuthCubit>().logout();
+                    },
+                  );
                 },
               ),
             );

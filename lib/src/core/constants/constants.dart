@@ -2,13 +2,12 @@
 
 // base url for network
 const BASE_URL = 'https://epolis.impexonline.uz/api/';
+const TRAVEL_BASE_URL = 'http://ais.impexonline.uz/ords/ins/travel/';
 //'https://api.epolis.sandbox.uz/';
 
 const REFRESH_TOKEN = 'refresh_token';
 const ACCESS_TOKEN = 'access-token';
 const APP_LANGUAGE = 'app-lang';
-const USERNAME = 'user-name';
-const HAS_PROFILE = 'has_profile';
 const UZ = 'uz';
 const EN = 'en';
 const RU = 'ru';

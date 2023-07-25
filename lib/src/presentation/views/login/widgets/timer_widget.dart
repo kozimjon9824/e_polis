@@ -22,11 +22,15 @@ class TimeWidget extends StatelessWidget {
             int sec = 60 - state.time;
             return Row(
               children: [
-                Text(AppLocalizations.of(context).resendCodeAfterSomeTime,
-                    style: AppTextStyles.styleW500S14Grey9),
+                Text(
+                  AppLocalizations.of(context).resendCodeAfterSomeTime,
+                  style: AppTextStyles.styleW500S14Grey9,
+                ),
                 const SizedBox(width: 4),
-                Text('00:${sec > 9 ? sec : '0$sec'}',
-                    style: AppTextStyles.styleW500S14Primary),
+                Text(
+                  '00:${sec > 9 ? sec : '0$sec'}',
+                  style: AppTextStyles.styleW500S14Primary,
+                ),
               ],
             );
           }
@@ -35,8 +39,10 @@ class TimeWidget extends StatelessWidget {
               onResend();
               context.read<TimerCubit>().startTimer(0);
             },
-            child: Text(AppLocalizations.of(context).reSendCode,
-                style: AppTextStyles.styleW500S14Primary),
+            child: Text(
+              AppLocalizations.of(context).reSendCode,
+              style: AppTextStyles.styleW500S14Primary,
+            ),
           );
         },
       ),

@@ -1,11 +1,17 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:e_polis/src/data/datasource/remote/provider_for_outer_api/travel_api_provider.dart';
 import 'package:e_polis/src/data/repository/auth.dart';
 import 'package:e_polis/src/data/repository/main.dart';
 import 'package:e_polis/src/data/repository/product.dart';
 import 'package:e_polis/src/data/repository/profile.dart';
 import 'package:e_polis/src/data/repository/settings.dart';
+import 'package:e_polis/src/data/repository/travel.dart';
 import 'package:e_polis/src/domain/repository/auth.dart';
 import 'package:e_polis/src/domain/repository/main.dart';
 import 'package:e_polis/src/domain/repository/profile.dart';
+import 'package:e_polis/src/domain/repository/travel.dart';
 import 'package:e_polis/src/domain/usecases/auth/check_user_auth.dart';
 import 'package:e_polis/src/domain/usecases/auth/login.dart';
 import 'package:e_polis/src/domain/usecases/auth/logout.dart';
@@ -25,14 +31,26 @@ import 'package:e_polis/src/domain/usecases/product/archived_product.dart';
 import 'package:e_polis/src/domain/usecases/product/current_product.dart';
 import 'package:e_polis/src/domain/usecases/product/get_product_details.dart';
 import 'package:e_polis/src/domain/usecases/product/progress_product.dart';
+import 'package:e_polis/src/domain/usecases/profile/delete_account.dart';
 import 'package:e_polis/src/domain/usecases/profile/profile_update.dart';
+import 'package:e_polis/src/domain/usecases/profile/send_otp_code.dart';
 import 'package:e_polis/src/domain/usecases/profile/user_profile.dart';
 import 'package:e_polis/src/domain/usecases/setting/get_app_lang.dart';
+import 'package:e_polis/src/domain/usecases/travel/countries.dart';
+import 'package:e_polis/src/domain/usecases/travel/multi_days.dart';
+import 'package:e_polis/src/domain/usecases/travel/policy_type.dart';
+import 'package:e_polis/src/domain/usecases/travel/programs.dart';
+import 'package:e_polis/src/domain/usecases/travel/travel_booking.dart';
+import 'package:e_polis/src/domain/usecases/travel/travel_calculator.dart';
+import 'package:e_polis/src/domain/usecases/travel/travel_types.dart';
+import 'package:e_polis/src/domain/usecases/travel/trip_purpose.dart';
 import 'package:e_polis/src/presentation/cubits/add_driver/add_driver_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/add_product/add_product_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/buy_travel/buy_travel_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/change_phone_verify/change_phone_verify_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/check_vehicle_info/check_vehicle_info_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/confirm_delete_account/confirm_account_delete_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/contract_information/contract_information_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/drop_down_values/drop_down_values_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/faq/faq_cubit.dart';
@@ -47,7 +65,11 @@ import 'package:e_polis/src/presentation/cubits/my_current_products/current_prod
 import 'package:e_polis/src/presentation/cubits/my_progress_products/progress_products_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/notifications/notifications_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/product_details/product_details_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/send_otp/send_otp_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/timer/timer_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/travel_attributes/travel_attributes_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/travel_booking/travel_booking_cubit.dart';
+import 'package:e_polis/src/presentation/cubits/travel_calculator/travel_calculator_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/update_profile/update_profile_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/user_product_details/user_product_details_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/verify/verify_cubit.dart';
@@ -114,6 +136,15 @@ Future<void> initDi() async {
   inject
       .registerFactory(() => UpdateProfileCubit(inject(), inject(), inject()));
   inject.registerFactory(() => ChangePhoneVerifyCubit(inject()));
+  inject.registerFactory(() => ConfirmAccountDeleteCubit(inject()));
+  inject.registerFactory(() => SendOtpCubit(inject()));
+
+  // travel
+  inject.registerFactory(() => TravelAttributesCubit(
+      inject(), inject(), inject(), inject(), inject(), inject()));
+  inject.registerFactory(() => TravelCalculatorCubit(inject()));
+  inject.registerFactory(() => TravelBookingCubit());
+  inject.registerFactory(() => BuyTravelCubit(inject()));
 
   /// UseCases
 
@@ -147,12 +178,24 @@ Future<void> initDi() async {
   inject.registerLazySingleton(() => MyArchivedProductsUseCase(inject()));
   inject.registerLazySingleton(() => AddProductUseCase(inject()));
   inject.registerLazySingleton(() => UserProductDetailsUseCase(inject()));
+  inject.registerLazySingleton(() => DeleteAccountUseCase(inject()));
+  inject.registerLazySingleton(() => SendOtpCodeUseCase(inject()));
 
   // auth
   inject.registerLazySingleton(() => CheckUserAuthUseCase(inject()));
   inject.registerLazySingleton(() => LogoutUseCase(inject()));
   inject.registerLazySingleton(() => LoginUseCase(inject()));
   inject.registerLazySingleton(() => VerifyUseCase(inject()));
+
+  // travel
+  inject.registerLazySingleton(() => GetCountriesUseCase(inject()));
+  inject.registerLazySingleton(() => GetProgramsUseCase(inject()));
+  inject.registerLazySingleton(() => GetTravelTypesUseCase(inject()));
+  inject.registerLazySingleton(() => GetTripPurposeUseCase(inject()));
+  inject.registerLazySingleton(() => GetPolicyTypeUseCase(inject()));
+  inject.registerLazySingleton(() => GetMultiDaysUseCase(inject()));
+  inject.registerLazySingleton(() => TravelCalculatorUseCase(inject()));
+  inject.registerLazySingleton(() => TravelBookingUseCase(inject()));
 
   /// repository init
   inject.registerLazySingleton<ISettingRepository>(
@@ -165,6 +208,8 @@ Future<void> initDi() async {
       () => ProfileRepository(inject(), inject()));
   inject.registerLazySingleton<IAuthRepository>(
       () => AuthRepository(inject(), inject()));
+  inject.registerLazySingleton<ITravelRepository>(
+      () => TravelRepository(inject(), inject()));
 
   // local source init shared pref
   var pref = await SharedPreferences.getInstance();
@@ -174,4 +219,20 @@ Future<void> initDi() async {
   inject.registerLazySingleton(() => NetworkClient());
   var dio = await inject<NetworkClient>().init(inject());
   inject.registerLazySingleton(() => ApiClient(dio, BASE_URL));
+  final api = Dio(BaseOptions(
+    contentType: 'application/json',
+    connectTimeout: const Duration(seconds: 20),
+    receiveTimeout: const Duration(seconds: 20),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  ));
+  api.interceptors.add(LogInterceptor(
+    requestBody: true,
+    responseBody: true,
+    requestHeader: true,
+    responseHeader: true,
+    request: true,
+  ));
+  inject.registerLazySingleton(() => TravelApiClient(api, TRAVEL_BASE_URL));
 }

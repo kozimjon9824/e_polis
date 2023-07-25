@@ -12,10 +12,13 @@ class LoadingWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(automaticallyImplyLeading: false),
       body: Center(
-          child: Platform.isAndroid
-              ? const CircularProgressIndicator(color: AppColors.primaryColor)
-              : const CupertinoActivityIndicator(
-                  color: AppColors.primaryColor, radius: 18)),
+        child: Platform.isAndroid
+            ? const CircularProgressIndicator(color: AppColors.primaryColor)
+            : const CupertinoActivityIndicator(
+                color: AppColors.primaryColor,
+                radius: 18,
+              ),
+      ),
     );
   }
 }

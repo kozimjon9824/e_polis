@@ -30,7 +30,10 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
       (failure) =>
           emit(state.copyWith(failure: failure, status: StateStatus.error)),
       (response) => emit(state.copyWith(
-          status: StateStatus.unknown, user: response, isPhoneVerify: false)),
+        status: StateStatus.unknown,
+        user: response,
+        isPhoneVerify: false,
+      )),
     );
   }
 
@@ -82,10 +85,13 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     String path = file.path;
     emit(state.copyWith(status: StateStatus.loading));
     var result = await _uploadPhotoUseCase.call(PhotoParam(path));
-    return result.fold((failure) {
-      emit(state.copyWith(failure: failure, status: StateStatus.error));
-      return '';
-    }, (response) => response.id);
+    return result.fold(
+      (failure) {
+        emit(state.copyWith(failure: failure, status: StateStatus.error));
+        return '';
+      },
+      (response) => response.id,
+    );
   }
 
   void selectFile(UserProfileResponse? response) async {
@@ -93,6 +99,11 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     XFile? pic = await picker.pickImage(
         source: ImageSource.gallery, maxHeight: 512, maxWidth: 512);
     if (pic == null) return;
-    emit(UpdateProfileState(user: response, selectedFile: File(pic.path)));
+    emit(
+      UpdateProfileState(
+        user: response,
+        selectedFile: File(pic.path),
+      ),
+    );
   }
 }

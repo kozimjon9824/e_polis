@@ -1,5 +1,6 @@
 import 'package:e_polis/generated/l10n.dart';
 import 'package:e_polis/injector.dart';
+import 'package:e_polis/src/core/themes/app_colors.dart';
 import 'package:e_polis/src/data/models/book/book_model.dart';
 import 'package:e_polis/src/presentation/components/snackbars.dart';
 import 'package:e_polis/src/presentation/cubits/add_driver/add_driver_cubit.dart';
@@ -101,112 +102,120 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                 licenseSeries.text = driverData.driverLicense?.series ?? '';
               }
               return Scaffold(
-                body: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 18),
-                  children: [
-                    AnimatedRoundContainer(
-                      title:
-                          '${widget.index}-${AppLocalizations.of(context).driver}',
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 16,
-                        horizontal: 10,
-                      ),
-                      padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
-                      showChildren2:
-                          (state.driverData != null || state.fillByHand),
-                      clearText: (state.driverData != null ||
-                              widget.index != 1 ||
-                              state.fillByHand)
-                          ? AppLocalizations.of(context).delete
-                          : null,
-                      onClear: () {
-                        seriesController.text = '';
-                        numberController.text = '';
-                        dateController.text = '';
-                        licenseSeries.text = '';
-                        licenseNumber.text = '';
-                        licenseDate.text = '';
-
-                        if (state.driverData != null || state.fillByHand) {
-                          cubit.clearDriverData();
-                          driverCubit.addDriverData(
-                            index: widget.index - 1,
-                            model: IndexedDriverModel(isSuccess: null),
-                          );
-                        } else {
-                          driverCubit.removeTab(widget.index - 1);
-                        }
+                body: BlocBuilder<DropDownValuesCubit, DropDownValuesState>(
+                  builder: (context, dropDownState) {
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        await context.read<DropDownValuesCubit>().loadValues();
                       },
-                      children2: [
-                        BlocBuilder<DropDownValuesCubit, DropDownValuesState>(
-                          builder: (context, dropDownState) {
-                            return Form(
-                              key: formKey2,
-                              child: Child2Body(
-                                hideDropDown: isCompany,
-                                onChange: (value) {
-                                  int key = context
-                                      .read<DropDownValuesCubit>()
-                                      .getRelativeKey(value ?? '');
-                                  driverCubit.selectDriverRelationShip(
-                                    index: widget.index - 1,
-                                    relativeKey: key,
-                                  );
-                                },
-                                dropDownValues: dropDownState.relativeList,
-                                data: state.driverData,
-                                licenseSeries: licenseSeries,
-                                licenseNumber: licenseNumber,
-                                licenseDate: licenseDate,
-                                licenseSeriesNode: licenseSeriesNode,
-                                licenseNumberNode: licenseNumberNode,
-                                licenseDateNode: licenseDateNode,
-                              ),
-                            );
-                          },
-                        )
-                      ],
-                      children: [
-                        Form(
-                          key: formKey,
-                          child: Child1Body(
-                            seriesController: seriesController,
-                            numberController: numberController,
-                            dateController: dateController,
-                            dateFocus: dateFocus,
-                            seriesFocus: seriesFocus,
-                            numberFocus: numberFocus,
-                            readOnly: state.driverData != null,
-                            onRequest: () {
-                              if (formKey.currentState!.validate()) {
-                                if (state.driverData == null) {
-                                  String date = dateConverter(
-                                    date: dateController.text,
-                                    inFormat: 'dd.MM.yyyy',
-                                    outFormat: 'yyyy-MM-dd',
-                                  );
-                                  cubit.addDriver(
-                                    birth: date,
-                                    series: seriesController.text,
-                                    number: numberController.text,
-                                  );
-                                }
+                      color: AppColors.primaryColor,
+                      child: ListView(
+                        padding: const EdgeInsets.symmetric(horizontal: 18),
+                        children: [
+                          AnimatedRoundContainer(
+                            title:
+                                '${widget.index}-${AppLocalizations.of(context).driver}',
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 16,
+                              horizontal: 10,
+                            ),
+                            padding2: const EdgeInsets.fromLTRB(10, 0, 10, 16),
+                            showChildren2:
+                                (state.driverData != null || state.fillByHand),
+                            clearText: (state.driverData != null ||
+                                    widget.index != 1 ||
+                                    state.fillByHand)
+                                ? AppLocalizations.of(context).delete
+                                : null,
+                            onClear: () {
+                              seriesController.text = '';
+                              numberController.text = '';
+                              dateController.text = '';
+                              licenseSeries.text = '';
+                              licenseNumber.text = '';
+                              licenseDate.text = '';
+
+                              if (state.driverData != null ||
+                                  state.fillByHand) {
+                                cubit.clearDriverData();
+                                driverCubit.addDriverData(
+                                  index: widget.index - 1,
+                                  model: IndexedDriverModel(isSuccess: null),
+                                );
+                              } else {
+                                driverCubit.removeTab(widget.index - 1);
                               }
                             },
+                            children2: [
+                              Form(
+                                key: formKey2,
+                                child: Child2Body(
+                                  hideDropDown: isCompany,
+                                  onChange: (value) {
+                                    int key = context
+                                        .read<DropDownValuesCubit>()
+                                        .getRelativeKey(value ?? '');
+                                    driverCubit.selectDriverRelationShip(
+                                      index: widget.index - 1,
+                                      relativeKey: key,
+                                    );
+                                  },
+                                  dropDownValues: dropDownState.relativeList,
+                                  data: state.driverData,
+                                  licenseSeries: licenseSeries,
+                                  licenseNumber: licenseNumber,
+                                  licenseDate: licenseDate,
+                                  licenseSeriesNode: licenseSeriesNode,
+                                  licenseNumberNode: licenseNumberNode,
+                                  licenseDateNode: licenseDateNode,
+                                ),
+                              )
+                            ],
+                            children: [
+                              Form(
+                                key: formKey,
+                                child: Child1Body(
+                                  seriesController: seriesController,
+                                  numberController: numberController,
+                                  dateController: dateController,
+                                  dateFocus: dateFocus,
+                                  seriesFocus: seriesFocus,
+                                  numberFocus: numberFocus,
+                                  readOnly: state.driverData != null,
+                                  onRequest: () {
+                                    if (formKey.currentState!.validate()) {
+                                      if (state.driverData == null) {
+                                        String date = dateConverter(
+                                          date: dateController.text,
+                                          inFormat: 'dd.MM.yyyy',
+                                          outFormat: 'yyyy-MM-dd',
+                                        );
+                                        cubit.addDriver(
+                                          birth: date,
+                                          series: seriesController.text,
+                                          number: numberController.text,
+                                        );
+                                      }
+                                    }
+                                  },
+                                ),
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    if (widget.tabLength != 5 && (driverCubit.isAllCompleted()))
-                      CustomOutlineButton(
-                        text: AppLocalizations.of(context).addDriver,
-                        onTap: () {
-                          driverCubit.addTab();
-                        },
+                          const SizedBox(height: 20),
+                          if (widget.tabLength != 5 &&
+                              (driverCubit.isAllCompleted()))
+                            CustomOutlineButton(
+                              text: AppLocalizations.of(context).addDriver,
+                              onTap: () {
+                                driverCubit.addTab();
+                              },
+                            ),
+                          if (widget.tabLength != 5) const SizedBox(height: 24),
+                        ],
                       ),
-                    if (widget.tabLength != 5) const SizedBox(height: 24),
-                  ],
+                    );
+                  },
                 ),
                 bottomNavigationBar: SafeArea(
                   minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),

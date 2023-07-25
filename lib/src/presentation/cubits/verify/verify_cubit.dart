@@ -6,7 +6,6 @@ import '../../../core/error/error.dart';
 import '../../../data/models/verify/request/verify.dart';
 
 part 'verify_state.dart';
-
 part 'verify_cubit.freezed.dart';
 
 class VerifyCubit extends Cubit<VerifyState> {
@@ -17,8 +16,10 @@ class VerifyCubit extends Cubit<VerifyState> {
     emit(const VerifyState.loading());
     var result = await _verifyUseCase
         .call(VerifyParams(VerifyRequest(phone: '998$phone', otp: code)));
-    result.fold((failure) => emit(VerifyState.error(failure)),
-        (response) => emit(const VerifyState.success()));
+    result.fold(
+      (failure) => emit(VerifyState.error(failure)),
+      (response) => emit(const VerifyState.success()),
+    );
   }
 
   void loadInitial() => emit(const VerifyState.initial());

@@ -1819,6 +1819,216 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Delete account`
+  String get delete_account {
+    return Intl.message(
+      'Delete account',
+      name: 'delete_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to delete account?`
+  String get delete_account_des {
+    return Intl.message(
+      'Do you want to delete account?',
+      name: 'delete_account_des',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Онлайн саёҳат суғуртаси`
+  String get onlineInsuranceTravel {
+    return Intl.message(
+      'Онлайн саёҳат суғуртаси',
+      name: 'onlineInsuranceTravel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Перед использованием Решения (см. определение ниже) внимательно ознакомьтесь с условиями данного Лицензионного соглашения с конечным пользователем (далее — «Соглашение»). Данный текст является юридически обязывающим договором. Давая согласие в электронной форме, устанавливая Решение или используя Решение, вы принимаете все условия настоящего Соглашения от своего лица и любой организации и физического лица, которое вы представляете или для чьего Устройства вы приобретаете Решение (в совокупности «вы»).`
+  String get travelInsDesc {
+    return Intl.message(
+      'Перед использованием Решения (см. определение ниже) внимательно ознакомьтесь с условиями данного Лицензионного соглашения с конечным пользователем (далее — «Соглашение»). Данный текст является юридически обязывающим договором. Давая согласие в электронной форме, устанавливая Решение или используя Решение, вы принимаете все условия настоящего Соглашения от своего лица и любой организации и физического лица, которое вы представляете или для чьего Устройства вы приобретаете Решение (в совокупности «вы»).',
+      name: 'travelInsDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Дни прибытия`
+  String get travelDays {
+    return Intl.message(
+      'Дни прибытия',
+      name: 'travelDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Дата начала путешествия`
+  String get travelStartDate {
+    return Intl.message(
+      'Дата начала путешествия',
+      name: 'travelStartDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Дата окончания путешествия`
+  String get travelEndDate {
+    return Intl.message(
+      'Дата окончания путешествия',
+      name: 'travelEndDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Где вы хотите путешествовать?`
+  String get travelCountry {
+    return Intl.message(
+      'Где вы хотите путешествовать?',
+      name: 'travelCountry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Программа`
+  String get travelProgram {
+    return Intl.message(
+      'Программа',
+      name: 'travelProgram',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Цель поездки`
+  String get travelPurpose {
+    return Intl.message(
+      'Цель поездки',
+      name: 'travelPurpose',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Путешественники`
+  String get traveller {
+    return Intl.message(
+      'Путешественники',
+      name: 'traveller',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Добавить путешественника`
+  String get addTraveller {
+    return Intl.message(
+      'Добавить путешественника',
+      name: 'addTraveller',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Путешественник`
+  String get singleTraveller {
+    return Intl.message(
+      'Путешественник',
+      name: 'singleTraveller',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Страна`
+  String get travelCountries {
+    return Intl.message(
+      'Страна',
+      name: 'travelCountries',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Заявителе`
+  String get travelApplicant {
+    return Intl.message(
+      'Заявителе',
+      name: 'travelApplicant',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Загранпаспорт`
+  String get worldPassport {
+    return Intl.message(
+      'Загранпаспорт',
+      name: 'worldPassport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ЖШШИР`
+  String get jshshr {
+    return Intl.message(
+      'ЖШШИР',
+      name: 'jshshr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Адрес`
+  String get address {
+    return Intl.message(
+      'Адрес',
+      name: 'address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ул. Амира темура, Ташкент`
+  String get addressHint {
+    return Intl.message(
+      'Ул. Амира темура, Ташкент',
+      name: 'addressHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Цена полиса на USD`
+  String get priceInUsd {
+    return Intl.message(
+      'Цена полиса на USD',
+      name: 'priceInUsd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `В семейной поездке количество путешественников должно быть от 3 до 6.`
+  String get travelCountFailure {
+    return Intl.message(
+      'В семейной поездке количество путешественников должно быть от 3 до 6.',
+      name: 'travelCountFailure',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

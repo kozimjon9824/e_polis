@@ -91,7 +91,9 @@ class _PolisDetailsPageState extends State<PolisDetailsPage> {
                           }
                           if (data?.type == 'DIVIDER') {
                             return const Divider(
-                                height: 24, color: AppColors.grey100);
+                              height: 24,
+                              color: AppColors.grey100,
+                            );
                           }
                           return RowTitleWidget(
                             title: data?.key ?? '',
@@ -136,7 +138,7 @@ class _PolisDetailsPageState extends State<PolisDetailsPage> {
                           } else {
                             LaunchApp.openApp(
                               iosUrlScheme:
-                                  'shareddocuments://${state.filePath!}',
+                                  'shareddocuments://${state.filePath ?? ''}',
                               openStore: false,
                             );
                           }
@@ -172,13 +174,12 @@ class PDFViewerFromUrl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('PDF'),
-      ),
+      appBar: AppBar(title: const Text('PDF')),
       body: const PDF().fromUrl(
         url,
         placeholder: (_) => const Center(
-            child: CupertinoActivityIndicator(color: AppColors.primaryColor)),
+          child: CupertinoActivityIndicator(color: AppColors.primaryColor),
+        ),
         errorWidget: (dynamic error) => Center(child: Text(error.toString())),
       ),
     );

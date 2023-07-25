@@ -1,11 +1,9 @@
 import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-
 import '../../../../../../../generated/l10n.dart';
 import '../../../../../../core/themes/app_colors.dart';
 import '../../../../../../data/models/contract_information/response/contract_info_response.dart';
-import '../../../../../components/custom_mask.dart';
 import '../../../../../components/custom_text_field.dart';
 import '../../../widgets/animated_container.dart';
 import '../../../widgets/widgets.dart';
@@ -56,12 +54,13 @@ class ContractDetails extends StatelessWidget {
           },
           inputFormatters: [
             MaskTextInputFormatter(
-                mask: '##.##.####',
-                initialText: dateController.text.replaceAll('.', ''),
-                type: MaskAutoCompletionType.eager,
-                filter: {"#": RegExp(r'\d')})
+              mask: '##.##.####',
+              initialText: dateController.text.replaceAll('.', ''),
+              type: MaskAutoCompletionType.eager,
+              filter: {"#": RegExp(r'\d')},
+            )
           ],
-          onDate: () {
+          onDate: (date) {
             focusNode.unfocus();
             onRequest();
           },
@@ -69,20 +68,24 @@ class ContractDetails extends StatelessWidget {
         const SizedBox(height: 8),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
         TitleSubtitle(
-            title: AppLocalizations.of(context).contractExpirationDate,
-            subtitle: contract?.endDate ?? ''),
+          title: AppLocalizations.of(context).contractExpirationDate,
+          subtitle: contract?.endDate ?? '',
+        ),
         TitleSubtitle(
-            title: AppLocalizations.of(context).haveThePrivilege,
-            subtitle: AppLocalizations.of(context).notPrivileged),
+          title: AppLocalizations.of(context).haveThePrivilege,
+          subtitle: AppLocalizations.of(context).notPrivileged,
+        ),
         const Divider(height: 16, color: AppColors.divider, thickness: 1),
         TitleSubtitle(
-            title: AppLocalizations.of(context).polisPrice,
-            subtitle:
-                '${numberFormat(contract?.policyAmount?.toInt())} ${AppLocalizations.of(context).sum}'),
+          title: AppLocalizations.of(context).polisPrice,
+          subtitle:
+              '${numberFormat(contract?.policyAmount?.toInt())} ${AppLocalizations.of(context).sum}',
+        ),
         TitleSubtitle(
-            title: AppLocalizations.of(context).insurancePrice,
-            subtitle:
-                '${numberFormat(contract?.insuranceAmount?.toInt())} ${AppLocalizations.of(context).sum}'),
+          title: AppLocalizations.of(context).insurancePrice,
+          subtitle:
+              '${numberFormat(contract?.insuranceAmount?.toInt())} ${AppLocalizations.of(context).sum}',
+        ),
       ],
     );
   }

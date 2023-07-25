@@ -14,7 +14,7 @@ class DropDownValuesCubit extends Cubit<DropDownValuesState> {
   DropDownValuesCubit(this._useCase) : super(const DropDownValuesState());
   final GetDropDownValuesUseCase _useCase;
 
-  void loadValues() async {
+  Future loadValues() async {
     emit(state.copyWith(status: StateStatus.loading));
     var result = await _useCase.call(NoParams());
     result.fold(

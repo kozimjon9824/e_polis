@@ -30,10 +30,11 @@ class AppTextStyles {
       fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.grey900);
 
   static const styleW400S14Grey9 = TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: AppColors.grey900,
-      height: 1.6);
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppColors.grey900,
+    height: 1.6,
+  );
 
   static const styleW500S14Grey6 = TextStyle(
       fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.grey600);
@@ -91,4 +92,10 @@ class AppTextStyles {
 
   static const styleW700S24Green = TextStyle(
       fontSize: 24, fontWeight: FontWeight.w700, color: AppColors.green);
+
+  static const styleW400S14Black = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppColors.black,
+  );
 }
