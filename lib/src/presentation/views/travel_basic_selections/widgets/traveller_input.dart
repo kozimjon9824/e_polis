@@ -1,4 +1,6 @@
 import 'package:e_polis/generated/l10n.dart';
+import 'package:e_polis/src/core/themes/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../components/custom_text_field.dart';
@@ -13,14 +15,18 @@ class TravellerInput extends StatelessWidget {
     required this.index,
     this.onChange,
     this.value,
+    this.onChangeValue,
+    this.selectedTraveller,
   }) : super(key: key);
 
   final TextEditingController? dateController;
   final FocusNode? dateFocus;
   final Function()? onClear;
   final Function(String? value)? onChange;
+  final Function(int? value)? onChangeValue;
   final String? value;
   final int index;
+  final int? selectedTraveller;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +72,29 @@ class TravellerInput extends StatelessWidget {
               onChange!(value);
               dateFocus?.unfocus();
             },
+          ),
+          const SizedBox(height: 12),
+          InkWell(
+            onTap: (){
+              onChangeValue!((index == selectedTraveller)?-1:index);
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: Row(
+                children: [
+                  Icon(
+                    (index == selectedTraveller)
+                        ? CupertinoIcons.checkmark_circle_fill
+                        : CupertinoIcons.circle,
+                    size: 22,
+                    color:  (index == selectedTraveller)
+                        ?AppColors.primaryColor:AppColors.grey500,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(AppLocalizations.of(context).travelApplicant)
+                ],
+              ),
+            ),
           ),
         ],
       ),

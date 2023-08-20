@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/presentation/components/error_view.dart';
 import 'package:e_polis/src/presentation/components/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import '../../../../generated/l10n.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/themes/app_colors.dart';
@@ -77,6 +77,11 @@ class TravelInsuranceDetailsPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       PriceTile(
+                        title: AppLocalizations.of(context).travelProgram,
+                        price: travelAtt.programs?.name ?? '',
+                      ),
+                      const SizedBox(height: 12),
+                      PriceTile(
                         title: AppLocalizations.of(context).polisPrice,
                         price:
                             '${numberFormat(state.calResponse?.insurancePremium ?? 0)} ${AppLocalizations.of(context).sum}',
@@ -86,7 +91,7 @@ class TravelInsuranceDetailsPage extends StatelessWidget {
                       PriceTile(
                         title: AppLocalizations.of(context).insurancePrice,
                         price:
-                            '${numberFormat(state.calResponse?.insuranceLiability ?? 0)} ${AppLocalizations.of(context).sum}',
+                            '€ ${numberFormat(state.calResponse?.insuranceLiability ?? 0)}',
                       ),
                       const SizedBox(height: 12),
                       PriceTile(
@@ -99,18 +104,55 @@ class TravelInsuranceDetailsPage extends StatelessWidget {
                         price: travelAtt.endDate ?? '',
                       ),
                       const SizedBox(height: 12),
-                      PriceTile(
-                        title: AppLocalizations.of(context).travelCountries,
-                        price: travelAtt.countries
-                                ?.map((e) => e.name2)
-                                .toList()
-                                .join(', ') ??
-                            '',
+                      Visibility(
+                        visible: travelAtt.policyType?.id == 1,
+                        child: PriceTile(
+                          title: AppLocalizations.of(context).planName,
+                          price:getTravelDaysName(travelAtt.multiDays?.id),
+                        ),
+                      ),
+                      Visibility(
+                        visible: travelAtt.policyType?.id == 1,
+                        child: const SizedBox(height: 12),
+                      ),
+                      Visibility(
+                        visible: travelAtt.policyType?.id == 1,
+                        child: PriceTile(
+                          title: AppLocalizations.of(context).policPeriod,
+                          price: '${travelAtt.multiDays?.day??''} ${AppLocalizations.of(context).day}',
+                        ),
+                      ),
+                      Visibility(
+                        visible: travelAtt.policyType?.id == 1,
+                        child: const SizedBox(height: 12),
+                      ),
+                      Visibility(
+                        visible: travelAtt.policyType?.id == 1,
+                        child: PriceTile(
+                          title: AppLocalizations.of(context).travelPeriod,
+                          price:'${ getTravelDays(travelAtt.multiDays?.id)} ${AppLocalizations.of(context).day}',
+                        ),
+                      ),
+                      Visibility(
+                        visible: travelAtt.policyType?.id == 1,
+                        child: const SizedBox(height: 12),
+                      ),
+                      Visibility(
+                        visible: travelAtt.policyType?.id != 1,
+                        child: PriceTile(
+                          title: AppLocalizations.of(context).travel_days,
+                          price:
+                              '${DateFormat('dd.MM.yyyy').parse(travelAtt.endDate!).difference(DateFormat('dd.MM.yyyy').parse(travelAtt.startDate!)).inDays + 1} ${AppLocalizations.of(context).day}',
+                        ),
                       ),
                       const SizedBox(height: 12),
                       PriceTile(
-                        title: AppLocalizations.of(context).travelProgram,
-                        price: travelAtt.programs?.name ?? '',
+                        title: AppLocalizations.of(context).travelCountries,
+                        price: travelAtt.countries
+                                ?.map((e) => '${e.ename??''} (${e.name2??''})')
+                                .toList()
+                                .join(', ') ??
+                            '',
                       ),
                       const SizedBox(height: 12),
                       PriceTile(

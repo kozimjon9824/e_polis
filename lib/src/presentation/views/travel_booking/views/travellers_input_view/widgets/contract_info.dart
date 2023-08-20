@@ -20,7 +20,6 @@ class ContractInfo extends StatelessWidget {
     return AnimatedRoundContainer(
       title: AppLocalizations.of(context).contractInfo,
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-      clearText: AppLocalizations.of(context).clearData,
       showChildren2: false,
       onClear: onClear,
       children: [
@@ -45,7 +44,7 @@ class ContractInfo extends StatelessWidget {
         TitleSubtitle(
           title: AppLocalizations.of(context).insurancePrice,
           subtitle:
-              '${numberFormat(travelAttModel.calResponse?.insuranceLiability ?? 0)} ${AppLocalizations.of(context).sum}',
+              '€ ${numberFormat(travelAttModel.calResponse?.insuranceLiability ?? 0)}',
         ),
       ],
     );

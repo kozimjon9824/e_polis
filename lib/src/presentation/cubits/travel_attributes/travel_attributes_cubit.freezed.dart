@@ -25,6 +25,8 @@ mixin _$TravelAttributesState {
   MultiDays? get multiDays => throw _privateConstructorUsedError;
   PolicyType? get policyType => throw _privateConstructorUsedError;
   TravelAttModel? get travelAttModel => throw _privateConstructorUsedError;
+  List<CountryModel>? get searchResult => throw _privateConstructorUsedError;
+  bool get isShengen => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TravelAttributesStateCopyWith<TravelAttributesState> get copyWith =>
@@ -46,7 +48,9 @@ abstract class $TravelAttributesStateCopyWith<$Res> {
       TravelersType? travelersType,
       MultiDays? multiDays,
       PolicyType? policyType,
-      TravelAttModel? travelAttModel});
+      TravelAttModel? travelAttModel,
+      List<CountryModel>? searchResult,
+      bool isShengen});
 
   $CountriesCopyWith<$Res>? get countries;
   $ProgramsCopyWith<$Res>? get programs;
@@ -79,6 +83,8 @@ class _$TravelAttributesStateCopyWithImpl<$Res,
     Object? multiDays = freezed,
     Object? policyType = freezed,
     Object? travelAttModel = freezed,
+    Object? searchResult = freezed,
+    Object? isShengen = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -117,6 +123,14 @@ class _$TravelAttributesStateCopyWithImpl<$Res,
           ? _value.travelAttModel
           : travelAttModel // ignore: cast_nullable_to_non_nullable
               as TravelAttModel?,
+      searchResult: freezed == searchResult
+          ? _value.searchResult
+          : searchResult // ignore: cast_nullable_to_non_nullable
+              as List<CountryModel>?,
+      isShengen: null == isShengen
+          ? _value.isShengen
+          : isShengen // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -210,7 +224,9 @@ abstract class _$$_TravelAttributesStateCopyWith<$Res>
       TravelersType? travelersType,
       MultiDays? multiDays,
       PolicyType? policyType,
-      TravelAttModel? travelAttModel});
+      TravelAttModel? travelAttModel,
+      List<CountryModel>? searchResult,
+      bool isShengen});
 
   @override
   $CountriesCopyWith<$Res>? get countries;
@@ -246,6 +262,8 @@ class __$$_TravelAttributesStateCopyWithImpl<$Res>
     Object? multiDays = freezed,
     Object? policyType = freezed,
     Object? travelAttModel = freezed,
+    Object? searchResult = freezed,
+    Object? isShengen = null,
   }) {
     return _then(_$_TravelAttributesState(
       status: null == status
@@ -284,6 +302,14 @@ class __$$_TravelAttributesStateCopyWithImpl<$Res>
           ? _value.travelAttModel
           : travelAttModel // ignore: cast_nullable_to_non_nullable
               as TravelAttModel?,
+      searchResult: freezed == searchResult
+          ? _value._searchResult
+          : searchResult // ignore: cast_nullable_to_non_nullable
+              as List<CountryModel>?,
+      isShengen: null == isShengen
+          ? _value.isShengen
+          : isShengen // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -300,7 +326,10 @@ class _$_TravelAttributesState implements _TravelAttributesState {
       this.travelersType,
       this.multiDays,
       this.policyType,
-      this.travelAttModel});
+      this.travelAttModel,
+      final List<CountryModel>? searchResult,
+      this.isShengen = false})
+      : _searchResult = searchResult;
 
   @override
   @JsonKey()
@@ -322,10 +351,23 @@ class _$_TravelAttributesState implements _TravelAttributesState {
   final PolicyType? policyType;
   @override
   final TravelAttModel? travelAttModel;
+  final List<CountryModel>? _searchResult;
+  @override
+  List<CountryModel>? get searchResult {
+    final value = _searchResult;
+    if (value == null) return null;
+    if (_searchResult is EqualUnmodifiableListView) return _searchResult;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  @JsonKey()
+  final bool isShengen;
 
   @override
   String toString() {
-    return 'TravelAttributesState(status: $status, failure: $failure, countries: $countries, programs: $programs, tripPurpose: $tripPurpose, travelersType: $travelersType, multiDays: $multiDays, policyType: $policyType, travelAttModel: $travelAttModel)';
+    return 'TravelAttributesState(status: $status, failure: $failure, countries: $countries, programs: $programs, tripPurpose: $tripPurpose, travelersType: $travelersType, multiDays: $multiDays, policyType: $policyType, travelAttModel: $travelAttModel, searchResult: $searchResult, isShengen: $isShengen)';
   }
 
   @override
@@ -348,7 +390,11 @@ class _$_TravelAttributesState implements _TravelAttributesState {
             (identical(other.policyType, policyType) ||
                 other.policyType == policyType) &&
             (identical(other.travelAttModel, travelAttModel) ||
-                other.travelAttModel == travelAttModel));
+                other.travelAttModel == travelAttModel) &&
+            const DeepCollectionEquality()
+                .equals(other._searchResult, _searchResult) &&
+            (identical(other.isShengen, isShengen) ||
+                other.isShengen == isShengen));
   }
 
   @override
@@ -362,7 +408,9 @@ class _$_TravelAttributesState implements _TravelAttributesState {
       travelersType,
       multiDays,
       policyType,
-      travelAttModel);
+      travelAttModel,
+      const DeepCollectionEquality().hash(_searchResult),
+      isShengen);
 
   @JsonKey(ignore: true)
   @override
@@ -382,7 +430,9 @@ abstract class _TravelAttributesState implements TravelAttributesState {
       final TravelersType? travelersType,
       final MultiDays? multiDays,
       final PolicyType? policyType,
-      final TravelAttModel? travelAttModel}) = _$_TravelAttributesState;
+      final TravelAttModel? travelAttModel,
+      final List<CountryModel>? searchResult,
+      final bool isShengen}) = _$_TravelAttributesState;
 
   @override
   StateStatus get status;
@@ -402,6 +452,10 @@ abstract class _TravelAttributesState implements TravelAttributesState {
   PolicyType? get policyType;
   @override
   TravelAttModel? get travelAttModel;
+  @override
+  List<CountryModel>? get searchResult;
+  @override
+  bool get isShengen;
   @override
   @JsonKey(ignore: true)
   _$$_TravelAttributesStateCopyWith<_$_TravelAttributesState> get copyWith =>

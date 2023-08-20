@@ -8,7 +8,10 @@ import '../../../../../generated/l10n.dart';
 import '../../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
 
 class CustomStepper extends StatelessWidget implements PreferredSizeWidget {
-  const CustomStepper({Key? key, required this.currentIndex}) : super(key: key);
+  const CustomStepper({
+    Key? key,
+    required this.currentIndex,
+  }) : super(key: key);
   final int currentIndex;
 
   @override
@@ -26,40 +29,44 @@ class CustomStepper extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   const Expanded(flex: 1, child: SizedBox()),
                   StepperStep(
-                      currentIndex: currentIndex,
-                      index: 0,
-                      onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(0);
-                      }),
+                    currentIndex: currentIndex,
+                    index: 0,
+                    onTap: () {
+                      context
+                          .read<ManageInsuranceStackViewsCubit>()
+                          .changeIndex(0);
+                    },
+                  ),
                   liner(currentIndex >= 1),
                   StepperStep(
-                      currentIndex: currentIndex,
-                      index: 1,
-                      onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(1);
-                      }),
+                    currentIndex: currentIndex,
+                    index: 1,
+                    onTap: () {
+                      context
+                          .read<ManageInsuranceStackViewsCubit>()
+                          .changeIndex(1);
+                    },
+                  ),
                   liner(currentIndex >= 2),
                   StepperStep(
-                      currentIndex: currentIndex,
-                      index: 2,
-                      onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(2);
-                      }),
+                    currentIndex: currentIndex,
+                    index: 2,
+                    onTap: () {
+                      context
+                          .read<ManageInsuranceStackViewsCubit>()
+                          .changeIndex(2);
+                    },
+                  ),
                   liner(currentIndex >= 3),
                   StepperStep(
-                      currentIndex: currentIndex,
-                      index: 3,
-                      onTap: () {
-                        context
-                            .read<ManageInsuranceStackViewsCubit>()
-                            .changeIndex(3);
-                      }),
+                    currentIndex: currentIndex,
+                    index: 3,
+                    onTap: () {
+                      context
+                          .read<ManageInsuranceStackViewsCubit>()
+                          .changeIndex(3);
+                    },
+                  ),
                   const Expanded(flex: 1, child: SizedBox()),
                 ],
               ),
@@ -71,8 +78,9 @@ class CustomStepper extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   for (int i = 0; i < 4; i++)
                     StepperText(
-                        title: getTitles(context)[i],
-                        isActive: currentIndex >= i),
+                      title: getTitles(context)[i],
+                      isActive: currentIndex >= i,
+                    ),
                 ],
               ),
             ),
@@ -93,9 +101,10 @@ class CustomStepper extends StatelessWidget implements PreferredSizeWidget {
     return Expanded(
       flex: 2,
       child: Divider(
-          height: 0,
-          thickness: 1,
-          color: isActive ? AppColors.primaryColor : AppColors.grey500),
+        height: 0,
+        thickness: 1,
+        color: isActive ? AppColors.primaryColor : AppColors.grey500,
+      ),
     );
   }
 
@@ -105,9 +114,13 @@ class CustomStepper extends StatelessWidget implements PreferredSizeWidget {
 
 /// widgets
 class StepperStep extends StatelessWidget {
-  const StepperStep(
-      {Key? key, required this.currentIndex, required this.index, this.onTap})
-      : super(key: key);
+  const StepperStep({
+    Key? key,
+    required this.currentIndex,
+    required this.index,
+    this.onTap,
+  }) : super(key: key);
+
   final int currentIndex;
   final int index;
   final Function()? onTap;
@@ -124,10 +137,13 @@ class StepperStep extends StatelessWidget {
             width: 18,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppColors.grey500, width: 1)),
-            child: Text((index + 1).toString(),
-                style: AppTextStyles.styleW700S12Grey5),
+              shape: BoxShape.circle,
+              border: Border.all(color: AppColors.grey500, width: 1),
+            ),
+            child: Text(
+              (index + 1).toString(),
+              style: AppTextStyles.styleW700S12Grey5,
+            ),
           ),
         ),
       );
@@ -137,9 +153,10 @@ class StepperStep extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 3),
         child: SvgPicture.asset(
-            index == currentIndex ? AppIcons.active : AppIcons.check,
-            height: 18,
-            width: 18),
+          index == currentIndex ? AppIcons.active : AppIcons.check,
+          height: 18,
+          width: 18,
+        ),
       ),
     );
   }
@@ -147,8 +164,11 @@ class StepperStep extends StatelessWidget {
 
 /// widgets
 class StepperText extends StatelessWidget {
-  const StepperText({Key? key, this.isActive = false, required this.title})
-      : super(key: key);
+  const StepperText({
+    Key? key,
+    this.isActive = false,
+    required this.title,
+  }) : super(key: key);
 
   final bool isActive;
   final String title;

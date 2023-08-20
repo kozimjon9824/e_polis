@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 import '../../../../../../generated/l10n.dart';
 import '../../../../../core/utils/helper_models.dart';
@@ -16,20 +17,22 @@ class ContractInfoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        children: [
-          ContractInfo(travelAttModel: travelAttModel),
-        ],
-      ),
-      bottomNavigationBar: SafeArea(
-        minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-        child: CustomButton(
-          text: AppLocalizations.of(context).next,
-          onTap: () {
-            context.read<ManageInsuranceStackViewsCubit>().changeIndex(3);
-          },
+    return KeyboardDismisser(
+      child: Scaffold(
+        body: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          children: [
+            ContractInfo(travelAttModel: travelAttModel),
+          ],
+        ),
+        bottomNavigationBar: SafeArea(
+          minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+          child: CustomButton(
+            text: AppLocalizations.of(context).next,
+            onTap: () {
+              context.read<ManageInsuranceStackViewsCubit>().changeIndex(3);
+            },
+          ),
         ),
       ),
     );

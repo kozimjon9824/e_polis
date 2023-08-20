@@ -1,6 +1,7 @@
 import 'package:e_polis/src/presentation/views/travel_booking/widgets/stepper_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../injector.dart';
 import '../../../core/utils/helper_models.dart';
@@ -36,25 +37,26 @@ class TravelBookingPage extends StatelessWidget {
               if (state.index == 0) {
                 return true;
               } else {
-                context
-                    .read<ManageInsuranceStackViewsCubit>()
+                context.read<ManageInsuranceStackViewsCubit>()
                     .changeIndex(state.index - 1);
                 return false;
               }
             },
-            child: Scaffold(
-              appBar: AppBar(
-                title: Text(AppLocalizations.of(context).bookInsurance),
-                bottom: TravelCustomStepper(currentIndex: state.index),
-              ),
-              body: IndexedStack(
-                index: state.index,
-                children: [
-                  const TravellersInputView(),
-                  const ApplicantInputsView(),
-                  ContractInfoView(travelAttModel: travelAtt),
-                  TravellerPaymentView(travelAttModel: travelAtt),
-                ],
+            child: KeyboardDismisser(
+              child: Scaffold(
+                appBar: AppBar(
+                  title: Text(AppLocalizations.of(context).bookInsurance),
+                  bottom: TravelCustomStepper(currentIndex: state.index),
+                ),
+                body: IndexedStack(
+                  index: state.index,
+                  children: [
+                    ApplicantInputsView(travelAttModel: travelAtt),
+                    const TravellersInputView(),
+                    ContractInfoView(travelAttModel: travelAtt),
+                    TravellerPaymentView(travelAttModel: travelAtt),
+                  ],
+                ),
               ),
             ),
           );

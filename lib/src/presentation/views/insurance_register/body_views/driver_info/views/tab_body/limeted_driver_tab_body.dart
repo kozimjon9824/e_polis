@@ -22,6 +22,7 @@ class DriverInputDetailsBody extends StatefulWidget {
     required this.index,
     required this.tabLength,
   }) : super(key: key);
+
   final int index;
   final int tabLength;
 
@@ -30,12 +31,14 @@ class DriverInputDetailsBody extends StatefulWidget {
 }
 
 class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
+
   final seriesController = TextEditingController();
   final numberController = TextEditingController();
   final dateController = TextEditingController();
   final licenseSeries = TextEditingController();
   final licenseNumber = TextEditingController();
   final licenseDate = TextEditingController();
+
   final seriesFocus = FocusNode();
   final numberFocus = FocusNode();
   final dateFocus = FocusNode();
@@ -65,7 +68,9 @@ class _DriverInputDetailsBodyState extends State<DriverInputDetailsBody> {
                       IndexedDriverModel(isSuccess: isCompany ? true : false),
                 );
                 showErrorMessage(
-                    context, state.failure.getLocalizedMessage(context));
+                  context,
+                  state.failure.getLocalizedMessage(context),
+                );
               }
               if (state.status == StateStatus.success) {
                 var model = IndexedDriverModel(

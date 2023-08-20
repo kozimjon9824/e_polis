@@ -96,7 +96,8 @@ abstract class ApiClient {
 
   @POST('insurance/passport-information')
   Future<DriverPassportInputResponse> addDriver(
-    @Body() DriverPassportInputRequest request,
+      @Query('includeDriver') bool include,
+      @Body() DriverPassportInputRequest request,
   );
 
   @POST('products/osago/calculation')

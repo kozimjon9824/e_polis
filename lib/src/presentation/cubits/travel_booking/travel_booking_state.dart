@@ -6,6 +6,7 @@ class TravelBookingState with _$TravelBookingState {
     List<TravellerMainInputs>? listOfTravellers,
     @Default(StateStatus.unknown) StateStatus status,
     @Default(UnknownFailure()) Failure failure,
+    PassportDataResponse? applicantData,
     String? fName,
     String? lName,
     String? phone,

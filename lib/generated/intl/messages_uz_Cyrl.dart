@@ -89,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Бошланиш санаси"),
         "date": MessageLookupByLibrary.simpleMessage("Сана"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Туғилган йил"),
+        "day": MessageLookupByLibrary.simpleMessage("кун"),
         "ddMMYY": MessageLookupByLibrary.simpleMessage("КК/ОО/ЙЙЙЙ"),
         "delete": MessageLookupByLibrary.simpleMessage("Ўчириш"),
         "delete_account":
@@ -218,6 +219,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Телефон рақам"),
         "pickImage": MessageLookupByLibrary.simpleMessage("Расм қўшиш"),
         "pinFl": MessageLookupByLibrary.simpleMessage("ЖШШИР"),
+        "planName": MessageLookupByLibrary.simpleMessage("Режанинг номи"),
+        "policPeriod":
+            MessageLookupByLibrary.simpleMessage("Полиснинг амал қилиши"),
         "polisPrice": MessageLookupByLibrary.simpleMessage("Полис нархи"),
         "popularQuestions": MessageLookupByLibrary.simpleMessage(
             "Тез-тез сўраладиган саволлар"),
@@ -286,11 +290,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Саёҳатнинг тугаш санаси"),
         "travelInsDesc": MessageLookupByLibrary.simpleMessage(
             "Перед использованием Решения (см. определение ниже) внимательно ознакомьтесь с условиями данного Лицензионного соглашения с конечным пользователем (далее — «Соглашение»). Данный текст является юридически обязывающим договором. Давая согласие в электронной форме, устанавливая Решение или используя Решение, вы принимаете все условия настоящего Соглашения от своего лица и любой организации и физического лица, которое вы представляете или для чьего Устройства вы приобретаете Решение (в совокупности «вы»)."),
+        "travelPeriod":
+            MessageLookupByLibrary.simpleMessage("Хорижда бўлиш вақти"),
         "travelProgram": MessageLookupByLibrary.simpleMessage("Дастур"),
         "travelPurpose": MessageLookupByLibrary.simpleMessage("Сафар мақсади"),
         "travelStartDate":
             MessageLookupByLibrary.simpleMessage("Саёҳатнинг бошланиш санаси"),
+        "travel_days":
+            MessageLookupByLibrary.simpleMessage("Саёҳат давомийлиги"),
         "traveller": MessageLookupByLibrary.simpleMessage("Саёҳатчилар"),
+        "travellers_count":
+            MessageLookupByLibrary.simpleMessage("Саёҳатчилар сони"),
         "twentyDays": MessageLookupByLibrary.simpleMessage("20 кун"),
         "typePolis": MessageLookupByLibrary.simpleMessage("Полис тури"),
         "typeVehicle":
@@ -312,7 +322,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "weFoundZero": MessageLookupByLibrary.simpleMessage(
             "Биз 0 та суғурта компаниясини топдик"),
         "worldPassport":
-            MessageLookupByLibrary.simpleMessage("Халқаро паспорт"),
+            MessageLookupByLibrary.simpleMessage("Хорижий паспорт(Загран)"),
         "yes": MessageLookupByLibrary.simpleMessage("Ҳа"),
         "youCanAddPolis":
             MessageLookupByLibrary.simpleMessage("Сиз полис қўшишингиз мумкин ")

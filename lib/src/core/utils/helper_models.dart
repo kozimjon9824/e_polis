@@ -28,6 +28,85 @@ class PaymentModel {
   });
 }
 
+final shengenCountries = [
+  226,
+  273,
+  229,
+  234,
+  76,
+  237,
+  282,
+  277,
+  54,
+  78,
+  160,
+  19,
+  38,
+  65,
+  66,
+  80,
+  18,
+  63,
+  70,
+  71,
+  27,
+  169,
+  119,
+  199,
+  175,
+  280,
+  143
+];
+
+final shengenPrograms = [
+  5,
+  3,
+  2,
+  6,
+];
+
+String getTravelDays(int? id) {
+  switch (id) {
+    case 1:
+      return '30';
+    case 2:
+      return '90';
+    case 3:
+      return '90';
+    case 4:
+      return '180';
+    case 5:
+      return '30';
+    case 6:
+      return '366';
+    case 7:
+      return '366';
+    default:
+      return '';
+  }
+}
+
+String getTravelDaysName(int? id) {
+  switch (id) {
+    case 1:
+      return 'Multi I';
+    case 2:
+      return 'Multi II';
+    case 3:
+      return 'Multi III';
+    case 4:
+      return 'Multi IV';
+    case 5:
+      return 'Multi V';
+    case 6:
+      return 'Worker';
+    case 7:
+      return 'Student';
+    default:
+      return '';
+  }
+}
+
 final paymentTypeList = [
   PaymentModel(
       paymentType: PaymentType.click, icon: AppIcons.click, name: 'CLICK'),
@@ -53,7 +132,7 @@ class IndexedDriverModel {
   });
 }
 
-class TravelAttModel {
+class TravelAttModel extends Equatable {
   final List<CountryModel>? countries;
   final ProgramModel? programs;
   final TripModel? tripPurpose;
@@ -66,6 +145,7 @@ class TravelAttModel {
   final List<TextEditingController>? textControllers;
   final TravelCalResponse? calResponse;
   final String? productId;
+  final int? selectedTraveller;
 
   TravelAttModel({
     this.countries,
@@ -80,6 +160,7 @@ class TravelAttModel {
     this.textControllers,
     this.calResponse,
     this.productId,
+    this.selectedTraveller,
   });
 
   TravelAttModel copyWith({
@@ -95,6 +176,7 @@ class TravelAttModel {
     TravelCalResponse? calResponse,
     String? productId,
     List<TextEditingController>? textControllers,
+    int? selectedTraveller,
   }) {
     return TravelAttModel(
       countries: countries ?? this.countries,
@@ -109,8 +191,26 @@ class TravelAttModel {
       calResponse: calResponse ?? this.calResponse,
       productId: productId ?? this.productId,
       textControllers: textControllers ?? this.textControllers,
+      selectedTraveller: selectedTraveller ?? this.selectedTraveller,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        countries,
+        programs,
+        tripPurpose,
+        travelersType,
+        multiDays,
+        policyType,
+        startDate,
+        endDate,
+        travellers,
+        calResponse,
+        productId,
+        textControllers,
+        selectedTraveller,
+      ];
 }
 
 class TravellerMainInputs extends Equatable {
@@ -120,6 +220,8 @@ class TravellerMainInputs extends Equatable {
   String? inn;
   String? firstName;
   String? lastName;
+  bool isDisable;
+  bool isHide;
 
   TravellerMainInputs({
     this.birth,
@@ -128,6 +230,8 @@ class TravellerMainInputs extends Equatable {
     this.inn,
     this.firstName,
     this.lastName,
+    this.isDisable = false,
+    this.isHide = false,
   });
 
   TravellerMainInputs copyWith({
@@ -137,6 +241,8 @@ class TravellerMainInputs extends Equatable {
     String? inn,
     String? lastName,
     String? firstName,
+    bool? isDisable,
+    bool? isHide,
   }) {
     return TravellerMainInputs(
       birth: birth ?? this.birth,
@@ -145,6 +251,8 @@ class TravellerMainInputs extends Equatable {
       inn: inn ?? this.inn,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
+      isDisable: isDisable ?? this.isDisable,
+      isHide: isHide ?? this.isHide,
     );
   }
 
@@ -156,5 +264,7 @@ class TravellerMainInputs extends Equatable {
         inn,
         firstName,
         lastName,
+        isDisable,
+        isHide,
       ];
 }

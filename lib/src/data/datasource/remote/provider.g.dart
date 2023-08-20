@@ -403,9 +403,11 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DriverPassportInputResponse> addDriver(
-      DriverPassportInputRequest request) async {
+    bool include,
+    DriverPassportInputRequest request,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'includeDriver': include};
     final _headers = <String, dynamic>{};
     final _data = request;
     final _result = await _dio.fetch<Map<String, dynamic>>(

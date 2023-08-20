@@ -2,6 +2,7 @@ import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/presentation/cubits/buy_travel/buy_travel_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/helper_models.dart';
@@ -25,53 +26,55 @@ class TravellerPaymentView extends StatelessWidget {
       create: (context) => inject<BuyTravelCubit>(),
       child: BlocBuilder<TravelBookingCubit, TravelBookingState>(
         builder: (context, bookingState) {
-          return Scaffold(
-            body: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              children: [
-                TravelContractPrice(travelAttModel: travelAttModel),
-                const SizedBox(height: 24),
-                const TravelPaymentTypes(),
-              ],
-            ),
-            bottomNavigationBar: BlocConsumer<BuyTravelCubit, BuyTravelState>(
-              listener: (context, state) {
-                if (state.status == StateStatus.success) {
-                  Navigator.pushNamed(
-                    context,
-                    AppRoutes.paymentSuccess,
-                    arguments: SuccessPageArgs(
-                      name:
-                          '${bookingState.lName ?? ''} ${bookingState.fName ?? ''}',
-                      amount: numberFormat(
-                          travelAttModel.calResponse?.insuranceLiability ?? 0),
+          return KeyboardDismisser(
+            child: Scaffold(
+              body: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                children: [
+                  TravelContractPrice(travelAttModel: travelAttModel),
+                  const SizedBox(height: 24),
+                  const TravelPaymentTypes(),
+                ],
+              ),
+              bottomNavigationBar: BlocConsumer<BuyTravelCubit, BuyTravelState>(
+                listener: (context, state) {
+                  if (state.status == StateStatus.success) {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.paymentSuccess,
+                      arguments: SuccessPageArgs(
+                        name:
+                            '${bookingState.lName ?? ''} ${bookingState.fName ?? ''}',
+                        amount: numberFormat(
+                            travelAttModel.calResponse?.insuranceLiability ?? 0),
+                      ),
+                    );
+                  }
+                },
+                builder: (context, buyState) {
+                  return SafeArea(
+                    minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+                    child: CustomButton(
+                      text: AppLocalizations.of(context).next,
+                      isLoading: buyState.status == StateStatus.loading,
+                      onTap: () {
+                        context.read<BuyTravelCubit>().buyTravelInsurance(
+                              travelAttModel: travelAttModel,
+                              fName: bookingState.fName,
+                              lName: bookingState.lName,
+                              phone: bookingState.phone,
+                              address: bookingState.address,
+                              bDate: bookingState.bDate,
+                              passportSeries: bookingState.passportSeries,
+                              passportNumber: bookingState.passportNumber,
+                              inn: bookingState.inn,
+                              listOfTravellers: bookingState.listOfTravellers,
+                            );
+                      },
                     ),
                   );
-                }
-              },
-              builder: (context, buyState) {
-                return SafeArea(
-                  minimum: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-                  child: CustomButton(
-                    text: AppLocalizations.of(context).next,
-                    isLoading: buyState.status == StateStatus.loading,
-                    onTap: () {
-                      context.read<BuyTravelCubit>().buyTravelInsurance(
-                            travelAttModel: travelAttModel,
-                            fName: bookingState.fName,
-                            lName: bookingState.lName,
-                            phone: bookingState.phone,
-                            address: bookingState.address,
-                            bDate: bookingState.bDate,
-                            passportSeries: bookingState.passportSeries,
-                            passportNumber: bookingState.passportNumber,
-                            inn: bookingState.inn,
-                            listOfTravellers: bookingState.listOfTravellers,
-                          );
-                    },
-                  ),
-                );
-              },
+                },
+              ),
             ),
           );
         },

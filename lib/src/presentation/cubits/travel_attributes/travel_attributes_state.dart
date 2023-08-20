@@ -12,5 +12,7 @@ class TravelAttributesState with _$TravelAttributesState {
     MultiDays? multiDays,
     PolicyType? policyType,
     TravelAttModel? travelAttModel,
+    List<CountryModel>? searchResult,
+    @Default(false) bool isShengen,
   }) = _TravelAttributesState;
 }

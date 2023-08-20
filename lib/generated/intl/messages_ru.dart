@@ -89,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Дата начало контракта"),
         "date": MessageLookupByLibrary.simpleMessage("Дата"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Дата рождения"),
+        "day": MessageLookupByLibrary.simpleMessage("день"),
         "ddMMYY": MessageLookupByLibrary.simpleMessage("ДД.ММ.ГГГГ"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "delete_account":
@@ -220,6 +221,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickImage":
             MessageLookupByLibrary.simpleMessage("Добавить изображение"),
         "pinFl": MessageLookupByLibrary.simpleMessage("ПИНФЛ"),
+        "planName": MessageLookupByLibrary.simpleMessage("Название плана"),
+        "policPeriod":
+            MessageLookupByLibrary.simpleMessage("Срок действия страхования"),
         "polisPrice": MessageLookupByLibrary.simpleMessage("Цена полиса"),
         "popularQuestions":
             MessageLookupByLibrary.simpleMessage("Популярные вопросы"),
@@ -284,11 +288,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Дата окончания путешествия"),
         "travelInsDesc": MessageLookupByLibrary.simpleMessage(
             "Перед использованием Решения (см. определение ниже) внимательно ознакомьтесь с условиями данного Лицензионного соглашения с конечным пользователем (далее — «Соглашение»). Данный текст является юридически обязывающим договором. Давая согласие в электронной форме, устанавливая Решение или используя Решение, вы принимаете все условия настоящего Соглашения от своего лица и любой организации и физического лица, которое вы представляете или для чьего Устройства вы приобретаете Решение (в совокупности «вы»)."),
+        "travelPeriod":
+            MessageLookupByLibrary.simpleMessage("Время быть за границей"),
         "travelProgram": MessageLookupByLibrary.simpleMessage("Программа"),
         "travelPurpose": MessageLookupByLibrary.simpleMessage("Цель поездки"),
         "travelStartDate":
             MessageLookupByLibrary.simpleMessage("Дата начала путешествия"),
+        "travel_days": MessageLookupByLibrary.simpleMessage("дней в пути"),
         "traveller": MessageLookupByLibrary.simpleMessage("Путешественники"),
+        "travellers_count":
+            MessageLookupByLibrary.simpleMessage("Количество путешественников"),
         "twentyDays": MessageLookupByLibrary.simpleMessage("20 дней"),
         "typePolis": MessageLookupByLibrary.simpleMessage("Тип полиса"),
         "typeVehicle": MessageLookupByLibrary.simpleMessage("Тип автомобиля"),

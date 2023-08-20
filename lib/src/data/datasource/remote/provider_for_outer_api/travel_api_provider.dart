@@ -45,4 +45,5 @@ abstract class TravelApiClient {
   @retrofit.Headers(<String, dynamic>{"Content-Type": "application/json"})
   Future<TravelCalResponse> calculateTravel(
       @retrofit.Body() TravelCalRequest request);
+
 }

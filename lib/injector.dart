@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:e_polis/src/data/datasource/remote/provider_for_outer_api/travel_api_provider.dart';
 import 'package:e_polis/src/data/repository/auth.dart';
@@ -85,6 +83,7 @@ import 'src/domain/usecases/main/notifications.dart';
 import 'src/domain/usecases/profile/upload_photo.dart';
 import 'src/domain/usecases/setting/faq.dart';
 import 'src/domain/usecases/setting/set_app_lang.dart';
+import 'src/domain/usecases/travel/get_info_by_passsport.dart';
 import 'src/presentation/cubits/auth/auth_cubit.dart';
 import 'src/presentation/cubits/filter_tab/filter_tab_manager_cubit.dart';
 import 'src/presentation/cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
@@ -143,7 +142,7 @@ Future<void> initDi() async {
   inject.registerFactory(() => TravelAttributesCubit(
       inject(), inject(), inject(), inject(), inject(), inject()));
   inject.registerFactory(() => TravelCalculatorCubit(inject()));
-  inject.registerFactory(() => TravelBookingCubit());
+  inject.registerFactory(() => TravelBookingCubit(inject()));
   inject.registerFactory(() => BuyTravelCubit(inject()));
 
   /// UseCases
@@ -196,6 +195,7 @@ Future<void> initDi() async {
   inject.registerLazySingleton(() => GetMultiDaysUseCase(inject()));
   inject.registerLazySingleton(() => TravelCalculatorUseCase(inject()));
   inject.registerLazySingleton(() => TravelBookingUseCase(inject()));
+  inject.registerLazySingleton(() => GetInfoByPassportUseCase(inject()));
 
   /// repository init
   inject.registerLazySingleton<ISettingRepository>(
@@ -209,7 +209,7 @@ Future<void> initDi() async {
   inject.registerLazySingleton<IAuthRepository>(
       () => AuthRepository(inject(), inject()));
   inject.registerLazySingleton<ITravelRepository>(
-      () => TravelRepository(inject(), inject()));
+      () => TravelRepository(inject(), inject(),inject()));
 
   // local source init shared pref
   var pref = await SharedPreferences.getInstance();

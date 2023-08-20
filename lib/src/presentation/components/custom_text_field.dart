@@ -81,6 +81,7 @@ class CustomTextField extends StatelessWidget {
           decoration: InputDecoration(
             // prefixIcon: Icon(prefixIcon, size: 22, color: preIconColor),
             suffixIcon: suffixIcon,
+            contentPadding: const EdgeInsets.fromLTRB(12, 16, 12, 16),
             hintStyle: AppTextStyles.styleW500S14Grey3,
             hintText: hintText,
             filled: true,
@@ -213,6 +214,7 @@ class CustomDatePickTextField extends StatelessWidget {
                       ),
                     ),
                   ),
+            contentPadding: const EdgeInsets.fromLTRB(12, 16, 12, 16),
             hintStyle: AppTextStyles.styleW500S14Grey3,
             hintText: hintText,
             filled: true,
@@ -301,6 +303,7 @@ class CustomPrefixTextField extends StatelessWidget {
             suffixIcon: suffixIcon,
             hintStyle: AppTextStyles.styleW500S14Grey3,
             hintText: hintText,
+            contentPadding: const EdgeInsets.fromLTRB(12, 16, 12, 16),
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(8)),
               borderSide: BorderSide(),

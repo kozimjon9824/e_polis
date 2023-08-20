@@ -15,7 +15,7 @@ class InsuranceBasicFilterCubit extends Cubit<InsuranceBasicFilterState> {
   InsuranceBasicFilterCubit(this._insurancesUseCase)
       : super(const InsuranceBasicFilterState(
             basicFilterRequest:
-                BasicFilterRequest(isVip: false, period: PERIOD_MONTHS)));
+                BasicFilterRequest(isVip: false, period: PERIOD_YEAR)));
   final GetInsurancesUseCase _insurancesUseCase;
 
   void loadData() async {

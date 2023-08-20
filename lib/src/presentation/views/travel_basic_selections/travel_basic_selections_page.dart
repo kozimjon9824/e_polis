@@ -1,5 +1,7 @@
 import 'package:e_polis/injector.dart';
+import 'package:e_polis/src/core/utils/helper_models.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
+import 'package:e_polis/src/presentation/components/snackbars.dart';
 import 'package:e_polis/src/presentation/cubits/travel_attributes/travel_attributes_cubit.dart';
 import 'package:e_polis/src/presentation/views/travel_basic_selections/widgets/country_select_widget.dart';
 import 'package:e_polis/src/presentation/views/travel_basic_selections/widgets/traveller_input.dart';
@@ -18,7 +20,6 @@ import '../../components/custom_button.dart';
 import '../../components/custom_text_field.dart';
 import '../../components/drop_down_button.dart';
 import '../../components/loading.dart';
-import 'widgets/desc.dart';
 
 class TravelBasicSelectionPage extends StatefulWidget {
   const TravelBasicSelectionPage({Key? key}) : super(key: key);
@@ -53,6 +54,13 @@ class _TravelBasicSelectionPageState extends State<TravelBasicSelectionPage> {
               AppRoutes.travelInsDetails,
               arguments: newTravelAtt,
             );
+          }
+          if (state.status == StateStatus.error) {
+            showErrorMessage(
+                context, state.failure.getLocalizedMessage(context));
+          }
+          if(state.status == StateStatus.initial){
+            dateController2.text = state.travelAttModel?.endDate??'';
           }
         },
         builder: (context, state) {
@@ -90,23 +98,25 @@ class _TravelBasicSelectionPageState extends State<TravelBasicSelectionPage> {
                       },
                       errorText: local.mustNotEmptyFailure,
                     ),
-                    const SizedBox(height: 20),
-                    DropDownButton<MultiDayModel>(
-                      value: state.travelAttModel?.multiDays,
-                      label: AppLocalizations.of(context).travelDays,
-                      items: (state.multiDays?.items ?? [])
-                          .map((item) => DropdownMenuItem<MultiDayModel>(
-                              value: item,
-                              child: Text(
-                                item.name ?? '',
-                                style: AppTextStyles.styleW400S14Grey6,
-                              )))
-                          .toList(),
-                      onChanged: (value) {
-                        cubit.selectMultiDays(value!);
-                      },
-                      errorText: local.mustNotEmptyFailure,
-                    ),
+                    if (state.travelAttModel?.policyType?.id == 1)
+                      const SizedBox(height: 20),
+                    if (state.travelAttModel?.policyType?.id == 1)
+                      DropDownButton<MultiDayModel>(
+                        value: state.travelAttModel?.multiDays,
+                        label: AppLocalizations.of(context).travelDays,
+                        items: (state.multiDays?.items ?? [])
+                            .map((item) => DropdownMenuItem<MultiDayModel>(
+                                value: item,
+                                child: Text(
+                                  item.name ?? '',
+                                  style: AppTextStyles.styleW400S14Grey6,
+                                )))
+                            .toList(),
+                        onChanged: (value) {
+                          cubit.selectMultiDays(value!);
+                        },
+                        errorText: local.mustNotEmptyFailure,
+                      ),
                     const SizedBox(height: 20),
                     CustomDatePickTextField(
                       label: AppLocalizations.of(context).travelStartDate,
@@ -148,6 +158,8 @@ class _TravelBasicSelectionPageState extends State<TravelBasicSelectionPage> {
                       textInputAction: TextInputAction.done,
                       onFieldSubmitted: (_) => focusNodeDate2.unfocus(),
                       focusNode: focusNodeDate2,
+                      readOnly: (state.travelAttModel?.policyType?.id == 1),
+                      hideCalendar: (state.travelAttModel?.policyType?.id == 1),
                       validator: (value) => (value!.length < 10)
                           ? AppLocalizations.of(context).enterDate
                           : null,
@@ -172,24 +184,6 @@ class _TravelBasicSelectionPageState extends State<TravelBasicSelectionPage> {
                       },
                     ),
 
-                    // const SizedBox(height: 20),
-                    // DropDownButton<CountryModel>(
-                    //   value: state.travelAttModel?.countries?.first,
-                    //   label: 'Где вы хотите путешествовать?',
-                    //   items: (state.countries?.items ?? [])
-                    //       .map((item) => DropdownMenuItem<CountryModel>(
-                    //           value: item,
-                    //           child: Text(
-                    //             item.name2 ?? '',
-                    //             style: AppTextStyles.styleW400S14Grey6,
-                    //           )))
-                    //       .toList(),
-                    //   onChanged: (value) {
-                    //     cubit.addCountry(value!);
-                    //   },
-                    //   errorText: local.mustNotEmptyFailure,
-                    // ),
-
                     const SizedBox(height: 20),
                     Text(
                       AppLocalizations.of(context).travelCountry,
@@ -201,7 +195,13 @@ class _TravelBasicSelectionPageState extends State<TravelBasicSelectionPage> {
                     DropDownButton<ProgramModel>(
                       value: state.travelAttModel?.programs,
                       label: AppLocalizations.of(context).travelProgram,
-                      items: (state.programs?.items ?? [])
+                      items: (state.isShengen
+                              ? (state.programs?.items
+                                      ?.where((element) =>
+                                          shengenPrograms.contains(element.id!))
+                                      .toList() ??
+                                  [])
+                              : state.programs?.items ?? [])
                           .map((item) => DropdownMenuItem<ProgramModel>(
                               value: item,
                               child: Text(
@@ -249,6 +249,23 @@ class _TravelBasicSelectionPageState extends State<TravelBasicSelectionPage> {
                       errorText: local.mustNotEmptyFailure,
                     ),
                     const SizedBox(height: 20),
+                    DropDownButton<int>(
+                      value: (state.travelAttModel?.travellers.length ?? 0),
+                      label: AppLocalizations.of(context).travellers_count,
+                      items: ([1, 2, 3, 4, 5, 6])
+                          .map((item) => DropdownMenuItem<int>(
+                              value: item,
+                              child: Text(
+                                item.toString() ?? '',
+                                style: AppTextStyles.styleW400S14Grey6,
+                              )))
+                          .toList(),
+                      onChanged: (value) {
+                        cubit.selectCountOfTravellers(value!);
+                      },
+                      errorText: local.mustNotEmptyFailure,
+                    ),
+                    const SizedBox(height: 20),
                     for (int index = 0;
                         index < (state.travelAttModel?.travellers.length ?? 0);
                         index++)
@@ -264,14 +281,19 @@ class _TravelBasicSelectionPageState extends State<TravelBasicSelectionPage> {
                           cubit.onBirthDateTraveller(
                               index: index, text: value!);
                         },
+                        selectedTraveller:
+                            state.travelAttModel?.selectedTraveller,
+                        onChangeValue: (int? index) {
+                          cubit.onChangeApplicant(index: index ?? 0);
+                        },
                       ),
                     const SizedBox(height: 20),
-                    CustomOutlineButton(
-                      text: AppLocalizations.of(context).addTraveller,
-                      onTap: () {
-                        cubit.addTravellers();
-                      },
-                    ),
+                    // CustomOutlineButton(
+                    //   text: AppLocalizations.of(context).addTraveller,
+                    //   onTap: () {
+                    //     cubit.addTravellers();
+                    //   },
+                    // ),
                   ],
                 ),
               ),

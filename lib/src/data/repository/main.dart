@@ -112,7 +112,7 @@ class MainRepository implements IMainRepository {
   Future<Either<Failure, DriverPassportInputResponse>> addDriver(
       DriverPassportInputRequest request) async {
     try {
-      final response = await _apiClient.addDriver(request);
+      final response = await _apiClient.addDriver(true,request);
       return Right(response);
     } on DioError catch (e) {
       if (kDebugMode) {

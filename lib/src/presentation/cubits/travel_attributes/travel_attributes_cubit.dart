@@ -8,6 +8,7 @@ import 'package:e_polis/src/domain/usecases/travel/trip_purpose.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 import '../../../core/error/error.dart';
 import '../../../core/utils/helper_models.dart';
 import '../../../core/utils/utils.dart';
@@ -114,31 +115,68 @@ class TravelAttributesCubit extends Cubit<TravelAttributesState> {
   void selectProgram(ProgramModel programs) {
     TravelAttModel model = state.travelAttModel!;
     var newModel = model.copyWith(programs: programs);
-    emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
+    emit(state.copyWith(
+      status: StateStatus.unknown,
+      travelAttModel: newModel,
+    ));
   }
 
   void selectPolicyType(PolicyTypeModel policyTypeModel) {
     TravelAttModel model = state.travelAttModel!;
     var newModel = model.copyWith(policyType: policyTypeModel);
-    emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
+    emit(state.copyWith(
+      status: StateStatus.unknown,
+      travelAttModel: newModel,
+    ));
   }
 
   void selectMultiDays(MultiDayModel multiDayModel) {
     TravelAttModel model = state.travelAttModel!;
     var newModel = model.copyWith(multiDays: multiDayModel);
-    emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
+    if (newModel.startDate != null) {
+      _calculateEndDate(newModel, newModel.startDate!);
+    } else {
+      emit(state.copyWith(
+        status: StateStatus.unknown,
+        travelAttModel: newModel,
+      ));
+    }
   }
 
   void selectStartDate(String startDate) {
     TravelAttModel model = state.travelAttModel!;
     var newModel = model.copyWith(startDate: startDate);
-    emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
+    if (model.policyType?.id == 1) {
+      _calculateEndDate(newModel, startDate);
+    } else {
+      emit(state.copyWith(
+        status: StateStatus.unknown,
+        travelAttModel: newModel,
+      ));
+    }
+  }
+
+  void _calculateEndDate(TravelAttModel model, String startDate) {
+    int period = model.multiDays?.day ?? 0;
+    final format = DateFormat('dd.MM.yyyy');
+    DateTime gettingDate = format.parse(startDate);
+    DateTime newDate = gettingDate.add(Duration(days: period - 1));
+    final DateFormat formatter = DateFormat('dd.MM.yyyy');
+    final String formatted = formatter.format(newDate);
+    var newModelWithEndDate = model.copyWith(endDate: formatted);
+    emit(state.copyWith(
+      status: StateStatus.initial,
+      travelAttModel: newModelWithEndDate,
+    ));
   }
 
   void selectEndDate(String endDate) {
     TravelAttModel model = state.travelAttModel!;
     var newModel = model.copyWith(endDate: endDate);
-    emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
+    emit(state.copyWith(
+      status: StateStatus.unknown,
+      travelAttModel: newModel,
+    ));
   }
 
   void addCountry(CountryModel country) {
@@ -146,7 +184,16 @@ class TravelAttributesCubit extends Cubit<TravelAttributesState> {
     List<CountryModel> countries = List.of(model.countries ?? []);
     countries.add(country);
     var newModel = model.copyWith(countries: countries);
-    emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
+    final bool isShengen = _getElementsAppearInBothList(
+          countries.map((e) => e.id).toList(),
+          shengenCountries,
+        )?.isNotEmpty ??
+        false;
+    emit(state.copyWith(
+      status: StateStatus.unknown,
+      travelAttModel: newModel,
+      isShengen: isShengen,
+    ));
   }
 
   void removeCountry(CountryModel country) {
@@ -154,7 +201,22 @@ class TravelAttributesCubit extends Cubit<TravelAttributesState> {
     List<CountryModel> countries = List.of(model.countries ?? []);
     countries.remove(country);
     var newModel = model.copyWith(countries: countries);
-    emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
+    final bool isShengen = _getElementsAppearInBothList(
+          countries.map((e) => e.id).toList(),
+          shengenCountries,
+        )?.isNotEmpty ??
+        false;
+    emit(state.copyWith(
+      status: StateStatus.unknown,
+      travelAttModel: newModel,
+      isShengen: isShengen,
+    ));
+  }
+
+  List? _getElementsAppearInBothList(List l1, List l2) {
+    return l1.where((e) {
+      return l2.contains(e);
+    }).toList();
   }
 
   void selectTripPurpose(TripModel tripModel) {
@@ -169,9 +231,24 @@ class TravelAttributesCubit extends Cubit<TravelAttributesState> {
     emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
   }
 
+  void searchCountry(String word) async {
+    List<CountryModel> countries = state.countries?.items ?? [];
+    List<CountryModel> result = countries
+        .where(
+            (country) => country.name2?.contains(word.toUpperCase()) ?? false)
+        .toList();
+    emit(state.copyWith(
+      status: StateStatus.unknown,
+      searchResult: result,
+    ));
+  }
+
   void addTravellers() {
     TravelAttModel model = state.travelAttModel!;
     List<String> travellers = List.of(model.travellers);
+    if (travellers.length == 6) {
+      return;
+    }
     List<TextEditingController> textControllers =
         List.of(model.textControllers ?? []);
     travellers.add('');
@@ -180,7 +257,36 @@ class TravelAttributesCubit extends Cubit<TravelAttributesState> {
       travellers: travellers,
       textControllers: textControllers,
     );
-    emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
+    emit(state.copyWith(
+      status: StateStatus.unknown,
+      travelAttModel: newModel,
+    ));
+  }
+
+  void selectCountOfTravellers(int count) {
+    TravelAttModel model = state.travelAttModel!;
+    List<String> travellers = List.of(model.travellers);
+    List<TextEditingController> textControllers =
+        List.of(model.textControllers ?? []);
+    if (travellers.length > count) {
+      travellers.removeRange(count - 1, travellers.length - 1);
+      textControllers.removeRange(count - 1, travellers.length - 1);
+      // textControllers.add(TextEditingController());
+    } else {
+      for (int i = travellers.length; i < count; i++) {
+        travellers.add('');
+        textControllers.add(TextEditingController());
+      }
+    }
+
+    var newModel = model.copyWith(
+      travellers: travellers,
+      textControllers: textControllers,
+    );
+    emit(state.copyWith(
+      status: StateStatus.unknown,
+      travelAttModel: newModel,
+    ));
   }
 
   void removeTravellers(int index) {
@@ -195,10 +301,16 @@ class TravelAttributesCubit extends Cubit<TravelAttributesState> {
     textControllers.removeAt(index);
     var newModel = model.copyWith(
         travellers: travellers, textControllers: textControllers);
-    emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
+    emit(state.copyWith(
+      status: StateStatus.unknown,
+      travelAttModel: newModel,
+    ));
   }
 
-  void onBirthDateTraveller({required int index, required String text}) {
+  void onBirthDateTraveller({
+    required int index,
+    required String text,
+  }) {
     TravelAttModel model = state.travelAttModel!;
     List<String> travellers = List.of(model.travellers);
     travellers[index] = text;
@@ -206,15 +318,23 @@ class TravelAttributesCubit extends Cubit<TravelAttributesState> {
     emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
   }
 
+  void onChangeApplicant({required int index}) {
+    TravelAttModel model = state.travelAttModel!;
+    var newModel = model.copyWith(selectedTraveller: index);
+    emit(state.copyWith(status: StateStatus.unknown, travelAttModel: newModel));
+  }
+
   void validSelection() {
     TravelAttModel model = state.travelAttModel!;
+    emit(state.copyWith(status: StateStatus.unknown));
     if (model.travelersType?.id == 1) {
       if (model.travellers.length < 3 || model.travellers.length > 6) {
         emit(state.copyWith(
             status: StateStatus.error, failure: const TravelerCountFailure()));
+      } else {
+        emit(state.copyWith(status: StateStatus.success));
       }
-    }
-    else{
+    } else {
       emit(state.copyWith(status: StateStatus.success));
     }
   }

@@ -33,10 +33,10 @@ class NetworkClient {
         _token = preferences.getString(ACCESS_TOKEN) ?? '';
         _lang = preferences.getString(APP_LANGUAGE) ?? RU;
         debugPrint(_token);
+        options.headers['Content-Type'] = 'application/json';
         if (_token != '') {
           options.headers['Authorization'] = 'Bearer $_token';
           options.headers['Accept-Language'] = _lang;
-          options.headers['Content-Type'] = 'application/json';
         }
         return handler.next(options);
       },
@@ -114,9 +114,10 @@ class NetworkClient {
         headers: {"Content-Type": "application/json"},
       );
       final response = await Dio(BaseOptions(baseUrl: BASE_URL)).post(
-          'auth/refresh-token',
-          data: {'refreshToken': refreshToken},
-          options: options);
+        'auth/refresh-token',
+        data: {'refreshToken': refreshToken},
+        options: options,
+      );
       if (response.statusCode == 201 || response.statusCode == 200) {
         RefreshToken token = RefreshToken.fromJson(response.data);
         debugPrint('TTTTT: ${token.accessToken}');

@@ -2029,6 +2029,66 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Саёҳатчилар сони`
+  String get travellers_count {
+    return Intl.message(
+      'Саёҳатчилар сони',
+      name: 'travellers_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Саёҳат давомийлиги`
+  String get travel_days {
+    return Intl.message(
+      'Саёҳат давомийлиги',
+      name: 'travel_days',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `day`
+  String get day {
+    return Intl.message(
+      'day',
+      name: 'day',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Название плана`
+  String get planName {
+    return Intl.message(
+      'Название плана',
+      name: 'planName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Срок действия страхования`
+  String get policPeriod {
+    return Intl.message(
+      'Срок действия страхования',
+      name: 'policPeriod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Время быть за границей`
+  String get travelPeriod {
+    return Intl.message(
+      'Время быть за границей',
+      name: 'travelPeriod',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

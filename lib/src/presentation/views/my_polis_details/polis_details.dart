@@ -17,14 +17,10 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../generated/l10n.dart';
 import '../../../data/models/my_products/product_data.dart';
 
-class PolisDetailsPage extends StatefulWidget {
+class PolisDetailsPage extends StatelessWidget {
   const PolisDetailsPage({Key? key}) : super(key: key);
 
-  @override
-  State<PolisDetailsPage> createState() => _PolisDetailsPageState();
-}
 
-class _PolisDetailsPageState extends State<PolisDetailsPage> {
   @override
   Widget build(BuildContext context) {
     final arguments =

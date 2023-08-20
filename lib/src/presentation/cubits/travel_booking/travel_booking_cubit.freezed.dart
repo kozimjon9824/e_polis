@@ -20,6 +20,7 @@ mixin _$TravelBookingState {
       throw _privateConstructorUsedError;
   StateStatus get status => throw _privateConstructorUsedError;
   Failure get failure => throw _privateConstructorUsedError;
+  PassportDataResponse? get applicantData => throw _privateConstructorUsedError;
   String? get fName => throw _privateConstructorUsedError;
   String? get lName => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
@@ -44,6 +45,7 @@ abstract class $TravelBookingStateCopyWith<$Res> {
       {List<TravellerMainInputs>? listOfTravellers,
       StateStatus status,
       Failure failure,
+      PassportDataResponse? applicantData,
       String? fName,
       String? lName,
       String? phone,
@@ -52,6 +54,8 @@ abstract class $TravelBookingStateCopyWith<$Res> {
       String? passportSeries,
       String? passportNumber,
       String? inn});
+
+  $PassportDataResponseCopyWith<$Res>? get applicantData;
 }
 
 /// @nodoc
@@ -70,6 +74,7 @@ class _$TravelBookingStateCopyWithImpl<$Res, $Val extends TravelBookingState>
     Object? listOfTravellers = freezed,
     Object? status = null,
     Object? failure = null,
+    Object? applicantData = freezed,
     Object? fName = freezed,
     Object? lName = freezed,
     Object? phone = freezed,
@@ -92,6 +97,10 @@ class _$TravelBookingStateCopyWithImpl<$Res, $Val extends TravelBookingState>
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as Failure,
+      applicantData: freezed == applicantData
+          ? _value.applicantData
+          : applicantData // ignore: cast_nullable_to_non_nullable
+              as PassportDataResponse?,
       fName: freezed == fName
           ? _value.fName
           : fName // ignore: cast_nullable_to_non_nullable
@@ -126,6 +135,18 @@ class _$TravelBookingStateCopyWithImpl<$Res, $Val extends TravelBookingState>
               as String?,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PassportDataResponseCopyWith<$Res>? get applicantData {
+    if (_value.applicantData == null) {
+      return null;
+    }
+
+    return $PassportDataResponseCopyWith<$Res>(_value.applicantData!, (value) {
+      return _then(_value.copyWith(applicantData: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -140,6 +161,7 @@ abstract class _$$_TravelBookingStateCopyWith<$Res>
       {List<TravellerMainInputs>? listOfTravellers,
       StateStatus status,
       Failure failure,
+      PassportDataResponse? applicantData,
       String? fName,
       String? lName,
       String? phone,
@@ -148,6 +170,9 @@ abstract class _$$_TravelBookingStateCopyWith<$Res>
       String? passportSeries,
       String? passportNumber,
       String? inn});
+
+  @override
+  $PassportDataResponseCopyWith<$Res>? get applicantData;
 }
 
 /// @nodoc
@@ -164,6 +189,7 @@ class __$$_TravelBookingStateCopyWithImpl<$Res>
     Object? listOfTravellers = freezed,
     Object? status = null,
     Object? failure = null,
+    Object? applicantData = freezed,
     Object? fName = freezed,
     Object? lName = freezed,
     Object? phone = freezed,
@@ -186,6 +212,10 @@ class __$$_TravelBookingStateCopyWithImpl<$Res>
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as Failure,
+      applicantData: freezed == applicantData
+          ? _value.applicantData
+          : applicantData // ignore: cast_nullable_to_non_nullable
+              as PassportDataResponse?,
       fName: freezed == fName
           ? _value.fName
           : fName // ignore: cast_nullable_to_non_nullable
@@ -229,6 +259,7 @@ class _$_TravelBookingState implements _TravelBookingState {
       {final List<TravellerMainInputs>? listOfTravellers,
       this.status = StateStatus.unknown,
       this.failure = const UnknownFailure(),
+      this.applicantData,
       this.fName,
       this.lName,
       this.phone,
@@ -257,6 +288,8 @@ class _$_TravelBookingState implements _TravelBookingState {
   @JsonKey()
   final Failure failure;
   @override
+  final PassportDataResponse? applicantData;
+  @override
   final String? fName;
   @override
   final String? lName;
@@ -275,7 +308,7 @@ class _$_TravelBookingState implements _TravelBookingState {
 
   @override
   String toString() {
-    return 'TravelBookingState(listOfTravellers: $listOfTravellers, status: $status, failure: $failure, fName: $fName, lName: $lName, phone: $phone, address: $address, bDate: $bDate, passportSeries: $passportSeries, passportNumber: $passportNumber, inn: $inn)';
+    return 'TravelBookingState(listOfTravellers: $listOfTravellers, status: $status, failure: $failure, applicantData: $applicantData, fName: $fName, lName: $lName, phone: $phone, address: $address, bDate: $bDate, passportSeries: $passportSeries, passportNumber: $passportNumber, inn: $inn)';
   }
 
   @override
@@ -287,6 +320,8 @@ class _$_TravelBookingState implements _TravelBookingState {
                 .equals(other._listOfTravellers, _listOfTravellers) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.failure, failure) || other.failure == failure) &&
+            (identical(other.applicantData, applicantData) ||
+                other.applicantData == applicantData) &&
             (identical(other.fName, fName) || other.fName == fName) &&
             (identical(other.lName, lName) || other.lName == lName) &&
             (identical(other.phone, phone) || other.phone == phone) &&
@@ -305,6 +340,7 @@ class _$_TravelBookingState implements _TravelBookingState {
       const DeepCollectionEquality().hash(_listOfTravellers),
       status,
       failure,
+      applicantData,
       fName,
       lName,
       phone,
@@ -327,6 +363,7 @@ abstract class _TravelBookingState implements TravelBookingState {
       {final List<TravellerMainInputs>? listOfTravellers,
       final StateStatus status,
       final Failure failure,
+      final PassportDataResponse? applicantData,
       final String? fName,
       final String? lName,
       final String? phone,
@@ -342,6 +379,8 @@ abstract class _TravelBookingState implements TravelBookingState {
   StateStatus get status;
   @override
   Failure get failure;
+  @override
+  PassportDataResponse? get applicantData;
   @override
   String? get fName;
   @override

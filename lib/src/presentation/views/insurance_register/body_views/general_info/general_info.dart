@@ -6,13 +6,10 @@ import 'package:e_polis/src/presentation/cubits/book/book_cubit.dart';
 import 'package:e_polis/src/presentation/cubits/check_vehicle_info/check_vehicle_info_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../core/constants/constants.dart';
-import '../../../../../data/models/contract_information/request/contract_info_request.dart';
 import '../../../../components/custom_button.dart';
-import '../../../../cubits/contract_information/contract_information_cubit.dart';
 import '../../../../cubits/insurance_basic_filter/insurance_basic_filter_cubit.dart';
 import '../../../../cubits/insurance_manager_stack_views/manage_insurance_stack_views_cubit.dart';
 import '../../../insurcance_details/insurance_details.dart';
@@ -20,7 +17,10 @@ import 'widgets/car_info.dart';
 import 'widgets/driver_info.dart';
 
 class GeneralInfoView extends StatefulWidget {
-  const GeneralInfoView({Key? key, required this.arguments}) : super(key: key);
+  const GeneralInfoView({
+    Key? key,
+    required this.arguments,
+  }) : super(key: key);
   final InsurancePageArguments arguments;
 
   @override

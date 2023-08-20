@@ -191,11 +191,17 @@
   "singleTraveller": "Саёҳатчи",
   "travelCountries": "Давлат",
   "travelApplicant": "Aриза берувчи",
-  "worldPassport": "Халқаро паспорт",
+  "worldPassport": "Хорижий паспорт(Загран)",
   "jshshr": "ЖШШИР",
   "address": "Манзил",
   "addressHint": "Ул. Амира темура, Ташкент",
   "priceInUsd": "Суғурта нархи (USD)",
-  "travelCountFailure": "Оилавий саёҳат турида саҳоҳатчилар сони 3 тадан 6 та оралиғида булиши шарт."
+  "travelCountFailure": "Оилавий саёҳат турида саҳоҳатчилар сони 3 тадан 6 та оралиғида булиши шарт.",
+  "travellers_count": "Саёҳатчилар сони",
+  "travel_days": "Саёҳат давомийлиги",
+  "day": "кун",
+  "planName": "Режанинг номи",
+  "policPeriod": "Полиснинг амал қилиши",
+  "travelPeriod": "Хорижда бўлиш вақти"
 
 }

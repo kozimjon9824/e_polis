@@ -63,7 +63,7 @@ class CarInformationWidget extends StatelessWidget {
           textInputAction: TextInputAction.next,
           focusNode: focusNodeVehicleNumber,
           onFieldSubmitted: (_) => focusNodeTechSeries!.requestFocus(),
-          validator: (value) => (value!.length < 9)
+          validator: (value) => (value!.length < 7)
               ? AppLocalizations.of(context).invalidLength
               : null,
           // validator: (value) => (value!.length < 10 ||

@@ -1,5 +1,4 @@
 import 'package:e_polis/generated/l10n.dart';
-import 'package:e_polis/injector.dart';
 import 'package:e_polis/src/core/utils/utils.dart';
 import 'package:e_polis/src/data/models/book/book_model.dart';
 import 'package:e_polis/src/presentation/components/snackbars.dart';
@@ -28,6 +27,7 @@ class ContactInfoView extends StatefulWidget {
 }
 
 class _ContactInfoViewState extends State<ContactInfoView> {
+
   final dateController = TextEditingController(
     text: DateFormat('dd.MM.yyyy').format(DateTime.now()),
   );

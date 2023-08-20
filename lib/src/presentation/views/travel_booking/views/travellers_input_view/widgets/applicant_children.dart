@@ -28,6 +28,8 @@ class ApplicantInputs extends StatelessWidget {
     required this.licenseSeriesNode,
     required this.licenseNumberNode,
     required this.innFocusNode,
+    this.isDisable = false,
+    this.readOnlyBirthDate = false,
   }) : super(key: key);
 
   final TextEditingController firstNameController;
@@ -47,6 +49,8 @@ class ApplicantInputs extends StatelessWidget {
   final FocusNode? licenseSeriesNode;
   final FocusNode? licenseNumberNode;
   final FocusNode? innFocusNode;
+  final bool isDisable;
+  final bool readOnlyBirthDate;
 
   final Function()? onRequest;
 
@@ -62,6 +66,7 @@ class ApplicantInputs extends StatelessWidget {
           textEditingController: dateController,
           textInputAction: TextInputAction.next,
           focusNode: dateFocus,
+          readOnly: readOnlyBirthDate,
           onFieldSubmitted: (_) => licenseSeriesNode?.requestFocus(),
           validator: (value) => value!.isEmpty
               ? AppLocalizations.of(context).invalidLength
@@ -86,6 +91,11 @@ class ApplicantInputs extends StatelessWidget {
           },
         ),
         const SizedBox(height: 16),
+        Text(
+          AppLocalizations.of(context).worldPassport,
+          style: AppTextStyles.styleW600S14Grey9,
+        ),
+        const SizedBox(height: 6),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -114,6 +124,9 @@ class ApplicantInputs extends StatelessWidget {
                 onChange: (value) {
                   if (value.length == 2) {
                     licenseNumberNode!.requestFocus();
+                    if (licenseNumber.text.length == 7) {
+                      onRequest!();
+                    }
                   }
                 },
               ),
@@ -128,7 +141,6 @@ class ApplicantInputs extends StatelessWidget {
                 textEditingController: licenseNumber,
                 focusNode: licenseNumberNode,
                 onFieldSubmitted: (_) => innFocusNode!.requestFocus(),
-                // readOnly: data != null,
                 validator: (value) => value!.length < 6
                     ? AppLocalizations.of(context).invalidLength
                     : null,
@@ -142,6 +154,7 @@ class ApplicantInputs extends StatelessWidget {
                 onChange: (value) {
                   if (value.length == 7) {
                     innFocusNode!.requestFocus();
+                    onRequest!();
                   }
                 },
               ),
@@ -156,6 +169,7 @@ class ApplicantInputs extends StatelessWidget {
           textInputAction: TextInputAction.next,
           textEditingController: innController,
           focusNode: innFocusNode,
+          readOnly: isDisable,
           onFieldSubmitted: (_) => firstNameFocus?.requestFocus(),
           validator: (value) => value!.length < 14
               ? AppLocalizations.of(context).invalidLength
@@ -177,10 +191,11 @@ class ApplicantInputs extends StatelessWidget {
         CustomTextField(
           hintText: AppLocalizations.of(context).firstName,
           keyboardType: TextInputType.name,
-          label: AppLocalizations.of(context).travelApplicant,
+          label: AppLocalizations.of(context).firstName,
           textInputAction: TextInputAction.next,
           textEditingController: firstNameController,
           focusNode: firstNameFocus,
+          readOnly: isDisable,
           onFieldSubmitted: (_) => lastNameFocus?.requestFocus(),
           validator: (value) => value!.isEmpty
               ? AppLocalizations.of(context).invalidLength
@@ -198,6 +213,7 @@ class ApplicantInputs extends StatelessWidget {
           textInputAction: TextInputAction.next,
           textEditingController: lastNameController,
           focusNode: lastNameFocus,
+          readOnly: isDisable,
           onFieldSubmitted: (_) => addressFocus?.requestFocus(),
           validator: (value) => value!.isEmpty
               ? AppLocalizations.of(context).invalidLength

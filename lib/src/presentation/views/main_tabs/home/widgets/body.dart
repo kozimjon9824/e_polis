@@ -73,13 +73,27 @@ class InsuranceTypesBody extends StatelessWidget {
               // );
             } else {
               /// travel page
+
               if (data.category?.type == 'travel') {
-                Navigator.pushNamed(
-                  context,
-                  AppRoutes.travelBasic,
-                  arguments: data.id ?? '',
-                );
+                if (context.read<AuthCubit>().state is UnAuthenticatedState) {
+                  showDialog(
+                    context: context,
+                    builder: (_) => DialogBody(
+                      onSubmit: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.login);
+                      },
+                    ),
+                  );
+                }else{
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.travelBasic,
+                    arguments: data.id ?? '',
+                  );
+                }
               }
+
             }
           },
         );

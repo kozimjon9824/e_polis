@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-enum StateStatus { loading, success, error, unknown }
+enum StateStatus { loading, success, error, unknown ,initial}
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 

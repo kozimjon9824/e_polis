@@ -63,8 +63,9 @@ class CheckVehicleInfoCubit extends Cubit<CheckVehicleInfoState> {
     result.fold(
       (failure) =>
           emit(state.copyWith(failure: failure, status: StateStatus.error)),
-      (response) => emit(state.copyWith(
-          status: StateStatus.unknown, isPassportValidated: true)),
+      (response) => emit(
+        state.copyWith(status: StateStatus.unknown, isPassportValidated: true),
+      ),
     );
   }
 
